@@ -951,6 +951,58 @@
       field.classList.remove('error');
     });
   });
+
+  // ── SUPABASE — Load products live ──
+  var SB_URL = 'https://nzqdmsbxwghkqowajmvs.supabase.co/rest/v1';
+  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cWRtc2J4d2doa3Fvd2FqbXZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3Njk0MjQsImV4cCI6MjA5NjM0NTQyNH0.aqdvA_ytnkeSvg4hmLqC1zces0aIFZcxkHrrN7k7atk';
+
+  document.addEventListener('DOMContentLoaded', function() {
+    fetch(SB_URL + '/products?active=eq.true&order=sort_order.asc', {
+      headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(products) {
+      if (!products || !products.length) return;
+      var list = document.getElementById('productList');
+      if (!list) return;
+      list.innerHTML = products.map(function(p, i) {
+        var pid = 'p' + (i + 1);
+        var safeName = p.name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+        var safeSub  = (p.subtitle || '').replace(/&/g,'&amp;');
+        return '<div class="product-row" data-price="' + p.price + '">' +
+          '<input type="checkbox" class="product-check" id="' + pid + '" name="product_' + pid + '" value="' + safeName + '">' +
+          '<label class="product-info" for="' + pid + '">' +
+            '<p class="product-name-text">' + p.name + '</p>' +
+            '<p class="product-sub">' + safeSub + '</p>' +
+          '</label>' +
+          '<input type="number" class="product-qty" min="1" max="10" value="1" aria-label="Quantity">' +
+          '<span class="product-price">$' + p.price + '</span>' +
+        '</div>';
+      }).join('');
+
+      // Re-attach event listeners after DOM update
+      document.querySelectorAll('.product-row').forEach(function(row) {
+        var check = row.querySelector('.product-check');
+        var qty   = row.querySelector('.product-qty');
+        var price = row.querySelector('.product-price');
+        check.addEventListener('change', function() {
+          qty.classList.toggle('active', check.checked);
+          price.classList.toggle('active', check.checked);
+          updateSummary();
+        });
+        qty.addEventListener('input', function() {
+          if (qty.value < 1) qty.value = 1;
+          if (qty.value > 10) qty.value = 10;
+          updateSummary();
+        });
+      });
+
+      // Redefine getSelectedProducts to use live DOM
+      window.rows = document.querySelectorAll('.product-row');
+      updateSummary();
+    })
+    .catch(function() { /* fall back to hardcoded product list */ });
+  });
 </script>
 
 </body>

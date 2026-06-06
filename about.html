@@ -8,6 +8,7 @@
 <meta property="og:title" content="About Tammy – Tammy Melchisedeck">
 <meta property="og:description" content="An Emmy-winning media personality turned wellness entrepreneur, Tammy Maltby Melchisedeck inspires women to take their health, faith, and purpose seriously.">
 <meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
@@ -340,12 +341,14 @@
     grid-template-columns: 1.5fr 1fr 2fr;
     gap: 4rem;
     padding-bottom: 4rem;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
+    border-bottom: 1px solid rgba(184,154,106,0.2);
   }
+  .footer-brand { display: flex; flex-direction: column; }
+  .footer-brand nav { border: none; background: none; padding: 0; margin: 0; }
   .footer-name { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: var(--cream); line-height: 1.2; letter-spacing: 0.03em; margin-bottom: 0.5rem; }
   .footer-tagline { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
-  .footer-social-row { display: flex; gap: 0.75rem; background: none; justify-content: flex-start; margin-top: 1rem; }
-  .footer-social-row a { background: none; border: none; padding: 0; }
+  .footer-social-row { display: flex; gap: 0.75rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(184,154,106,0.35); background: none; justify-content: flex-start; }
+  .footer-social-row a { background: none; border: none; padding: 0; outline: none; }
   .footer-icon-link { display: flex; align-items: center; justify-content: center; color: var(--white); text-decoration: none; transition: color 0.2s; }
   .footer-icon-link:hover { color: var(--gold); }
   .footer-col-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; display: block; }

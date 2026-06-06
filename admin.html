@@ -765,8 +765,8 @@
             '<img id="pfeatureimgpreview-' + p.id + '" class="img-preview" ' + (p.feature_image_path ? 'src="' + p.feature_image_path + '" style="display:block"' : '') + ' onerror="this.style.display=\'none\'">' +
             '<div id="uprog-' + p.id + '-feature" style="display:none;font-size:0.75rem;color:var(--gold);margin-top:0.35rem;align-items:center;gap:0.4rem"><div class="spinner" style="width:14px;height:14px;border-width:1.5px"></div> Uploading…</div>' +
           '</div>' +
-          '<div style="display:flex;align-items:center;justify-content:space-between;margin-top:0.5rem;flex-wrap:wrap;gap:0.5rem">' +
-            '<span class="save-indicator" id="psaved-' + p.id + '"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Saved!</span>' +
+          '<div style="display:flex;align-items:center;justify-content:flex-end;margin-top:1rem;gap:0.75rem">' +
+            '<span class="save-indicator" id="psaved-' + p.id + '" style="color:var(--sage);font-size:0.78rem;display:none;align-items:center;gap:0.35rem"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Saved!</span>' +
             '<button class="btn btn-gold" onclick="saveProduct(\'' + p.id + '\')">Save Changes</button>' +
           '</div>' +
         '</div>' +
@@ -853,8 +853,7 @@
       .then(function(r) {
         if (r.ok) {
           var ind = document.getElementById('psaved-' + id);
-          ind.classList.add('show');
-          setTimeout(function() { ind.classList.remove('show'); }, 3000);
+          if (ind) { ind.style.display = 'flex'; setTimeout(function() { ind.style.display = 'none'; }, 3000); }
           toast('✓ Product saved — live on site', 'success');
         } else { toast('Save failed — please try again', 'error'); }
       });

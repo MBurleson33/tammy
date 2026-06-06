@@ -134,10 +134,29 @@
 
   /* ── PAGE HERO ── */
   .page-hero {
-    background: var(--linen);
-    padding: 5rem 2rem 0;
-    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 75vh;
     overflow: hidden;
+  }
+  .page-hero-img-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    min-height: 500px;
+  }
+  .page-hero-copy {
+    background: var(--linen);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 4rem;
   }
   .page-hero-eyebrow {
     font-size: 0.72rem;
@@ -150,21 +169,17 @@
   }
   .page-hero-title {
     font-family: var(--serif);
-    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-size: clamp(2.8rem, 4vw, 4rem);
     font-weight: 300;
     line-height: 1.1;
     color: var(--ink);
-    margin-bottom: 3.5rem;
+    margin-bottom: 1.5rem;
   }
-  .page-hero-img {
-    width: 100%;
-    max-width: 560px;
-    aspect-ratio: 3/4;
-    object-fit: cover;
-    object-position: top center;
-    display: block;
-    margin: 0 auto;
-    border-radius: 2px 2px 0 0;
+  .page-hero-sub {
+    font-size: 1rem;
+    color: var(--ink-mid);
+    line-height: 1.8;
+    max-width: 420px;
   }
 
   /* ── MAIN CONTENT ── */
@@ -213,8 +228,9 @@
   }
   .social-row {
     display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     margin-top: 2rem;
   }
   .social-icon-btn {
@@ -444,13 +460,15 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
+    .page-hero { grid-template-columns: 1fr; min-height: auto; }
+    .page-hero-img { min-height: 60vw; height: 60vw; }
+    .page-hero-copy { padding: 3rem 1.5rem; }
     .about-grid { grid-template-columns: 1fr; gap: 3rem; }
     .credentials { position: static; }
     .social-row { flex-direction: row; flex-wrap: wrap; }
     nav { padding: 0 1.25rem; }
     .nav-links { display: none; }
     .nav-toggle { display: flex; }
-    .page-hero { padding: 3.5rem 1.5rem 0; }
     .about-content { padding: 3.5rem 1.5rem; }
   }
 </style>
@@ -481,14 +499,19 @@
 
 <!-- ── PAGE HERO ── -->
 <div class="page-hero">
-  <span class="page-hero-eyebrow">Meet Tammy</span>
-  <h1 class="page-hero-title">Glad to meet you!</h1>
-  <img
-    src="images/RedDressArmsneedretouch.webp"
-    alt="Tammy Maltby Melchisedeck"
-    class="page-hero-img"
-    loading="eager"
-  >
+  <div class="page-hero-img-wrap">
+    <img
+      src="images/RedDressArmsneedretouch.webp"
+      alt="Tammy Maltby Melchisedeck"
+      class="page-hero-img"
+      loading="eager"
+    >
+  </div>
+  <div class="page-hero-copy">
+    <span class="page-hero-eyebrow">Meet Tammy</span>
+    <h1 class="page-hero-title">Glad to<br>meet you!</h1>
+    <p class="page-hero-sub">An Emmy-winning media personality turned wellness entrepreneur — speaker, author, mentor, and mother. Her story is one of courage, faith, and continual becoming.</p>
+  </div>
 </div>
 
 <!-- ── ABOUT CONTENT ── -->

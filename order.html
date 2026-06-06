@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Order | Tammy Maltby Melchisedeck</title>
-<meta name="description" content="Order Partner.Co wellness products from Tammy Maltby Melchisedeck. Skinny Drops, AbVantage, Core Cleanse and more.">
+<title>About Tammy – Tammy Melchisedeck</title>
+<meta name="description" content="An Emmy-winning media personality turned wellness entrepreneur, Tammy Maltby Melchisedeck inspires women to take their health, faith, and purpose seriously.">
+<meta property="og:title" content="About Tammy – Tammy Melchisedeck">
+<meta property="og:description" content="An Emmy-winning media personality turned wellness entrepreneur, Tammy Maltby Melchisedeck inspires women to take their health, faith, and purpose seriously.">
+<meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,20 +25,20 @@
     --ink-mid: #5C4F44;
     --ink-light: #8C7E72;
     --sage: #7A8C72;
+    --sage-light: #C4D0BD;
     --white: #FFFFFF;
     --serif: 'Cormorant Garamond', Georgia, serif;
     --sans: 'DM Sans', system-ui, sans-serif;
-    --error: #C0392B;
   }
 
   html { scroll-behavior: smooth; }
+
   body {
     font-family: var(--sans);
     background: var(--cream);
     color: var(--ink);
     line-height: 1.6;
     font-size: 16px;
-    min-height: 100vh;
   }
 
   /* ── NAV ── */
@@ -59,743 +62,521 @@
     color: var(--ink);
     text-decoration: none;
   }
-  .nav-back {
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--ink-mid);
     text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
     transition: color 0.2s;
   }
-  .nav-back:hover { color: var(--gold); }
-
-  /* ── PAGE HEADER ── */
-  .page-header {
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a.active { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold) !important;
+    color: var(--white) !important;
+    padding: 0.55rem 1.35rem;
+    border-radius: 2px;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--ink) !important; color: var(--white) !important; }
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
     background: var(--ink);
-    padding: 4rem 2rem;
+    transition: all 0.25s;
+  }
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 68px;
+    left: 0; right: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--sand);
+    padding: 1.5rem 2rem;
+    z-index: 99;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    text-decoration: none;
+  }
+  .mobile-nav .nav-cta {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    border-radius: 2px;
     text-align: center;
   }
-  .page-header-eyebrow {
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    max-height: 520px;
+    overflow: hidden;
+  }
+  .page-hero-img-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero-img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    object-position: center 45%;
+    display: block;
+  }
+  .page-hero-copy {
+    background: var(--linen);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 4rem;
+  }
+  .page-hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .page-hero-title {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 4vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  .page-hero-sub {
+    font-size: 1rem;
+    color: var(--ink-mid);
+    line-height: 1.8;
+    max-width: 420px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .about-content {
+    background: var(--white);
+    padding: 5rem 2rem;
+  }
+  .container { max-width: 1080px; margin: 0 auto; }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    gap: 7rem;
+    align-items: start;
+  }
+
+  /* Credentials sidebar */
+  .credentials {
+  }
+  .credentials-label {
     font-size: 0.7rem;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--gold-light);
-    margin-bottom: 0.75rem;
-    display: block;
-  }
-  .page-header-title {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 300;
-    color: var(--cream);
-    margin-bottom: 0.75rem;
-  }
-  .page-header-sub {
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.45);
-    max-width: 480px;
-    margin: 0 auto;
-    line-height: 1.7;
-  }
-
-  /* ── LAYOUT ── */
-  .order-layout {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 4rem 2rem;
-    display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 4rem;
-    align-items: start;
-  }
-
-  /* ── FORM SECTIONS ── */
-  .form-section {
-    margin-bottom: 2.5rem;
-  }
-  .form-section-label {
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 1.25rem;
-    display: block;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--sand);
-  }
-  .form-row {
-    display: grid;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-  }
-  .form-row.cols-2 { grid-template-columns: 1fr 1fr; }
-  .form-row.cols-3 { grid-template-columns: 2fr 1fr 1fr; }
-
-  .field-wrap { display: flex; flex-direction: column; gap: 0.35rem; }
-  .field-label {
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    color: var(--ink-mid);
-  }
-  .field-input {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    font-family: var(--sans);
-    font-size: 0.9rem;
-    color: var(--ink);
-    background: var(--white);
-    border: 1px solid var(--sand);
-    border-radius: 2px;
-    outline: none;
-    transition: border-color 0.2s;
-    appearance: none;
-  }
-  .field-input:focus { border-color: var(--gold); }
-  .field-input.error { border-color: var(--error); }
-  .field-input::placeholder { color: var(--ink-light); }
-  select.field-input { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238C7E72' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; cursor: pointer; }
-
-  /* ── PRODUCTS ── */
-  .product-list { display: flex; flex-direction: column; gap: 0; }
-  .product-row {
-    display: grid;
-    grid-template-columns: auto 1fr auto auto;
-    gap: 1rem;
-    align-items: center;
-    padding: 1.1rem 0;
-    border-bottom: 1px solid var(--sand);
-    transition: background 0.15s;
-  }
-  .product-row:first-child { border-top: 1px solid var(--sand); }
-
-  .product-check {
-    width: 18px;
-    height: 18px;
-    border: 1.5px solid var(--sand);
-    border-radius: 2px;
-    cursor: pointer;
-    appearance: none;
-    flex-shrink: 0;
-    transition: all 0.15s;
-    position: relative;
-  }
-  .product-check:checked {
-    background: var(--gold);
-    border-color: var(--gold);
-  }
-  .product-check:checked::after {
-    content: '';
-    position: absolute;
-    top: 2px; left: 5px;
-    width: 5px; height: 9px;
-    border: 1.5px solid var(--white);
-    border-top: none;
-    border-left: none;
-    transform: rotate(45deg);
-  }
-  .product-check:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
-
-  .product-info { cursor: pointer; }
-  .product-name-text {
-    font-family: var(--serif);
-    font-size: 1.05rem;
-    font-weight: 400;
-    color: var(--ink);
-    line-height: 1.3;
-  }
-  .product-sub {
-    font-size: 0.78rem;
-    color: var(--ink-light);
-    margin-top: 0.1rem;
-  }
-
-  .product-qty {
-    width: 64px;
-    padding: 0.4rem 0.5rem;
-    font-family: var(--sans);
-    font-size: 0.85rem;
-    color: var(--ink);
-    background: var(--cream);
-    border: 1px solid var(--sand);
-    border-radius: 2px;
-    outline: none;
-    text-align: center;
-    transition: all 0.2s;
-    opacity: 0.4;
-    pointer-events: none;
-  }
-  .product-qty.active { opacity: 1; pointer-events: auto; }
-  .product-qty:focus { border-color: var(--gold); }
-
-  .product-price {
-    font-family: var(--serif);
-    font-size: 1.05rem;
-    font-weight: 400;
-    color: var(--ink);
-    min-width: 60px;
-    text-align: right;
-    white-space: nowrap;
-  }
-  .product-price.active { color: var(--gold); }
-
-  /* ── ORDER SUMMARY (sidebar) ── */
-  .order-summary {
-    position: sticky;
-    top: 88px;
-    background: var(--white);
-    border: 1px solid var(--sand);
-    border-top: 3px solid var(--gold);
-    border-radius: 2px;
-    padding: 2rem;
-  }
-  .summary-title {
-    font-family: var(--serif);
-    font-size: 1.3rem;
-    font-weight: 300;
-    color: var(--ink);
     margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--sand);
-  }
-  .summary-items { margin-bottom: 1.5rem; min-height: 60px; }
-  .summary-empty {
-    font-size: 0.85rem;
-    color: var(--ink-light);
-    font-style: italic;
-    padding: 0.5rem 0;
-  }
-  .summary-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    gap: 0.75rem;
-    padding: 0.6rem 0;
-    border-bottom: 1px solid var(--linen);
-    font-size: 0.88rem;
-  }
-  .summary-item:last-child { border-bottom: none; }
-  .summary-item-name { color: var(--ink-mid); flex: 1; line-height: 1.4; }
-  .summary-item-qty { color: var(--ink-light); font-size: 0.8rem; }
-  .summary-item-price { color: var(--ink); font-weight: 500; white-space: nowrap; }
-  .summary-total-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 1.25rem;
-    margin-top: 0.25rem;
-    border-top: 1px solid var(--sand);
-  }
-  .summary-total-label {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-mid);
-  }
-  .summary-total-amount {
-    font-family: var(--serif);
-    font-size: 2rem;
-    font-weight: 300;
-    color: var(--ink);
-  }
-  .summary-shipping {
-    font-size: 0.75rem;
-    color: var(--sage);
-    font-weight: 500;
-    text-align: right;
-    margin-top: 0.25rem;
-  }
-
-  /* Payment info */
-  .payment-info {
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--sand);
-  }
-  .payment-info-label {
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
     display: block;
   }
-  .payment-info p {
+  .credential-item {
+    padding: 1.1rem 0;
+    border-top: 1px solid var(--sand);
+  }
+  .credential-item:last-child { border-bottom: 1px solid var(--sand); }
+  .credential-title {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+  .credential-sub {
     font-size: 0.82rem;
-    color: var(--ink-mid);
-    line-height: 1.7;
+    color: var(--ink-light);
+    line-height: 1.5;
   }
-  .payment-methods {
+  .social-row {
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     gap: 0.5rem;
-    margin-top: 0.75rem;
-    flex-wrap: wrap;
+    margin-top: 2rem;
   }
-  .payment-badge {
+  .social-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
     font-size: 0.68rem;
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--ink-mid);
-    background: var(--linen);
+    text-decoration: none;
     border: 1px solid var(--sand);
-    padding: 0.3rem 0.65rem;
+    padding: 0.55rem 0.9rem;
     border-radius: 2px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .social-icon-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Bio */
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 1.5rem 0;
+  }
+  .bio-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .bio-body p {
+    font-size: 1.05rem;
+    color: var(--ink-mid);
+    line-height: 1.9;
+    margin-bottom: 1.4rem;
+  }
+  .bio-body p:last-child { margin-bottom: 0; }
+  .bio-body em { font-style: italic; color: var(--ink); }
+  .bio-pullquote {
+    border-left: 3px solid var(--gold);
+    margin: 2.5rem 0;
+    padding: 0.5rem 0 0.5rem 1.75rem;
+  }
+  .bio-pullquote p {
+    font-family: var(--serif);
+    font-size: 1.4rem !important;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink) !important;
+    line-height: 1.55 !important;
+    margin-bottom: 0 !important;
   }
 
-  /* Submit button */
-  .submit-btn {
+  /* ── CTA STRIP ── */
+  .cta-strip {
+    background: var(--ink);
+    padding: 4.5rem 2rem;
+    text-align: center;
+  }
+  .cta-strip-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1rem;
     display: block;
-    width: 100%;
+  }
+  .cta-strip-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+  .cta-strip-body {
+    font-size: 1rem;
+    color: var(--sand);
+    line-height: 1.75;
+    max-width: 520px;
+    margin: 0 auto 2.25rem;
+  }
+  .btn-primary {
+    display: inline-block;
     background: var(--gold);
     color: var(--white);
     font-family: var(--sans);
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    padding: 1.1rem;
-    border: none;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
     border-radius: 2px;
-    cursor: pointer;
-    transition: background 0.2s;
-    margin-top: 1.5rem;
-    text-align: center;
+    transition: background 0.2s, transform 0.15s;
   }
-  .submit-btn:hover { background: var(--ink); }
-  .submit-btn:disabled { opacity: 0.6; cursor: default; }
-  .submit-note {
-    font-size: 0.73rem;
-    color: var(--ink-light);
-    text-align: center;
-    margin-top: 0.75rem;
-    line-height: 1.6;
-  }
-
-  /* Notes field */
-  textarea.field-input { resize: vertical; min-height: 90px; }
-
-  /* Success state */
-  .success-screen {
-    display: none;
-    text-align: center;
-    padding: 5rem 2rem;
-    max-width: 560px;
-    margin: 0 auto;
-  }
-  .success-icon {
-    font-family: var(--serif);
-    font-size: 3rem;
-    color: var(--gold);
-    margin-bottom: 1.5rem;
-    display: block;
-  }
-  .success-title {
-    font-family: var(--serif);
-    font-size: 2.2rem;
-    font-weight: 300;
-    color: var(--ink);
-    margin-bottom: 1rem;
-  }
-  .success-body {
-    font-size: 1rem;
-    color: var(--ink-mid);
-    line-height: 1.8;
-    margin-bottom: 2rem;
-  }
+  .btn-primary:hover { background: var(--cream); color: var(--ink); transform: translateY(-1px); }
 
   /* ── FOOTER ── */
-  .page-footer {
-    background: var(--ink);
-    padding: 2rem;
-    text-align: center;
+  .site-footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06); }
+  .footer-inner { max-width: 1080px; margin: 0 auto; padding: 5rem 2rem 2.5rem; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 2fr;
+    gap: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(184,154,106,0.2);
   }
-  .page-footer p {
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.25);
-    line-height: 1.7;
-  }
-  .page-footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  .footer-brand { display: flex; flex-direction: column; }
+  .footer-brand nav { border: none; background: none; padding: 0; margin: 0; }
+  .footer-name { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: var(--cream); line-height: 1.2; letter-spacing: 0.03em; margin-bottom: 0.5rem; }
+  .footer-tagline { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+  .footer-social-row { display: flex; gap: 0.75rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(184,154,106,0.35); background: none; justify-content: flex-start; }
+  .footer-social-row a { background: none; border: none; padding: 0; outline: none; }
+  .footer-icon-link { display: flex; align-items: center; justify-content: center; color: var(--white); text-decoration: none; transition: color 0.2s; }
+  .footer-icon-link:hover { color: var(--gold); }
+  .footer-col-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; display: block; }
+  .footer-links { display: flex; flex-direction: column; gap: 0.65rem; }
+  .footer-link { font-size: 0.88rem; color: var(--ink-light); text-decoration: none; transition: color 0.2s; }
+  .footer-link:hover { color: var(--cream); }
+  .footer-signup-desc { font-size: 0.88rem; color: var(--ink-light); line-height: 1.65; margin-bottom: 1.1rem; }
+  .footer-email-form { display: flex; }
+  .footer-email-form input { flex: 1; padding: 0.75rem 1rem; font-family: var(--sans); font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.1); outline: none; background: rgba(255,255,255,0.05); color: var(--cream); border-radius: 2px 0 0 2px; min-width: 0; transition: border-color 0.2s; }
+  .footer-email-form input:focus { border-color: var(--gold); }
+  .footer-email-form input::placeholder { color: var(--ink-light); }
+  .footer-email-form button { background: var(--gold); color: var(--white); border: none; padding: 0.75rem 1.25rem; font-family: var(--sans); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border-radius: 0 2px 2px 0; transition: background 0.2s; white-space: nowrap; }
+  .footer-email-form button:hover { background: var(--cream); color: var(--ink); }
+  .footer-bottom { padding-top: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .footer-disclaimer { font-size: 0.68rem; color: rgba(255,255,255,0.2); line-height: 1.6; max-width: 600px; }
+  .footer-copy { font-size: 0.68rem; color: rgba(255,255,255,0.2); white-space: nowrap; }
+  .footer-partnerco-logo { height: 24px; width: auto; opacity: 0.4; flex-shrink: 0; }
 
+  /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
-    .order-layout { grid-template-columns: 1fr; gap: 2.5rem; padding: 2.5rem 1.5rem; }
-    .order-summary { position: static; }
-    .form-row.cols-2, .form-row.cols-3 { grid-template-columns: 1fr; }
+    .page-hero { grid-template-columns: 1fr; max-height: none; }
+    .page-hero-img { height: 60vw; }
+    .page-hero-copy { padding: 3rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .credentials { position: static; order: 2; }
+    .bio-body { order: 1; }
+    .social-row { flex-direction: row; flex-wrap: wrap; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    nav { padding: 0 1.25rem; }
+    .nav-links { display: none; }
+    .nav-toggle { display: flex; }
+    .about-content { padding: 3.5rem 1.5rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
+<!-- ── NAVIGATION ── -->
+<nav aria-label="Main navigation">
   <a href="index.html" class="nav-name">Tammy Maltby Melchisedeck</a>
-  <a href="index.html" class="nav-back">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-    Back to Site
-  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="index.html#drops">The Drops</a></li>
+    <li><a href="index.html#results">Results</a></li>
+    <li><a href="index.html#testimonials">Testimonials</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="order.html" class="nav-cta">Order Now</a></li>
+  </ul>
+  <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+  <a href="index.html#drops" onclick="closeMobileNav()">The Drops</a>
+  <a href="index.html#results" onclick="closeMobileNav()">Results</a>
+  <a href="index.html#testimonials" onclick="closeMobileNav()">Testimonials</a>
+  <a href="about.html" onclick="closeMobileNav()">About</a>
+  <a href="order.html" class="nav-cta">Order Now</a>
 </nav>
 
-<!-- PAGE HEADER -->
-<div class="page-header">
-  <span class="page-header-eyebrow">Partner.Co Wellness</span>
-  <h1 class="page-header-title">Place Your Order</h1>
-  <p class="page-header-sub">Fill out the form below. Tammy will confirm your order and follow up with payment details within 24 hours.</p>
-</div>
-
-<!-- MAIN CONTENT -->
-<div id="orderForm">
-  <div class="order-layout">
-
-    <!-- LEFT: Form -->
-    <form id="checkoutForm" novalidate>
-
-      <!-- Contact -->
-      <div class="form-section">
-        <span class="form-section-label">Contact Information</span>
-        <div class="form-row">
-          <div class="field-wrap">
-            <label class="field-label" for="fullName">Full Name *</label>
-            <input class="field-input" id="fullName" name="fullName" type="text" placeholder="Jane Smith" required autocomplete="name">
-          </div>
-        </div>
-        <div class="form-row cols-2">
-          <div class="field-wrap">
-            <label class="field-label" for="email">Email Address *</label>
-            <input class="field-input" id="email" name="email" type="email" placeholder="jane@email.com" required autocomplete="email">
-          </div>
-          <div class="field-wrap">
-            <label class="field-label" for="phone">Phone Number</label>
-            <input class="field-input" id="phone" name="phone" type="tel" placeholder="(555) 000-0000" autocomplete="tel">
-          </div>
-        </div>
-      </div>
-
-      <!-- Shipping -->
-      <div class="form-section">
-        <span class="form-section-label">Shipping Address</span>
-        <div class="form-row">
-          <div class="field-wrap">
-            <label class="field-label" for="address">Street Address *</label>
-            <input class="field-input" id="address" name="address" type="text" placeholder="123 Main Street" required autocomplete="street-address">
-          </div>
-        </div>
-        <div class="form-row cols-2">
-          <div class="field-wrap">
-            <label class="field-label" for="city">City *</label>
-            <input class="field-input" id="city" name="city" type="text" placeholder="Oklahoma City" required autocomplete="address-level2">
-          </div>
-          <div class="field-wrap">
-            <label class="field-label" for="state">State *</label>
-            <input class="field-input" id="state" name="state" type="text" placeholder="OK" required autocomplete="address-level1" maxlength="2">
-          </div>
-        </div>
-        <div class="form-row cols-2">
-          <div class="field-wrap">
-            <label class="field-label" for="zip">Zip Code *</label>
-            <input class="field-input" id="zip" name="zip" type="text" placeholder="73101" required autocomplete="postal-code" maxlength="10">
-          </div>
-          <div class="field-wrap">
-            <label class="field-label" for="country">Country</label>
-            <select class="field-input" id="country" name="country" autocomplete="country">
-              <option value="US" selected>United States</option>
-              <option value="CA">Canada</option>
-              <option value="GB">United Kingdom</option>
-              <option value="AU">Australia</option>
-              <option value="OTHER">Other</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- Products -->
-      <div class="form-section">
-        <span class="form-section-label">Select Your Products</span>
-        <div class="product-list" id="productList">
-
-          <div class="product-row" data-price="167">
-            <input type="checkbox" class="product-check" id="p1" name="product_drops" value="Skinny Drops (Slenderiix + Xceler8)">
-            <label class="product-info" for="p1">
-              <p class="product-name-text">Skinny Drops</p>
-              <p class="product-sub">Slenderiix™ + Xceler8™ — Full Program</p>
-            </label>
-            <input type="number" class="product-qty" min="1" max="10" value="1" aria-label="Quantity">
-            <span class="product-price">$167</span>
-          </div>
-
-          <div class="product-row" data-price="58">
-            <input type="checkbox" class="product-check" id="p2" name="product_abvantage" value="AbVantage">
-            <label class="product-info" for="p2">
-              <p class="product-name-text">AbVantage</p>
-              <p class="product-sub">Hip &amp; Waist Reducer — Natural Fat Burning</p>
-            </label>
-            <input type="number" class="product-qty" min="1" max="10" value="1" aria-label="Quantity">
-            <span class="product-price">$58</span>
-          </div>
-
-          <div class="product-row" data-price="225">
-            <input type="checkbox" class="product-check" id="p3" name="product_drops_abvantage_combo" value="Drops &amp; AbVantage Combo">
-            <label class="product-info" for="p3">
-              <p class="product-name-text">Drops &amp; AbVantage Combo</p>
-              <p class="product-sub">Best Value — Save vs. buying separately</p>
-            </label>
-            <input type="number" class="product-qty" min="1" max="10" value="1" aria-label="Quantity">
-            <span class="product-price">$225</span>
-          </div>
-
-          <div class="product-row" data-price="87">
-            <input type="checkbox" class="product-check" id="p4" name="product_core_cleanse" value="Core Cleanse — Month Supply">
-            <label class="product-info" for="p4">
-              <p class="product-name-text">Core Cleanse</p>
-              <p class="product-sub">One Month Supply — 5:2 Gut Reset Ritual</p>
-            </label>
-            <input type="number" class="product-qty" min="1" max="10" value="1" aria-label="Quantity">
-            <span class="product-price">$87</span>
-          </div>
-
-          <div class="product-row" data-price="237">
-            <input type="checkbox" class="product-check" id="p5" name="product_combo_pack" value="Combo Pack — Slenderiiz &amp; Core Cleanse">
-            <label class="product-info" for="p5">
-              <p class="product-name-text">Combo Pack</p>
-              <p class="product-sub">Slenderiiz™ &amp; Core Cleanse — Complete System</p>
-            </label>
-            <input type="number" class="product-qty" min="1" max="10" value="1" aria-label="Quantity">
-            <span class="product-price">$237</span>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Notes -->
-      <div class="form-section">
-        <span class="form-section-label">Notes (Optional)</span>
-        <div class="form-row">
-          <div class="field-wrap">
-            <label class="field-label" for="notes">Questions or special instructions</label>
-            <textarea class="field-input" id="notes" name="notes" placeholder="Any questions for Tammy, or special requests..."></textarea>
-          </div>
-        </div>
-      </div>
-
-      <!-- Hidden fields for Formspree -->
-      <input type="hidden" name="_subject" value="New Order — Tammy Melchisedeck">
-      <input type="hidden" name="order_total" id="hiddenTotal" value="$0.00">
-      <input type="hidden" name="order_items" id="hiddenItems" value="">
-
-    </form>
-
-    <!-- RIGHT: Summary -->
-    <aside class="order-summary" aria-label="Order summary">
-      <h2 class="summary-title">Order Summary</h2>
-      <div class="summary-items" id="summaryItems">
-        <p class="summary-empty">No products selected yet.</p>
-      </div>
-      <div class="summary-total-row">
-        <span class="summary-total-label">Order Total</span>
-        <span class="summary-total-amount" id="summaryTotal">$0</span>
-      </div>
-      <p class="summary-shipping">✓ Free US Shipping Included</p>
-
-      <div class="payment-info">
-        <span class="payment-info-label">Payment</span>
-        <p>After submitting, Tammy will follow up within 24 hours to confirm your order and arrange payment. She accepts:</p>
-        <div class="payment-methods">
-          <span class="payment-badge">Venmo</span>
-          <span class="payment-badge">PayPal</span>
-          <span class="payment-badge">Zelle</span>
-          <span class="payment-badge">Check</span>
-        </div>
-      </div>
-
-      <button type="submit" class="submit-btn" id="submitBtn" onclick="submitOrder(event)">
-        Place Order Request
-      </button>
-      <p class="submit-note">By submitting you agree to be contacted by Tammy to complete your purchase. No payment is collected now.</p>
-    </aside>
-
+<!-- ── PAGE HERO ── -->
+<div class="page-hero">
+  <div class="page-hero-img-wrap">
+    <img
+      src="images/RedDressArmsneedretouch.webp"
+      alt="Tammy Maltby Melchisedeck"
+      class="page-hero-img"
+      loading="eager"
+    >
+  </div>
+  <div class="page-hero-copy">
+    <span class="page-hero-eyebrow">Meet Tammy</span>
+    <h1 class="page-hero-title">Glad to<br>meet you!</h1>
+    <p class="page-hero-sub">An Emmy-winning media personality turned wellness entrepreneur — speaker, author, mentor, and mother. Her story is one of courage, faith, and continual becoming.</p>
   </div>
 </div>
 
-<!-- SUCCESS SCREEN -->
-<div class="success-screen" id="successScreen">
-  <span class="success-icon">✦</span>
-  <h2 class="success-title">Order Received!</h2>
-  <p class="success-body">
-    Thank you, <strong id="successName"></strong>! Tammy has received your order and will be in touch within 24 hours to confirm the details and arrange payment.<br><br>
-    In the meantime, if you have any questions you can reach her at <a href="mailto:tammymelchisedeck@gmail.com" style="color: var(--gold);">tammymelchisedeck@gmail.com</a>.
-  </p>
-  <a href="index.html" style="display:inline-block; background:var(--gold); color:var(--white); font-family:var(--sans); font-size:0.78rem; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; padding:1rem 2.5rem; text-decoration:none; border-radius:2px;">
-    Back to Site
-  </a>
+<!-- ── ABOUT CONTENT ── -->
+<section class="about-content" aria-labelledby="bio-title">
+  <div class="container">
+    <div class="about-grid">
+
+      <!-- Credentials sidebar -->
+      <aside class="credentials" aria-label="Tammy's credentials">
+        <span class="credentials-label">Background</span>
+        <div class="credential-item">
+          <p class="credential-title">Emmy-Winning Media Personality</p>
+          <p class="credential-sub">Television host, speaker, and author with decades of media experience</p>
+        </div>
+        <div class="credential-item">
+          <p class="credential-title">Wellness Entrepreneur</p>
+          <p class="credential-sub">Rose to the top of a $400 million global wellness company</p>
+        </div>
+        <div class="credential-item">
+          <p class="credential-title">Speaker &amp; Mentor</p>
+          <p class="credential-sub">Has led rooms of thousands and one-on-one conversations with equal warmth</p>
+        </div>
+        <div class="credential-item">
+          <p class="credential-title">Author &amp; Mother</p>
+          <p class="credential-sub">Writing and motherhood woven through every chapter of her story</p>
+        </div>
+        <div class="credential-item">
+          <p class="credential-title">Faith-Driven Leader</p>
+          <p class="credential-sub">Deep conviction that God meets us in every season — especially the unexpected ones</p>
+        </div>
+
+        <nav class="social-row" aria-label="Follow Tammy">
+          <a href="https://www.facebook.com/share/1Js62grMD4/?mibextid=wwXIfr" class="social-icon-btn" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            Facebook
+          </a>
+          <a href="https://www.instagram.com/tammymmelchisedeck?igsh=dGQxcjQyMmEzbDcx" class="social-icon-btn" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            Instagram
+          </a>
+          <a href="https://www.tiktok.com/@tammymmelchisedec?_r=1&_t=ZT-9297iK4kplv" class="social-icon-btn" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+            TikTok
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Bio -->
+      <div class="bio-body">
+        <h2 class="bio-title" id="bio-title">Tammy Maltby<br>Melchisedeck</h2>
+        <div class="divider" aria-hidden="true"></div>
+
+        <p>Tammy Maltby Melchisedeck believes in the power of starting again. An Emmy-winning media personality turned wellness entrepreneur, Tammy has lived many lives — speaker, author, television host, mentor, and mother — and each chapter has shaped the woman she is today.</p>
+
+        <p>Her story is one of courage and continual becoming. At 52, Tammy stepped into a brand-new career in global wellness, rising to the top of a $400 million company and inspiring women around the world to take their health and purpose seriously. Her leadership blends compassion, strength, and a deep conviction that <em>God meets us in every season — especially the unexpected ones.</em></p>
+
+        <div class="bio-pullquote">
+          <p>"Tammy's gift has always been connection — creating a sense of belonging that reminds women they are seen, valued, and capable of so much more than they imagine."</p>
+        </div>
+
+        <p>Whether she's leading a room of thousands or welcoming someone into her home, she creates a sense of belonging that reminds women they are seen, valued, and capable of so much more than they imagine.</p>
+
+        <p>Today, she continues her mission of helping women live rich, authentic, purpose-driven lives — built on wellness, faith, community, and courageous reinvention.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA STRIP ── -->
+<div class="cta-strip">
+  <span class="cta-strip-label">Ready to Begin?</span>
+  <h2 class="cta-strip-title">You were woven for this moment.</h2>
+  <p class="cta-strip-body">Join the women who have already taken the first step toward health, energy, and a life lived on purpose. The Skinny Drops are a simple start.</p>
+  <a href="order.html" class="btn-primary">Order Now</a>
 </div>
 
-<!-- FOOTER -->
-<footer class="page-footer">
-  <p>&copy; <span id="year"></span> Tammy Maltby Melchisedeck &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; <a href="about.html">About</a> &nbsp;·&nbsp; <a href="mailto:tammymelchisedeck@gmail.com">Contact</a></p>
-  <p style="margin-top:0.5rem;">These statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease.</p>
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p class="footer-name">Tammy Maltby<br>Melchisedeck</p>
+        <p class="footer-tagline">Wellness. Faith. Purpose.</p>
+        <nav class="footer-social-row" aria-label="Social media">
+          <a href="https://www.facebook.com/share/1Js62grMD4/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook" class="footer-icon-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/tammymmelchisedeck?igsh=dGQxcjQyMmEzbDcx" target="_blank" rel="noopener" aria-label="Instagram" class="footer-icon-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@tammymmelchisedec?_r=1&_t=ZT-9297iK4kplv" target="_blank" rel="noopener" aria-label="TikTok" class="footer-icon-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+          </a>
+        </nav>
+      </div>
+      <div class="footer-links">
+        <p class="footer-col-label">Navigate</p>
+        <a href="index.html#drops" class="footer-link">The Drops</a>
+        <a href="index.html#results" class="footer-link">Results</a>
+        <a href="index.html#testimonials" class="footer-link">Testimonials</a>
+        <a href="about.html" class="footer-link">About Tammy</a>
+        <a href="mailto:tammymelchisedeck@gmail.com" class="footer-link">Contact</a>
+      </div>
+      <div class="footer-signup">
+        <p class="footer-col-label">Stay Connected</p>
+        <p class="footer-signup-desc">Tips, recipes, and encouragement — straight to your inbox.</p>
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" onsubmit="handleEmailSubmit(event)" class="footer-email-form" aria-label="Newsletter signup">
+          <input type="email" name="email" placeholder="Your email address" required autocomplete="email">
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <img src="images/unnamed.webp" alt="Partner.Co" class="footer-partnerco-logo">
+      <p class="footer-disclaimer">These statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease. Applicable to U.S. only.</p>
+      <p class="footer-copy">&copy; <span id="year"></span> Tammy Maltby Melchisedeck. All rights reserved.</p>
+    </div>
+  </div>
 </footer>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Product rows — check/uncheck interaction
-  var rows = document.querySelectorAll('.product-row');
-  rows.forEach(function(row) {
-    var check = row.querySelector('.product-check');
-    var qty   = row.querySelector('.product-qty');
-    var price = row.querySelector('.product-price');
-
-    check.addEventListener('change', function() {
-      qty.classList.toggle('active', check.checked);
-      price.classList.toggle('active', check.checked);
-      updateSummary();
-    });
-
-    qty.addEventListener('input', function() {
-      if (qty.value < 1) qty.value = 1;
-      if (qty.value > 10) qty.value = 10;
-      updateSummary();
-    });
+  function toggleNav() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
+  function closeMobileNav() {
+    document.getElementById('mobileNav').classList.remove('open');
+  }
+  document.addEventListener('click', function(e) {
+    const nav = document.getElementById('mobileNav');
+    const toggle = document.querySelector('.nav-toggle');
+    if (nav.classList.contains('open') && !nav.contains(e.target) && !toggle.contains(e.target)) {
+      nav.classList.remove('open');
+    }
   });
 
-  function getSelectedProducts() {
-    var products = [];
-    rows.forEach(function(row) {
-      var check = row.querySelector('.product-check');
-      if (check.checked) {
-        var name  = row.querySelector('.product-name-text').textContent.trim();
-        var sub   = row.querySelector('.product-sub').textContent.trim();
-        var qty   = parseInt(row.querySelector('.product-qty').value) || 1;
-        var price = parseInt(row.dataset.price);
-        products.push({ name: name, sub: sub, qty: qty, price: price, total: qty * price });
-      }
-    });
-    return products;
-  }
-
-  function updateSummary() {
-    var products = getSelectedProducts();
-    var container = document.getElementById('summaryItems');
-    var totalEl   = document.getElementById('summaryTotal');
-    var submitBtn = document.getElementById('submitBtn');
-    var grandTotal = 0;
-
-    if (products.length === 0) {
-      container.innerHTML = '<p class="summary-empty">No products selected yet.</p>';
-      totalEl.textContent = '$0';
-      submitBtn.disabled = true;
-      return;
+  function handleEmailSubmit(e) {
+    const action = e.target.action;
+    if (action.includes('YOUR_FORM_ID')) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      const original = btn.textContent;
+      btn.textContent = 'Almost there! (Form not yet connected)';
+      btn.style.background = '#7A8C72';
+      setTimeout(function() {
+        btn.textContent = original;
+        btn.style.background = '';
+        e.target.reset();
+      }, 3500);
     }
-
-    submitBtn.disabled = false;
-    var html = '';
-    products.forEach(function(p) {
-      grandTotal += p.total;
-      html += '<div class="summary-item">';
-      html += '<span class="summary-item-name">' + p.name + (p.qty > 1 ? ' <span class="summary-item-qty">×' + p.qty + '</span>' : '') + '</span>';
-      html += '<span class="summary-item-price">$' + p.total + '</span>';
-      html += '</div>';
-    });
-
-    container.innerHTML = html;
-    totalEl.textContent = '$' + grandTotal;
-
-    // Update hidden fields for Formspree
-    var itemsSummary = products.map(function(p) {
-      return p.name + (p.qty > 1 ? ' x' + p.qty : '') + ' — $' + p.total;
-    }).join(', ');
-    document.getElementById('hiddenTotal').value = '$' + grandTotal;
-    document.getElementById('hiddenItems').value = itemsSummary;
   }
-
-  // Initialise
-  updateSummary();
-  document.getElementById('submitBtn').disabled = true;
-
-  // Form validation & submission
-  function submitOrder(e) {
-    e.preventDefault();
-    var form = document.getElementById('checkoutForm');
-    var products = getSelectedProducts();
-    var valid = true;
-
-    // Required fields
-    ['fullName','email','address','city','state','zip'].forEach(function(id) {
-      var field = document.getElementById(id);
-      if (!field.value.trim()) {
-        field.classList.add('error');
-        valid = false;
-      } else {
-        field.classList.remove('error');
-      }
-    });
-
-    // Email format
-    var emailField = document.getElementById('email');
-    if (emailField.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
-      emailField.classList.add('error');
-      valid = false;
-    }
-
-    // At least one product
-    if (products.length === 0) {
-      valid = false;
-      alert('Please select at least one product.');
-    }
-
-    if (!valid) {
-      // Scroll to first error
-      var firstError = form.querySelector('.error');
-      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      return;
-    }
-
-    // Submit to Formspree
-    var btn = document.getElementById('submitBtn');
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
-
-    var data = new FormData(form);
-    fetch('https://formspree.io/f/YOUR_ORDER_FORM_ID', {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    }).then(function(r) {
-      if (r.ok) {
-        showSuccess();
-      } else {
-        btn.textContent = 'Place Order Request';
-        btn.disabled = false;
-        alert('Something went wrong. Please try again or email Tammy directly.');
-      }
-    }).catch(function() {
-      // If Formspree not set up yet, still show success in dev
-      showSuccess();
-    });
-  }
-
-  function showSuccess() {
-    var name = document.getElementById('fullName').value.split(' ')[0];
-    document.getElementById('successName').textContent = name;
-    document.getElementById('orderForm').style.display = 'none';
-    document.querySelector('.page-header').style.display = 'none';
-    document.getElementById('successScreen').style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  // Clear error state on input
-  document.querySelectorAll('.field-input').forEach(function(field) {
-    field.addEventListener('input', function() {
-      field.classList.remove('error');
-    });
-  });
 </script>
 
 </body>

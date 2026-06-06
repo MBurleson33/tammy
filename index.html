@@ -1230,7 +1230,7 @@
         <p class="section-body">
           Slenderiiz™ is a unique homeopathic combination of Slenderiix and Xceler8 — designed to balance hormones, increase metabolism, control appetite, and support healthy weight loss. Three drops before each meal. Purchase includes free access to a supportive community to keep you on track.
         </p>
-        <img src="images/tmpv33k6gwn.webp" alt="Slenderiix and Xceler8 drops" class="drops-product-img" loading="lazy">
+        <img src="images/tmpv33k6gwn.webp" alt="Slenderiix and Xceler8 drops" class="drops-product-img" id="dropsFeatureImg" loading="lazy">
       </div>
 
       <!-- Right: FAQs -->
@@ -1736,11 +1736,19 @@
       .catch(function() { /* fall back to hardcoded */ });
   }
 
-  // Load products from Supabase
   function loadProductsFromDB() {
     sbFetch('/products?active=eq.true&order=sort_order.asc')
       .then(function(data) {
         if (!data || !data.length) return;
+
+        // Update the drops feature image if the first product has one
+        var dropsProduct = data.find(function(p) { return p.sort_order === 1; });
+        if (dropsProduct && dropsProduct.feature_image_path) {
+          var featImg = document.getElementById('dropsFeatureImg');
+          if (featImg) featImg.src = dropsProduct.feature_image_path;
+        }
+
+        // Rebuild the More Products grid
         var grid = document.querySelector('.products-grid');
         if (!grid) return;
         grid.innerHTML = data.map(function(p) {

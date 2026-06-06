@@ -396,53 +396,76 @@
   .testimonials-section .section-label { color: var(--gold-light); }
   .testimonials-section .divider { background: var(--gold-light); }
   .testimonials-section .section-body { color: var(--sand); }
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    margin-top: 3.5rem;
-  }
-  .testimonial-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.07);
-    padding: 2.25rem 2rem 2rem;
-    border-radius: 2px;
+
+  .testimonial-stage {
+    margin-top: 4rem;
+    text-align: center;
     position: relative;
+    min-height: 220px;
   }
-  .testimonial-card::before {
-    content: '\201C';
+  .testimonial-big-quote {
+    font-size: 8rem;
     font-family: var(--serif);
-    font-size: 5.5rem;
     color: var(--gold);
-    opacity: 0.25;
-    position: absolute;
-    top: 0.25rem;
-    left: 1.5rem;
-    line-height: 1;
-    pointer-events: none;
+    opacity: 0.15;
+    line-height: 0.6;
+    margin-bottom: 1rem;
+    display: block;
+    user-select: none;
   }
-  .testimonial-quote {
+  .testimonial-slide {
+    display: none;
+    animation: tFadeIn 0.5s ease;
+  }
+  .testimonial-slide.active { display: block; }
+  @keyframes tFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .testimonial-text {
     font-family: var(--serif);
-    font-size: 1.1rem;
+    font-size: clamp(1.35rem, 2.5vw, 2rem);
     font-style: italic;
     font-weight: 300;
     color: var(--cream);
-    line-height: 1.7;
-    margin-bottom: 1.25rem;
-    padding-top: 1.5rem;
+    line-height: 1.65;
+    max-width: 780px;
+    margin: 0 auto 2rem;
   }
-  .testimonial-name {
-    font-size: 0.75rem;
+  .testimonial-attr {
+    font-size: 0.72rem;
     font-weight: 500;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--gold);
   }
-  .testimonial-wide {
-    grid-column: 1 / -1;
-    max-width: 560px;
-    margin: 0 auto;
+
+  /* Name selector pills */
+  .testimonial-names {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
   }
+  .testimonial-name-btn {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--ink-light);
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.35rem;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .testimonial-name-btn:hover { border-color: var(--gold-light); color: var(--gold-light); }
+  .testimonial-name-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(184,154,106,0.08); }
 
   /* ── PURCHASE ── */
   .purchase-section { background: var(--cream); }
@@ -874,7 +897,6 @@
     }
     .about-quote-block { display: none; }
     .results-grid { grid-template-columns: 1fr; }
-    .testimonials-grid { grid-template-columns: 1fr; }
     .testimonial-wide { grid-column: auto; max-width: 100%; }
     .purchase-box { padding: 2.5rem 1.75rem; }
     nav { padding: 0 1.25rem; }
@@ -1081,29 +1103,40 @@
     <h2 class="section-title" id="testimonials-title">Their stories.</h2>
     <div class="divider" aria-hidden="true"></div>
     <p class="section-body">
-      These are real results from real people — not paid endorsements, not stock photos. Just women who said yes to something different.
+      Real results from real people — not paid endorsements, not stock photos. Just women who said yes to something different.
     </p>
-    <div class="testimonials-grid">
-      <article class="testimonial-card">
-        <blockquote class="testimonial-quote">I have lost 25 pounds and have gained enormous amounts of energy. I didn't think anything would work for me — I was wrong.</blockquote>
-        <p class="testimonial-name">— Ciera</p>
-      </article>
-      <article class="testimonial-card">
-        <blockquote class="testimonial-quote">My night sweats are completely gone. I honestly didn't expect that benefit — this program has genuinely changed my life.</blockquote>
-        <p class="testimonial-name">— Ashley</p>
-      </article>
-      <article class="testimonial-card">
-        <blockquote class="testimonial-quote">This is so much more than weight loss. I am now off 6 medications! I feel like I have gotten my life back.</blockquote>
-        <p class="testimonial-name">— Noha</p>
-      </article>
-      <article class="testimonial-card">
-        <blockquote class="testimonial-quote">22 pounds down and my inflammation is completely gone. I feel better at 50 than I did at 35.</blockquote>
-        <p class="testimonial-name">— Tonya</p>
-      </article>
-      <article class="testimonial-card testimonial-wide">
-        <blockquote class="testimonial-quote">These drops give me unbelievable amounts of energy. An absolute game changer — I tell everyone I know about them.</blockquote>
-        <p class="testimonial-name">— Ellie</p>
-      </article>
+
+    <div class="testimonial-stage" aria-live="polite">
+      <span class="testimonial-big-quote" aria-hidden="true">"</span>
+
+      <div class="testimonial-slide active" id="t-0">
+        <p class="testimonial-text">I have lost 25 pounds and have gained enormous amounts of energy. I didn't think anything would work for me — I was wrong.</p>
+        <p class="testimonial-attr">— Ciera</p>
+      </div>
+      <div class="testimonial-slide" id="t-1">
+        <p class="testimonial-text">My night sweats are completely gone. I honestly didn't expect that benefit — this program has genuinely changed my life.</p>
+        <p class="testimonial-attr">— Ashley</p>
+      </div>
+      <div class="testimonial-slide" id="t-2">
+        <p class="testimonial-text">This is so much more than weight loss. I am now off 6 medications! I feel like I have gotten my life back.</p>
+        <p class="testimonial-attr">— Noha</p>
+      </div>
+      <div class="testimonial-slide" id="t-3">
+        <p class="testimonial-text">22 pounds down and my inflammation is completely gone. I feel better at 50 than I did at 35.</p>
+        <p class="testimonial-attr">— Tonya</p>
+      </div>
+      <div class="testimonial-slide" id="t-4">
+        <p class="testimonial-text">These drops give me unbelievable amounts of energy. An absolute game changer — I tell everyone I know about them.</p>
+        <p class="testimonial-attr">— Ellie</p>
+      </div>
+    </div>
+
+    <div class="testimonial-names" role="tablist" aria-label="Select a testimonial">
+      <button class="testimonial-name-btn active" onclick="showTestimonial(0)" role="tab" aria-selected="true">Ciera</button>
+      <button class="testimonial-name-btn" onclick="showTestimonial(1)" role="tab" aria-selected="false">Ashley</button>
+      <button class="testimonial-name-btn" onclick="showTestimonial(2)" role="tab" aria-selected="false">Noha</button>
+      <button class="testimonial-name-btn" onclick="showTestimonial(3)" role="tab" aria-selected="false">Tonya</button>
+      <button class="testimonial-name-btn" onclick="showTestimonial(4)" role="tab" aria-selected="false">Ellie</button>
     </div>
   </div>
 </section>

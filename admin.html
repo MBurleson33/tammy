@@ -11,222 +11,61 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --cream: #FAF7F2;
-    --linen: #F2EDE4;
-    --sand: #E8DFD0;
-    --gold: #B89A6A;
-    --gold-light: #D4B896;
-    --ink: #2C2520;
-    --ink-mid: #5C4F44;
-    --ink-light: #8C7E72;
-    --sage: #7A8C72;
-    --white: #FFFFFF;
-    --error: #C0392B;
-    --success: #27AE60;
+    --cream: #FAF7F2; --linen: #F2EDE4; --sand: #E8DFD0;
+    --gold: #B89A6A; --gold-light: #D4B896;
+    --ink: #2C2520; --ink-mid: #5C4F44; --ink-light: #8C7E72;
+    --sage: #7A8C72; --white: #FFFFFF;
+    --error: #C0392B; --success: #27AE60;
     --serif: 'Cormorant Garamond', Georgia, serif;
     --sans: 'DM Sans', system-ui, sans-serif;
   }
   html { scroll-behavior: smooth; }
   body { font-family: var(--sans); background: var(--cream); color: var(--ink); font-size: 15px; line-height: 1.6; }
 
-  /* ── LOGIN ── */
-  .login-screen {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--ink);
-    padding: 2rem;
-  }
-  .login-box {
-    background: var(--white);
-    border-top: 3px solid var(--gold);
-    border-radius: 2px;
-    padding: 3rem 2.5rem;
-    width: 100%;
-    max-width: 380px;
-  }
-  .login-title {
-    font-family: var(--serif);
-    font-size: 1.8rem;
-    font-weight: 300;
-    color: var(--ink);
-    margin-bottom: 0.25rem;
-  }
-  .login-sub {
-    font-size: 0.8rem;
-    color: var(--ink-light);
-    margin-bottom: 2rem;
-    letter-spacing: 0.05em;
-  }
-  .login-field {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    font-family: var(--sans);
-    font-size: 0.9rem;
-    border: 1px solid var(--sand);
-    border-radius: 2px;
-    outline: none;
-    margin-bottom: 0.75rem;
-    background: var(--cream);
-    color: var(--ink);
-    transition: border-color 0.2s;
-  }
+  /* LOGIN */
+  .login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--ink); padding: 2rem; }
+  .login-box { background: var(--white); border-top: 3px solid var(--gold); border-radius: 2px; padding: 3rem 2.5rem; width: 100%; max-width: 380px; }
+  .login-title { font-family: var(--serif); font-size: 1.8rem; font-weight: 300; color: var(--ink); margin-bottom: 0.25rem; }
+  .login-sub { font-size: 0.8rem; color: var(--ink-light); margin-bottom: 2rem; }
+  .login-field { width: 100%; padding: 0.75rem 1rem; font-family: var(--sans); font-size: 0.9rem; border: 1px solid var(--sand); border-radius: 2px; outline: none; margin-bottom: 0.75rem; background: var(--cream); color: var(--ink); transition: border-color 0.2s; }
   .login-field:focus { border-color: var(--gold); }
-  .login-btn {
-    width: 100%;
-    background: var(--gold);
-    color: var(--white);
-    border: none;
-    padding: 0.85rem;
-    font-family: var(--sans);
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: background 0.2s;
-    margin-top: 0.25rem;
-  }
+  .login-btn { width: 100%; background: var(--gold); color: var(--white); border: none; padding: 0.85rem; font-family: var(--sans); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; border-radius: 2px; cursor: pointer; transition: background 0.2s; margin-top: 0.25rem; }
   .login-btn:hover { background: var(--ink); }
-  .login-error {
-    font-size: 0.8rem;
-    color: var(--error);
-    margin-top: 0.75rem;
-    display: none;
-  }
+  .login-btn:disabled { opacity: 0.6; cursor: default; }
+  .login-error { font-size: 0.8rem; color: var(--error); margin-top: 0.75rem; display: none; }
 
-  /* ── ADMIN SHELL ── */
+  /* SHELL */
   .admin-shell { display: none; min-height: 100vh; flex-direction: column; }
 
-  /* Top bar */
-  .topbar {
-    background: var(--ink);
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2rem;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .topbar-title {
-    font-family: var(--serif);
-    font-size: 1.2rem;
-    font-weight: 300;
-    color: var(--cream);
-    letter-spacing: 0.04em;
-  }
-  .topbar-right { display: flex; align-items: center; gap: 1.25rem; }
-  .topbar-site {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gold-light);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
+  /* TOPBAR */
+  .topbar { background: var(--ink); height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; position: sticky; top: 0; z-index: 100; }
+  .topbar-title { font-family: var(--serif); font-size: 1.2rem; font-weight: 300; color: var(--cream); }
+  .topbar-right { display: flex; align-items: center; gap: 0.75rem; }
+  .topbar-site { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); text-decoration: none; transition: color 0.2s; }
   .topbar-site:hover { color: var(--gold); }
-  .topbar-logout {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-    background: none;
-    border: 1px solid rgba(255,255,255,0.15);
-    padding: 0.35rem 0.85rem;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: var(--sans);
-  }
-  .topbar-logout:hover { color: var(--white); border-color: rgba(255,255,255,0.4); }
+  .topbar-btn { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.45); background: none; border: 1px solid rgba(255,255,255,0.15); padding: 0.35rem 0.85rem; border-radius: 2px; cursor: pointer; transition: all 0.2s; font-family: var(--sans); }
+  .topbar-btn:hover { color: var(--white); border-color: rgba(255,255,255,0.4); }
 
-  /* Tab nav */
-  .tab-nav {
-    background: var(--white);
-    border-bottom: 1px solid var(--sand);
-    display: flex;
-    padding: 0 2rem;
-    gap: 0;
-  }
-  .tab-btn {
-    font-family: var(--sans);
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    background: none;
-    border: none;
-    border-bottom: 2px solid transparent;
-    padding: 1rem 1.25rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
+  /* TAB NAV */
+  .tab-nav { background: var(--white); border-bottom: 1px solid var(--sand); display: flex; padding: 0 1.5rem; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-btn { font-family: var(--sans); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); background: none; border: none; border-bottom: 2px solid transparent; padding: 1rem 1rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; flex-shrink: 0; }
   .tab-btn:hover { color: var(--ink); }
   .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
-  .tab-badge {
-    background: var(--gold);
-    color: var(--white);
-    font-size: 0.6rem;
-    font-weight: 700;
-    padding: 0.1rem 0.4rem;
-    border-radius: 10px;
-    min-width: 18px;
-    text-align: center;
-  }
+  .tab-badge { background: var(--gold); color: var(--white); font-size: 0.6rem; font-weight: 700; padding: 0.1rem 0.4rem; border-radius: 10px; min-width: 18px; text-align: center; }
 
-  /* Content area */
-  .tab-content { flex: 1; padding: 2.5rem 2rem; max-width: 1080px; margin: 0 auto; width: 100%; }
+  /* CONTENT AREA */
+  .tab-content { flex: 1; padding: 2rem 1.5rem; max-width: 1080px; margin: 0 auto; width: 100%; }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
-  /* Panel header */
-  .panel-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-  .panel-title {
-    font-family: var(--serif);
-    font-size: 1.8rem;
-    font-weight: 300;
-    color: var(--ink);
-  }
-  .panel-subtitle {
-    font-size: 0.82rem;
-    color: var(--ink-light);
-    margin-top: 0.2rem;
-  }
+  /* PANEL HEADER */
+  .panel-header { display: flex; align-items: start; justify-content: space-between; margin-bottom: 1.75rem; flex-wrap: wrap; gap: 1rem; }
+  .panel-title { font-family: var(--serif); font-size: 1.8rem; font-weight: 300; color: var(--ink); }
+  .panel-subtitle { font-size: 0.82rem; color: var(--ink-light); margin-top: 0.2rem; }
 
-  /* Buttons */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: var(--sans);
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.6rem 1.25rem;
-    border-radius: 2px;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s;
-    text-decoration: none;
-  }
+  /* BUTTONS */
+  .btn { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--sans); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.25rem; border-radius: 2px; cursor: pointer; border: none; transition: all 0.2s; text-decoration: none; }
   .btn-gold { background: var(--gold); color: var(--white); }
   .btn-gold:hover { background: var(--ink); }
   .btn-outline { background: transparent; color: var(--ink-mid); border: 1px solid var(--sand); }
@@ -236,580 +75,478 @@
   .btn-sm { padding: 0.4rem 0.85rem; font-size: 0.68rem; }
   .btn:disabled { opacity: 0.5; cursor: default; }
 
-  /* Toast notification */
-  .toast {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background: var(--ink);
-    color: var(--white);
-    padding: 0.85rem 1.5rem;
-    border-radius: 2px;
-    font-size: 0.82rem;
-    border-left: 3px solid var(--gold);
-    z-index: 999;
-    transform: translateY(100px);
-    opacity: 0;
-    transition: all 0.3s ease;
-    max-width: 320px;
-  }
+  /* TOAST */
+  .toast { position: fixed; bottom: 2rem; right: 1.5rem; background: var(--ink); color: var(--white); padding: 0.85rem 1.5rem; border-radius: 2px; font-size: 0.82rem; border-left: 3px solid var(--gold); z-index: 999; transform: translateY(100px); opacity: 0; transition: all 0.3s ease; max-width: 300px; }
   .toast.show { transform: translateY(0); opacity: 1; }
   .toast.success { border-left-color: var(--sage); }
   .toast.error { border-left-color: var(--error); }
 
-  /* Loading spinner */
-  .spinner {
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    border: 2px solid var(--sand);
-    border-top-color: var(--gold);
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-  }
+  /* SPINNER */
+  .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--sand); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.7s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .loading-state {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: var(--ink-light);
-    font-size: 0.85rem;
-    padding: 2rem 0;
-  }
+  .loading-state { display: flex; align-items: center; gap: 0.75rem; color: var(--ink-light); font-size: 0.85rem; padding: 2rem 0; }
 
-  /* ── CARDS ── */
-  .card {
-    background: var(--white);
-    border: 1px solid var(--sand);
-    border-radius: 2px;
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-  }
-  .card-header {
-    display: flex;
-    align-items: start;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  .card-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
-
-  /* Inline edit fields */
-  .edit-field {
-    width: 100%;
-    padding: 0.6rem 0.85rem;
-    font-family: var(--sans);
-    font-size: 0.88rem;
-    color: var(--ink);
-    background: var(--cream);
-    border: 1px solid var(--sand);
-    border-radius: 2px;
-    outline: none;
-    transition: border-color 0.2s;
-    margin-bottom: 0.5rem;
-  }
+  /* EDIT FIELDS */
+  .edit-field { width: 100%; padding: 0.6rem 0.85rem; font-family: var(--sans); font-size: 0.88rem; color: var(--ink); background: var(--cream); border: 1px solid var(--sand); border-radius: 2px; outline: none; transition: border-color 0.2s; margin-bottom: 0.5rem; }
   .edit-field:focus { border-color: var(--gold); background: var(--white); }
-  textarea.edit-field { resize: vertical; min-height: 80px; line-height: 1.6; }
-  .edit-label {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    margin-bottom: 0.3rem;
-    display: block;
-  }
+  textarea.edit-field { resize: vertical; min-height: 80px; line-height: 1.6; font-family: var(--sans); }
+  .edit-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.3rem; display: block; }
   .field-group { margin-bottom: 0.75rem; }
+  .field-hint { font-size: 0.75rem; color: var(--ink-light); margin-top: 0.25rem; line-height: 1.5; }
 
-  /* Toggle switch */
+  /* TOGGLE */
   .toggle-wrap { display: flex; align-items: center; gap: 0.6rem; }
-  .toggle {
-    position: relative;
-    width: 36px;
-    height: 20px;
-    flex-shrink: 0;
-  }
+  .toggle { position: relative; width: 36px; height: 20px; flex-shrink: 0; }
   .toggle input { opacity: 0; width: 0; height: 0; }
-  .toggle-slider {
-    position: absolute;
-    inset: 0;
-    background: var(--sand);
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .toggle-slider::before {
-    content: '';
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    left: 3px;
-    top: 3px;
-    background: var(--white);
-    border-radius: 50%;
-    transition: transform 0.2s;
-  }
+  .toggle-slider { position: absolute; inset: 0; background: var(--sand); border-radius: 20px; cursor: pointer; transition: background 0.2s; }
+  .toggle-slider::before { content: ''; position: absolute; width: 14px; height: 14px; left: 3px; top: 3px; background: var(--white); border-radius: 50%; transition: transform 0.2s; }
   .toggle input:checked + .toggle-slider { background: var(--gold); }
   .toggle input:checked + .toggle-slider::before { transform: translateX(16px); }
   .toggle-label { font-size: 0.8rem; color: var(--ink-mid); }
 
-  /* Sort handle */
-  .sort-handle {
-    cursor: grab;
-    color: var(--sand);
-    padding: 0.25rem;
-    flex-shrink: 0;
-    transition: color 0.2s;
-  }
+  /* SORT HANDLE */
+  .sort-handle { cursor: grab; color: var(--sand); padding: 0.25rem; flex-shrink: 0; transition: color 0.2s; user-select: none; }
   .sort-handle:hover { color: var(--ink-light); }
   .sort-handle:active { cursor: grabbing; }
+  .drag-hint { font-size: 0.72rem; color: var(--ink-light); display: flex; align-items: center; gap: 0.4rem; margin-bottom: 1rem; }
 
-  /* ── TESTIMONIALS ── */
-  .testimonial-card {
-    background: var(--white);
-    border: 1px solid var(--sand);
-    border-radius: 2px;
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 0.75rem;
-    display: flex;
-    gap: 1rem;
-    align-items: start;
-    transition: box-shadow 0.2s;
-  }
+  /* TESTIMONIALS */
+  .testimonial-card { background: var(--white); border: 1px solid var(--sand); border-radius: 2px; padding: 1.1rem 1.25rem; margin-bottom: 0.65rem; display: flex; gap: 1rem; align-items: start; transition: box-shadow 0.2s, opacity 0.2s; }
   .testimonial-card:hover { box-shadow: 0 2px 12px rgba(44,37,32,0.07); }
-  .testimonial-card.inactive { opacity: 0.5; }
-  .testimonial-body { flex: 1; }
-  .testimonial-quote-display {
-    font-family: var(--serif);
-    font-size: 1rem;
-    font-style: italic;
-    color: var(--ink-mid);
-    line-height: 1.6;
-    margin-bottom: 0.4rem;
-  }
-  .testimonial-name-display {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
+  .testimonial-card.inactive { opacity: 0.45; }
+  .testimonial-card.drag-over { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(184,154,106,0.2); }
+  .testimonial-body { flex: 1; min-width: 0; }
+  .testimonial-quote-display { font-family: var(--serif); font-size: 1rem; font-style: italic; color: var(--ink-mid); line-height: 1.5; margin-bottom: 0.3rem; }
+  .testimonial-name-display { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+  .card-actions { display: flex; gap: 0.4rem; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
 
-  /* ── PRODUCTS ── */
-  .product-card {
-    background: var(--white);
-    border: 1px solid var(--sand);
-    border-radius: 2px;
-    margin-bottom: 1rem;
-    overflow: hidden;
-  }
-  .product-card-header {
-    padding: 1.25rem 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    cursor: pointer;
-    user-select: none;
-  }
+  /* PRODUCTS */
+  .product-card { background: var(--white); border: 1px solid var(--sand); border-radius: 2px; margin-bottom: 1rem; overflow: hidden; }
+  .product-card-header { padding: 1.1rem 1.25rem; display: flex; align-items: center; gap: 1rem; cursor: pointer; user-select: none; transition: background 0.15s; }
   .product-card-header:hover { background: var(--linen); }
-  .product-thumb {
-    width: 48px;
-    height: 48px;
-    object-fit: cover;
-    border-radius: 2px;
-    flex-shrink: 0;
-    background: var(--linen);
-  }
-  .product-card-name {
-    font-family: var(--serif);
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: var(--ink);
-    flex: 1;
-  }
-  .product-card-price {
-    font-family: var(--serif);
-    font-size: 1.2rem;
-    font-weight: 300;
-    color: var(--gold);
-    flex-shrink: 0;
-  }
-  .product-card-body {
-    padding: 1.5rem;
-    border-top: 1px solid var(--sand);
-    display: none;
-  }
+  .product-thumb { width: 48px; height: 48px; object-fit: cover; border-radius: 2px; flex-shrink: 0; background: var(--linen); }
+  .product-card-info { flex: 1; min-width: 0; }
+  .product-card-name { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); }
+  .product-card-price { font-family: var(--serif); font-size: 1.1rem; font-weight: 300; color: var(--gold); flex-shrink: 0; }
+  .product-card-chevron { color: var(--ink-light); flex-shrink: 0; transition: transform 0.2s; }
+  .product-card-chevron.open { transform: rotate(180deg); }
+  .product-card-body { padding: 1.5rem; border-top: 1px solid var(--sand); display: none; }
   .product-card-body.open { display: block; }
   .product-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .img-preview { width: 100%; max-width: 200px; height: 120px; object-fit: cover; border-radius: 2px; border: 1px solid var(--sand); margin-top: 0.5rem; display: none; }
+  .save-indicator { font-size: 0.72rem; color: var(--sage); display: none; align-items: center; gap: 0.35rem; }
+  .save-indicator.show { display: flex; }
 
-  /* ── CONTENT ── */
-  .content-block-card {
-    background: var(--white);
-    border: 1px solid var(--sand);
-    border-radius: 2px;
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-  }
-  .content-block-key {
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
-    display: block;
-  }
-  .content-save-row {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 0.75rem;
-  }
+  /* CONTENT BLOCKS */
+  .content-section-group { margin-bottom: 2.5rem; }
+  .content-section-title { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-light); padding-bottom: 0.5rem; border-bottom: 1px solid var(--sand); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+  .content-block-card { background: var(--white); border: 1px solid var(--sand); border-radius: 2px; padding: 1.5rem; margin-bottom: 0.75rem; }
+  .content-block-label { font-size: 0.78rem; font-weight: 500; color: var(--ink); margin-bottom: 0.35rem; display: block; }
+  .content-block-desc { font-size: 0.75rem; color: var(--ink-light); margin-bottom: 0.75rem; line-height: 1.5; }
+  .content-preview { margin-top: 0.75rem; padding: 0.85rem 1rem; background: var(--linen); border-radius: 2px; border: 1px solid var(--sand); display: none; }
+  .content-preview.show { display: block; }
+  .content-preview-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; display: block; }
+  .content-save-row { display: flex; align-items: center; justify-content: space-between; margin-top: 0.75rem; flex-wrap: wrap; gap: 0.5rem; }
+  .last-saved { font-size: 0.72rem; color: var(--ink-light); }
+  .format-tip { background: var(--linen); border: 1px solid var(--sand); border-left: 3px solid var(--gold); border-radius: 2px; padding: 0.85rem 1.1rem; margin-bottom: 1.5rem; font-size: 0.82rem; color: var(--ink-mid); line-height: 1.6; }
+  .format-tip code { background: var(--sand); padding: 0.1rem 0.35rem; border-radius: 2px; font-size: 0.82em; font-family: monospace; }
 
-  /* ── ORDERS ── */
-  .orders-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.85rem;
-  }
-  .orders-table th {
-    text-align: left;
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--sand);
-    background: var(--linen);
-  }
-  .orders-table td {
-    padding: 0.9rem 1rem;
-    border-bottom: 1px solid var(--linen);
-    color: var(--ink-mid);
-    vertical-align: top;
-  }
-  .orders-table tr:hover td { background: var(--cream); }
-  .order-name { font-weight: 500; color: var(--ink); }
-  .order-items { font-size: 0.78rem; color: var(--ink-light); line-height: 1.5; }
-  .order-total { font-family: var(--serif); font-size: 1.1rem; color: var(--gold); font-weight: 300; }
-  .status-badge {
-    display: inline-block;
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.2rem 0.6rem;
-    border-radius: 2px;
-  }
+  /* ORDERS */
+  .orders-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.75rem; }
+  .stat-card { background: var(--white); border: 1px solid var(--sand); border-top: 3px solid var(--gold); border-radius: 2px; padding: 1.25rem; }
+  .stat-value { font-family: var(--serif); font-size: 2rem; font-weight: 300; color: var(--ink); line-height: 1; margin-bottom: 0.25rem; }
+  .stat-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); }
+  .orders-wrap { background: var(--white); border: 1px solid var(--sand); border-radius: 2px; overflow: hidden; }
+
+  /* Orders mobile cards */
+  .order-card { padding: 1.25rem; border-bottom: 1px solid var(--linen); }
+  .order-card:last-child { border-bottom: none; }
+  .order-card-header { display: flex; align-items: start; justify-content: space-between; gap: 1rem; margin-bottom: 0.75rem; }
+  .order-card-name { font-weight: 500; color: var(--ink); font-size: 0.95rem; }
+  .order-card-email { font-size: 0.78rem; color: var(--ink-light); }
+  .order-card-date { font-size: 0.75rem; color: var(--ink-light); flex-shrink: 0; }
+  .order-card-items { font-size: 0.82rem; color: var(--ink-mid); line-height: 1.6; margin-bottom: 0.75rem; }
+  .order-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; }
+  .order-total { font-family: var(--serif); font-size: 1.3rem; font-weight: 300; color: var(--gold); }
+  .order-actions { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+  .status-badge { display: inline-block; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 2px; }
   .status-new { background: rgba(184,154,106,0.15); color: var(--gold); }
   .status-contacted { background: rgba(122,140,114,0.15); color: var(--sage); }
   .status-payment_sent { background: rgba(39,174,96,0.1); color: #27AE60; }
   .status-shipped { background: rgba(52,152,219,0.1); color: #2980B9; }
   .status-complete { background: rgba(44,37,32,0.08); color: var(--ink-mid); }
   .status-cancelled { background: rgba(192,57,43,0.08); color: var(--error); }
-  .status-select {
-    font-family: var(--sans);
-    font-size: 0.75rem;
-    padding: 0.3rem 0.5rem;
-    border: 1px solid var(--sand);
-    border-radius: 2px;
-    background: var(--white);
-    color: var(--ink);
-    cursor: pointer;
-    outline: none;
-  }
+  .status-select { font-family: var(--sans); font-size: 0.75rem; padding: 0.35rem 0.6rem; border: 1px solid var(--sand); border-radius: 2px; background: var(--white); color: var(--ink); cursor: pointer; outline: none; }
   .status-select:focus { border-color: var(--gold); }
-  .orders-empty {
-    text-align: center;
-    padding: 3rem;
-    color: var(--ink-light);
-    font-style: italic;
-    font-family: var(--serif);
-    font-size: 1rem;
-  }
-  .orders-wrap {
-    background: var(--white);
-    border: 1px solid var(--sand);
-    border-radius: 2px;
-    overflow: hidden;
-    overflow-x: auto;
-  }
-  .orders-stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-  .stat-card {
-    background: var(--white);
-    border: 1px solid var(--sand);
-    border-top: 3px solid var(--gold);
-    border-radius: 2px;
-    padding: 1.25rem;
-  }
-  .stat-value {
-    font-family: var(--serif);
-    font-size: 2rem;
-    font-weight: 300;
-    color: var(--ink);
-    line-height: 1;
-    margin-bottom: 0.25rem;
-  }
-  .stat-label {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-  }
+  .orders-empty { text-align: center; padding: 3rem; color: var(--ink-light); font-style: italic; font-family: var(--serif); font-size: 1rem; }
+  .email-template-btn { font-size: 0.68rem; }
 
-  /* Add testimonial modal */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(44,37,32,0.6);
-    z-index: 200;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-  }
+  /* MODALS */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(44,37,32,0.65); z-index: 200; display: none; align-items: center; justify-content: center; padding: 1.5rem; }
   .modal-overlay.open { display: flex; }
-  .modal {
-    background: var(--white);
-    border-top: 3px solid var(--gold);
-    border-radius: 2px;
-    padding: 2rem;
-    width: 100%;
-    max-width: 520px;
-  }
-  .modal-title {
-    font-family: var(--serif);
-    font-size: 1.5rem;
-    font-weight: 300;
-    color: var(--ink);
-    margin-bottom: 1.5rem;
-  }
+  .modal { background: var(--white); border-top: 3px solid var(--gold); border-radius: 2px; padding: 2rem; width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; }
+  .modal-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 300; color: var(--ink); margin-bottom: 1.25rem; }
   .modal-actions { display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem; }
+  .modal-danger-title { color: var(--error); }
+  .modal-body-text { font-size: 0.88rem; color: var(--ink-mid); line-height: 1.7; margin-bottom: 1rem; }
 
-  @media (max-width: 768px) {
-    .tab-btn span { display: none; }
+  /* EMAIL TEMPLATE MODAL */
+  .email-preview { background: var(--linen); border: 1px solid var(--sand); border-radius: 2px; padding: 1.25rem; font-size: 0.85rem; color: var(--ink-mid); line-height: 1.7; white-space: pre-wrap; font-family: var(--sans); margin-bottom: 1rem; }
+
+  /* PASSWORD CHANGE */
+  .settings-card { background: var(--white); border: 1px solid var(--sand); border-radius: 2px; padding: 1.5rem; margin-bottom: 1rem; }
+  .settings-card-title { font-size: 0.88rem; font-weight: 500; color: var(--ink); margin-bottom: 0.25rem; }
+  .settings-card-desc { font-size: 0.78rem; color: var(--ink-light); margin-bottom: 1rem; line-height: 1.5; }
+
+  /* SESSION TIMER */
+  .session-timer { font-size: 0.65rem; color: rgba(255,255,255,0.3); letter-spacing: 0.05em; }
+
+  @media (max-width: 640px) {
     .orders-stats { grid-template-columns: 1fr 1fr; }
     .product-grid-2 { grid-template-columns: 1fr; }
-    .tab-content { padding: 1.5rem 1rem; }
+    .tab-content { padding: 1.25rem 1rem; }
+    .panel-header { flex-direction: column; align-items: stretch; }
+    .card-actions { justify-content: flex-start; }
   }
 </style>
 </head>
 <body>
 
-<!-- ── LOGIN ── -->
+<!-- LOGIN -->
 <div class="login-screen" id="loginScreen">
   <div class="login-box">
     <h1 class="login-title">Admin</h1>
     <p class="login-sub">Tammy Maltby Melchisedeck</p>
     <input type="password" class="login-field" id="loginPassword" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
-    <button class="login-btn" onclick="doLogin()">Sign In</button>
+    <button class="login-btn" id="loginBtn" onclick="doLogin()">Sign In</button>
     <p class="login-error" id="loginError">Incorrect password. Please try again.</p>
   </div>
 </div>
 
-<!-- ── ADMIN SHELL ── -->
+<!-- ADMIN SHELL -->
 <div class="admin-shell" id="adminShell">
 
-  <!-- Top bar -->
   <div class="topbar">
     <span class="topbar-title">Tammy — Admin</span>
     <div class="topbar-right">
+      <span class="session-timer" id="sessionTimer"></span>
       <a href="index.html" target="_blank" class="topbar-site">← View Site</a>
-      <button class="topbar-logout" onclick="doLogout()">Log Out</button>
+      <button class="topbar-btn" onclick="switchTab('settings',null)">Settings</button>
+      <button class="topbar-btn" onclick="doLogout()">Log Out</button>
     </div>
   </div>
 
-  <!-- Tab nav -->
   <div class="tab-nav">
-    <button class="tab-btn active" onclick="switchTab('testimonials')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      <span>Testimonials</span>
+    <button class="tab-btn active" onclick="switchTab('testimonials',event)">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Testimonials
     </button>
-    <button class="tab-btn" onclick="switchTab('products')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-      <span>Products</span>
+    <button class="tab-btn" onclick="switchTab('products',event)">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      Products
     </button>
-    <button class="tab-btn" onclick="switchTab('content')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="17" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="17" y1="18" x2="3" y2="18"/></svg>
-      <span>Content</span>
+    <button class="tab-btn" onclick="switchTab('content',event)">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="17" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="17" y1="18" x2="3" y2="18"/></svg>
+      Site Text
     </button>
-    <button class="tab-btn" onclick="switchTab('orders')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-      <span>Orders</span>
+    <button class="tab-btn" onclick="switchTab('orders',event)">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Orders
       <span class="tab-badge" id="newOrdersBadge" style="display:none">0</span>
     </button>
   </div>
 
-  <!-- Tab content -->
   <div class="tab-content">
 
-    <!-- ── TESTIMONIALS TAB ── -->
+    <!-- TESTIMONIALS -->
     <div class="tab-panel active" id="panel-testimonials">
       <div class="panel-header">
         <div>
           <h2 class="panel-title">Testimonials</h2>
-          <p class="panel-subtitle">Drag to reorder · Toggle to show/hide on site</p>
+          <p class="panel-subtitle">These are the customer quotes shown on your homepage</p>
         </div>
         <button class="btn btn-gold" onclick="openAddTestimonial()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Add Testimonial
+          Add New
         </button>
       </div>
+      <div class="drag-hint">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        Drag the lines on the left to reorder · Use the toggle to show or hide on site
+      </div>
       <div id="testimonialsList">
-        <div class="loading-state"><div class="spinner"></div> Loading testimonials…</div>
+        <div class="loading-state"><div class="spinner"></div> Loading…</div>
       </div>
     </div>
 
-    <!-- ── PRODUCTS TAB ── -->
+    <!-- PRODUCTS -->
     <div class="tab-panel" id="panel-products">
       <div class="panel-header">
         <div>
           <h2 class="panel-title">Products</h2>
-          <p class="panel-subtitle">Edit product details, prices, and visibility</p>
+          <p class="panel-subtitle">Click any product to edit its details and price</p>
         </div>
       </div>
       <div id="productsList">
-        <div class="loading-state"><div class="spinner"></div> Loading products…</div>
+        <div class="loading-state"><div class="spinner"></div> Loading…</div>
       </div>
     </div>
 
-    <!-- ── CONTENT TAB ── -->
+    <!-- SITE TEXT -->
     <div class="tab-panel" id="panel-content">
       <div class="panel-header">
         <div>
-          <h2 class="panel-title">Content</h2>
-          <p class="panel-subtitle">Edit text across the site — changes go live immediately</p>
+          <h2 class="panel-title">Site Text</h2>
+          <p class="panel-subtitle">Edit words and phrases across your website</p>
         </div>
       </div>
+      <div class="format-tip">
+        <strong>Making text gold:</strong> Wrap any words in <code>*asterisks*</code> to make them display in gold on the site.<br>
+        Example: <code>Real results. *Real women.* Real transformation.</code><br>
+        Use a new line in the text box to create a line break on the site.
+      </div>
       <div id="contentList">
-        <div class="loading-state"><div class="spinner"></div> Loading content…</div>
+        <div class="loading-state"><div class="spinner"></div> Loading…</div>
       </div>
     </div>
 
-    <!-- ── ORDERS TAB ── -->
+    <!-- ORDERS -->
     <div class="tab-panel" id="panel-orders">
       <div class="panel-header">
         <div>
           <h2 class="panel-title">Orders</h2>
-          <p class="panel-subtitle">Track and manage customer orders</p>
+          <p class="panel-subtitle">Track orders and update their status</p>
         </div>
         <button class="btn btn-outline" onclick="loadOrders()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.67"/></svg>
           Refresh
         </button>
       </div>
-      <div class="orders-stats" id="ordersStats">
+      <div class="orders-stats">
         <div class="stat-card"><div class="stat-value" id="statTotal">—</div><div class="stat-label">Total Orders</div></div>
-        <div class="stat-card"><div class="stat-value" id="statNew">—</div><div class="stat-label">New Orders</div></div>
+        <div class="stat-card"><div class="stat-value" id="statNew">—</div><div class="stat-label">Need Attention</div></div>
         <div class="stat-card"><div class="stat-value" id="statRevenue">—</div><div class="stat-label">Total Revenue</div></div>
         <div class="stat-card"><div class="stat-value" id="statShipped">—</div><div class="stat-label">Shipped</div></div>
       </div>
       <div class="orders-wrap">
-        <div id="ordersList">
-          <div class="loading-state" style="padding:2rem"><div class="spinner"></div> Loading orders…</div>
+        <div id="ordersList"><div class="loading-state" style="padding:2rem"><div class="spinner"></div> Loading…</div></div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="tab-panel" id="panel-settings">
+      <div class="panel-header">
+        <div>
+          <h2 class="panel-title">Settings</h2>
+          <p class="panel-subtitle">Manage your admin account</p>
         </div>
+      </div>
+
+      <div class="settings-card">
+        <p class="settings-card-title">Change Password</p>
+        <p class="settings-card-desc">Update your admin password. You'll need to update the ADMIN_PASSWORD environment variable in Vercel after changing it here.</p>
+        <div class="field-group">
+          <label class="edit-label">Current Password</label>
+          <input type="password" class="edit-field" id="currentPw" placeholder="Enter current password">
+        </div>
+        <div class="field-group">
+          <label class="edit-label">New Password</label>
+          <input type="password" class="edit-field" id="newPw" placeholder="At least 8 characters">
+        </div>
+        <div class="field-group">
+          <label class="edit-label">Confirm New Password</label>
+          <input type="password" class="edit-field" id="confirmPw" placeholder="Repeat new password">
+        </div>
+        <p style="font-size:0.78rem;color:var(--ink-light);margin-bottom:1rem;line-height:1.6;">
+          After saving, go to <strong>Vercel → Settings → Environment Variables</strong> and update <code style="background:var(--linen);padding:0.1rem 0.35rem;border-radius:2px">ADMIN_PASSWORD</code> to match your new password.
+        </p>
+        <button class="btn btn-gold" onclick="changePassword()">Save New Password</button>
+      </div>
+
+      <div class="settings-card">
+        <p class="settings-card-title">Auto Logout</p>
+        <p class="settings-card-desc">You are automatically logged out after 2 hours of inactivity for security. The timer shows in the top bar.</p>
+        <div class="toggle-wrap">
+          <label class="toggle"><input type="checkbox" id="autoLogoutToggle" checked onchange="toggleAutoLogout(this.checked)"><span class="toggle-slider"></span></label>
+          <span class="toggle-label">Auto logout after 2 hours</span>
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <p class="settings-card-title">About This Admin Panel</p>
+        <p class="settings-card-desc">
+          This admin panel lets you update your website content without needing any technical help.<br><br>
+          <strong>Testimonials</strong> — Add, edit, hide, or reorder the quotes on your homepage.<br>
+          <strong>Products</strong> — Update prices, descriptions, and show/hide products.<br>
+          <strong>Site Text</strong> — Edit the main words on your homepage like the headline and welcome letter.<br>
+          <strong>Orders</strong> — See all orders submitted through your website and track their status.
+        </p>
       </div>
     </div>
 
   </div>
 </div>
 
-<!-- ── ADD TESTIMONIAL MODAL ── -->
+<!-- ADD TESTIMONIAL MODAL -->
 <div class="modal-overlay" id="addTestimonialModal">
   <div class="modal">
-    <h3 class="modal-title">Add Testimonial</h3>
+    <h3 class="modal-title">Add a Testimonial</h3>
     <div class="field-group">
-      <label class="edit-label">Quote *</label>
-      <textarea class="edit-field" id="newQuote" placeholder="What did she say about the drops?..." style="min-height:100px"></textarea>
+      <label class="edit-label">Their Quote *</label>
+      <textarea class="edit-field" id="newQuote" placeholder="What did she say about the drops? Write it just as she said it..." style="min-height:110px"></textarea>
+      <p class="field-hint">Write it in her own words, as if she's speaking directly to the reader.</p>
     </div>
     <div class="field-group">
-      <label class="edit-label">Name *</label>
-      <input type="text" class="edit-field" id="newName" placeholder="First name only (e.g. Ciera)">
+      <label class="edit-label">First Name *</label>
+      <input type="text" class="edit-field" id="newName" placeholder="e.g. Ciera">
+      <p class="field-hint">First name only is fine — it feels more personal.</p>
     </div>
     <div class="modal-actions">
-      <button class="btn btn-outline" onclick="closeAddTestimonial()">Cancel</button>
+      <button class="btn btn-outline" onclick="closeModal('addTestimonialModal')">Cancel</button>
       <button class="btn btn-gold" onclick="saveNewTestimonial()">Add Testimonial</button>
     </div>
   </div>
 </div>
 
-<!-- ── TOAST ── -->
+<!-- DELETE CONFIRM MODAL -->
+<div class="modal-overlay" id="deleteModal">
+  <div class="modal">
+    <h3 class="modal-title modal-danger-title">Delete Testimonial?</h3>
+    <p class="modal-body-text">This will permanently remove this testimonial. This cannot be undone.</p>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('deleteModal')">Keep It</button>
+      <button class="btn btn-danger" id="confirmDeleteBtn">Yes, Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- EMAIL TEMPLATE MODAL -->
+<div class="modal-overlay" id="emailModal">
+  <div class="modal">
+    <h3 class="modal-title">Contact Customer</h3>
+    <p class="modal-body-text">Here's a suggested message. Copy it and send from your email app, or click "Open in Email" to start a draft.</p>
+    <div class="email-preview" id="emailPreview"></div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('emailModal')">Close</button>
+      <button class="btn btn-gold" id="openEmailBtn">Open in Email App</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
-  // ── CONFIG ──
-  var SUPABASE_URL  = 'https://nzqdmsbxwghkqowajmvs.supabase.co';
-  var SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cWRtc2J4d2doa3Fvd2FqbXZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3Njk0MjQsImV4cCI6MjA5NjM0NTQyNH0.aqdvA_ytnkeSvg4hmLqC1zces0aIFZcxkHrrN7k7atk';
-  var API           = SUPABASE_URL + '/rest/v1';
+  // CONFIG
+  var SUPABASE_URL = 'https://nzqdmsbxwghkqowajmvs.supabase.co';
+  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cWRtc2J4d2doa3Fvd2FqbXZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3Njk0MjQsImV4cCI6MjA5NjM0NTQyNH0.aqdvA_ytnkeSvg4hmLqC1zces0aIFZcxkHrrN7k7atk';
+  var API = SUPABASE_URL + '/rest/v1';
 
   function headers(extra) {
-    return Object.assign({
-      'apikey': SUPABASE_KEY,
-      'Authorization': 'Bearer ' + SUPABASE_KEY,
-      'Content-Type': 'application/json',
-      'Prefer': 'return=representation'
-    }, extra || {});
+    return Object.assign({ 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=representation' }, extra || {});
   }
-
-  function db(table) {
-    return API + '/' + table;
-  }
+  function db(t) { return API + '/' + t; }
 
   // ── AUTH ──
-  function doLogin() {
-    var pw  = document.getElementById('loginPassword').value;
-    var btn = document.querySelector('.login-btn');
-    btn.textContent = 'Signing in…';
-    btn.disabled = true;
+  var sessionTimeout = null;
+  var autoLogout = true;
+  var sessionMinutes = 120;
+  var sessionStart = null;
 
-    fetch('/api/admin-auth', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password: pw })
-    })
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      if (data.ok) {
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('adminShell').style.display = 'flex';
-        loadTestimonials();
-        loadOrderBadge();
-      } else {
+  function doLogin() {
+    var pw = document.getElementById('loginPassword').value;
+    var btn = document.getElementById('loginBtn');
+    btn.textContent = 'Signing in…'; btn.disabled = true;
+    fetch('/api/admin-auth', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: pw }) })
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        if (d.ok) {
+          document.getElementById('loginScreen').style.display = 'none';
+          document.getElementById('adminShell').style.display = 'flex';
+          sessionStart = Date.now();
+          startSessionTimer();
+          loadTestimonials();
+          loadOrderBadge();
+        } else {
+          document.getElementById('loginError').style.display = 'block';
+          btn.textContent = 'Sign In'; btn.disabled = false;
+        }
+      })
+      .catch(function() {
+        document.getElementById('loginError').textContent = 'Connection error. Please try again.';
         document.getElementById('loginError').style.display = 'block';
-        btn.textContent = 'Sign In';
-        btn.disabled = false;
-      }
-    })
-    .catch(function() {
-      document.getElementById('loginError').textContent = 'Connection error. Please try again.';
-      document.getElementById('loginError').style.display = 'block';
-      btn.textContent = 'Sign In';
-      btn.disabled = false;
-    });
+        btn.textContent = 'Sign In'; btn.disabled = false;
+      });
   }
 
   function doLogout() {
+    clearInterval(sessionTimeout);
     document.getElementById('loginScreen').style.display = 'flex';
     document.getElementById('adminShell').style.display = 'none';
     document.getElementById('loginPassword').value = '';
+    document.getElementById('loginBtn').textContent = 'Sign In';
+    document.getElementById('loginBtn').disabled = false;
+    document.getElementById('loginError').style.display = 'none';
+  }
+
+  function startSessionTimer() {
+    clearInterval(sessionTimeout);
+    sessionTimeout = setInterval(function() {
+      var elapsed = Date.now() - sessionStart;
+      var remaining = (sessionMinutes * 60 * 1000) - elapsed;
+      if (remaining <= 0 && autoLogout) {
+        clearInterval(sessionTimeout);
+        toast('Session expired — please log in again', 'error');
+        setTimeout(doLogout, 2000);
+        return;
+      }
+      var mins = Math.floor(remaining / 60000);
+      var secs = Math.floor((remaining % 60000) / 1000);
+      var el = document.getElementById('sessionTimer');
+      if (el) el.textContent = mins + ':' + (secs < 10 ? '0' : '') + secs;
+    }, 1000);
+  }
+
+  function toggleAutoLogout(val) {
+    autoLogout = val;
+    document.getElementById('sessionTimer').style.display = val ? 'inline' : 'none';
+  }
+
+  // Reset timer on activity
+  ['click','keydown','scroll'].forEach(function(ev) {
+    document.addEventListener(ev, function() {
+      if (sessionStart) sessionStart = Date.now();
+    }, { passive: true });
+  });
+
+  function changePassword() {
+    var cur = document.getElementById('currentPw').value;
+    var nw  = document.getElementById('newPw').value;
+    var cf  = document.getElementById('confirmPw').value;
+    if (!cur || !nw || !cf) { toast('Please fill in all password fields', 'error'); return; }
+    if (nw !== cf) { toast('New passwords do not match', 'error'); return; }
+    if (nw.length < 8) { toast('Password must be at least 8 characters', 'error'); return; }
+    fetch('/api/admin-auth', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: cur }) })
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        if (!d.ok) { toast('Current password is incorrect', 'error'); return; }
+        toast('Password verified — remember to update ADMIN_PASSWORD in Vercel too!', 'success');
+        document.getElementById('currentPw').value = '';
+        document.getElementById('newPw').value = '';
+        document.getElementById('confirmPw').value = '';
+      });
   }
 
   // ── TABS ──
-  function switchTab(name) {
+  function switchTab(name, e) {
     document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
     document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
-    event.currentTarget.classList.add('active');
+    if (e && e.currentTarget) e.currentTarget.classList.add('active');
     document.getElementById('panel-' + name).classList.add('active');
     if (name === 'testimonials') loadTestimonials();
-    if (name === 'products')     loadProducts();
-    if (name === 'content')      loadContent();
-    if (name === 'orders')       loadOrders();
+    if (name === 'products') loadProducts();
+    if (name === 'content') loadContent();
+    if (name === 'orders') loadOrders();
   }
 
   // ── TOAST ──
@@ -820,56 +557,53 @@
     setTimeout(function() { el.className = 'toast'; }, 3500);
   }
 
+  // ── MODALS ──
+  function openModal(id) { document.getElementById(id).classList.add('open'); }
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(function(m) { m.classList.remove('open'); }); });
+
   // ──────────────────────────────────────
   // TESTIMONIALS
   // ──────────────────────────────────────
   var testimonials = [];
+  var deleteTargetId = null;
 
   function loadTestimonials() {
-    document.getElementById('testimonialsList').innerHTML = '<div class="loading-state"><div class="spinner"></div> Loading testimonials…</div>';
+    document.getElementById('testimonialsList').innerHTML = '<div class="loading-state"><div class="spinner"></div> Loading…</div>';
     fetch(db('testimonials') + '?order=sort_order.asc', { headers: headers() })
       .then(function(r) { return r.json(); })
-      .then(function(data) {
-        testimonials = data;
-        renderTestimonials();
-      })
-      .catch(function() { toast('Failed to load testimonials', 'error'); });
+      .then(function(d) { testimonials = d; renderTestimonials(); })
+      .catch(function() { toast('Could not load testimonials', 'error'); });
   }
 
   function renderTestimonials() {
     var list = document.getElementById('testimonialsList');
-    if (!testimonials.length) {
-      list.innerHTML = '<p style="color:var(--ink-light);font-style:italic;padding:1rem 0">No testimonials yet.</p>';
-      return;
-    }
-    list.innerHTML = testimonials.map(function(t, i) {
-      return '<div class="testimonial-card ' + (t.active ? '' : 'inactive') + '" id="tc-' + t.id + '" draggable="true" ondragstart="dragStart(event,\'' + t.id + '\')" ondragover="dragOver(event)" ondrop="dragDrop(event,\'' + t.id + '\')">' +
+    if (!testimonials.length) { list.innerHTML = '<p style="color:var(--ink-light);font-style:italic;padding:1rem 0">No testimonials yet — add one above!</p>'; return; }
+    list.innerHTML = testimonials.map(function(t) {
+      return '<div class="testimonial-card ' + (t.active ? '' : 'inactive') + '" id="tc-' + t.id + '" draggable="true" ondragstart="dragStart(event,\'' + t.id + '\')" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dragDrop(event,\'' + t.id + '\')">' +
         '<div class="sort-handle" title="Drag to reorder"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>' +
         '<div class="testimonial-body" id="tbody-' + t.id + '">' +
           '<p class="testimonial-quote-display">"' + t.quote + '"</p>' +
           '<p class="testimonial-name-display">— ' + t.name + '</p>' +
         '</div>' +
         '<div class="card-actions">' +
-          '<label class="toggle" title="' + (t.active ? 'Hide from site' : 'Show on site') + '"><input type="checkbox" ' + (t.active ? 'checked' : '') + ' onchange="toggleTestimonial(\'' + t.id + '\',this.checked)"><span class="toggle-slider"></span></label>' +
+          '<label class="toggle" title="' + (t.active ? 'Showing on site — click to hide' : 'Hidden — click to show on site') + '"><input type="checkbox" ' + (t.active ? 'checked' : '') + ' onchange="toggleTestimonial(\'' + t.id + '\',this.checked)"><span class="toggle-slider"></span></label>' +
           '<button class="btn btn-outline btn-sm" onclick="editTestimonial(\'' + t.id + '\')">Edit</button>' +
-          '<button class="btn btn-danger btn-sm" onclick="deleteTestimonial(\'' + t.id + '\')">Delete</button>' +
+          '<button class="btn btn-danger btn-sm" onclick="confirmDelete(\'' + t.id + '\')">Delete</button>' +
         '</div>' +
       '</div>';
     }).join('');
   }
 
   function toggleTestimonial(id, active) {
-    fetch(db('testimonials') + '?id=eq.' + id, {
-      method: 'PATCH',
-      headers: headers(),
-      body: JSON.stringify({ active: active })
-    }).then(function() {
-      var t = testimonials.find(function(x) { return x.id === id; });
-      if (t) t.active = active;
-      var card = document.getElementById('tc-' + id);
-      if (card) card.classList.toggle('inactive', !active);
-      toast(active ? 'Testimonial shown on site' : 'Testimonial hidden from site', 'success');
-    });
+    fetch(db('testimonials') + '?id=eq.' + id, { method: 'PATCH', headers: headers(), body: JSON.stringify({ active: active }) })
+      .then(function() {
+        var t = testimonials.find(function(x) { return x.id === id; });
+        if (t) t.active = active;
+        var card = document.getElementById('tc-' + id);
+        if (card) card.classList.toggle('inactive', !active);
+        toast(active ? '✓ Showing on site' : 'Hidden from site', 'success');
+      });
   }
 
   function editTestimonial(id) {
@@ -878,10 +612,10 @@
     var body = document.getElementById('tbody-' + id);
     body.innerHTML =
       '<div class="field-group"><label class="edit-label">Quote</label><textarea class="edit-field" id="eq-' + id + '" style="min-height:80px">' + t.quote + '</textarea></div>' +
-      '<div class="field-group"><label class="edit-label">Name</label><input type="text" class="edit-field" id="en-' + id + '" value="' + t.name + '"></div>' +
+      '<div class="field-group"><label class="edit-label">First Name</label><input type="text" class="edit-field" id="en-' + id + '" value="' + t.name + '"></div>' +
       '<div style="display:flex;gap:0.5rem;margin-top:0.5rem">' +
         '<button class="btn btn-gold btn-sm" onclick="saveTestimonial(\'' + id + '\')">Save</button>' +
-        '<button class="btn btn-outline btn-sm" onclick="cancelEditTestimonial(\'' + id + '\')">Cancel</button>' +
+        '<button class="btn btn-outline btn-sm" onclick="renderTestimonials()">Cancel</button>' +
       '</div>';
   }
 
@@ -889,115 +623,109 @@
     var quote = document.getElementById('eq-' + id).value.trim();
     var name  = document.getElementById('en-' + id).value.trim();
     if (!quote || !name) { toast('Quote and name are required', 'error'); return; }
-    fetch(db('testimonials') + '?id=eq.' + id, {
-      method: 'PATCH',
-      headers: headers(),
-      body: JSON.stringify({ quote: quote, name: name })
-    }).then(function() {
-      var t = testimonials.find(function(x) { return x.id === id; });
-      if (t) { t.quote = quote; t.name = name; }
-      renderTestimonials();
-      toast('Testimonial saved', 'success');
-    });
-  }
-
-  function cancelEditTestimonial(id) { renderTestimonials(); }
-
-  function deleteTestimonial(id) {
-    if (!confirm('Delete this testimonial? This cannot be undone.')) return;
-    fetch(db('testimonials') + '?id=eq.' + id, { method: 'DELETE', headers: headers() })
+    fetch(db('testimonials') + '?id=eq.' + id, { method: 'PATCH', headers: headers(), body: JSON.stringify({ quote: quote, name: name }) })
       .then(function() {
-        testimonials = testimonials.filter(function(x) { return x.id !== id; });
+        var t = testimonials.find(function(x) { return x.id === id; });
+        if (t) { t.quote = quote; t.name = name; }
         renderTestimonials();
-        toast('Testimonial deleted', 'success');
+        toast('✓ Testimonial saved', 'success');
       });
   }
 
-  // Add testimonial modal
+  function confirmDelete(id) {
+    deleteTargetId = id;
+    openModal('deleteModal');
+    document.getElementById('confirmDeleteBtn').onclick = function() {
+      fetch(db('testimonials') + '?id=eq.' + id, { method: 'DELETE', headers: headers() })
+        .then(function() {
+          testimonials = testimonials.filter(function(x) { return x.id !== id; });
+          renderTestimonials();
+          closeModal('deleteModal');
+          toast('Testimonial deleted', 'success');
+        });
+    };
+  }
+
   function openAddTestimonial() {
     document.getElementById('newQuote').value = '';
     document.getElementById('newName').value = '';
-    document.getElementById('addTestimonialModal').classList.add('open');
+    openModal('addTestimonialModal');
+    setTimeout(function() { document.getElementById('newQuote').focus(); }, 100);
   }
-  function closeAddTestimonial() {
-    document.getElementById('addTestimonialModal').classList.remove('open');
-  }
+
   function saveNewTestimonial() {
     var quote = document.getElementById('newQuote').value.trim();
     var name  = document.getElementById('newName').value.trim();
-    if (!quote || !name) { toast('Quote and name are required', 'error'); return; }
+    if (!quote || !name) { toast('Please fill in the quote and name', 'error'); return; }
     var maxOrder = testimonials.reduce(function(m, t) { return Math.max(m, t.sort_order); }, 0);
-    fetch(db('testimonials'), {
-      method: 'POST',
-      headers: headers(),
-      body: JSON.stringify({ quote: quote, name: name, sort_order: maxOrder + 1, active: true })
-    }).then(function(r) { return r.json(); })
-      .then(function(data) {
-        testimonials.push(Array.isArray(data) ? data[0] : data);
+    fetch(db('testimonials'), { method: 'POST', headers: headers(), body: JSON.stringify({ quote: quote, name: name, sort_order: maxOrder + 1, active: true }) })
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        testimonials.push(Array.isArray(d) ? d[0] : d);
         renderTestimonials();
-        closeAddTestimonial();
-        toast('Testimonial added', 'success');
+        closeModal('addTestimonialModal');
+        toast('✓ Testimonial added and showing on site', 'success');
       });
   }
 
-  // Drag to reorder
   var dragId = null;
   function dragStart(e, id) { dragId = id; e.dataTransfer.effectAllowed = 'move'; }
-  function dragOver(e) { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; }
+  function dragOver(e) { e.preventDefault(); e.currentTarget.classList.add('drag-over'); }
+  function dragLeave(e) { e.currentTarget.classList.remove('drag-over'); }
   function dragDrop(e, targetId) {
     e.preventDefault();
+    e.currentTarget.classList.remove('drag-over');
     if (dragId === targetId) return;
-    var fromIdx = testimonials.findIndex(function(t) { return t.id === dragId; });
-    var toIdx   = testimonials.findIndex(function(t) { return t.id === targetId; });
-    var moved = testimonials.splice(fromIdx, 1)[0];
-    testimonials.splice(toIdx, 0, moved);
+    var fi = testimonials.findIndex(function(t) { return t.id === dragId; });
+    var ti = testimonials.findIndex(function(t) { return t.id === targetId; });
+    var moved = testimonials.splice(fi, 1)[0];
+    testimonials.splice(ti, 0, moved);
     testimonials.forEach(function(t, i) { t.sort_order = i + 1; });
     renderTestimonials();
-    // Save new order to Supabase
     Promise.all(testimonials.map(function(t) {
-      return fetch(db('testimonials') + '?id=eq.' + t.id, {
-        method: 'PATCH',
-        headers: headers(),
-        body: JSON.stringify({ sort_order: t.sort_order })
-      });
-    })).then(function() { toast('Order saved', 'success'); });
+      return fetch(db('testimonials') + '?id=eq.' + t.id, { method: 'PATCH', headers: headers(), body: JSON.stringify({ sort_order: t.sort_order }) });
+    })).then(function() { toast('✓ Order saved', 'success'); });
   }
 
   // ──────────────────────────────────────
   // PRODUCTS
   // ──────────────────────────────────────
   function loadProducts() {
-    document.getElementById('productsList').innerHTML = '<div class="loading-state"><div class="spinner"></div> Loading products…</div>';
+    document.getElementById('productsList').innerHTML = '<div class="loading-state"><div class="spinner"></div> Loading…</div>';
     fetch(db('products') + '?order=sort_order.asc', { headers: headers() })
       .then(function(r) { return r.json(); })
-      .then(function(data) { renderProducts(data); })
-      .catch(function() { toast('Failed to load products', 'error'); });
+      .then(renderProducts)
+      .catch(function() { toast('Could not load products', 'error'); });
   }
 
   function renderProducts(products) {
     var list = document.getElementById('productsList');
-    if (!products.length) {
-      list.innerHTML = '<p style="color:var(--ink-light);font-style:italic;padding:1rem 0">No products found.</p>';
-      return;
-    }
     list.innerHTML = products.map(function(p) {
+      var thumb = p.image_path ? '<img src="' + p.image_path + '" class="product-thumb" onerror="this.style.display=\'none\'">' : '<div class="product-thumb"></div>';
       return '<div class="product-card">' +
         '<div class="product-card-header" onclick="toggleProductCard(\'' + p.id + '\')">' +
-          (p.image_path ? '<img src="' + p.image_path + '" class="product-thumb" onerror="this.style.display=\'none\'">' : '<div class="product-thumb"></div>') +
-          '<span class="product-card-name">' + p.name + '</span>' +
+          thumb +
+          '<div class="product-card-info">' +
+            '<div class="product-card-name">' + p.name + '</div>' +
+            '<div style="font-size:0.75rem;color:var(--ink-light)">' + (p.active ? 'Showing on site' : 'Hidden from site') + '</div>' +
+          '</div>' +
           '<span class="product-card-price">$' + p.price + '</span>' +
-          '<label class="toggle" onclick="event.stopPropagation()" title="' + (p.active ? 'Hide from site' : 'Show on site') + '"><input type="checkbox" ' + (p.active ? 'checked' : '') + ' onchange="toggleProduct(\'' + p.id + '\',this.checked)"><span class="toggle-slider"></span></label>' +
+          '<label class="toggle" onclick="event.stopPropagation()" title="Show or hide this product on your site"><input type="checkbox" ' + (p.active ? 'checked' : '') + ' onchange="toggleProduct(\'' + p.id + '\',this.checked)"><span class="toggle-slider"></span></label>' +
+          '<svg class="product-card-chevron" id="chev-' + p.id + '" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>' +
         '</div>' +
         '<div class="product-card-body" id="pb-' + p.id + '">' +
           '<div class="product-grid-2">' +
-            '<div class="field-group"><label class="edit-label">Product Name</label><input type="text" class="edit-field" id="pname-' + p.id + '" value="' + (p.name || '') + '"></div>' +
-            '<div class="field-group"><label class="edit-label">Price ($)</label><input type="number" class="edit-field" id="pprice-' + p.id + '" value="' + p.price + '"></div>' +
+            '<div class="field-group"><label class="edit-label">Product Name</label><input type="text" class="edit-field" id="pname-' + p.id + '" value="' + (p.name||'').replace(/"/g,'&quot;') + '"></div>' +
+            '<div class="field-group"><label class="edit-label">Price ($)</label><input type="number" class="edit-field" id="pprice-' + p.id + '" value="' + p.price + '"><p class="field-hint">Whole dollars only, e.g. 167</p></div>' +
           '</div>' +
-          '<div class="field-group"><label class="edit-label">Tag / Category</label><input type="text" class="edit-field" id="ptag-' + p.id + '" value="' + (p.tag || '') + '"></div>' +
-          '<div class="field-group"><label class="edit-label">Subtitle</label><input type="text" class="edit-field" id="psub-' + p.id + '" value="' + (p.subtitle || '') + '"></div>' +
-          '<div class="field-group"><label class="edit-label">Description</label><textarea class="edit-field" id="pdesc-' + p.id + '" style="min-height:100px">' + (p.description || '') + '</textarea></div>' +
-          '<div class="field-group"><label class="edit-label">Image Path</label><input type="text" class="edit-field" id="pimg-' + p.id + '" value="' + (p.image_path || '') + '" placeholder="images/product.webp"></div>' +
-          '<div style="display:flex;justify-content:flex-end;gap:0.5rem;margin-top:0.5rem">' +
+          '<div class="field-group"><label class="edit-label">Category Tag</label><input type="text" class="edit-field" id="ptag-' + p.id + '" value="' + (p.tag||'') + '"><p class="field-hint">e.g. Weight Loss, Gut Health, Bundle</p></div>' +
+          '<div class="field-group"><label class="edit-label">Short Description (under product name)</label><input type="text" class="edit-field" id="psub-' + p.id + '" value="' + (p.subtitle||'').replace(/"/g,'&quot;') + '"></div>' +
+          '<div class="field-group"><label class="edit-label">Full Description</label><textarea class="edit-field" id="pdesc-' + p.id + '" style="min-height:100px">' + (p.description||'') + '</textarea></div>' +
+          '<div class="field-group"><label class="edit-label">Image Path</label><input type="text" class="edit-field" id="pimg-' + p.id + '" value="' + (p.image_path||'') + '" oninput="previewImg(\'' + p.id + '\')" placeholder="images/product-name.webp"><p class="field-hint">The filename of the image in your images folder</p>' +
+            '<img id="pimgpreview-' + p.id + '" class="img-preview" ' + (p.image_path ? 'src="' + p.image_path + '" style="display:block"' : '') + ' onerror="this.style.display=\'none\'">' +
+          '</div>' +
+          '<div style="display:flex;align-items:center;justify-content:space-between;margin-top:0.5rem;flex-wrap:wrap;gap:0.5rem">' +
+            '<span class="save-indicator" id="psaved-' + p.id + '"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Saved!</span>' +
             '<button class="btn btn-gold" onclick="saveProduct(\'' + p.id + '\')">Save Changes</button>' +
           '</div>' +
         '</div>' +
@@ -1007,81 +735,137 @@
 
   function toggleProductCard(id) {
     var body = document.getElementById('pb-' + id);
+    var chev = document.getElementById('chev-' + id);
     body.classList.toggle('open');
+    if (chev) chev.classList.toggle('open', body.classList.contains('open'));
   }
 
   function toggleProduct(id, active) {
-    fetch(db('products') + '?id=eq.' + id, {
-      method: 'PATCH',
-      headers: headers(),
-      body: JSON.stringify({ active: active })
-    }).then(function() {
-      toast(active ? 'Product shown on site' : 'Product hidden from site', 'success');
-    });
+    fetch(db('products') + '?id=eq.' + id, { method: 'PATCH', headers: headers(), body: JSON.stringify({ active: active }) })
+      .then(function() { toast(active ? '✓ Product now showing on site' : 'Product hidden from site', 'success'); });
+  }
+
+  function previewImg(id) {
+    var val = document.getElementById('pimg-' + id).value;
+    var preview = document.getElementById('pimgpreview-' + id);
+    if (val) { preview.src = val; preview.style.display = 'block'; }
+    else { preview.style.display = 'none'; }
   }
 
   function saveProduct(id) {
     var data = {
-      name:        document.getElementById('pname-'  + id).value.trim(),
-      price:       parseInt(document.getElementById('pprice-' + id).value) || 0,
-      tag:         document.getElementById('ptag-'   + id).value.trim(),
-      subtitle:    document.getElementById('psub-'   + id).value.trim(),
-      description: document.getElementById('pdesc-'  + id).value.trim(),
-      image_path:  document.getElementById('pimg-'   + id).value.trim()
+      name: document.getElementById('pname-' + id).value.trim(),
+      price: parseInt(document.getElementById('pprice-' + id).value) || 0,
+      tag: document.getElementById('ptag-' + id).value.trim(),
+      subtitle: document.getElementById('psub-' + id).value.trim(),
+      description: document.getElementById('pdesc-' + id).value.trim(),
+      image_path: document.getElementById('pimg-' + id).value.trim()
     };
-    fetch(db('products') + '?id=eq.' + id, {
-      method: 'PATCH',
-      headers: headers(),
-      body: JSON.stringify(data)
-    }).then(function() { toast('Product saved', 'success'); });
+    fetch(db('products') + '?id=eq.' + id, { method: 'PATCH', headers: headers(), body: JSON.stringify(data) })
+      .then(function(r) {
+        if (r.ok) {
+          var ind = document.getElementById('psaved-' + id);
+          ind.classList.add('show');
+          setTimeout(function() { ind.classList.remove('show'); }, 3000);
+          toast('✓ Product saved — live on site', 'success');
+        } else { toast('Save failed — please try again', 'error'); }
+      });
   }
 
   // ──────────────────────────────────────
   // CONTENT BLOCKS
   // ──────────────────────────────────────
+  var contentGroups = {
+    'Homepage Hero': ['hero_eyebrow','hero_headline','hero_body'],
+    'Welcome Letter': ['letter_greeting','letter_body'],
+    'Call to Action': ['cta_headline','cta_body']
+  };
+
+  var contentDescriptions = {
+    hero_eyebrow:    'Small text above the main headline (e.g. "Partner.Co Wellness")',
+    hero_headline:   'The big headline in the hero image. Use *asterisks* around words you want in gold.',
+    hero_body:       'The paragraph of text below the headline explaining what the drops are.',
+    letter_greeting: 'The opening greeting of your welcome letter (e.g. "Hello Beautiful One,")',
+    letter_body:     'The full body of your welcome letter. Start a new line in this box to create a new paragraph on the site. Use *asterisks* for gold text.',
+    cta_headline:    'The headline in the dark "Start Your Transformation" section at the bottom of the page.',
+    cta_body:        'The description paragraph next to the Order Now button at the bottom.'
+  };
+
   function loadContent() {
-    document.getElementById('contentList').innerHTML = '<div class="loading-state"><div class="spinner"></div> Loading content…</div>';
+    document.getElementById('contentList').innerHTML = '<div class="loading-state"><div class="spinner"></div> Loading…</div>';
     fetch(db('content_blocks') + '?order=key.asc', { headers: headers() })
       .then(function(r) { return r.json(); })
-      .then(function(data) { renderContent(data); })
-      .catch(function() { toast('Failed to load content', 'error'); });
+      .then(renderContent)
+      .catch(function() { toast('Could not load content', 'error'); });
   }
 
   function renderContent(blocks) {
-    var list = document.getElementById('contentList');
-    if (!blocks.length) {
-      list.innerHTML = '<p style="color:var(--ink-light);font-style:italic;padding:1rem 0">No content blocks found.</p>';
-      return;
+    var map = {};
+    blocks.forEach(function(b) { map[b.key] = b; });
+    var html = '';
+    Object.keys(contentGroups).forEach(function(groupName) {
+      html += '<div class="content-section-group">';
+      html += '<div class="content-section-title">';
+      html += '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/></svg>';
+      html += groupName + '</div>';
+      contentGroups[groupName].forEach(function(key) {
+        var b = map[key];
+        if (!b) return;
+        var isLong = b.value.length > 100 || b.value.includes('\n');
+        var updated = b.updated_at ? new Date(b.updated_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' }) : '';
+        var fieldId = 'cb-' + b.id;
+        var field = isLong
+          ? '<textarea class="edit-field" id="' + fieldId + '" oninput="showPreview(\'' + b.id + '\',\'' + key + '\')" style="min-height:120px">' + b.value + '</textarea>'
+          : '<input type="text" class="edit-field" id="' + fieldId + '" value="' + b.value.replace(/"/g,'&quot;') + '" oninput="showPreview(\'' + b.id + '\',\'' + key + '\')">';
+        html += '<div class="content-block-card">' +
+          '<span class="content-block-label">' + (b.label || key) + '</span>' +
+          '<p class="content-block-desc">' + (contentDescriptions[key] || '') + '</p>' +
+          field +
+          '<div class="content-preview" id="prev-' + b.id + '">' +
+            '<span class="content-preview-label">Preview on site</span>' +
+            '<div id="prevtext-' + b.id + '"></div>' +
+          '</div>' +
+          '<div class="content-save-row">' +
+            '<span class="last-saved" id="lastsaved-' + b.id + '">' + (updated ? 'Last saved: ' + updated : '') + '</span>' +
+            '<button class="btn btn-gold btn-sm" onclick="saveContentBlock(\'' + b.id + '\',\'' + key + '\')">Save</button>' +
+          '</div>' +
+        '</div>';
+      });
+      html += '</div>';
+    });
+    document.getElementById('contentList').innerHTML = html;
+  }
+
+  function parseGoldPreview(text) {
+    return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\*([^*]+)\*/g,'<em style="color:#B89A6A;font-style:italic">$1</em>').replace(/\n/g,'<br>');
+  }
+
+  function showPreview(id, key) {
+    var el = document.getElementById('cb-' + id);
+    var val = el.value || el.textContent;
+    var prev = document.getElementById('prev-' + id);
+    var prevtext = document.getElementById('prevtext-' + id);
+    if (key === 'hero_headline' || key === 'letter_body' || key === 'letter_greeting' || key === 'cta_headline') {
+      prev.classList.add('show');
+      prevtext.innerHTML = parseGoldPreview(val);
     }
-    // Add hint banner
-    var hint = '<div style="background:var(--linen);border:1px solid var(--sand);border-left:3px solid var(--gold);border-radius:2px;padding:0.85rem 1.1rem;margin-bottom:1.5rem;font-size:0.82rem;color:var(--ink-mid);">' +
-      '<strong style="color:var(--ink);">Formatting tip:</strong> Wrap text in <code style="background:var(--sand);padding:0.1rem 0.35rem;border-radius:2px;font-size:0.85em">*asterisks*</code> to make it gold. ' +
-      'Example: <code style="background:var(--sand);padding:0.1rem 0.35rem;border-radius:2px;font-size:0.85em">Real results. *Real women.* Real transformation.</code>' +
-      '</div>';
-    list.innerHTML = hint + blocks.map(function(b) {
-      var isLong = b.value.length > 120;
-      var field = isLong
-        ? '<textarea class="edit-field" id="cb-' + b.id + '" style="min-height:140px">' + b.value + '</textarea>'
-        : '<input type="text" class="edit-field" id="cb-' + b.id + '" value="' + b.value.replace(/"/g, '&quot;') + '">';
-      return '<div class="content-block-card">' +
-        '<span class="content-block-key">' + (b.label || b.key) + '</span>' +
-        field +
-        '<div class="content-save-row">' +
-          '<button class="btn btn-gold btn-sm" onclick="saveContentBlock(\'' + b.id + '\',\'' + b.key + '\')">Save</button>' +
-        '</div>' +
-      '</div>';
-    }).join('');
   }
 
   function saveContentBlock(id, key) {
-    var value = document.getElementById('cb-' + id).value;
+    var el = document.getElementById('cb-' + id);
+    var value = el.tagName === 'TEXTAREA' ? el.value : el.value;
+    var now = new Date().toISOString();
     fetch(db('content_blocks') + '?id=eq.' + id, {
       method: 'PATCH',
-      headers: headers({ 'Prefer': 'return=minimal' }),
-      body: JSON.stringify({ value: value, updated_at: new Date().toISOString() })
+      headers: Object.assign(headers(), { 'Prefer': 'return=minimal' }),
+      body: JSON.stringify({ value: value, updated_at: now })
     }).then(function(r) {
-      if (r.ok) { toast('Content saved — changes live on site', 'success'); }
-      else { toast('Save failed', 'error'); }
+      if (r.ok) {
+        var formatted = new Date(now).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' });
+        var ls = document.getElementById('lastsaved-' + id);
+        if (ls) ls.textContent = 'Last saved: ' + formatted;
+        toast('✓ Saved — changes are live on your site', 'success');
+      } else { toast('Save failed — please try again', 'error'); }
     });
   }
 
@@ -1089,26 +873,22 @@
   // ORDERS
   // ──────────────────────────────────────
   function loadOrders() {
-    document.getElementById('ordersList').innerHTML = '<div class="loading-state" style="padding:2rem"><div class="spinner"></div> Loading orders…</div>';
+    document.getElementById('ordersList').innerHTML = '<div class="loading-state" style="padding:2rem"><div class="spinner"></div> Loading…</div>';
     fetch(db('orders') + '?order=created_at.desc', { headers: headers() })
       .then(function(r) { return r.json(); })
-      .then(function(data) {
-        renderOrders(data);
-        renderOrderStats(data);
-      })
-      .catch(function() { toast('Failed to load orders', 'error'); });
+      .then(function(data) { renderOrders(data); renderOrderStats(data); })
+      .catch(function() { toast('Could not load orders', 'error'); });
   }
 
   function renderOrderStats(orders) {
     var total   = orders.length;
     var newOrds = orders.filter(function(o) { return o.status === 'new'; }).length;
-    var revenue = orders.reduce(function(s, o) { return s + (o.order_total || 0); }, 0);
+    var revenue = orders.reduce(function(s,o) { return s + (o.order_total||0); }, 0);
     var shipped = orders.filter(function(o) { return o.status === 'shipped' || o.status === 'complete'; }).length;
     document.getElementById('statTotal').textContent   = total;
     document.getElementById('statNew').textContent     = newOrds;
     document.getElementById('statRevenue').textContent = '$' + revenue;
     document.getElementById('statShipped').textContent = shipped;
-    // Badge
     var badge = document.getElementById('newOrdersBadge');
     if (newOrds > 0) { badge.textContent = newOrds; badge.style.display = 'inline-block'; }
     else { badge.style.display = 'none'; }
@@ -1117,63 +897,63 @@
   function loadOrderBadge() {
     fetch(db('orders') + '?status=eq.new&select=id', { headers: headers() })
       .then(function(r) { return r.json(); })
-      .then(function(data) {
+      .then(function(d) {
         var badge = document.getElementById('newOrdersBadge');
-        if (data.length > 0) { badge.textContent = data.length; badge.style.display = 'inline-block'; }
+        if (d.length > 0) { badge.textContent = d.length; badge.style.display = 'inline-block'; }
       });
   }
 
+  var statusLabels = { new: 'New Order', contacted: 'Contacted', payment_sent: 'Payment Sent', shipped: 'Shipped', complete: 'Complete', cancelled: 'Cancelled' };
+
   function renderOrders(orders) {
     var el = document.getElementById('ordersList');
-    if (!orders.length) {
-      el.innerHTML = '<p class="orders-empty">No orders yet. They\'ll appear here when customers submit the order form.</p>';
-      return;
-    }
-    var statuses = ['new','contacted','payment_sent','shipped','complete','cancelled'];
-    el.innerHTML = '<table class="orders-table">' +
-      '<thead><tr>' +
-        '<th>Date</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Actions</th>' +
-      '</tr></thead><tbody>' +
-      orders.map(function(o) {
-        var date = new Date(o.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        var items = '';
-        if (o.items) {
-          try {
-            var itemArr = typeof o.items === 'string' ? JSON.parse(o.items) : o.items;
-            if (Array.isArray(itemArr)) {
-              items = itemArr.map(function(i) { return i.name + (i.qty > 1 ? ' ×' + i.qty : ''); }).join('<br>');
-            } else {
-              items = String(o.items);
-            }
-          } catch(e) { items = String(o.items); }
-        }
-        var statusOpts = statuses.map(function(s) {
-          return '<option value="' + s + '"' + (o.status === s ? ' selected' : '') + '>' + s.replace('_',' ') + '</option>';
-        }).join('');
-        return '<tr>' +
-          '<td>' + date + '</td>' +
-          '<td><span class="order-name">' + (o.full_name || '—') + '</span><br><span style="font-size:0.75rem;color:var(--ink-light)">' + (o.email || '') + '</span></td>' +
-          '<td><span class="order-items">' + (items || '—') + '</span></td>' +
-          '<td><span class="order-total">$' + (o.order_total || 0) + '</span></td>' +
-          '<td><span class="status-badge status-' + o.status + '">' + (o.status || 'new').replace('_',' ') + '</span></td>' +
-          '<td>' +
+    if (!orders.length) { el.innerHTML = '<p class="orders-empty">No orders yet — they\'ll appear here when customers submit the order form.</p>'; return; }
+    el.innerHTML = orders.map(function(o) {
+      var date = new Date(o.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      var items = '';
+      if (o.items) {
+        try {
+          var arr = typeof o.items === 'string' ? JSON.parse(o.items) : o.items;
+          items = Array.isArray(arr) ? arr.map(function(i) { return i.name + (i.qty > 1 ? ' ×' + i.qty : '') + ' — $' + i.total; }).join('<br>') : String(o.items);
+        } catch(e) { items = String(o.items); }
+      }
+      var statusOpts = Object.keys(statusLabels).map(function(s) {
+        return '<option value="' + s + '"' + (o.status === s ? ' selected' : '') + '>' + statusLabels[s] + '</option>';
+      }).join('');
+      return '<div class="order-card">' +
+        '<div class="order-card-header">' +
+          '<div><div class="order-card-name">' + (o.full_name||'—') + '</div><div class="order-card-email">' + (o.email||'') + '</div>' +
+          (o.phone ? '<div class="order-card-email">' + o.phone + '</div>' : '') +
+          (o.address ? '<div class="order-card-email" style="margin-top:0.25rem">' + [o.address, o.city, o.state, o.zip].filter(Boolean).join(', ') + '</div>' : '') +
+          '</div>' +
+          '<div class="order-card-date">' + date + '</div>' +
+        '</div>' +
+        '<div class="order-card-items">' + (items || '—') + '</div>' +
+        (o.notes ? '<div style="font-size:0.78rem;color:var(--ink-light);margin-bottom:0.75rem;font-style:italic">Note: ' + o.notes + '</div>' : '') +
+        '<div class="order-card-footer">' +
+          '<span class="order-total">$' + (o.order_total||0) + '</span>' +
+          '<div class="order-actions">' +
+            '<span class="status-badge status-' + (o.status||'new') + '">' + (statusLabels[o.status] || 'New') + '</span>' +
             '<select class="status-select" onchange="updateOrderStatus(\'' + o.id + '\',this.value)">' + statusOpts + '</select>' +
-            '<br><a href="mailto:' + o.email + '" class="btn btn-outline btn-sm" style="margin-top:0.4rem;display:inline-flex">Email</a>' +
-          '</td>' +
-        '</tr>';
-      }).join('') +
-      '</tbody></table>';
+            '<button class="btn btn-outline btn-sm email-template-btn" onclick="openEmailTemplate(\'' + o.id + '\',\'' + (o.full_name||'').split(' ')[0] + '\',\'' + (o.email||'') + '\',' + (o.order_total||0) + ')">✉ Email</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
   }
 
   function updateOrderStatus(id, status) {
-    fetch(db('orders') + '?id=eq.' + id, {
-      method: 'PATCH',
-      headers: headers({ 'Prefer': 'return=minimal' }),
-      body: JSON.stringify({ status: status })
-    }).then(function(r) {
-      if (r.ok) { toast('Order status updated to: ' + status.replace('_',' '), 'success'); loadOrderBadge(); }
-      else { toast('Update failed', 'error'); }
-    });
+    fetch(db('orders') + '?id=eq.' + id, { method: 'PATCH', headers: Object.assign(headers(), { 'Prefer': 'return=minimal' }), body: JSON.stringify({ status: status }) })
+      .then(function(r) { if (r.ok) { toast('✓ Status updated to: ' + statusLabels[status], 'success'); loadOrderBadge(); } else { toast('Update failed', 'error'); } });
+  }
+
+  function openEmailTemplate(id, firstName, email, total) {
+    var template = 'Hi ' + firstName + ',\n\nThank you so much for your order! I received it and I\'m so excited for you to start your wellness journey.\n\nYour order total is $' + total + '. To complete your purchase, please send payment via:\n\n• Venmo: @tammy-melchisedeck\n• PayPal: tammymelchisedeck@gmail.com\n\nPlease include your name in the memo so I can match it to your order.\n\nOnce I receive payment I\'ll get your order shipped out right away. Feel free to reach out with any questions!\n\nCheering you on,\nTammy';
+    document.getElementById('emailPreview').textContent = template;
+    document.getElementById('openEmailBtn').onclick = function() {
+      window.location.href = 'mailto:' + email + '?subject=Your Order from Tammy Melchisedeck&body=' + encodeURIComponent(template);
+    };
+    openModal('emailModal');
   }
 </script>
 </body>

@@ -1634,6 +1634,124 @@
       panel.classList.remove('open');
     }
   });
+
+  // ── SUPABASE LIVE CONTENT ──
+  var SB_URL = 'https://nzqdmsbxwghkqowajmvs.supabase.co/rest/v1';
+  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cWRtc2J4d2doa3Fvd2FqbXZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3Njk0MjQsImV4cCI6MjA5NjM0NTQyNH0.aqdvA_ytnkeSvg4hmLqC1zces0aIFZcxkHrrN7k7atk';
+  var SB_HEADERS = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY };
+
+  function sbFetch(endpoint) {
+    return fetch(SB_URL + endpoint, { headers: SB_HEADERS }).then(function(r) { return r.json(); });
+  }
+
+  // Load testimonials from Supabase
+  function loadTestimonialsFromDB() {
+    sbFetch('/testimonials?active=eq.true&order=sort_order.asc')
+      .then(function(data) {
+        if (!data || !data.length) return;
+        var slides = document.querySelectorAll('.t-slide');
+        var dots   = document.querySelectorAll('.t-dot');
+
+        // Update existing slides with DB content
+        data.forEach(function(t, i) {
+          if (slides[i]) {
+            slides[i].querySelector('.t-text').textContent = t.quote;
+            slides[i].querySelector('.t-name').textContent = '— ' + t.name;
+          }
+        });
+
+        // Hide extra slides/dots if DB has fewer than 5
+        for (var i = data.length; i < slides.length; i++) {
+          slides[i].style.display = 'none';
+          if (dots[i]) dots[i].style.display = 'none';
+        }
+
+        // Update sizer with longest quote
+        var longest = data.reduce(function(a, b) { return b.quote.length > a.quote.length ? b : a; }, data[0]);
+        var sizer = document.querySelector('.testimonial-sizer .t-text');
+        if (sizer) sizer.textContent = longest.quote;
+      })
+      .catch(function() { /* silently fall back to hardcoded content */ });
+  }
+
+  // Load content blocks from Supabase
+  function loadContentFromDB() {
+    sbFetch('/content_blocks?select=key,value')
+      .then(function(data) {
+        if (!data || !data.length) return;
+        var map = {};
+        data.forEach(function(b) { map[b.key] = b.value; });
+
+        // Hero
+        if (map.hero_eyebrow) {
+          var ey = document.querySelector('.hero-eyebrow');
+          if (ey) ey.textContent = map.hero_eyebrow;
+        }
+        if (map.hero_body) {
+          var hb = document.querySelector('.hero-body');
+          if (hb) hb.textContent = map.hero_body;
+        }
+
+        // Welcome letter
+        if (map.letter_greeting) {
+          var lg = document.getElementById('letter-greeting');
+          if (lg) lg.textContent = map.letter_greeting;
+        }
+        if (map.letter_body) {
+          var lb = document.querySelector('.letter-body');
+          if (lb) {
+            var paragraphs = map.letter_body.split('\n\n');
+            lb.innerHTML = paragraphs.map(function(p) {
+              return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+            }).join('');
+          }
+        }
+
+        // CTA strip
+        if (map.cta_headline) {
+          var ch = document.querySelector('.cta-strip-title');
+          if (ch) ch.textContent = map.cta_headline;
+        }
+        if (map.cta_body) {
+          var cb = document.querySelector('.cta-strip-body');
+          if (cb) cb.textContent = map.cta_body;
+        }
+      })
+      .catch(function() { /* fall back to hardcoded */ });
+  }
+
+  // Load products from Supabase
+  function loadProductsFromDB() {
+    sbFetch('/products?active=eq.true&order=sort_order.asc')
+      .then(function(data) {
+        if (!data || !data.length) return;
+        var grid = document.querySelector('.products-grid');
+        if (!grid) return;
+        grid.innerHTML = data.map(function(p) {
+          var img = p.image_path
+            ? '<img src="' + p.image_path + '" alt="' + p.name + '" class="product-img" onerror="this.style.display=\'none\'">'
+            : '';
+          var placeholder = '<div class="product-img-placeholder" aria-hidden="true">' + p.name + '</div>';
+          return '<div class="product-card">' +
+            '<div class="product-img-wrap">' + img + placeholder + '</div>' +
+            '<div class="product-body">' +
+              '<span class="product-tag">' + (p.tag || '') + '</span>' +
+              '<h3 class="product-name">' + p.name + '</h3>' +
+              '<p class="product-desc">' + (p.description || '') + '</p>' +
+              '<a href="order.html" class="product-btn">Order Now</a>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function() { /* fall back to hardcoded */ });
+  }
+
+  // Run all on DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', function() {
+    loadTestimonialsFromDB();
+    loadContentFromDB();
+    loadProductsFromDB();
+  });
 </script>
 
 <style>

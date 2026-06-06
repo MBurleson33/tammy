@@ -1399,10 +1399,234 @@
         btn.style.background = '';
         e.target.reset();
       }, 3500);
-    }
-    // If Formspree is real, it will redirect/handle normally.
   }
+  // If Formspree is real, it will redirect/handle normally.
+  }
+
+  // ── CHAT BUBBLE ──
+  function toggleChat() {
+    var panel = document.getElementById('chatPanel');
+    var isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+    if (!isOpen) document.getElementById('chatName').focus();
+  }
+
+  function submitChat(e) {
+    e.preventDefault();
+    var btn = document.getElementById('chatSubmitBtn');
+    var form = document.getElementById('chatForm');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    var data = new FormData(form);
+    fetch('https://formspree.io/f/YOUR_CHAT_FORM_ID', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(function(r) {
+      if (r.ok) {
+        document.getElementById('chatFormWrap').style.display = 'none';
+        document.getElementById('chatSuccess').style.display = 'block';
+      } else {
+        btn.textContent = 'Try again';
+        btn.disabled = false;
+      }
+    }).catch(function() {
+      btn.textContent = 'Try again';
+      btn.disabled = false;
+    });
+  }
+
+  // Close chat on outside click
+  document.addEventListener('click', function(e) {
+    var panel = document.getElementById('chatPanel');
+    var bubble = document.getElementById('chatBubble');
+    if (panel.classList.contains('open') && !panel.contains(e.target) && !bubble.contains(e.target)) {
+      panel.classList.remove('open');
+    }
+  });
 </script>
+
+<style>
+  .chat-bubble {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    box-shadow: 0 4px 20px rgba(44,37,32,0.25);
+    transition: background 0.2s, transform 0.2s;
+  }
+  .chat-bubble:hover { background: var(--ink); transform: scale(1.05); }
+  .chat-bubble svg { color: var(--white); }
+
+  .chat-panel {
+    position: fixed;
+    bottom: 5.5rem;
+    right: 2rem;
+    width: 340px;
+    background: var(--white);
+    border-radius: 2px;
+    border-top: 3px solid var(--gold);
+    box-shadow: 0 8px 40px rgba(44,37,32,0.2);
+    z-index: 899;
+    transform: translateY(12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .chat-panel.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .chat-header {
+    background: var(--ink);
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .chat-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top center;
+    flex-shrink: 0;
+    border: 2px solid var(--gold);
+  }
+  .chat-header-text { flex: 1; }
+  .chat-header-name {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.2;
+  }
+  .chat-header-sub {
+    font-size: 0.68rem;
+    color: var(--gold-light);
+    letter-spacing: 0.06em;
+  }
+  .chat-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255,255,255,0.4);
+    display: flex;
+    align-items: center;
+    padding: 0;
+    transition: color 0.2s;
+  }
+  .chat-close:hover { color: var(--white); }
+
+  .chat-body { padding: 1.25rem; }
+  .chat-intro {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--ink-mid);
+    line-height: 1.6;
+    margin-bottom: 1.1rem;
+  }
+  .chat-field {
+    width: 100%;
+    padding: 0.65rem 0.85rem;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--ink);
+    border: 1px solid var(--sand);
+    border-radius: 2px;
+    outline: none;
+    margin-bottom: 0.65rem;
+    background: var(--cream);
+    transition: border-color 0.2s;
+    display: block;
+  }
+  .chat-field:focus { border-color: var(--gold); }
+  textarea.chat-field { resize: none; height: 80px; }
+  .chat-submit {
+    width: 100%;
+    background: var(--gold);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.85rem;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 0.25rem;
+  }
+  .chat-submit:hover { background: var(--ink); }
+  .chat-submit:disabled { opacity: 0.6; cursor: default; }
+  .chat-success {
+    display: none;
+    text-align: center;
+    padding: 2rem 1.25rem;
+  }
+  .chat-success-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .chat-success p {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--ink-mid);
+    line-height: 1.6;
+  }
+  @media (max-width: 900px) {
+    .chat-panel { width: calc(100vw - 2rem); right: 1rem; }
+    .chat-bubble { right: 1rem; bottom: 1.5rem; }
+  }
+</style>
+
+<!-- ── CHAT BUBBLE ── -->
+<button class="chat-bubble" id="chatBubble" onclick="toggleChat()" aria-label="Have a question?">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+</button>
+
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Contact Tammy">
+  <div class="chat-header">
+    <img src="images/TammyJulieWEB-6432.webp" alt="Tammy" class="chat-avatar">
+    <div class="chat-header-text">
+      <p class="chat-header-name">Tammy Melchisedeck</p>
+      <p class="chat-header-sub">Typically replies within 24hrs</p>
+    </div>
+    <button class="chat-close" onclick="toggleChat()" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="chat-body">
+    <div id="chatFormWrap">
+      <p class="chat-intro">Have a question about the drops? I'd love to help — send me a message!</p>
+      <form id="chatForm" onsubmit="submitChat(event)">
+        <input type="text" name="name" id="chatName" class="chat-field" placeholder="Your name" required>
+        <input type="tel" name="phone" class="chat-field" placeholder="Phone (optional)">
+        <input type="email" name="email" class="chat-field" placeholder="Email address" required>
+        <textarea name="message" class="chat-field" placeholder="Your question..." required></textarea>
+        <button type="submit" class="chat-submit" id="chatSubmitBtn">Send Message</button>
+      </form>
+    </div>
+    <div class="chat-success" id="chatSuccess">
+      <div class="chat-success-icon">✦</div>
+      <p>Thank you! Tammy will be in touch with you soon.</p>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

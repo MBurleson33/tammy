@@ -453,16 +453,41 @@
       <textarea class="edit-field" id="npDesc" style="min-height:90px" placeholder="Describe the product and its benefits..."></textarea>
     </div>
     <div class="field-group">
+      <label class="edit-label">Product Card Image <span style="font-size:0.7rem;color:var(--ink-light);font-weight:400;text-transform:none;letter-spacing:0">(800×450px, 16:9)</span></label>
+      <div style="display:flex;gap:0.5rem;align-items:center">
+        <input type="text" class="edit-field" id="npImg" placeholder="images/product.webp" style="margin-bottom:0" oninput="npPreview('npImg','npImgPreview')">
+        <label class="btn btn-outline btn-sm" style="cursor:pointer;white-space:nowrap;flex-shrink:0">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+          Upload
+          <input type="file" accept="image/*" style="display:none" onchange="npUpload('card',this,'npImg','npImgPreview','npUploadProgress1')">
+        </label>
+      </div>
+      <div id="npUploadProgress1" style="display:none;font-size:0.75rem;color:var(--gold);margin-top:0.35rem;align-items:center;gap:0.4rem"><div class="spinner" style="width:14px;height:14px;border-width:1.5px"></div> Uploading…</div>
+      <img id="npImgPreview" class="img-preview" onerror="this.style.display='none'">
+    </div>
+    <div class="field-group">
+      <label class="edit-label">Feature Image <span style="font-size:0.7rem;color:var(--ink-light);font-weight:400;text-transform:none;letter-spacing:0">(320×400px, portrait — Drops section only)</span></label>
+      <div style="display:flex;gap:0.5rem;align-items:center">
+        <input type="text" class="edit-field" id="npFeatureImg" placeholder="images/feature.webp" style="margin-bottom:0" oninput="npPreview('npFeatureImg','npFeatureImgPreview')">
+        <label class="btn btn-outline btn-sm" style="cursor:pointer;white-space:nowrap;flex-shrink:0">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+          Upload
+          <input type="file" accept="image/*" style="display:none" onchange="npUpload('feature',this,'npFeatureImg','npFeatureImgPreview','npUploadProgress2')">
+        </label>
+      </div>
+      <div id="npUploadProgress2" style="display:none;font-size:0.75rem;color:var(--gold);margin-top:0.35rem;align-items:center;gap:0.4rem"><div class="spinner" style="width:14px;height:14px;border-width:1.5px"></div> Uploading…</div>
+      <img id="npFeatureImgPreview" class="img-preview" onerror="this.style.display='none'">
+    </div>
+    <div class="field-group">
       <label class="edit-label">Show on Site?</label>
       <div class="toggle-wrap" style="margin-top:0.25rem">
         <label class="toggle"><input type="checkbox" id="npActive" checked><span class="toggle-slider"></span></label>
         <span class="toggle-label">Yes — show this product immediately</span>
       </div>
     </div>
-    <p class="field-hint" style="margin-top:0.5rem">You can add images after saving by clicking the product to expand it.</p>
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeModal('addProductModal')">Cancel</button>
-      <button class="btn btn-gold" onclick="saveNewProduct()">Add Product</button>
+      <button class="btn btn-gold" id="npSaveBtn" onclick="saveNewProduct()">Add Product</button>
     </div>
   </div>
 </div>
@@ -821,12 +846,47 @@
   }
 
   function openAddProduct() {
-    ['npName','npPrice','npTag','npSubtitle','npDesc'].forEach(function(id) {
+    ['npName','npPrice','npTag','npSubtitle','npDesc','npImg','npFeatureImg'].forEach(function(id) {
       document.getElementById(id).value = '';
     });
     document.getElementById('npActive').checked = true;
+    document.getElementById('npImgPreview').style.display = 'none';
+    document.getElementById('npFeatureImgPreview').style.display = 'none';
+    document.getElementById('npSaveBtn').textContent = 'Add Product';
+    document.getElementById('npSaveBtn').disabled = false;
     openModal('addProductModal');
     setTimeout(function() { document.getElementById('npName').focus(); }, 100);
+  }
+
+  function npPreview(inputId, previewId) {
+    var val = document.getElementById(inputId).value;
+    var img = document.getElementById(previewId);
+    if (val) { img.src = val; img.style.display = 'block'; }
+    else { img.style.display = 'none'; }
+  }
+
+  function npUpload(type, input, inputId, previewId, progId) {
+    var file = input.files[0];
+    if (!file) return;
+    var prog = document.getElementById(progId);
+    prog.style.display = 'flex';
+    var ext = file.name.split('.').pop();
+    var filename = 'new-product-' + type + '-' + Date.now() + '.' + ext;
+    fetch(SUPABASE_URL + '/storage/v1/object/product-images/' + filename, {
+      method: 'POST',
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': file.type, 'x-upsert': 'true' },
+      body: file
+    })
+    .then(function(r) { if (!r.ok) throw new Error('Upload failed'); return r.json(); })
+    .then(function() {
+      var publicUrl = SUPABASE_URL + '/storage/v1/object/public/product-images/' + filename;
+      document.getElementById(inputId).value = publicUrl;
+      var img = document.getElementById(previewId);
+      img.src = publicUrl; img.style.display = 'block';
+      prog.style.display = 'none';
+      toast('✓ Image uploaded', 'success');
+    })
+    .catch(function() { prog.style.display = 'none'; toast('Upload failed', 'error'); });
   }
 
   function saveNewProduct() {
@@ -834,20 +894,23 @@
     var price = parseInt(document.getElementById('npPrice').value) || 0;
     if (!name) { toast('Product name is required', 'error'); return; }
     if (!price) { toast('Please enter a price', 'error'); return; }
+    var btn = document.getElementById('npSaveBtn');
+    btn.textContent = 'Saving…'; btn.disabled = true;
 
-    // Get max sort_order from current list
     fetch(db('products') + '?select=sort_order&order=sort_order.desc&limit=1', { headers: headers() })
       .then(function(r) { return r.json(); })
       .then(function(data) {
         var maxOrder = data.length ? (data[0].sort_order || 0) : 0;
         var newProduct = {
-          name:        name,
-          price:       price,
-          tag:         document.getElementById('npTag').value.trim(),
-          subtitle:    document.getElementById('npSubtitle').value.trim(),
-          description: document.getElementById('npDesc').value.trim(),
-          active:      document.getElementById('npActive').checked,
-          sort_order:  maxOrder + 1
+          name:               name,
+          price:              price,
+          tag:                document.getElementById('npTag').value.trim(),
+          subtitle:           document.getElementById('npSubtitle').value.trim(),
+          description:        document.getElementById('npDesc').value.trim(),
+          image_path:         document.getElementById('npImg').value.trim(),
+          feature_image_path: document.getElementById('npFeatureImg').value.trim(),
+          active:             document.getElementById('npActive').checked,
+          sort_order:         maxOrder + 1
         };
         return fetch(db('products'), { method: 'POST', headers: headers(), body: JSON.stringify(newProduct) });
       })
@@ -855,10 +918,16 @@
         if (r.ok) {
           closeModal('addProductModal');
           loadProducts();
-          toast('✓ Product added! Click it to upload images.', 'success');
-        } else { toast('Save failed — please try again', 'error'); }
+          toast('✓ Product added and live on site!', 'success');
+        } else {
+          toast('Save failed — please try again', 'error');
+          btn.textContent = 'Add Product'; btn.disabled = false;
+        }
       })
-      .catch(function() { toast('Something went wrong', 'error'); });
+      .catch(function() {
+        toast('Something went wrong', 'error');
+        btn.textContent = 'Add Product'; btn.disabled = false;
+      });
   }
 
   function toggleProductCard(id) {

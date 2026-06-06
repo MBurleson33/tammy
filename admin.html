@@ -1053,7 +1053,12 @@
       list.innerHTML = '<p style="color:var(--ink-light);font-style:italic;padding:1rem 0">No content blocks found.</p>';
       return;
     }
-    list.innerHTML = blocks.map(function(b) {
+    // Add hint banner
+    var hint = '<div style="background:var(--linen);border:1px solid var(--sand);border-left:3px solid var(--gold);border-radius:2px;padding:0.85rem 1.1rem;margin-bottom:1.5rem;font-size:0.82rem;color:var(--ink-mid);">' +
+      '<strong style="color:var(--ink);">Formatting tip:</strong> Wrap text in <code style="background:var(--sand);padding:0.1rem 0.35rem;border-radius:2px;font-size:0.85em">*asterisks*</code> to make it gold. ' +
+      'Example: <code style="background:var(--sand);padding:0.1rem 0.35rem;border-radius:2px;font-size:0.85em">Real results. *Real women.* Real transformation.</code>' +
+      '</div>';
+    list.innerHTML = hint + blocks.map(function(b) {
       var isLong = b.value.length > 120;
       var field = isLong
         ? '<textarea class="edit-field" id="cb-' + b.id + '" style="min-height:140px">' + b.value + '</textarea>'

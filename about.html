@@ -136,7 +136,7 @@
   .page-hero {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: 75vh;
+    max-height: 520px;
     overflow: hidden;
   }
   .page-hero-img-wrap {
@@ -145,11 +145,10 @@
   }
   .page-hero-img {
     width: 100%;
-    height: 100%;
+    height: 520px;
     object-fit: cover;
-    object-position: top center;
+    object-position: center 25%;
     display: block;
-    min-height: 500px;
   }
   .page-hero-copy {
     background: var(--linen);
@@ -197,8 +196,6 @@
 
   /* Credentials sidebar */
   .credentials {
-    position: sticky;
-    top: 88px;
   }
   .credentials-label {
     font-size: 0.7rem;
@@ -460,8 +457,8 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
-    .page-hero { grid-template-columns: 1fr; min-height: auto; }
-    .page-hero-img { min-height: 60vw; height: 60vw; }
+    .page-hero { grid-template-columns: 1fr; max-height: none; }
+    .page-hero-img { height: 60vw; }
     .page-hero-copy { padding: 3rem 1.5rem; }
     .about-grid { grid-template-columns: 1fr; gap: 3rem; }
     .credentials { position: static; }

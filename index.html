@@ -1312,7 +1312,7 @@
       <div class="product-card">
         <div class="product-img-wrap">
           <img src="images/CLB_CoreCleanse_Insider_Guide_ENG-V05_10.jpg" alt="Core Cleanse and Core Cleanse Plus packets" class="product-img" onerror="this.style.display='none'">
-          <div class="product-img-placeholder" aria-hidden="true">Core Cleanse</div>
+          
         </div>
         <div class="product-body">
           <span class="product-tag">Gut Health</span>
@@ -1325,7 +1325,7 @@
       <div class="product-card">
         <div class="product-img-wrap">
           <img src="images/pdp-product-image-global-clb-abvantage-2-desktop.jpg" alt="AbVantage hip and waist reducer supplement" class="product-img" onerror="this.style.display='none'">
-          <div class="product-img-placeholder" aria-hidden="true">AbVantage</div>
+          
         </div>
         <div class="product-body">
           <span class="product-tag">Thermogenic Fat Burning</span>
@@ -1755,9 +1755,8 @@
           var img = p.image_path
             ? '<img src="' + p.image_path + '" alt="' + p.name + '" class="product-img" onerror="this.style.display=\'none\'">'
             : '';
-          var placeholder = '<div class="product-img-placeholder" aria-hidden="true">' + p.name + '</div>';
           return '<div class="product-card">' +
-            '<div class="product-img-wrap">' + img + placeholder + '</div>' +
+            '<div class="product-img-wrap">' + img + '</div>' +
             '<div class="product-body">' +
               '<span class="product-tag">' + (p.tag || '') + '</span>' +
               '<h3 class="product-name">' + p.name + '</h3>' +

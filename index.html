@@ -144,7 +144,7 @@
     overflow: hidden;
   }
   .hero-img {
-    background: url('images/TammyJulieWEB-6432.webp') center 15% / cover no-repeat;
+    background: url('images/TammyJulieWEB-6432.webp') center 35% / cover no-repeat;
     position: relative;
     min-height: 500px;
   }
@@ -290,23 +290,8 @@
   /* ── DROPS SECTION ── */
   .drops-section { background: var(--white); }
   .drops-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
+    max-width: 780px;
     margin-top: 3.5rem;
-  }
-  .drops-photo-wrap {
-    position: sticky;
-    top: 88px;
-    align-self: start;
-  }
-  .drops-photo {
-    width: 100%;
-    aspect-ratio: 4/5;
-    object-fit: cover;
-    border-radius: 2px;
-    display: block;
   }
 
   /* FAQ */
@@ -617,41 +602,80 @@
   }
   .social-btn:hover { border-color: var(--gold); color: var(--gold); }
 
-  /* ── LETTER ── */
-  .letter-section {
-    background: var(--cream);
-    padding: 5.5rem 2rem;
+  /* ── WELCOME LETTER POPUP ── */
+  .letter-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(44, 37, 32, 0.72);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    animation: overlayFadeIn 0.6s 0.3s ease forwards;
   }
-  .letter-wrap {
-    max-width: 720px;
-    margin: 0 auto;
-    position: relative;
+  .letter-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
   }
-  .letter-card {
+  @keyframes overlayFadeIn {
+    to { opacity: 1; }
+  }
+  .letter-modal {
     background: var(--white);
-    border: 1px solid var(--sand);
     border-top: 3px solid var(--gold);
     border-radius: 2px;
-    padding: 4rem 4.5rem;
+    padding: 3.5rem 4rem;
+    max-width: 640px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
     position: relative;
+    transform: translateY(16px);
+    animation: modalSlideIn 0.5s 0.4s cubic-bezier(0.22,1,0.36,1) forwards;
+    scrollbar-width: thin;
+    scrollbar-color: var(--sand) transparent;
   }
+  @keyframes modalSlideIn {
+    to { transform: translateY(0); }
+  }
+  .letter-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    background: none;
+    border: 1px solid var(--sand);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--ink-light);
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .letter-close:hover { border-color: var(--gold); color: var(--gold); }
   .letter-greeting {
     font-family: var(--serif);
-    font-size: 1.75rem;
+    font-size: 1.65rem;
     font-weight: 300;
     font-style: italic;
     color: var(--gold);
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
     display: block;
   }
   .letter-body {
     font-family: var(--serif);
-    font-size: 1.15rem;
+    font-size: 1.08rem;
     font-weight: 300;
     color: var(--ink-mid);
-    line-height: 1.95;
+    line-height: 1.9;
   }
-  .letter-body p { margin-bottom: 1.4rem; }
+  .letter-body p { margin-bottom: 1.25rem; }
   .letter-body p:last-of-type { margin-bottom: 0; }
   .letter-body strong {
     font-weight: 400;
@@ -659,8 +683,8 @@
     font-style: italic;
   }
   .letter-closing {
-    margin-top: 2.5rem;
-    padding-top: 2rem;
+    margin-top: 2rem;
+    padding-top: 1.75rem;
     border-top: 1px solid var(--sand);
   }
   .letter-closing-line {
@@ -668,26 +692,43 @@
     font-size: 1rem;
     font-style: italic;
     color: var(--ink-mid);
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.25rem;
   }
   .letter-sig {
     font-family: var(--serif);
-    font-size: 2rem;
+    font-size: 1.9rem;
     font-weight: 300;
     font-style: italic;
     color: var(--gold);
-    margin-top: 0.25rem;
   }
   .letter-ornament {
     text-align: center;
     color: var(--gold-light);
-    font-size: 1.2rem;
+    font-size: 1rem;
     letter-spacing: 0.5em;
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
     opacity: 0.6;
   }
+  .letter-enter {
+    display: block;
+    width: 100%;
+    margin-top: 2rem;
+    background: var(--gold);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 1rem;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .letter-enter:hover { background: var(--ink); }
   @media (max-width: 900px) {
-    .letter-card { padding: 2.5rem 2rem; }
+    .letter-modal { padding: 2.5rem 1.75rem; }
   }
 
   /* ── EMAIL ── */
@@ -814,7 +855,6 @@
     .hero-copy {
       padding: 2.5rem 1.75rem 3rem;
     }
-    .drops-grid,
     .about-grid {
       grid-template-columns: 1fr;
       gap: 2.5rem;
@@ -885,42 +925,35 @@
   <span class="trust-item" role="listitem"><span class="trust-dot" aria-hidden="true"></span>Up to ¾ lb Lost Per Day</span>
 </div>
 
-<!-- ── OPENING LETTER ── -->
-<section class="letter-section" aria-labelledby="letter-greeting">
-  <div class="letter-wrap">
+<!-- ── WELCOME LETTER POPUP ── -->
+<div class="letter-overlay" id="letterOverlay" role="dialog" aria-modal="true" aria-labelledby="letter-greeting">
+  <div class="letter-modal">
+    <button class="letter-close" onclick="closeLetter()" aria-label="Close letter">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
     <div class="letter-ornament" aria-hidden="true">✦ &nbsp; ✦ &nbsp; ✦</div>
-    <div class="letter-card">
-      <span class="letter-greeting" id="letter-greeting">Hello Beautiful One,</span>
-      <div class="letter-body">
-        <p>Every woman reaches a moment where she feels the quiet pull toward more: more health, more clarity, more faith, more purpose. Not out of striving, but out of a holy knowing:</p>
-        <p><strong>You were designed to grow. You were crafted to rise.</strong></p>
-        <p>My work, through media, writing, leadership, and global wellness coaching, has always pointed toward one truth: when a woman becomes well, her world becomes stronger. Her family shifts. Her confidence rises. Her calling expands. And generational legacy begins to change.</p>
-        <p>Midlife has become my favorite season to speak into because it is where reinvention is not only possible—it is powerful. God loves to use what we think disqualifies us as the very thing that equips us.</p>
-        <p>My heart is to help you cultivate health from the inside out, walk boldly into your God-given identity, and build a life that reflects the joy and abundance He designed for you.</p>
-        <p>Here, you'll find pathways to wellness, mentorship, community, and personal growth—tools that help you live a life of purpose and vitality.</p>
-        <p><strong>You were woven for this moment. Let's step into it together.</strong></p>
-      </div>
-      <div class="letter-closing">
-        <p class="letter-closing-line">Cheering you on,</p>
-        <p class="letter-sig">Tammy</p>
-      </div>
+    <span class="letter-greeting" id="letter-greeting">Hello Beautiful One,</span>
+    <div class="letter-body">
+      <p>Every woman reaches a moment where she feels the quiet pull toward more: more health, more clarity, more faith, more purpose. Not out of striving, but out of a holy knowing:</p>
+      <p><strong>You were designed to grow. You were crafted to rise.</strong></p>
+      <p>My work, through media, writing, leadership, and global wellness coaching, has always pointed toward one truth: when a woman becomes well, her world becomes stronger. Her family shifts. Her confidence rises. Her calling expands. And generational legacy begins to change.</p>
+      <p>Midlife has become my favorite season to speak into because it is where reinvention is not only possible—it is powerful. God loves to use what we think disqualifies us as the very thing that equips us.</p>
+      <p>My heart is to help you cultivate health from the inside out, walk boldly into your God-given identity, and build a life that reflects the joy and abundance He designed for you.</p>
+      <p>Here, you'll find pathways to wellness, mentorship, community, and personal growth—tools that help you live a life of purpose and vitality.</p>
+      <p><strong>You were woven for this moment. Let's step into it together.</strong></p>
     </div>
+    <div class="letter-closing">
+      <p class="letter-closing-line">Cheering you on,</p>
+      <p class="letter-sig">Tammy</p>
+    </div>
+    <button class="letter-enter" onclick="closeLetter()">Enter the Site</button>
   </div>
-</section>
+</div>
 
 <!-- ── WHAT ARE THE DROPS ── -->
 <section class="drops-section" id="drops" aria-labelledby="drops-title">
   <div class="container">
     <div class="drops-grid">
-
-      <div class="drops-photo-wrap">
-        <img
-          src="images/unnamed(3).webp"
-          alt="Partner.Co Slenderiix and Xceler8 Skinny Drops"
-          class="drops-photo"
-          loading="lazy"
-        >
-      </div>
 
       <div>
         <span class="section-label">Slenderiiz™ by Partner.Co</span>
@@ -1145,6 +1178,30 @@
 <script>
   // Dynamic copyright year
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Welcome letter popup — shows once per session
+  function closeLetter() {
+    const overlay = document.getElementById('letterOverlay');
+    overlay.classList.add('hidden');
+    setTimeout(function() { overlay.style.display = 'none'; }, 400);
+    sessionStorage.setItem('letterSeen', '1');
+  }
+
+  // Close on backdrop click
+  document.getElementById('letterOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeLetter();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLetter();
+  });
+
+  // Only show if not already seen this session
+  if (sessionStorage.getItem('letterSeen')) {
+    const overlay = document.getElementById('letterOverlay');
+    overlay.style.display = 'none';
+  }
 
   // Mobile nav
   function toggleNav() {

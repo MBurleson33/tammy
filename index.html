@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tammy Melchisedeck – Skinny Drops by Partner.Co</title>
+<title>Natural Weight Loss Drops | Tammy Maltby Melchisedeck</title>
 <meta name="description" content="Tammy Melchisedeck helps women lose weight, balance hormones, and reclaim their energy through Partner.Co's natural Skinny Drops. Real results, real women.">
 <meta property="og:title" content="Tammy Melchisedeck – Skinny Drops by Partner.Co">
 <meta property="og:description" content="Real results. Real women. Real transformation. Order Skinny Drops today — $160 with free US shipping.">
@@ -80,6 +80,7 @@
     transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--gold); }
+  .nav-links a.nav-active { color: var(--gold); }
   .nav-cta {
     background: var(--gold) !important;
     color: var(--white) !important;
@@ -88,6 +89,26 @@
     transition: background 0.2s !important;
   }
   .nav-cta:hover { background: var(--ink) !important; color: var(--white) !important; }
+
+  .nav-mobile-right {
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .nav-mobile-order {
+    display: none;
+    background: var(--gold);
+    color: var(--white) !important;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
 
   /* Mobile nav toggle */
   .nav-toggle {
@@ -574,91 +595,95 @@
   }
   .t-dot.active { background: var(--gold); width: 18px; }
 
-  /* ── PURCHASE ── */
-  .purchase-section { background: var(--cream); }
-  .purchase-box {
-    background: var(--white);
-    border: 1px solid var(--sand);
-    border-radius: 2px;
-    max-width: 660px;
-    margin: 3.5rem auto 0;
-    padding: 3.5rem 3rem;
+  .cta-social-proof {
     text-align: center;
+    margin-bottom: 3.5rem;
+    padding-bottom: 3.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
   }
-  .purchase-eyebrow {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.5rem;
-  }
-  .purchase-price {
+  .cta-quote-mark {
     font-family: var(--serif);
-    font-size: 4rem;
-    font-weight: 300;
-    color: var(--ink);
+    font-size: 3rem;
+    color: var(--gold);
+    opacity: 0.4;
     line-height: 1;
-    margin: 0.75rem 0 0.25rem;
-  }
-  .purchase-note {
-    font-size: 0.85rem;
-    color: var(--ink-light);
-    margin-bottom: 2.25rem;
-  }
-  .purchase-features {
-    list-style: none;
-    margin: 0 0 2.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    text-align: left;
-    max-width: 340px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .purchase-features li {
-    font-size: 0.9rem;
-    color: var(--ink-mid);
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-  }
-  .check {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: var(--sage-light);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-size: 0.65rem;
-    color: var(--sage);
-    font-weight: 600;
-  }
-  .purchase-btn {
     display: block;
-    background: var(--gold);
-    color: var(--white);
-    font-family: var(--sans);
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 1.15rem 3rem;
-    text-decoration: none;
-    border-radius: 2px;
-    transition: background 0.2s, transform 0.15s;
   }
-  .purchase-btn:hover { background: var(--ink); transform: translateY(-1px); }
-  .purchase-sub {
-    font-size: 0.78rem;
-    color: var(--ink-light);
-    margin-top: 1rem;
+  .cta-quote-text {
+    font-family: var(--serif);
+    font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--cream);
+    max-width: 600px;
+    margin: 0 auto 0.75rem;
     line-height: 1.6;
   }
-  .purchase-sub a { color: var(--gold); text-decoration: none; }
+  .cta-quote-attr {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ── PURCHASE / CTA STRIP ── */
+  .purchase-section {
+    background: var(--ink);
+    padding: 5rem 2rem;
+  }
+  .cta-strip-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .cta-strip-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .cta-strip-body {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.75;
+    max-width: 520px;
+  }
+  .cta-strip-right {
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .cta-price {
+    font-family: var(--serif);
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+  .cta-price-note {
+    font-size: 0.75rem;
+    color: var(--gold-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .cta-contact {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.35);
+    margin-top: 1rem;
+  }
+  .cta-contact a { color: var(--gold-light); text-decoration: none; }
+  .cta-contact a:hover { color: var(--gold); }
+  @media (max-width: 900px) {
+    .cta-strip-inner { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+    .cta-strip-body { margin: 0 auto; }
+  }
 
   /* ── ABOUT ── */
   .about-section { background: var(--linen); }
@@ -755,7 +780,7 @@
     justify-content: center;
     padding: 1.5rem;
     opacity: 0;
-    animation: overlayFadeIn 0.6s 0.3s ease forwards;
+    animation: overlayFadeIn 0.6s ease forwards;
   }
   .letter-overlay.hidden {
     opacity: 0;
@@ -1051,6 +1076,8 @@
     nav { padding: 0 1.25rem; }
     .nav-links { display: none; }
     .nav-toggle { display: flex; }
+    .nav-mobile-right { display: flex; }
+    .nav-mobile-order { display: inline-block; }
     section { padding: 4rem 1.5rem; }
     .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
@@ -1070,9 +1097,12 @@
     <li><a href="about.html">About</a></li>
     <li><a href="#drops" class="nav-cta">Order Now</a></li>
   </ul>
-  <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-mobile-right">
+    <a href="#drops" class="nav-mobile-order">Order Now</a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
   <a href="#drops" onclick="closeMobileNav()">The Drops</a>
@@ -1084,7 +1114,7 @@
 
 <!-- ── HERO ── -->
 <section class="hero" style="padding: 0;" aria-labelledby="hero-headline">
-  <div class="hero-img" role="img" aria-label="Tammy Melchisedeck"></div>
+  <div class="hero-img" role="img" aria-label="Tammy Maltby Melchisedeck smiling and laughing, full of energy and joy"></div>
   <div class="hero-copy">
     <p class="hero-eyebrow">Partner.Co Wellness</p>
     <h1 class="hero-headline" id="hero-headline">
@@ -1134,6 +1164,90 @@
     <button class="letter-enter" onclick="closeLetter()">Enter the Site</button>
   </div>
 </div>
+
+<!-- ── RESULTS ── -->
+<section class="results-section" id="results" aria-labelledby="results-title">
+  <div class="container">
+    <span class="section-label">What to Expect</span>
+    <h2 class="section-title" id="results-title">Proven results, naturally.</h2>
+    <div class="divider" aria-hidden="true"></div>
+    <p class="section-body">
+      These aren't crash-diet numbers. Women on this program see steady, sustainable transformation — in their weight, their energy, and their overall health. Real drops. Real results.
+    </p>
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-stat">½ lb</div>
+        <div class="result-label">Lost Per Day — Women</div>
+        <div class="result-desc">Consistent, daily fat loss that adds up fast — without starvation or extreme restriction.</div>
+      </div>
+      <div class="result-card">
+        <div class="result-stat">¾ lb</div>
+        <div class="result-label">Lost Per Day — Men</div>
+        <div class="result-desc">Men on the program see even faster results, with drops designed to support male metabolism.</div>
+      </div>
+      <div class="result-card">
+        <div class="result-stat">3×</div>
+        <div class="result-label">Daily Doses</div>
+        <div class="result-desc">Simple routine: drops under the tongue before each meal. No injections. No prescriptions. No fuss.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonials-section" id="testimonials" aria-labelledby="t-title">
+  <div class="testimonials-inner">
+
+    <div class="testimonials-header">
+      <span class="section-label">From Real Women</span>
+      <h2 class="section-title" id="t-title">Their stories.</h2>
+      <div class="divider" aria-hidden="true"></div>
+      <p class="section-body">Real results from real people — not paid endorsements, not stock photos. Just women who said yes to something different.</p>
+    </div>
+
+    <div class="testimonials-stage">
+      <span class="t-quote-mark" aria-hidden="true">"</span>
+      <div class="t-quotes" aria-live="polite">
+        <div class="t-slide active">
+          <p class="t-text">I have lost 25 pounds and have gained enormous amounts of energy. I didn't think anything would work for me — I was wrong.</p>
+          <p class="t-name">— Ciera</p>
+        </div>
+        <div class="t-slide">
+          <p class="t-text">My night sweats are completely gone. I honestly didn't expect that benefit — this program has genuinely changed my life.</p>
+          <p class="t-name">— Ashley</p>
+        </div>
+        <div class="t-slide">
+          <p class="t-text">This is so much more than weight loss. I am now off 6 medications! I feel like I have gotten my life back.</p>
+          <p class="t-name">— Noha</p>
+        </div>
+        <div class="t-slide">
+          <p class="t-text">22 pounds down and my inflammation is completely gone. I feel better at 50 than I did at 35.</p>
+          <p class="t-name">— Tonya</p>
+        </div>
+        <div class="t-slide">
+          <p class="t-text">These drops give me unbelievable amounts of energy. An absolute game changer — I tell everyone I know about them.</p>
+          <p class="t-name">— Ellie</p>
+        </div>
+      </div>
+      <div class="t-controls">
+        <button class="t-arrow" id="tPrev" aria-label="Previous">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="t-dots" aria-hidden="true">
+          <span class="t-dot active"></span>
+          <span class="t-dot"></span>
+          <span class="t-dot"></span>
+          <span class="t-dot"></span>
+          <span class="t-dot"></span>
+        </div>
+        <button class="t-arrow" id="tNext" aria-label="Next">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <!-- ── WHAT ARE THE DROPS ── -->
 <section class="drops-section" id="drops" aria-labelledby="drops-title">
@@ -1257,113 +1371,26 @@
   </div>
 </section>
 
-<!-- ── RESULTS ── -->
-<section class="results-section" id="results" aria-labelledby="results-title">
-  <div class="container">
-    <span class="section-label">What to Expect</span>
-    <h2 class="section-title" id="results-title">Proven results, naturally.</h2>
-    <div class="divider" aria-hidden="true"></div>
-    <p class="section-body">
-      These aren't crash-diet numbers. Women on this program see steady, sustainable transformation — in their weight, their energy, and their overall health. Real drops. Real results.
-    </p>
-    <div class="results-grid">
-      <div class="result-card">
-        <div class="result-stat">½ lb</div>
-        <div class="result-label">Lost Per Day — Women</div>
-        <div class="result-desc">Consistent, daily fat loss that adds up fast — without starvation or extreme restriction.</div>
-      </div>
-      <div class="result-card">
-        <div class="result-stat">¾ lb</div>
-        <div class="result-label">Lost Per Day — Men</div>
-        <div class="result-desc">Men on the program see even faster results, with drops designed to support male metabolism.</div>
-      </div>
-      <div class="result-card">
-        <div class="result-stat">3×</div>
-        <div class="result-label">Daily Doses</div>
-        <div class="result-desc">Simple routine: drops under the tongue before each meal. No injections. No prescriptions. No fuss.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── TESTIMONIALS ── -->
-<section class="testimonials-section" id="testimonials" aria-labelledby="t-title">
-  <div class="testimonials-inner">
-
-    <div class="testimonials-header">
-      <span class="section-label">From Real Women</span>
-      <h2 class="section-title" id="t-title">Their stories.</h2>
-      <div class="divider" aria-hidden="true"></div>
-      <p class="section-body">Real results from real people — not paid endorsements, not stock photos. Just women who said yes to something different.</p>
-    </div>
-
-    <div class="testimonials-stage">
-      <span class="t-quote-mark" aria-hidden="true">"</span>
-      <div class="t-quotes" aria-live="polite">
-        <div class="t-slide active">
-          <p class="t-text">I have lost 25 pounds and have gained enormous amounts of energy. I didn't think anything would work for me — I was wrong.</p>
-          <p class="t-name">— Ciera</p>
-        </div>
-        <div class="t-slide">
-          <p class="t-text">My night sweats are completely gone. I honestly didn't expect that benefit — this program has genuinely changed my life.</p>
-          <p class="t-name">— Ashley</p>
-        </div>
-        <div class="t-slide">
-          <p class="t-text">This is so much more than weight loss. I am now off 6 medications! I feel like I have gotten my life back.</p>
-          <p class="t-name">— Noha</p>
-        </div>
-        <div class="t-slide">
-          <p class="t-text">22 pounds down and my inflammation is completely gone. I feel better at 50 than I did at 35.</p>
-          <p class="t-name">— Tonya</p>
-        </div>
-        <div class="t-slide">
-          <p class="t-text">These drops give me unbelievable amounts of energy. An absolute game changer — I tell everyone I know about them.</p>
-          <p class="t-name">— Ellie</p>
-        </div>
-      </div>
-      <div class="t-controls">
-        <button class="t-arrow" id="tPrev" aria-label="Previous">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <div class="t-dots" aria-hidden="true">
-          <span class="t-dot active"></span>
-          <span class="t-dot"></span>
-          <span class="t-dot"></span>
-          <span class="t-dot"></span>
-          <span class="t-dot"></span>
-        </div>
-        <button class="t-arrow" id="tNext" aria-label="Next">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
-    </div>
-
-  </div>
-</section>
-
 <!-- ── PURCHASE ── -->
-<section class="purchase-section" id="order" aria-labelledby="purchase-title">
-  <div class="container" style="text-align: center;">
-    <span class="section-label">Ready to Begin?</span>
-    <h2 class="section-title" id="purchase-title" style="margin-left: auto; margin-right: auto; max-width: 500px;">Start your transformation today.</h2>
-    <div class="divider" style="margin-left: auto; margin-right: auto;" aria-hidden="true"></div>
-    <div class="purchase-box">
-      <p class="purchase-eyebrow">Skinny Drops — Full Program</p>
-      <div class="purchase-price">$160</div>
-      <p class="purchase-note">Free US Shipping — Bought in Bulk to Save You Money</p>
-      <ul class="purchase-features" aria-label="What's included">
-        <li><span class="check" aria-hidden="true">✓</span> Slenderiix™ + Xceler8™ drop bottles</li>
-        <li><span class="check" aria-hidden="true">✓</span> Natural, plant-based &amp; hormone-free</li>
-        <li><span class="check" aria-hidden="true">✓</span> Diet guide &amp; recipe support included</li>
-        <li><span class="check" aria-hidden="true">✓</span> Full program booklet</li>
-        <li><span class="check" aria-hidden="true">✓</span> Personal support from Tammy</li>
-        <li><span class="check" aria-hidden="true">✓</span> Free US shipping</li>
-      </ul>
-      <a href="https://venmo.com/u/tammy-melchisedeck" class="purchase-btn" target="_blank" rel="noopener">Order via Venmo</a>
-      <p class="purchase-sub">
-        Questions before ordering?<br>
-        Email Tammy at <a href="mailto:tammymelchisedeck@gmail.com">tammymelchisedeck@gmail.com</a>
-      </p>
+<section class="purchase-section" id="order">
+  <div class="container">
+    <div class="cta-social-proof">
+      <span class="cta-quote-mark">"</span>
+      <p class="cta-quote-text">I am now off 6 medications. I feel like I have gotten my life back.</p>
+      <p class="cta-quote-attr">— Noha, verified customer</p>
+    </div>
+    <div class="cta-strip-inner">
+      <div class="cta-strip-left">
+        <span class="section-label" style="color: var(--gold-light);">Ready to Begin?</span>
+        <h2 class="cta-strip-title">Start your transformation today.</h2>
+        <p class="cta-strip-body">Slenderiix™ + Xceler8™ drops. Natural, plant-based, hormone-free. Includes diet guide, program booklet, and personal support from Tammy. Free US shipping.</p>
+      </div>
+      <div class="cta-strip-right">
+        <div class="cta-price">$160</div>
+        <p class="cta-price-note">Free US Shipping</p>
+        <a href="https://venmo.com/u/tammy-melchisedeck" class="btn-primary" target="_blank" rel="noopener" style="background: var(--gold); font-size: 0.82rem; padding: 1.1rem 2.5rem;">Order via Venmo</a>
+        <p class="cta-contact">Questions? <a href="mailto:tammymelchisedeck@gmail.com">Email Tammy</a></p>
+      </div>
     </div>
   </div>
 </section>
@@ -1464,12 +1491,19 @@
   // Dynamic copyright year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Welcome letter popup — shows once per session
+  // Welcome letter popup — 3s delay on first visit + exit intent
+  function showLetter() {
+    if (sessionStorage.getItem('letterSeen')) return;
+    var overlay = document.getElementById('letterOverlay');
+    if (!overlay || overlay.style.display === 'none') return;
+    overlay.style.display = 'flex';
+    sessionStorage.setItem('letterSeen', '1');
+  }
+
   function closeLetter() {
-    const overlay = document.getElementById('letterOverlay');
+    var overlay = document.getElementById('letterOverlay');
     overlay.classList.add('hidden');
     setTimeout(function() { overlay.style.display = 'none'; }, 400);
-    sessionStorage.setItem('letterSeen', '1');
   }
 
   // Close on backdrop click
@@ -1482,13 +1516,46 @@
     if (e.key === 'Escape') closeLetter();
   });
 
-  // Only show if not already seen this session
   if (sessionStorage.getItem('letterSeen')) {
-    const overlay = document.getElementById('letterOverlay');
-    overlay.style.display = 'none';
+    // Already seen — hide immediately, no flash
+    var ol = document.getElementById('letterOverlay');
+    if (ol) { ol.style.display = 'none'; }
+  } else {
+    // Hide initially so it doesn't flash on load
+    var ol = document.getElementById('letterOverlay');
+    if (ol) ol.style.display = 'none';
+
+    // Show after 3 seconds
+    var letterTimer = setTimeout(showLetter, 3000);
+
+    // Exit intent — mouse moving toward top of browser (tab switching)
+    document.addEventListener('mouseleave', function onExit(e) {
+      if (e.clientY <= 10) {
+        clearTimeout(letterTimer);
+        showLetter();
+        document.removeEventListener('mouseleave', onExit);
+      }
+    });
   }
 
-  // Mobile nav
+  // Active nav state on scroll
+  (function() {
+    var sections = document.querySelectorAll('section[id], div[id="order"]');
+    var navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          navLinks.forEach(function(link) {
+            link.classList.remove('nav-active');
+            if (link.getAttribute('href') === '#' + entry.target.id) {
+              link.classList.add('nav-active');
+            }
+          });
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    sections.forEach(function(s) { observer.observe(s); });
+  })();
   function toggleNav() {
     document.getElementById('mobileNav').classList.toggle('open');
   }
@@ -1527,22 +1594,24 @@
 
   // Email form with basic feedback
   function handleEmailSubmit(e) {
-    // If Formspree is configured, let it submit normally.
-    // If the action still has YOUR_FORM_ID, give a helpful message.
-    const action = e.target.action;
+    var btn = e.target.querySelector('button');
+    var original = btn.textContent;
+    var action = e.target.action;
     if (action.includes('YOUR_FORM_ID')) {
       e.preventDefault();
-      const btn = e.target.querySelector('button');
-      const original = btn.textContent;
-      btn.textContent = 'Almost there! (Form not yet connected)';
-      btn.style.background = '#7A8C72';
+      btn.textContent = 'Almost there!';
+      btn.style.opacity = '0.7';
+      btn.disabled = true;
       setTimeout(function() {
         btn.textContent = original;
-        btn.style.background = '';
+        btn.style.opacity = '';
+        btn.disabled = false;
         e.target.reset();
-      }, 3500);
-  }
-  // If Formspree is real, it will redirect/handle normally.
+      }, 3000);
+    } else {
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+    }
   }
 
   // ── CHAT BUBBLE ──

@@ -462,12 +462,8 @@
       .then(function(r) { return r.json(); })
       .then(function(d) {
         if (d.ok) {
-          document.getElementById('loginScreen').style.display = 'none';
-          document.getElementById('adminShell').style.display = 'flex';
-          sessionStart = Date.now();
-          startSessionTimer();
-          loadTestimonials();
-          loadOrderBadge();
+          sessionStorage.setItem('tmmAdminAuth', '1');
+          showAdminShell();
         } else {
           document.getElementById('loginError').style.display = 'block';
           btn.textContent = 'Sign In'; btn.disabled = false;
@@ -480,7 +476,17 @@
       });
   }
 
+  function showAdminShell() {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminShell').style.display = 'flex';
+    sessionStart = Date.now();
+    startSessionTimer();
+    loadTestimonials();
+    loadOrderBadge();
+  }
+
   function doLogout() {
+    sessionStorage.removeItem('tmmAdminAuth');
     clearInterval(sessionTimeout);
     document.getElementById('loginScreen').style.display = 'flex';
     document.getElementById('adminShell').style.display = 'none';
@@ -488,6 +494,12 @@
     document.getElementById('loginBtn').textContent = 'Sign In';
     document.getElementById('loginBtn').disabled = false;
     document.getElementById('loginError').style.display = 'none';
+  }
+
+  // Auto-login if session is still active
+  if (sessionStorage.getItem('tmmAdminAuth')) {
+    sessionStart = Date.now();
+    showAdminShell();
   }
 
   function startSessionTimer() {
@@ -506,6 +518,7 @@
       // Log out when time is up
       if (remaining <= 0 && autoLogout) {
         clearInterval(sessionTimeout);
+        sessionStorage.removeItem('tmmAdminAuth');
         toast('Session expired — please log in again', 'error');
         setTimeout(doLogout, 2000);
       }
@@ -748,7 +761,7 @@
                 '<input type="file" accept="image/*" style="display:none" onchange="uploadProductImage(\'' + p.id + '\',\'feature\',this)">' +
               '</label>' +
             '</div>' +
-            '<p class="field-hint">Shown in the Skinny Drops section — portrait works best</p>' +
+            '<p class="field-hint">Shown in the Skinny Drops section — portrait works best, 320×400px ideal</p>' +
             '<img id="pfeatureimgpreview-' + p.id + '" class="img-preview" ' + (p.feature_image_path ? 'src="' + p.feature_image_path + '" style="display:block"' : '') + ' onerror="this.style.display=\'none\'">' +
             '<div id="uprog-' + p.id + '-feature" style="display:none;font-size:0.75rem;color:var(--gold);margin-top:0.35rem;align-items:center;gap:0.4rem"><div class="spinner" style="width:14px;height:14px;border-width:1.5px"></div> Uploading…</div>' +
           '</div>' +

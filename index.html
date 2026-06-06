@@ -440,32 +440,44 @@
     color: var(--gold);
   }
 
-  /* Name selector pills */
-  .testimonial-names {
+  /* Arrow navigation */
+  .testimonial-arrows {
     display: flex;
+    align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.65rem;
-    margin-top: 3.5rem;
+    gap: 2rem;
+    margin-top: 3rem;
     padding-top: 2.5rem;
     border-top: 1px solid rgba(255,255,255,0.08);
   }
-  .testimonial-name-btn {
+  .testimonial-arrow {
     background: none;
-    border: 1px solid rgba(255,255,255,0.12);
-    color: var(--ink-light);
-    font-family: var(--sans);
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 0.55rem 1.35rem;
-    border-radius: 2px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    color: var(--gold-light);
     transition: all 0.2s;
+    flex-shrink: 0;
   }
-  .testimonial-name-btn:hover { border-color: var(--gold-light); color: var(--gold-light); }
-  .testimonial-name-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(184,154,106,0.08); }
+  .testimonial-arrow:hover { border-color: var(--gold); color: var(--gold); }
+  .testimonial-dots {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .testimonial-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    transition: all 0.3s;
+  }
+  .testimonial-dot.active { background: var(--gold); width: 20px; border-radius: 3px; }
 
   /* ── PURCHASE ── */
   .purchase-section { background: var(--cream); }
@@ -1131,12 +1143,20 @@
       </div>
     </div>
 
-    <div class="testimonial-names" role="tablist" aria-label="Select a testimonial">
-      <button class="testimonial-name-btn active" onclick="showTestimonial(0)" role="tab" aria-selected="true">Ciera</button>
-      <button class="testimonial-name-btn" onclick="showTestimonial(1)" role="tab" aria-selected="false">Ashley</button>
-      <button class="testimonial-name-btn" onclick="showTestimonial(2)" role="tab" aria-selected="false">Noha</button>
-      <button class="testimonial-name-btn" onclick="showTestimonial(3)" role="tab" aria-selected="false">Tonya</button>
-      <button class="testimonial-name-btn" onclick="showTestimonial(4)" role="tab" aria-selected="false">Ellie</button>
+    <div class="testimonial-arrows">
+      <button class="testimonial-arrow" onclick="prevTestimonial()" aria-label="Previous testimonial">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="testimonial-dots" aria-hidden="true">
+        <span class="testimonial-dot active"></span>
+        <span class="testimonial-dot"></span>
+        <span class="testimonial-dot"></span>
+        <span class="testimonial-dot"></span>
+        <span class="testimonial-dot"></span>
+      </div>
+      <button class="testimonial-arrow" onclick="nextTestimonial()" aria-label="Next testimonial">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
     </div>
   </div>
 </section>
@@ -1223,6 +1243,38 @@
 </footer>
 
 <script>
+  // Testimonial switcher
+  var tTotal = 5;
+  var tCurrent = 0;
+  var tTimer = null;
+
+  function showTestimonial(idx) {
+    document.querySelectorAll('.testimonial-slide').forEach(function(s, i) {
+      s.classList.toggle('active', i === idx);
+    });
+    document.querySelectorAll('.testimonial-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === idx);
+    });
+    tCurrent = idx;
+    resetTimer();
+  }
+
+  function nextTestimonial() {
+    showTestimonial((tCurrent + 1) % tTotal);
+  }
+
+  function prevTestimonial() {
+    showTestimonial((tCurrent - 1 + tTotal) % tTotal);
+  }
+
+  function resetTimer() {
+    clearInterval(tTimer);
+    tTimer = setInterval(nextTestimonial, 5000);
+  }
+
+  // Start auto-rotate
+  resetTimer();
+
   // Dynamic copyright year
   document.getElementById('year').textContent = new Date().getFullYear();
 

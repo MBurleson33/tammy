@@ -287,6 +287,10 @@
           <h2 class="panel-title">Products</h2>
           <p class="panel-subtitle">Click any product to edit its details and price</p>
         </div>
+        <button class="btn btn-gold" onclick="openAddProduct()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Product
+        </button>
       </div>
       <div id="productsList">
         <div class="loading-state"><div class="spinner"></div> Loading…</div>
@@ -417,6 +421,48 @@
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeModal('deleteModal')">Keep It</button>
       <button class="btn btn-danger" id="confirmDeleteBtn">Yes, Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD PRODUCT MODAL -->
+<div class="modal-overlay" id="addProductModal">
+  <div class="modal" style="max-width:560px">
+    <h3 class="modal-title">Add New Product</h3>
+    <div class="product-grid-2">
+      <div class="field-group">
+        <label class="edit-label">Product Name *</label>
+        <input type="text" class="edit-field" id="npName" placeholder="e.g. AbVantage">
+      </div>
+      <div class="field-group">
+        <label class="edit-label">Price ($) *</label>
+        <input type="number" class="edit-field" id="npPrice" placeholder="e.g. 58">
+        <p class="field-hint">Whole dollars only</p>
+      </div>
+    </div>
+    <div class="field-group">
+      <label class="edit-label">Category Tag</label>
+      <input type="text" class="edit-field" id="npTag" placeholder="e.g. Weight Loss, Gut Health, Bundle">
+    </div>
+    <div class="field-group">
+      <label class="edit-label">Short Description</label>
+      <input type="text" class="edit-field" id="npSubtitle" placeholder="e.g. Thermogenic Hip &amp; Waist Reducer">
+    </div>
+    <div class="field-group">
+      <label class="edit-label">Full Description</label>
+      <textarea class="edit-field" id="npDesc" style="min-height:90px" placeholder="Describe the product and its benefits..."></textarea>
+    </div>
+    <div class="field-group">
+      <label class="edit-label">Show on Site?</label>
+      <div class="toggle-wrap" style="margin-top:0.25rem">
+        <label class="toggle"><input type="checkbox" id="npActive" checked><span class="toggle-slider"></span></label>
+        <span class="toggle-label">Yes — show this product immediately</span>
+      </div>
+    </div>
+    <p class="field-hint" style="margin-top:0.5rem">You can add images after saving by clicking the product to expand it.</p>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('addProductModal')">Cancel</button>
+      <button class="btn btn-gold" onclick="saveNewProduct()">Add Product</button>
     </div>
   </div>
 </div>
@@ -774,8 +820,48 @@
     }).join('');
   }
 
+  function openAddProduct() {
+    ['npName','npPrice','npTag','npSubtitle','npDesc'].forEach(function(id) {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('npActive').checked = true;
+    openModal('addProductModal');
+    setTimeout(function() { document.getElementById('npName').focus(); }, 100);
+  }
+
+  function saveNewProduct() {
+    var name  = document.getElementById('npName').value.trim();
+    var price = parseInt(document.getElementById('npPrice').value) || 0;
+    if (!name) { toast('Product name is required', 'error'); return; }
+    if (!price) { toast('Please enter a price', 'error'); return; }
+
+    // Get max sort_order from current list
+    fetch(db('products') + '?select=sort_order&order=sort_order.desc&limit=1', { headers: headers() })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var maxOrder = data.length ? (data[0].sort_order || 0) : 0;
+        var newProduct = {
+          name:        name,
+          price:       price,
+          tag:         document.getElementById('npTag').value.trim(),
+          subtitle:    document.getElementById('npSubtitle').value.trim(),
+          description: document.getElementById('npDesc').value.trim(),
+          active:      document.getElementById('npActive').checked,
+          sort_order:  maxOrder + 1
+        };
+        return fetch(db('products'), { method: 'POST', headers: headers(), body: JSON.stringify(newProduct) });
+      })
+      .then(function(r) {
+        if (r.ok) {
+          closeModal('addProductModal');
+          loadProducts();
+          toast('✓ Product added! Click it to upload images.', 'success');
+        } else { toast('Save failed — please try again', 'error'); }
+      })
+      .catch(function() { toast('Something went wrong', 'error'); });
+  }
+
   function toggleProductCard(id) {
-    var body = document.getElementById('pb-' + id);
     var chev = document.getElementById('chev-' + id);
     body.classList.toggle('open');
     if (chev) chev.classList.toggle('open', body.classList.contains('open'));

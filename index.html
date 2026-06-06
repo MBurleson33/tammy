@@ -290,8 +290,20 @@
   /* ── DROPS SECTION ── */
   .drops-section { background: var(--white); }
   .drops-grid {
-    max-width: 780px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
     margin-top: 3.5rem;
+  }
+  .drops-left {
+    display: flex;
+    flex-direction: column;
+  }
+  .drops-left .btn-primary {
+    margin-top: auto;
+    padding-top: 2.25rem;
+    align-self: flex-start;
   }
 
   /* FAQ */
@@ -855,6 +867,7 @@
     .hero-copy {
       padding: 2.5rem 1.75rem 3rem;
     }
+    .drops-grid,
     .about-grid {
       grid-template-columns: 1fr;
       gap: 2.5rem;
@@ -955,76 +968,77 @@
   <div class="container">
     <div class="drops-grid">
 
-      <div>
+      <!-- Left: intro copy + order button -->
+      <div class="drops-left">
         <span class="section-label">Slenderiiz™ by Partner.Co</span>
         <h2 class="section-title" id="drops-title">What are the<br>Skinny Drops?</h2>
         <div class="divider" aria-hidden="true"></div>
         <p class="section-body">
           Slenderiix™ and Xceler8™ are two unique drop blends you take before meals — naturally suppressing appetite, balancing hormones, supporting thyroid health, and accelerating fat loss. I've been buying in bulk to pass the savings directly on to you.
         </p>
-
-        <div class="faq-list" role="list" aria-label="Frequently asked questions">
-
-          <details open>
-            <summary class="faq-q">
-              How do the drops work?
-              <span class="faq-toggle" aria-hidden="true">−</span>
-            </summary>
-            <div class="faq-body">
-              Three drops under your tongue before each meal — three times a day. They suppress appetite, balance hormones, and support thyroid, digestion, and blood sugar levels. Women typically lose ½ lb per day; men around ¾ lb. All natural, plant-based, and hormone-free.
-              <br><br><a href="https://vimeo.com/855740553" target="_blank" rel="noopener">Watch the full video →</a>
-            </div>
-          </details>
-
-          <details>
-            <summary class="faq-q">
-              Do you have diet &amp; recipe support?
-              <span class="faq-toggle" aria-hidden="true">+</span>
-            </summary>
-            <div class="faq-body">
-              Yes! Use this guide to choose the right ingredients and accelerate your weight management goals.
-              <br><br><a href="https://file.brd.so/TgxOWudb05ifxQCcvBqNx75Glk1K.pdf" target="_blank" rel="noopener">Download the food guide →</a>
-            </div>
-          </details>
-
-          <details>
-            <summary class="faq-q">
-              What results can I expect?
-              <span class="faq-toggle" aria-hidden="true">+</span>
-            </summary>
-            <div class="faq-body">
-              Safe, effective, and long-lasting results. Slenderiiz is the only natural weight management system of its kind shown to improve results beyond diet and exercise alone. Check out the before &amp; after photos.
-              <br><br><a href="https://brd.so/1e8fYWlq7cdtSaffv7W9VyUWNpR8/ingredients-list.pdf" target="_blank" rel="noopener">View before &amp; after results →</a>
-            </div>
-          </details>
-
-          <details>
-            <summary class="faq-q">
-              What are the ingredients?
-              <span class="faq-toggle" aria-hidden="true">+</span>
-            </summary>
-            <div class="faq-body">
-              Here is the complete ingredient list for each bottle, with an explanation of what each ingredient does in the body.
-              <br><br><a href="https://file.brd.so/KE9ROqr6hRGIKR2Xo1b1el8D8fgK.pdf" target="_blank" rel="noopener">Read the full ingredient list →</a>
-            </div>
-          </details>
-
-          <details>
-            <summary class="faq-q">
-              Where can I read the full program guide?
-              <span class="faq-toggle" aria-hidden="true">+</span>
-            </summary>
-            <div class="faq-body">
-              This booklet is your guide to staying the course. It includes the approved food list, supporting supplements, and pro tips for success.
-              <br><br><a href="https://0c341c57-3f9c-4425-9b20-0062a219b9d2.filesusr.com/ugd/a68862_a465aa0c489d4bdfbc754537729e0724.pdf" target="_blank" rel="noopener">Download the program booklet →</a>
-            </div>
-          </details>
-
-        </div>
-
         <div style="margin-top: 2.25rem;">
           <a href="https://venmo.com/u/tammy-melchisedeck" class="btn-primary" target="_blank" rel="noopener">Order Now — $160 + Free Shipping</a>
         </div>
+      </div>
+
+      <!-- Right: FAQs -->
+      <div class="faq-list" role="list" aria-label="Frequently asked questions">
+
+        <details open>
+          <summary class="faq-q">
+            How do the drops work?
+            <span class="faq-toggle" aria-hidden="true">−</span>
+          </summary>
+          <div class="faq-body">
+            Three drops under your tongue before each meal — three times a day. They suppress appetite, balance hormones, and support thyroid, digestion, and blood sugar levels. Women typically lose ½ lb per day; men around ¾ lb. All natural, plant-based, and hormone-free.
+            <br><br><a href="https://vimeo.com/855740553" target="_blank" rel="noopener">Watch the full video →</a>
+          </div>
+        </details>
+
+        <details>
+          <summary class="faq-q">
+            Do you have diet &amp; recipe support?
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-body">
+            Yes! Use this guide to choose the right ingredients and accelerate your weight management goals.
+            <br><br><a href="https://file.brd.so/TgxOWudb05ifxQCcvBqNx75Glk1K.pdf" target="_blank" rel="noopener">Download the food guide →</a>
+          </div>
+        </details>
+
+        <details>
+          <summary class="faq-q">
+            What results can I expect?
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-body">
+            Safe, effective, and long-lasting results. Slenderiiz is the only natural weight management system of its kind shown to improve results beyond diet and exercise alone. Check out the before &amp; after photos.
+            <br><br><a href="https://brd.so/1e8fYWlq7cdtSaffv7W9VyUWNpR8/ingredients-list.pdf" target="_blank" rel="noopener">View before &amp; after results →</a>
+          </div>
+        </details>
+
+        <details>
+          <summary class="faq-q">
+            What are the ingredients?
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-body">
+            Here is the complete ingredient list for each bottle, with an explanation of what each ingredient does in the body.
+            <br><br><a href="https://file.brd.so/KE9ROqr6hRGIKR2Xo1b1el8D8fgK.pdf" target="_blank" rel="noopener">Read the full ingredient list →</a>
+          </div>
+        </details>
+
+        <details>
+          <summary class="faq-q">
+            Where can I read the full program guide?
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-body">
+            This booklet is your guide to staying the course. It includes the approved food list, supporting supplements, and pro tips for success.
+            <br><br><a href="https://0c341c57-3f9c-4425-9b20-0062a219b9d2.filesusr.com/ugd/a68862_a465aa0c489d4bdfbc754537729e0724.pdf" target="_blank" rel="noopener">Download the program booklet →</a>
+          </div>
+        </details>
+
       </div>
 
     </div>

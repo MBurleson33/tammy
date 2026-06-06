@@ -746,7 +746,6 @@
   // ── CONFIG ──
   var SUPABASE_URL  = 'https://nzqdmsbxwghkqowajmvs.supabase.co';
   var SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cWRtc2J4d2doa3Fvd2FqbXZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3Njk0MjQsImV4cCI6MjA5NjM0NTQyNH0.aqdvA_ytnkeSvg4hmLqC1zces0aIFZcxkHrrN7k7atk';
-  var ADMIN_PASS    = 'tmm2026';
   var API           = SUPABASE_URL + '/rest/v1';
 
   function headers(extra) {
@@ -764,15 +763,35 @@
 
   // ── AUTH ──
   function doLogin() {
-    var pw = document.getElementById('loginPassword').value;
-    if (pw === ADMIN_PASS) {
-      document.getElementById('loginScreen').style.display = 'none';
-      document.getElementById('adminShell').style.display = 'flex';
-      loadTestimonials();
-      loadOrderBadge();
-    } else {
+    var pw  = document.getElementById('loginPassword').value;
+    var btn = document.querySelector('.login-btn');
+    btn.textContent = 'Signing in…';
+    btn.disabled = true;
+
+    fetch('/api/admin-auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.ok) {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('adminShell').style.display = 'flex';
+        loadTestimonials();
+        loadOrderBadge();
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+        btn.textContent = 'Sign In';
+        btn.disabled = false;
+      }
+    })
+    .catch(function() {
+      document.getElementById('loginError').textContent = 'Connection error. Please try again.';
       document.getElementById('loginError').style.display = 'block';
-    }
+      btn.textContent = 'Sign In';
+      btn.disabled = false;
+    });
   }
 
   function doLogout() {

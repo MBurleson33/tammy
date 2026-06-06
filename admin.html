@@ -466,19 +466,6 @@
       <img id="npImgPreview" class="img-preview" onerror="this.style.display='none'">
     </div>
     <div class="field-group">
-      <label class="edit-label">Feature Image <span style="font-size:0.7rem;color:var(--ink-light);font-weight:400;text-transform:none;letter-spacing:0">(320×400px, portrait — Drops section only)</span></label>
-      <div style="display:flex;gap:0.5rem;align-items:center">
-        <input type="text" class="edit-field" id="npFeatureImg" placeholder="images/feature.webp" style="margin-bottom:0" oninput="npPreview('npFeatureImg','npFeatureImgPreview')">
-        <label class="btn btn-outline btn-sm" style="cursor:pointer;white-space:nowrap;flex-shrink:0">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
-          Upload
-          <input type="file" accept="image/*" style="display:none" onchange="npUpload('feature',this,'npFeatureImg','npFeatureImgPreview','npUploadProgress2')">
-        </label>
-      </div>
-      <div id="npUploadProgress2" style="display:none;font-size:0.75rem;color:var(--gold);margin-top:0.35rem;align-items:center;gap:0.4rem"><div class="spinner" style="width:14px;height:14px;border-width:1.5px"></div> Uploading…</div>
-      <img id="npFeatureImgPreview" class="img-preview" onerror="this.style.display='none'">
-    </div>
-    <div class="field-group">
       <label class="edit-label">Show on Site?</label>
       <div class="toggle-wrap" style="margin-top:0.25rem">
         <label class="toggle"><input type="checkbox" id="npActive" checked><span class="toggle-slider"></span></label>
@@ -846,12 +833,11 @@
   }
 
   function openAddProduct() {
-    ['npName','npPrice','npTag','npSubtitle','npDesc','npImg','npFeatureImg'].forEach(function(id) {
+    ['npName','npPrice','npTag','npSubtitle','npDesc','npImg'].forEach(function(id) {
       document.getElementById(id).value = '';
     });
     document.getElementById('npActive').checked = true;
     document.getElementById('npImgPreview').style.display = 'none';
-    document.getElementById('npFeatureImgPreview').style.display = 'none';
     document.getElementById('npSaveBtn').textContent = 'Add Product';
     document.getElementById('npSaveBtn').disabled = false;
     openModal('addProductModal');
@@ -908,7 +894,6 @@
           subtitle:           document.getElementById('npSubtitle').value.trim(),
           description:        document.getElementById('npDesc').value.trim(),
           image_path:         document.getElementById('npImg').value.trim(),
-          feature_image_path: document.getElementById('npFeatureImg').value.trim(),
           active:             document.getElementById('npActive').checked,
           sort_order:         maxOrder + 1
         };

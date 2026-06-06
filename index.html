@@ -397,14 +397,23 @@
   .testimonials-section .divider { background: var(--gold-light); }
   .testimonials-section .section-body { color: var(--sand); }
 
+  .testimonials-layout {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .testimonials-header { padding-right: 1rem; }
+  .testimonials-right { border-left: 1px solid rgba(255,255,255,0.08); padding-left: 5rem; }
+
   .testimonial-stage {
-    margin-top: 4rem;
-    text-align: center;
+    margin-bottom: 2rem;
+    text-align: left;
     position: relative;
-    min-height: 220px;
+    min-height: 200px;
   }
   .testimonial-big-quote {
-    font-size: 8rem;
+    font-size: 6rem;
     font-family: var(--serif);
     color: var(--gold);
     opacity: 0.15;
@@ -424,13 +433,13 @@
   }
   .testimonial-text {
     font-family: var(--serif);
-    font-size: clamp(1.35rem, 2.5vw, 2rem);
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
     font-style: italic;
     font-weight: 300;
     color: var(--cream);
-    line-height: 1.65;
-    max-width: 780px;
-    margin: 0 auto 2rem;
+    line-height: 1.7;
+    max-width: 100%;
+    margin: 0 0 1.5rem;
   }
   .testimonial-attr {
     font-size: 0.72rem;
@@ -444,10 +453,8 @@
   .testimonial-arrows {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 3rem;
-    padding-top: 2.5rem;
+    gap: 1.5rem;
+    padding-top: 2rem;
     border-top: 1px solid rgba(255,255,255,0.08);
   }
   .testimonial-arrow {
@@ -909,6 +916,8 @@
     }
     .about-quote-block { display: none; }
     .results-grid { grid-template-columns: 1fr; }
+    .testimonials-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .testimonials-right { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 3rem; }
     .testimonial-wide { grid-column: auto; max-width: 100%; }
     .purchase-box { padding: 2.5rem 1.75rem; }
     nav { padding: 0 1.25rem; }
@@ -1111,52 +1120,61 @@
 <!-- ── TESTIMONIALS ── -->
 <section class="testimonials-section" id="testimonials" aria-labelledby="testimonials-title">
   <div class="container">
-    <span class="section-label">From Real Women</span>
-    <h2 class="section-title" id="testimonials-title">Their stories.</h2>
-    <div class="divider" aria-hidden="true"></div>
-    <p class="section-body">
-      Real results from real people — not paid endorsements, not stock photos. Just women who said yes to something different.
-    </p>
+    <div class="testimonials-layout">
 
-    <div class="testimonial-stage" aria-live="polite">
-      <span class="testimonial-big-quote" aria-hidden="true">"</span>
+      <!-- Left: header copy -->
+      <div class="testimonials-header">
+        <span class="section-label">From Real Women</span>
+        <h2 class="section-title" id="testimonials-title">Their stories.</h2>
+        <div class="divider" aria-hidden="true"></div>
+        <p class="section-body">
+          Real results from real people — not paid endorsements, not stock photos. Just women who said yes to something different.
+        </p>
+      </div>
 
-      <div class="testimonial-slide active" id="t-0">
-        <p class="testimonial-text">I have lost 25 pounds and have gained enormous amounts of energy. I didn't think anything would work for me — I was wrong.</p>
-        <p class="testimonial-attr">— Ciera</p>
-      </div>
-      <div class="testimonial-slide" id="t-1">
-        <p class="testimonial-text">My night sweats are completely gone. I honestly didn't expect that benefit — this program has genuinely changed my life.</p>
-        <p class="testimonial-attr">— Ashley</p>
-      </div>
-      <div class="testimonial-slide" id="t-2">
-        <p class="testimonial-text">This is so much more than weight loss. I am now off 6 medications! I feel like I have gotten my life back.</p>
-        <p class="testimonial-attr">— Noha</p>
-      </div>
-      <div class="testimonial-slide" id="t-3">
-        <p class="testimonial-text">22 pounds down and my inflammation is completely gone. I feel better at 50 than I did at 35.</p>
-        <p class="testimonial-attr">— Tonya</p>
-      </div>
-      <div class="testimonial-slide" id="t-4">
-        <p class="testimonial-text">These drops give me unbelievable amounts of energy. An absolute game changer — I tell everyone I know about them.</p>
-        <p class="testimonial-attr">— Ellie</p>
-      </div>
-    </div>
+      <!-- Right: rotating quote + arrows -->
+      <div class="testimonials-right">
+        <div class="testimonial-stage" aria-live="polite">
+          <span class="testimonial-big-quote" aria-hidden="true">"</span>
+          <div class="testimonial-slide active" id="t-0">
+            <p class="testimonial-text">I have lost 25 pounds and have gained enormous amounts of energy. I didn't think anything would work for me — I was wrong.</p>
+            <p class="testimonial-attr">— Ciera</p>
+          </div>
+          <div class="testimonial-slide" id="t-1">
+            <p class="testimonial-text">My night sweats are completely gone. I honestly didn't expect that benefit — this program has genuinely changed my life.</p>
+            <p class="testimonial-attr">— Ashley</p>
+          </div>
+          <div class="testimonial-slide" id="t-2">
+            <p class="testimonial-text">This is so much more than weight loss. I am now off 6 medications! I feel like I have gotten my life back.</p>
+            <p class="testimonial-attr">— Noha</p>
+          </div>
+          <div class="testimonial-slide" id="t-3">
+            <p class="testimonial-text">22 pounds down and my inflammation is completely gone. I feel better at 50 than I did at 35.</p>
+            <p class="testimonial-attr">— Tonya</p>
+          </div>
+          <div class="testimonial-slide" id="t-4">
+            <p class="testimonial-text">These drops give me unbelievable amounts of energy. An absolute game changer — I tell everyone I know about them.</p>
+            <p class="testimonial-attr">— Ellie</p>
+          </div>
+        </div>
 
-    <div class="testimonial-arrows">
-      <button class="testimonial-arrow" onclick="prevTestimonial()" aria-label="Previous testimonial">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <div class="testimonial-dots" aria-hidden="true">
-        <span class="testimonial-dot active"></span>
-        <span class="testimonial-dot"></span>
-        <span class="testimonial-dot"></span>
-        <span class="testimonial-dot"></span>
-        <span class="testimonial-dot"></span>
+        <div class="testimonial-arrows">
+          <button class="testimonial-arrow" onclick="prevTestimonial()" aria-label="Previous testimonial">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="testimonial-dots" aria-hidden="true">
+            <span class="testimonial-dot active"></span>
+            <span class="testimonial-dot"></span>
+            <span class="testimonial-dot"></span>
+            <span class="testimonial-dot"></span>
+            <span class="testimonial-dot"></span>
+          </div>
+          <button class="testimonial-arrow" onclick="nextTestimonial()" aria-label="Next testimonial">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
       </div>
-      <button class="testimonial-arrow" onclick="nextTestimonial()" aria-label="Next testimonial">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
+
     </div>
   </div>
 </section>

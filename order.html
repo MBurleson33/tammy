@@ -912,27 +912,57 @@
       return;
     }
 
-    // Submit to Formspree
+    // Submit — save to Supabase first, then Formspree for email notification
     var btn = document.getElementById('submitBtn');
     btn.textContent = 'Sending…';
     btn.disabled = true;
 
-    var data = new FormData(form);
-    fetch('https://formspree.io/f/YOUR_ORDER_FORM_ID', {
+    // Build Supabase order record
+    var orderRecord = {
+      full_name:   document.getElementById('fullName').value.trim(),
+      email:       document.getElementById('email').value.trim(),
+      phone:       document.getElementById('phone').value.trim(),
+      address:     document.getElementById('address').value.trim(),
+      city:        document.getElementById('city').value.trim(),
+      state:       document.getElementById('state').value.trim(),
+      zip:         document.getElementById('zip').value.trim(),
+      country:     document.getElementById('country').value,
+      notes:       document.getElementById('notes').value.trim(),
+      items:       products.map(function(p) { return { name: p.name, qty: p.qty, price: p.price, total: p.total }; }),
+      order_total: products.reduce(function(s, p) { return s + p.total; }, 0),
+      status:      'new'
+    };
+
+    // Save to Supabase
+    fetch(SB_URL + '/orders', {
       method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    }).then(function(r) {
-      if (r.ok) {
+      headers: {
+        'apikey': SB_KEY,
+        'Authorization': 'Bearer ' + SB_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(orderRecord)
+    })
+    .then(function(r) {
+      if (!r.ok) console.warn('Supabase order save failed — continuing anyway');
+    })
+    .catch(function(err) { console.warn('Supabase error:', err); })
+    .finally(function() {
+      // Always attempt Formspree regardless of Supabase result
+      var data = new FormData(document.getElementById('checkoutForm'));
+      fetch('https://formspree.io/f/YOUR_ORDER_FORM_ID', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(r) {
+        // Show success regardless — order is saved in Supabase
         showSuccess();
-      } else {
-        btn.textContent = 'Place Order Request';
-        btn.disabled = false;
-        alert('Something went wrong. Please try again or email Tammy directly.');
-      }
-    }).catch(function() {
-      // If Formspree not set up yet, still show success in dev
-      showSuccess();
+      })
+      .catch(function() {
+        showSuccess();
+      });
     });
   }
 

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Tammy – Tammy Melchisedeck</title>
+<meta name="description" content="An Emmy-winning media personality turned wellness entrepreneur, Tammy Maltby Melchisedeck inspires women to take their health, faith, and purpose seriously.">
+<meta property="og:title" content="About Tammy – Tammy Melchisedeck">
+<meta property="og:description" content="An Emmy-winning media personality turned wellness entrepreneur, Tammy Maltby Melchisedeck inspires women to take their health, faith, and purpose seriously.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF7F2;
+    --linen: #F2EDE4;
+    --sand: #E8DFD0;
+    --gold: #B89A6A;
+    --gold-light: #D4B896;
+    --ink: #2C2520;
+    --ink-mid: #5C4F44;
+    --ink-light: #8C7E72;
+    --sage: #7A8C72;
+    --sage-light: #C4D0BD;
+    --white: #FFFFFF;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--sand);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+  }
+  .nav-name {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a.active { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold) !important;
+    color: var(--white) !important;
+    padding: 0.55rem 1.35rem;
+    border-radius: 2px;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--ink) !important; color: var(--white) !important; }
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--ink);
+    transition: all 0.25s;
+  }
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 68px;
+    left: 0; right: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--sand);
+    padding: 1.5rem 2rem;
+    z-index: 99;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    text-decoration: none;
+  }
+  .mobile-nav .nav-cta {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    border-radius: 2px;
+    text-align: center;
+  }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    background: var(--linen);
+    padding: 5rem 2rem 0;
+    text-align: center;
+    overflow: hidden;
+  }
+  .page-hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .page-hero-title {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 3.5rem;
+  }
+  .page-hero-img {
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    margin: 0 auto;
+    border-radius: 2px 2px 0 0;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .about-content {
+    background: var(--white);
+    padding: 5rem 2rem;
+  }
+  .container { max-width: 1080px; margin: 0 auto; }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  /* Credentials sidebar */
+  .credentials {
+    position: sticky;
+    top: 88px;
+  }
+  .credentials-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+  .credential-item {
+    padding: 1.1rem 0;
+    border-top: 1px solid var(--sand);
+  }
+  .credential-item:last-child { border-bottom: 1px solid var(--sand); }
+  .credential-title {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+  .credential-sub {
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    line-height: 1.5;
+  }
+  .social-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-top: 2rem;
+  }
+  .social-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.73rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    text-decoration: none;
+    border: 1px solid var(--sand);
+    padding: 0.6rem 1.1rem;
+    border-radius: 2px;
+    transition: all 0.2s;
+    width: fit-content;
+  }
+  .social-icon-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Bio */
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 1.5rem 0;
+  }
+  .bio-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .bio-body p {
+    font-size: 1.05rem;
+    color: var(--ink-mid);
+    line-height: 1.9;
+    margin-bottom: 1.4rem;
+  }
+  .bio-body p:last-child { margin-bottom: 0; }
+  .bio-body em { font-style: italic; color: var(--ink); }
+  .bio-pullquote {
+    border-left: 3px solid var(--gold);
+    margin: 2.5rem 0;
+    padding: 0.5rem 0 0.5rem 1.75rem;
+  }
+  .bio-pullquote p {
+    font-family: var(--serif);
+    font-size: 1.4rem !important;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink) !important;
+    line-height: 1.55 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* ── CTA STRIP ── */
+  .cta-strip {
+    background: var(--ink);
+    padding: 4.5rem 2rem;
+    text-align: center;
+  }
+  .cta-strip-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .cta-strip-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+  .cta-strip-body {
+    font-size: 1rem;
+    color: var(--sand);
+    line-height: 1.75;
+    max-width: 520px;
+    margin: 0 auto 2.25rem;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--cream); color: var(--ink); transform: translateY(-1px); }
+
+  /* ── EMAIL ── */
+  .email-section {
+    background: var(--sage);
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+  .email-section .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+  .email-section .section-body {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.78);
+    line-height: 1.75;
+    max-width: 480px;
+    margin: 0 auto 2.25rem;
+  }
+  .email-form {
+    display: flex;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+  .email-form input {
+    flex: 1;
+    padding: 0.9rem 1.25rem;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    border: none;
+    outline: none;
+    background: var(--white);
+    color: var(--ink);
+    border-radius: 2px 0 0 2px;
+    min-width: 0;
+  }
+  .email-form input::placeholder { color: var(--ink-light); }
+  .email-form button {
+    background: var(--ink);
+    color: var(--white);
+    border: none;
+    padding: 0.9rem 1.75rem;
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 0 2px 2px 0;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .email-form button:hover { background: var(--gold); }
+  .email-privacy {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.45);
+    margin-top: 0.85rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+  }
+  .footer-name {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--cream);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+  .footer-email a {
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    text-decoration: none;
+  }
+  .footer-email a:hover { color: var(--gold); }
+  .footer-social {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 1.25rem 0;
+  }
+  .footer-social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sand);
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 0.45rem 1.1rem;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .footer-social-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .footer-divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 1.5rem auto;
+  }
+  .footer-disclaimer {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.22);
+    max-width: 680px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .footer-copy {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.18);
+    margin-top: 1.5rem;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .credentials { position: static; }
+    .social-row { flex-direction: row; flex-wrap: wrap; }
+    nav { padding: 0 1.25rem; }
+    .nav-links { display: none; }
+    .nav-toggle { display: flex; }
+    .page-hero { padding: 3.5rem 1.5rem 0; }
+    .about-content { padding: 3.5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav aria-label="Main navigation">
+  <a href="index.html" class="nav-name">Tammy Melchisedeck</a>
+  <ul class="nav-links" role="list">
+    <li><a href="index.html#drops">The Drops</a></li>
+    <li><a href="index.html#results">Results</a></li>
+    <li><a href="index.html#testimonials">Testimonials</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="https://venmo.com/u/tammy-melchisedeck" class="nav-cta" target="_blank" rel="noopener">Order Now — $160</a></li>
+  </ul>
+  <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+  <a href="index.html#drops" onclick="closeMobileNav()">The Drops</a>
+  <a href="index.html#results" onclick="closeMobileNav()">Results</a>
+  <a href="index.html#testimonials" onclick="closeMobileNav()">Testimonials</a>
+  <a href="about.html" onclick="closeMobileNav()">About</a>
+  <a href="https://venmo.com/u/tammy-melchisedeck" class="nav-cta" target="_blank" rel="noopener">Order Now — $160</a>
+</nav>
+
+<!-- ── PAGE HERO ── -->
+<div class="page-hero">
+  <span class="page-hero-eyebrow">Meet Tammy</span>
+  <h1 class="page-hero-title">Glad to meet you!</h1>
+  <img
+    src="images/RedDressArmsneedretouch.webp"
+    alt="Tammy Maltby Melchisedeck"
+    class="page-hero-img"
+    loading="eager"
+  >
+</div>
+
+<!-- ── ABOUT CONTENT ── -->
+<section class="about-content" aria-labelledby="bio-title">
+  <div class="container">
+    <div class="about-grid">
+
+      <!-- Credentials sidebar -->
+      <aside class="credentials" aria-label="Tammy's credentials">
+        <span class="credentials-label">Background</span>
+        <div class="credential-item">
+          <p class="credential-title">Emmy-Winning Media Personality</p>
+          <p class="credential-sub">Television host, speaker, and author with decades of media experience</p>
+        </div>
+        <div class="credential-item">
+          <p class="credential-title">Wellness Entrepreneur</p>
+          <p class="credential-sub">Rose to the top of a $400 million global wellness company</p>
+        </div>
+        <div class="credential-item">
+          <p class="credential-title">Speaker &amp; Mentor</p>
+          <p class="credential-sub">Has led rooms of thousands and one-on-one conversations with equal warmth</p>
+        </div>
+        <div class="credential-item">
+          <p class="credential-title">Author &amp; Mother</p>
+          <p class="credential-sub">Writing and motherhood woven through every chapter of her story</p>
+        </div>
+        <div class="credential-item">
+          <p class="credential-title">Faith-Driven Leader</p>
+          <p class="credential-sub">Deep conviction that God meets us in every season — especially the unexpected ones</p>
+        </div>
+
+        <nav class="social-row" aria-label="Follow Tammy">
+          <a href="https://www.facebook.com/share/1Js62grMD4/?mibextid=wwXIfr" class="social-icon-btn" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            Facebook
+          </a>
+          <a href="https://www.instagram.com/tammymmelchisedeck?igsh=dGQxcjQyMmEzbDcx" class="social-icon-btn" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            Instagram
+          </a>
+          <a href="https://www.tiktok.com/@tammymmelchisedec?_r=1&_t=ZT-9297iK4kplv" class="social-icon-btn" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+            TikTok
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Bio -->
+      <div class="bio-body">
+        <h2 class="bio-title" id="bio-title">Tammy Maltby<br>Melchisedeck</h2>
+        <div class="divider" aria-hidden="true"></div>
+
+        <p>Tammy Maltby Melchisedeck believes in the power of starting again. An Emmy-winning media personality turned wellness entrepreneur, Tammy has lived many lives — speaker, author, television host, mentor, and mother — and each chapter has shaped the woman she is today.</p>
+
+        <p>Her story is one of courage and continual becoming. At 52, Tammy stepped into a brand-new career in global wellness, rising to the top of a $400 million company and inspiring women around the world to take their health and purpose seriously. Her leadership blends compassion, strength, and a deep conviction that <em>God meets us in every season — especially the unexpected ones.</em></p>
+
+        <div class="bio-pullquote">
+          <p>"Tammy's gift has always been connection — creating a sense of belonging that reminds women they are seen, valued, and capable of so much more than they imagine."</p>
+        </div>
+
+        <p>Whether she's leading a room of thousands or welcoming someone into her home, she creates a sense of belonging that reminds women they are seen, valued, and capable of so much more than they imagine.</p>
+
+        <p>Today, she continues her mission of helping women live rich, authentic, purpose-driven lives — built on wellness, faith, community, and courageous reinvention.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA STRIP ── -->
+<div class="cta-strip">
+  <span class="cta-strip-label">Ready to Begin?</span>
+  <h2 class="cta-strip-title">You were woven for this moment.</h2>
+  <p class="cta-strip-body">Join the women who have already taken the first step toward health, energy, and a life lived on purpose. The Skinny Drops are a simple start.</p>
+  <a href="https://venmo.com/u/tammy-melchisedeck" class="btn-primary" target="_blank" rel="noopener">Order Skinny Drops — $160</a>
+</div>
+
+<!-- ── EMAIL SIGNUP ── -->
+<section class="email-section" aria-labelledby="email-title">
+  <div class="container">
+    <h2 class="section-title" id="email-title">Stay connected.</h2>
+    <p class="section-body">Tips, recipes, encouragement, and updates — straight to your inbox. No spam, ever.</p>
+    <form
+      class="email-form"
+      action="https://formspree.io/f/YOUR_FORM_ID"
+      method="POST"
+      onsubmit="handleEmailSubmit(event)"
+      aria-label="Email newsletter signup"
+    >
+      <input type="email" name="email" placeholder="Your email address" required aria-label="Email address" autocomplete="email">
+      <button type="submit">Subscribe</button>
+    </form>
+    <p class="email-privacy">We respect your privacy. Unsubscribe any time.</p>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p class="footer-name">Tammy Maltby Melchisedeck</p>
+  <p class="footer-email"><a href="mailto:tammymelchisedeck@gmail.com">tammymelchisedeck@gmail.com</a></p>
+  <nav class="footer-social" aria-label="Social media links">
+    <a href="https://www.facebook.com/share/1Js62grMD4/?mibextid=wwXIfr" class="footer-social-btn" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      Facebook
+    </a>
+    <a href="https://www.instagram.com/tammymmelchisedeck?igsh=dGQxcjQyMmEzbDcx" class="footer-social-btn" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      Instagram
+    </a>
+    <a href="https://www.tiktok.com/@tammymmelchisedec?_r=1&_t=ZT-9297iK4kplv" class="footer-social-btn" target="_blank" rel="noopener" aria-label="TikTok">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+      TikTok
+    </a>
+  </nav>
+  <div class="footer-divider" aria-hidden="true"></div>
+  <p class="footer-disclaimer">
+    These statements have not been evaluated by the Food and Drug Administration.
+    These products are not intended to diagnose, treat, cure, or prevent any disease.
+    Applicable to U.S. only. Product availability varies by market.
+  </p>
+  <p class="footer-copy">&copy; <span id="year"></span> Tammy Maltby Melchisedeck. All rights reserved.</p>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  function toggleNav() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
+  function closeMobileNav() {
+    document.getElementById('mobileNav').classList.remove('open');
+  }
+  document.addEventListener('click', function(e) {
+    const nav = document.getElementById('mobileNav');
+    const toggle = document.querySelector('.nav-toggle');
+    if (nav.classList.contains('open') && !nav.contains(e.target) && !toggle.contains(e.target)) {
+      nav.classList.remove('open');
+    }
+  });
+
+  function handleEmailSubmit(e) {
+    const action = e.target.action;
+    if (action.includes('YOUR_FORM_ID')) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      const original = btn.textContent;
+      btn.textContent = 'Almost there! (Form not yet connected)';
+      btn.style.background = '#7A8C72';
+      setTimeout(function() {
+        btn.textContent = original;
+        btn.style.background = '';
+        e.target.reset();
+      }, 3500);
+    }
+  }
+</script>
+
+</body>
+</html>

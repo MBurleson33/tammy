@@ -200,7 +200,7 @@
   .settings-card-desc { font-size: 0.78rem; color: var(--ink-light); margin-bottom: 1rem; line-height: 1.5; }
 
   /* SESSION TIMER */
-  .session-timer { font-size: 0.65rem; color: rgba(255,255,255,0.3); letter-spacing: 0.05em; }
+  .session-timer { display: none; }
 
   @media (max-width: 640px) {
     .orders-stats { grid-template-columns: 1fr 1fr; }
@@ -492,19 +492,23 @@
 
   function startSessionTimer() {
     clearInterval(sessionTimeout);
+    var warningShown = false;
     sessionTimeout = setInterval(function() {
       var elapsed = Date.now() - sessionStart;
       var remaining = (sessionMinutes * 60 * 1000) - elapsed;
+
+      // Show 5 minute warning once
+      if (remaining <= 5 * 60 * 1000 && !warningShown) {
+        warningShown = true;
+        toast('⚠️ You will be logged out in 5 minutes due to inactivity', 'error');
+      }
+
+      // Log out when time is up
       if (remaining <= 0 && autoLogout) {
         clearInterval(sessionTimeout);
         toast('Session expired — please log in again', 'error');
         setTimeout(doLogout, 2000);
-        return;
       }
-      var mins = Math.floor(remaining / 60000);
-      var secs = Math.floor((remaining % 60000) / 1000);
-      var el = document.getElementById('sessionTimer');
-      if (el) el.textContent = mins + ':' + (secs < 10 ? '0' : '') + secs;
     }, 1000);
   }
 

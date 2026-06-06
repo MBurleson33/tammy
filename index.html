@@ -1363,11 +1363,23 @@
     }
   });
 
-  // FAQ toggle icon sync for <details> elements
+  // FAQ accordion — clicking one closes all others
   document.querySelectorAll('details').forEach(function(detail) {
-    detail.addEventListener('toggle', function() {
-      const icon = detail.querySelector('.faq-toggle');
-      if (icon) icon.textContent = detail.open ? '−' : '+';
+    detail.querySelector('summary').addEventListener('click', function(e) {
+      e.preventDefault();
+      var isOpen = detail.open;
+      // Close all
+      document.querySelectorAll('details').forEach(function(d) {
+        d.open = false;
+        var icon = d.querySelector('.faq-toggle');
+        if (icon) icon.textContent = '+';
+      });
+      // If it was closed, open this one
+      if (!isOpen) {
+        detail.open = true;
+        var icon = detail.querySelector('.faq-toggle');
+        if (icon) icon.textContent = '−';
+      }
     });
   });
 

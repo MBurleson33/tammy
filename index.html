@@ -144,7 +144,7 @@
     overflow: hidden;
   }
   .hero-img {
-    background: url('images/TammyJulieWEB-6432.webp') center top / cover no-repeat;
+    background: url('images/TammyJulieWEB-6432.webp') center 15% / cover no-repeat;
     position: relative;
     min-height: 500px;
   }
@@ -581,6 +581,28 @@
     margin-top: 2rem;
     flex-wrap: wrap;
   }
+  .social-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.73rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    text-decoration: none;
+    border: 1px solid var(--sand);
+    padding: 0.55rem 1.1rem;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .social-icon-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .footer-social-btn {
+    color: var(--sand);
+    border-color: rgba(255,255,255,0.1);
+  }
+  .footer-social-btn:hover { border-color: var(--gold); color: var(--gold); }
+
   .social-btn {
     font-size: 0.73rem;
     font-weight: 500;
@@ -820,7 +842,7 @@
     <li><a href="#drops">The Drops</a></li>
     <li><a href="#results">Results</a></li>
     <li><a href="#testimonials">Testimonials</a></li>
-    <li><a href="#about">About</a></li>
+    <li><a href="about.html">About</a></li>
     <li><a href="https://venmo.com/u/tammy-melchisedeck" class="nav-cta" target="_blank" rel="noopener">Order Now — $160</a></li>
   </ul>
   <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
@@ -831,7 +853,7 @@
   <a href="#drops" onclick="closeMobileNav()">The Drops</a>
   <a href="#results" onclick="closeMobileNav()">Results</a>
   <a href="#testimonials" onclick="closeMobileNav()">Testimonials</a>
-  <a href="#about" onclick="closeMobileNav()">About</a>
+  <a href="about.html" onclick="closeMobileNav()">About</a>
   <a href="https://venmo.com/u/tammy-melchisedeck" class="nav-cta" target="_blank" rel="noopener">Order Now — $160</a>
 </nav>
 
@@ -1066,34 +1088,6 @@
   </div>
 </section>
 
-<!-- ── ABOUT ── -->
-<section class="about-section" id="about" aria-labelledby="about-title">
-  <div class="container">
-    <span class="section-label">About Tammy</span>
-    <h2 class="section-title" id="about-title">You were woven<br>for this moment.</h2>
-    <div class="divider" aria-hidden="true"></div>
-    <div class="about-grid">
-      <div class="about-img-wrap">
-        <div class="about-img" role="img" aria-label="Tammy Melchisedeck"></div>
-        <div class="about-quote-block" aria-hidden="true">
-          <p>"When a woman becomes well, her world becomes stronger."</p>
-        </div>
-      </div>
-      <div class="about-body">
-        <p>Every woman reaches a moment where she feels the quiet pull toward more — more health, more clarity, more faith, more purpose. Not out of striving, but out of a holy knowing: <em>you were designed to grow. You were crafted to rise.</em></p>
-        <p>My work — through media, writing, leadership, and global wellness coaching — has always pointed toward one truth: when a woman becomes well, her world becomes stronger. Her family shifts. Her confidence rises. Her calling expands. And generational legacy begins to change.</p>
-        <p>Midlife has become my favorite season to speak into, because it is where reinvention is not only possible — it is powerful. God loves to use what we think disqualifies us as the very thing that equips us.</p>
-        <p>My heart is to help you cultivate health from the inside out, walk boldly into your God-given identity, and build a life that reflects the joy and abundance He designed for you.</p>
-        <div class="social-row" aria-label="Follow Tammy on social media">
-          <a href="https://www.facebook.com/share/1Js62grMD4/?mibextid=wwXIfr" class="social-btn" target="_blank" rel="noopener">Facebook</a>
-          <a href="https://www.instagram.com/tammymmelchisedeck?igsh=dGQxcjQyMmEzbDcx" class="social-btn" target="_blank" rel="noopener">Instagram</a>
-          <a href="https://www.tiktok.com/@tammymmelchisedec?_r=1&_t=ZT-9297iK4kplv" class="social-btn" target="_blank" rel="noopener">TikTok</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ── EMAIL SIGNUP ── -->
 <!-- NOTE: Replace the form action with your Formspree or other email handler endpoint. -->
 <section class="email-section" aria-labelledby="email-title">
@@ -1126,9 +1120,18 @@
   <p class="footer-name">Tammy Maltby Melchisedeck</p>
   <p class="footer-email"><a href="mailto:tammymelchisedeck@gmail.com">tammymelchisedeck@gmail.com</a></p>
   <nav class="footer-social" aria-label="Social media links">
-    <a href="https://www.facebook.com/share/1Js62grMD4/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a>
-    <a href="https://www.instagram.com/tammymmelchisedeck?igsh=dGQxcjQyMmEzbDcx" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://www.tiktok.com/@tammymmelchisedec?_r=1&_t=ZT-9297iK4kplv" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://www.facebook.com/share/1Js62grMD4/?mibextid=wwXIfr" class="social-icon-btn footer-social-btn" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      Facebook
+    </a>
+    <a href="https://www.instagram.com/tammymmelchisedeck?igsh=dGQxcjQyMmEzbDcx" class="social-icon-btn footer-social-btn" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      Instagram
+    </a>
+    <a href="https://www.tiktok.com/@tammymmelchisedec?_r=1&_t=ZT-9297iK4kplv" class="social-icon-btn footer-social-btn" target="_blank" rel="noopener" aria-label="TikTok">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+      TikTok
+    </a>
   </nav>
   <div class="footer-divider" aria-hidden="true"></div>
   <p class="footer-disclaimer">

@@ -467,117 +467,104 @@
   }
 
   /* ── TESTIMONIALS ── */
-  .testimonials-section { background: var(--ink); }
-  .testimonials-section .section-title { color: var(--cream); }
-  .testimonials-section .section-label { color: var(--gold-light); }
-  .testimonials-section .divider { background: var(--gold-light); }
-  .testimonials-section .section-body { color: var(--sand); }
-
-  .testimonials-layout {
+  .testimonials-section {
+    background: var(--ink);
+    padding: 6rem 2rem;
+  }
+  .testimonials-inner {
+    max-width: 1080px;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: 2fr 3fr;
-    gap: 5rem;
+    grid-template-columns: 1fr 2fr;
+    gap: 6rem;
     align-items: center;
   }
-  .testimonials-header { padding-right: 1rem; }
-  .testimonials-right { border-left: 1px solid rgba(255,255,255,0.08); padding-left: 5rem; }
-
-  .testimonial-stage {
-    margin-bottom: 2rem;
-    text-align: left;
-    position: relative;
+  .testimonials-header .section-title { color: var(--cream); }
+  .testimonials-header .section-label { color: var(--gold-light); }
+  .testimonials-header .divider { background: var(--gold-light); }
+  .testimonials-header .section-body { color: rgba(255,255,255,0.55); font-size: 0.9rem; }
+  .testimonials-stage {
+    border-left: 1px solid rgba(255,255,255,0.08);
+    padding-left: 6rem;
   }
-  .testimonial-big-quote {
-    font-size: 6rem;
+
+  .t-quote-mark {
     font-family: var(--serif);
+    font-size: 5rem;
     color: var(--gold);
-    opacity: 0.15;
-    line-height: 0.6;
-    margin-bottom: 1rem;
+    opacity: 0.2;
+    line-height: 1;
     display: block;
+    margin-bottom: 0.5rem;
     user-select: none;
   }
-  .testimonial-slides-wrap {
+  .t-quotes {
+    min-height: 160px;
     position: relative;
+    margin-bottom: 2rem;
   }
-  .testimonial-slide {
-    opacity: 0;
+  .t-slide {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    top: 0; left: 0; right: 0;
+    opacity: 0;
+    transition: opacity 0.45s ease;
     pointer-events: none;
-    transition: opacity 0.5s ease;
   }
-  .testimonial-slide.active {
+  .t-slide.active {
     opacity: 1;
-    position: relative;
     pointer-events: auto;
   }
-  /* Invisible ghost of all slides to hold max height */
-  .testimonial-sizer {
-    visibility: hidden;
-    pointer-events: none;
-    position: relative;
-  }
-  .testimonial-sizer .testimonial-text,
-  .testimonial-sizer .testimonial-attr {
-    display: block;
-  }
-  .testimonial-text {
+  .t-text {
     font-family: var(--serif);
-    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+    font-size: clamp(1.15rem, 1.6vw, 1.45rem);
     font-style: italic;
     font-weight: 300;
     color: var(--cream);
     line-height: 1.7;
-    max-width: 100%;
-    margin: 0 0 1.5rem;
+    margin-bottom: 1.1rem;
   }
-  .testimonial-attr {
-    font-size: 0.72rem;
+  .t-name {
+    font-size: 0.7rem;
     font-weight: 500;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--gold);
   }
-
-  /* Arrow navigation */
-  .testimonial-arrows {
+  .t-controls {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.25rem;
     padding-top: 2rem;
     border-top: 1px solid rgba(255,255,255,0.08);
   }
-  .testimonial-arrow {
-    background: none;
-    border: 1px solid rgba(255,255,255,0.2);
+  .t-arrow {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    width: 44px;
-    height: 44px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: none;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     color: var(--gold-light);
-    transition: all 0.2s;
     flex-shrink: 0;
+    transition: all 0.2s;
   }
-  .testimonial-arrow:hover { border-color: var(--gold); color: var(--gold); }
-  .testimonial-dots {
+  .t-arrow:hover { border-color: var(--gold); color: var(--gold); }
+  .t-dots {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.45rem;
     align-items: center;
   }
-  .testimonial-dot {
+  .t-dot {
     width: 6px;
     height: 6px;
-    border-radius: 50%;
+    border-radius: 3px;
     background: rgba(255,255,255,0.2);
     transition: all 0.3s;
   }
-  .testimonial-dot.active { background: var(--gold); width: 20px; border-radius: 3px; }
+  .t-dot.active { background: var(--gold); width: 18px; }
 
   /* ── PURCHASE ── */
   .purchase-section { background: var(--cream); }
@@ -1034,9 +1021,8 @@
     .about-quote-block { display: none; }
     .products-grid { grid-template-columns: 1fr; }
     .results-grid { grid-template-columns: 1fr; }
-    .testimonials-layout { grid-template-columns: 1fr; gap: 3rem; }
-    .testimonials-right { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 3rem; }
-    .testimonial-wide { grid-column: auto; max-width: 100%; }
+    .testimonials-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .testimonials-stage { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 3rem; }
     .purchase-box { padding: 2.5rem 1.75rem; }
     nav { padding: 0 1.25rem; }
     .nav-links { display: none; }
@@ -1275,71 +1261,57 @@
 </section>
 
 <!-- ── TESTIMONIALS ── -->
-<section class="testimonials-section" id="testimonials" aria-labelledby="testimonials-title">
-  <div class="container">
-    <div class="testimonials-layout">
+<section class="testimonials-section" id="testimonials" aria-labelledby="t-title">
+  <div class="testimonials-inner">
 
-      <!-- Left: header copy -->
-      <div class="testimonials-header">
-        <span class="section-label">From Real Women</span>
-        <h2 class="section-title" id="testimonials-title">Their stories.</h2>
-        <div class="divider" aria-hidden="true"></div>
-        <p class="section-body">
-          Real results from real people — not paid endorsements, not stock photos. Just women who said yes to something different.
-        </p>
-      </div>
-
-      <!-- Right: rotating quote + arrows -->
-      <div class="testimonials-right">
-        <div class="testimonial-stage" aria-live="polite">
-          <span class="testimonial-big-quote" aria-hidden="true">"</span>
-          <div class="testimonial-slides-wrap">
-            <!-- Hidden sizer: tallest quote holds the height -->
-            <div class="testimonial-sizer" aria-hidden="true">
-              <p class="testimonial-text">I have lost 25 pounds and have gained enormous amounts of energy. I didn't think anything would work for me — I was wrong.</p>
-              <p class="testimonial-attr">— Ciera</p>
-            </div>
-            <div class="testimonial-slide active" id="t-0">
-              <p class="testimonial-text">I have lost 25 pounds and have gained enormous amounts of energy. I didn't think anything would work for me — I was wrong.</p>
-              <p class="testimonial-attr">— Ciera</p>
-            </div>
-            <div class="testimonial-slide" id="t-1">
-              <p class="testimonial-text">My night sweats are completely gone. I honestly didn't expect that benefit — this program has genuinely changed my life.</p>
-              <p class="testimonial-attr">— Ashley</p>
-            </div>
-            <div class="testimonial-slide" id="t-2">
-              <p class="testimonial-text">This is so much more than weight loss. I am now off 6 medications! I feel like I have gotten my life back.</p>
-              <p class="testimonial-attr">— Noha</p>
-            </div>
-            <div class="testimonial-slide" id="t-3">
-              <p class="testimonial-text">22 pounds down and my inflammation is completely gone. I feel better at 50 than I did at 35.</p>
-              <p class="testimonial-attr">— Tonya</p>
-            </div>
-            <div class="testimonial-slide" id="t-4">
-              <p class="testimonial-text">These drops give me unbelievable amounts of energy. An absolute game changer — I tell everyone I know about them.</p>
-              <p class="testimonial-attr">— Ellie</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-arrows">
-          <button class="testimonial-arrow" onclick="prevTestimonial()" aria-label="Previous testimonial">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <div class="testimonial-dots" aria-hidden="true">
-            <span class="testimonial-dot active"></span>
-            <span class="testimonial-dot"></span>
-            <span class="testimonial-dot"></span>
-            <span class="testimonial-dot"></span>
-            <span class="testimonial-dot"></span>
-          </div>
-          <button class="testimonial-arrow" onclick="nextTestimonial()" aria-label="Next testimonial">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
-        </div>
-      </div>
-
+    <div class="testimonials-header">
+      <span class="section-label">From Real Women</span>
+      <h2 class="section-title" id="t-title">Their stories.</h2>
+      <div class="divider" aria-hidden="true"></div>
+      <p class="section-body">Real results from real people — not paid endorsements, not stock photos. Just women who said yes to something different.</p>
     </div>
+
+    <div class="testimonials-stage">
+      <span class="t-quote-mark" aria-hidden="true">"</span>
+      <div class="t-quotes" aria-live="polite">
+        <div class="t-slide active">
+          <p class="t-text">I have lost 25 pounds and have gained enormous amounts of energy. I didn't think anything would work for me — I was wrong.</p>
+          <p class="t-name">— Ciera</p>
+        </div>
+        <div class="t-slide">
+          <p class="t-text">My night sweats are completely gone. I honestly didn't expect that benefit — this program has genuinely changed my life.</p>
+          <p class="t-name">— Ashley</p>
+        </div>
+        <div class="t-slide">
+          <p class="t-text">This is so much more than weight loss. I am now off 6 medications! I feel like I have gotten my life back.</p>
+          <p class="t-name">— Noha</p>
+        </div>
+        <div class="t-slide">
+          <p class="t-text">22 pounds down and my inflammation is completely gone. I feel better at 50 than I did at 35.</p>
+          <p class="t-name">— Tonya</p>
+        </div>
+        <div class="t-slide">
+          <p class="t-text">These drops give me unbelievable amounts of energy. An absolute game changer — I tell everyone I know about them.</p>
+          <p class="t-name">— Ellie</p>
+        </div>
+      </div>
+      <div class="t-controls">
+        <button class="t-arrow" id="tPrev" aria-label="Previous">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="t-dots" aria-hidden="true">
+          <span class="t-dot active"></span>
+          <span class="t-dot"></span>
+          <span class="t-dot"></span>
+          <span class="t-dot"></span>
+          <span class="t-dot"></span>
+        </div>
+        <button class="t-arrow" id="tNext" aria-label="Next">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1426,37 +1398,41 @@
 </footer>
 
 <script>
-  // Testimonial switcher
-  var tTotal = 5;
-  var tCurrent = 0;
-  var tTimer = null;
+  // Testimonials
+  (function() {
+    var slides = document.querySelectorAll('.t-slide');
+    var dots   = document.querySelectorAll('.t-dot');
+    var cur    = 0;
+    var timer  = null;
 
-  function showTestimonial(idx) {
-    document.querySelectorAll('.testimonial-slide').forEach(function(s, i) {
-      s.classList.toggle('active', i === idx);
-    });
-    document.querySelectorAll('.testimonial-dot').forEach(function(d, i) {
-      d.classList.toggle('active', i === idx);
-    });
-    tCurrent = idx;
-    resetTimer();
-  }
+    // Set min-height of container to tallest slide
+    var wrap = document.querySelector('.t-quotes');
+    if (wrap) {
+      var maxH = 0;
+      slides.forEach(function(s) {
+        s.style.opacity = '1';
+        s.style.position = 'relative';
+        maxH = Math.max(maxH, s.offsetHeight);
+        s.style.opacity = '';
+        s.style.position = '';
+      });
+      wrap.style.minHeight = maxH + 'px';
+    }
 
-  function nextTestimonial() {
-    showTestimonial((tCurrent + 1) % tTotal);
-  }
+    function go(idx) {
+      slides[cur].classList.remove('active');
+      dots[cur].classList.remove('active');
+      cur = (idx + slides.length) % slides.length;
+      slides[cur].classList.add('active');
+      dots[cur].classList.add('active');
+      clearInterval(timer);
+      timer = setInterval(function(){ go(cur + 1); }, 5000);
+    }
 
-  function prevTestimonial() {
-    showTestimonial((tCurrent - 1 + tTotal) % tTotal);
-  }
-
-  function resetTimer() {
-    clearInterval(tTimer);
-    tTimer = setInterval(nextTestimonial, 5000);
-  }
-
-  // Start auto-rotate
-  resetTimer();
+    document.getElementById('tNext').addEventListener('click', function(){ go(cur + 1); });
+    document.getElementById('tPrev').addEventListener('click', function(){ go(cur - 1); });
+    timer = setInterval(function(){ go(cur + 1); }, 5000);
+  })();
 
   // Dynamic copyright year
   document.getElementById('year').textContent = new Date().getFullYear();

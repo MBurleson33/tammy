@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="4" fill="#2C2520"/>
-  <text x="16" y="14" font-family="Georgia, serif" font-size="7" font-weight="400" fill="#B89A6A" text-anchor="middle" letter-spacing="2">TMM</text>
-  <line x1="7" y1="17" x2="25" y2="17" stroke="#B89A6A" stroke-width="0.6" opacity="0.5"/>
-  <text x="16" y="24" font-family="Georgia, serif" font-size="5" fill="rgba(184,154,106,0.65)" text-anchor="middle" letter-spacing="1" font-style="italic">wellness</text>
-</svg>

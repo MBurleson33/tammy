@@ -356,6 +356,80 @@
   .faq-body a { color: var(--gold); text-decoration: none; }
   .faq-body a:hover { text-decoration: underline; }
 
+  /* ── MORE PRODUCTS ── */
+  .products-section { background: var(--linen); }
+  .products-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3.5rem;
+  }
+  .product-card {
+    background: var(--white);
+    border-radius: 2px;
+    overflow: hidden;
+    border: 1px solid var(--sand);
+    display: flex;
+    flex-direction: column;
+  }
+  .product-img-wrap { position: relative; aspect-ratio: 16/9; overflow: hidden; background: var(--sand); }
+  .product-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .product-img-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--ink-light);
+  }
+  .product-body { padding: 2rem; display: flex; flex-direction: column; flex: 1; }
+  .product-tag {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.65rem;
+    display: block;
+  }
+  .product-name {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .product-desc {
+    font-size: 0.9rem;
+    color: var(--ink-mid);
+    line-height: 1.75;
+    margin-bottom: 1.75rem;
+    flex: 1;
+  }
+  .product-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.85rem 1.75rem;
+    text-decoration: none;
+    border: 1px solid var(--sand);
+    border-radius: 2px;
+    transition: all 0.2s;
+    align-self: flex-start;
+  }
+  .product-btn:hover { border-color: var(--gold); color: var(--gold); }
+
   /* ── RESULTS ── */
   .results-section { background: var(--linen); }
   .results-grid {
@@ -958,6 +1032,7 @@
       gap: 2.5rem;
     }
     .about-quote-block { display: none; }
+    .products-grid { grid-template-columns: 1fr; }
     .results-grid { grid-template-columns: 1fr; }
     .testimonials-layout { grid-template-columns: 1fr; gap: 3rem; }
     .testimonials-right { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 3rem; }
@@ -1126,6 +1201,44 @@
           </div>
         </details>
 
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── MORE PRODUCTS ── -->
+<section class="products-section" aria-labelledby="products-title">
+  <div class="container">
+    <span class="section-label">Also from Partner.Co</span>
+    <h2 class="section-title" id="products-title">Complete your wellness routine.</h2>
+    <div class="divider" aria-hidden="true"></div>
+    <div class="products-grid">
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/core-cleanse.webp" alt="Core Cleanse and Core Cleanse Plus packets" class="product-img" onerror="this.style.display='none'">
+          <div class="product-img-placeholder" aria-hidden="true">Core Cleanse</div>
+        </div>
+        <div class="product-body">
+          <span class="product-tag">Gut Health</span>
+          <h3 class="product-name">Core Cleanse &amp;<br>Core Cleanse Plus</h3>
+          <p class="product-desc">Your weekly 5:2 ritual for digestive health and rhythm. Feel lighter, no bloat, and keep cravings in check. A five-day gut reset followed by a two-day GI release that restores your core.</p>
+          <a href="https://venmo.com/u/tammy-melchisedeck" class="product-btn" target="_blank" rel="noopener">Order via Venmo</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/abvantage.webp" alt="AbVantage hip and waist reducer supplement" class="product-img" onerror="this.style.display='none'">
+          <div class="product-img-placeholder" aria-hidden="true">AbVantage</div>
+        </div>
+        <div class="product-body">
+          <span class="product-tag">Fat Burning</span>
+          <h3 class="product-name">AbVantage</h3>
+          <p class="product-desc">A science and nature collaboration. AbVantage activates your fat burning naturally — targeting the hip and waist with vegetable capsules designed to work alongside your body's own systems.</p>
+          <a href="https://venmo.com/u/tammy-melchisedeck" class="product-btn" target="_blank" rel="noopener">Order via Venmo</a>
+        </div>
       </div>
 
     </div>

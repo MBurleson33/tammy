@@ -1640,6 +1640,12 @@
   var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cWRtc2J4d2doa3Fvd2FqbXZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3Njk0MjQsImV4cCI6MjA5NjM0NTQyNH0.aqdvA_ytnkeSvg4hmLqC1zces0aIFZcxkHrrN7k7atk';
   var SB_HEADERS = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY };
 
+  // Convert *text* markers to gold italic spans
+  // e.g. "Real results. *Real women.* Real transformation."
+  function parseGold(text) {
+    return text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  }
+
   function sbFetch(endpoint) {
     return fetch(SB_URL + endpoint, { headers: SB_HEADERS }).then(function(r) { return r.json(); });
   }
@@ -1686,6 +1692,16 @@
         if (map.hero_eyebrow) {
           var ey = document.querySelector('.hero-eyebrow');
           if (ey) ey.textContent = map.hero_eyebrow;
+        }
+        if (map.hero_headline) {
+          var hh = document.querySelector('.hero-headline');
+          if (hh) {
+            // Convert *text* to gold em, \n to <br>
+            var lines = map.hero_headline.split('\n');
+            hh.innerHTML = lines.map(function(line) {
+              return parseGold(line);
+            }).join('<br>');
+          }
         }
         if (map.hero_body) {
           var hb = document.querySelector('.hero-body');

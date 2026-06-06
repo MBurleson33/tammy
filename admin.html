@@ -721,8 +721,20 @@
           '<div class="field-group"><label class="edit-label">Category Tag</label><input type="text" class="edit-field" id="ptag-' + p.id + '" value="' + (p.tag||'') + '"><p class="field-hint">e.g. Weight Loss, Gut Health, Bundle</p></div>' +
           '<div class="field-group"><label class="edit-label">Short Description (under product name)</label><input type="text" class="edit-field" id="psub-' + p.id + '" value="' + (p.subtitle||'').replace(/"/g,'&quot;') + '"></div>' +
           '<div class="field-group"><label class="edit-label">Full Description</label><textarea class="edit-field" id="pdesc-' + p.id + '" style="min-height:100px">' + (p.description||'') + '</textarea></div>' +
-          '<div class="field-group"><label class="edit-label">Image Path</label><input type="text" class="edit-field" id="pimg-' + p.id + '" value="' + (p.image_path||'') + '" oninput="previewImg(\'' + p.id + '\')" placeholder="images/product-name.webp"><p class="field-hint">The filename of the image in your images folder</p>' +
+          '<div class="field-group"><label class="edit-label">Product Image</label>' +
+            '<div style="display:flex;gap:0.5rem;align-items:center;margin-bottom:0.5rem">' +
+              '<input type="text" class="edit-field" id="pimg-' + p.id + '" value="' + (p.image_path||'') + '" oninput="previewImg(\'' + p.id + '\')" placeholder="images/product-name.webp" style="margin-bottom:0">' +
+              '<label class="btn btn-outline btn-sm" style="cursor:pointer;white-space:nowrap;flex-shrink:0" title="Upload a new image">' +
+                '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>' +
+                ' Upload' +
+                '<input type="file" accept="image/*" style="display:none" onchange="uploadProductImage(\'' + p.id + '\',this)">' +
+              '</label>' +
+            '</div>' +
+            '<p class="field-hint">Upload a new image or type the filename manually</p>' +
             '<img id="pimgpreview-' + p.id + '" class="img-preview" ' + (p.image_path ? 'src="' + p.image_path + '" style="display:block"' : '') + ' onerror="this.style.display=\'none\'">' +
+            '<div class="upload-progress" id="uprog-' + p.id + '" style="display:none;font-size:0.75rem;color:var(--gold);margin-top:0.35rem;display:none;align-items:center;gap:0.4rem">' +
+              '<div class="spinner" style="width:14px;height:14px;border-width:1.5px"></div> Uploading…' +
+            '</div>' +
           '</div>' +
           '<div style="display:flex;align-items:center;justify-content:space-between;margin-top:0.5rem;flex-wrap:wrap;gap:0.5rem">' +
             '<span class="save-indicator" id="psaved-' + p.id + '"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Saved!</span>' +
@@ -745,7 +757,51 @@
       .then(function() { toast(active ? '✓ Product now showing on site' : 'Product hidden from site', 'success'); });
   }
 
-  function previewImg(id) {
+  function uploadProductImage(productId, input) {
+    var file = input.files[0];
+    if (!file) return;
+
+    // Show progress
+    var prog = document.getElementById('uprog-' + productId);
+    prog.style.display = 'flex';
+
+    // Sanitise filename — no spaces or special chars
+    var ext = file.name.split('.').pop();
+    var filename = 'product-' + productId + '-' + Date.now() + '.' + ext;
+
+    fetch(SUPABASE_URL + '/storage/v1/object/product-images/' + filename, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': file.type,
+        'x-upsert': 'true'
+      },
+      body: file
+    })
+    .then(function(r) {
+      if (!r.ok) throw new Error('Upload failed');
+      return r.json();
+    })
+    .then(function() {
+      // Build the public URL
+      var publicUrl = SUPABASE_URL + '/storage/v1/object/public/product-images/' + filename;
+
+      // Update the image path field and preview
+      document.getElementById('pimg-' + productId).value = publicUrl;
+      var preview = document.getElementById('pimgpreview-' + productId);
+      preview.src = publicUrl;
+      preview.style.display = 'block';
+
+      prog.style.display = 'none';
+      toast('✓ Image uploaded — click Save Changes to apply', 'success');
+    })
+    .catch(function(err) {
+      prog.style.display = 'none';
+      toast('Upload failed — please try again', 'error');
+      console.error(err);
+    });
+  }
     var val = document.getElementById('pimg-' + id).value;
     var preview = document.getElementById('pimgpreview-' + id);
     if (val) { preview.src = val; preview.style.display = 'block'; }

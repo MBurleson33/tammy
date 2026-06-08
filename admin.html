@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Admin — Tammy Melchisedeck</title>
 <link rel="icon" type="image/png" href="images/favicon.png">
+<script src="config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -397,14 +398,17 @@
   <div class="modal">
     <h3 class="modal-title">Add a Testimonial</h3>
     <div class="field-group">
-      <label class="edit-label">Their Quote *</label>
-      <textarea class="edit-field" id="newQuote" placeholder="What did she say about the drops? Write it just as she said it..." style="min-height:110px"></textarea>
-      <p class="field-hint">Write it in her own words, as if she's speaking directly to the reader.</p>
+      <label class="edit-label">Their Quote</label>
+      <textarea class="edit-field" id="newQuote" placeholder="What did she say about the drops?..." style="min-height:110px"></textarea>
+      <p class="field-hint">Write it in her own words. Quote is optional — name alone is fine if you just want to show her photo.</p>
     </div>
     <div class="field-group">
       <label class="edit-label">First Name *</label>
       <input type="text" class="edit-field" id="newName" placeholder="e.g. Ciera">
-      <p class="field-hint">First name only is fine — it feels more personal.</p>
+    </div>
+    <div class="field-group">
+      <label class="edit-label">Result <span style="font-size:0.7rem;color:var(--ink-light);font-weight:400;text-transform:none;letter-spacing:0">(optional — shows on photo hover)</span></label>
+      <input type="text" class="edit-field" id="newResult" placeholder="e.g. Lost 25 lbs">
     </div>
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeModal('addTestimonialModal')">Cancel</button>
@@ -496,10 +500,24 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  // CONFIG
-  var SUPABASE_URL = 'https://nzqdmsbxwghkqowajmvs.supabase.co';
-  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cWRtc2J4d2doa3Fvd2FqbXZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3Njk0MjQsImV4cCI6MjA5NjM0NTQyNH0.aqdvA_ytnkeSvg4hmLqC1zces0aIFZcxkHrrN7k7atk';
+  // CONFIG — pulled from config.js if available
+  var SUPABASE_URL = (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.supabase) ? SITE_CONFIG.supabase.url     : 'https://nzqdmsbxwghkqowajmvs.supabase.co';
+  var SUPABASE_KEY = (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.supabase) ? SITE_CONFIG.supabase.anonKey : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cWRtc2J4d2doa3Fvd2FqbXZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3Njk0MjQsImV4cCI6MjA5NjM0NTQyNH0.aqdvA_ytnkeSvg4hmLqC1zces0aIFZcxkHrrN7k7atk';
   var API = SUPABASE_URL + '/rest/v1';
+
+  // Apply brand colors from config
+  if (typeof SITE_CONFIG !== 'undefined') {
+    var _c = SITE_CONFIG.colors;
+    var _r = document.documentElement.style;
+    _r.setProperty('--cream', _c.cream); _r.setProperty('--linen', _c.linen);
+    _r.setProperty('--sand', _c.sand); _r.setProperty('--gold', _c.gold);
+    _r.setProperty('--gold-light', _c.goldLight); _r.setProperty('--ink', _c.ink);
+    _r.setProperty('--ink-mid', _c.inkMid); _r.setProperty('--ink-light', _c.inkLight);
+    _r.setProperty('--sage', _c.sage);
+    // Login background image
+    var loginBg = document.querySelector('.login-screen');
+    if (loginBg && SITE_CONFIG.images.loginBg) loginBg.style.backgroundImage = "url('" + SITE_CONFIG.images.loginBg + "')";
+  }
 
   function headers(extra) {
     return Object.assign({ 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=representation' }, extra || {});
@@ -687,25 +705,64 @@
     if (!t) return;
     var body = document.getElementById('tbody-' + id);
     body.innerHTML =
-      '<div class="field-group"><label class="edit-label">Quote</label><textarea class="edit-field" id="eq-' + id + '" style="min-height:80px">' + t.quote + '</textarea></div>' +
-      '<div class="field-group"><label class="edit-label">First Name</label><input type="text" class="edit-field" id="en-' + id + '" value="' + t.name + '"></div>' +
-      '<div style="display:flex;gap:0.5rem;margin-top:0.5rem">' +
+      '<div class="field-group"><label class="edit-label">Quote</label><textarea class="edit-field" id="eq-' + id + '" style="min-height:80px">' + (t.quote||'') + '</textarea></div>' +
+      '<div class="field-group"><label class="edit-label">First Name</label><input type="text" class="edit-field" id="en-' + id + '" value="' + (t.name||'') + '"></div>' +
+      '<div class="field-group"><label class="edit-label">Result <span style="font-size:0.7rem;color:var(--ink-light);font-weight:400;text-transform:none;letter-spacing:0">(optional — shows on photo hover)</span></label><input type="text" class="edit-field" id="er-' + id + '" value="' + (t.result||'') + '" placeholder="e.g. Lost 25 lbs"></div>' +
+      '<div class="field-group"><label class="edit-label">Transformation Photo <span style="font-size:0.7rem;color:var(--ink-light);font-weight:400;text-transform:none;letter-spacing:0">(square, 500×500px ideal)</span></label>' +
+        '<div style="display:flex;gap:0.5rem;align-items:center;margin-bottom:0.5rem">' +
+          '<input type="text" class="edit-field" id="ep-' + id + '" value="' + (t.photo_url||'') + '" placeholder="URL or upload below" style="margin-bottom:0">' +
+          '<label class="btn btn-outline btn-sm" style="cursor:pointer;white-space:nowrap;flex-shrink:0">' +
+            '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>' +
+            ' Upload' +
+            '<input type="file" accept="image/*" style="display:none" onchange="uploadTestimonialPhoto(\'' + id + '\',this)">' +
+          '</label>' +
+        '</div>' +
+        '<div id="tphoto-prog-' + id + '" style="display:none;font-size:0.75rem;color:var(--gold);align-items:center;gap:0.4rem"><div class="spinner" style="width:14px;height:14px;border-width:1.5px"></div> Uploading…</div>' +
+        (t.photo_url ? '<img src="' + t.photo_url + '" style="width:80px;height:80px;object-fit:cover;border-radius:2px;margin-top:0.5rem;display:block" onerror="this.style.display=\'none\'" id="tphoto-prev-' + id + '">' : '<img id="tphoto-prev-' + id + '" style="display:none;width:80px;height:80px;object-fit:cover;border-radius:2px;margin-top:0.5rem">') +
+      '</div>' +
+      '<div style="display:flex;gap:0.5rem;margin-top:0.75rem">' +
         '<button class="btn btn-gold btn-sm" onclick="saveTestimonial(\'' + id + '\')">Save</button>' +
         '<button class="btn btn-outline btn-sm" onclick="renderTestimonials()">Cancel</button>' +
       '</div>';
   }
 
   function saveTestimonial(id) {
-    var quote = document.getElementById('eq-' + id).value.trim();
-    var name  = document.getElementById('en-' + id).value.trim();
-    if (!quote || !name) { toast('Quote and name are required', 'error'); return; }
-    fetch(db('testimonials') + '?id=eq.' + id, { method: 'PATCH', headers: headers(), body: JSON.stringify({ quote: quote, name: name }) })
+    var quote  = document.getElementById('eq-' + id).value.trim();
+    var name   = document.getElementById('en-' + id).value.trim();
+    var result = document.getElementById('er-' + id).value.trim();
+    var photo  = document.getElementById('ep-' + id).value.trim();
+    if (!name) { toast('Name is required', 'error'); return; }
+    fetch(db('testimonials') + '?id=eq.' + id, { method: 'PATCH', headers: headers(), body: JSON.stringify({ quote: quote, name: name, result: result, photo_url: photo }) })
       .then(function() {
         var t = testimonials.find(function(x) { return x.id === id; });
-        if (t) { t.quote = quote; t.name = name; }
+        if (t) { t.quote = quote; t.name = name; t.result = result; t.photo_url = photo; }
         renderTestimonials();
         toast('✓ Testimonial saved', 'success');
       });
+  }
+
+  function uploadTestimonialPhoto(id, input) {
+    var file = input.files[0];
+    if (!file) return;
+    var prog = document.getElementById('tphoto-prog-' + id);
+    prog.style.display = 'flex';
+    var ext = file.name.split('.').pop();
+    var filename = 'testimonial-' + id + '-' + Date.now() + '.' + ext;
+    fetch(SUPABASE_URL + '/storage/v1/object/product-images/' + filename, {
+      method: 'POST',
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': file.type, 'x-upsert': 'true' },
+      body: file
+    })
+    .then(function(r) { if (!r.ok) throw new Error(); return r.json(); })
+    .then(function() {
+      var url = SUPABASE_URL + '/storage/v1/object/public/product-images/' + filename;
+      document.getElementById('ep-' + id).value = url;
+      var prev = document.getElementById('tphoto-prev-' + id);
+      prev.src = url; prev.style.display = 'block';
+      prog.style.display = 'none';
+      toast('✓ Photo uploaded', 'success');
+    })
+    .catch(function() { prog.style.display = 'none'; toast('Upload failed', 'error'); });
   }
 
   function confirmDelete(id) {
@@ -725,6 +782,7 @@
   function openAddTestimonial() {
     document.getElementById('newQuote').value = '';
     document.getElementById('newName').value = '';
+    document.getElementById('newResult').value = '';
     openModal('addTestimonialModal');
     setTimeout(function() { document.getElementById('newQuote').focus(); }, 100);
   }
@@ -734,7 +792,7 @@
     var name  = document.getElementById('newName').value.trim();
     if (!quote || !name) { toast('Please fill in the quote and name', 'error'); return; }
     var maxOrder = testimonials.reduce(function(m, t) { return Math.max(m, t.sort_order); }, 0);
-    fetch(db('testimonials'), { method: 'POST', headers: headers(), body: JSON.stringify({ quote: quote, name: name, sort_order: maxOrder + 1, active: true }) })
+    fetch(db('testimonials'), { method: 'POST', headers: headers(), body: JSON.stringify({ quote: quote, name: name, result: document.getElementById('newResult').value.trim(), sort_order: maxOrder + 1, active: true }) })
       .then(function(r) { return r.json(); })
       .then(function(d) {
         testimonials.push(Array.isArray(d) ? d[0] : d);

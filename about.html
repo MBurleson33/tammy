@@ -9,6 +9,7 @@
 <meta property="og:description" content="An Emmy-winning media personality turned wellness entrepreneur, Tammy Maltby Melchisedeck inspires women to take their health, faith, and purpose seriously.">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/png" href="images/favicon.png">
+<script src="config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
@@ -547,6 +548,28 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Apply config
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof SITE_CONFIG === 'undefined') return;
+    var c = SITE_CONFIG;
+    var root = document.documentElement.style;
+    root.setProperty('--cream', c.colors.cream); root.setProperty('--linen', c.colors.linen);
+    root.setProperty('--sand', c.colors.sand); root.setProperty('--gold', c.colors.gold);
+    root.setProperty('--gold-light', c.colors.goldLight); root.setProperty('--ink', c.colors.ink);
+    root.setProperty('--ink-mid', c.colors.inkMid); root.setProperty('--ink-light', c.colors.inkLight);
+    root.setProperty('--sage', c.colors.sage);
+    root.setProperty('--serif', "'" + c.fonts.serif + "', Georgia, serif");
+    root.setProperty('--sans', "'" + c.fonts.sans + "', system-ui, sans-serif");
+    document.querySelectorAll('.nav-name').forEach(function(el) { el.textContent = c.brand.name; });
+    document.querySelectorAll('.footer-name').forEach(function(el) { el.innerHTML = c.brand.name.replace(' ', '<br>'); });
+    document.querySelectorAll('.footer-tagline').forEach(function(el) { el.textContent = c.brand.tagline; });
+    document.querySelectorAll('.footer-disclaimer').forEach(function(el) { el.textContent = c.footer.disclaimer; });
+    var aboutImg = document.querySelector('.about-img');
+    if (aboutImg) aboutImg.style.backgroundImage = "url('" + c.images.about + "')";
+    var partnerLogo = document.querySelector('.footer-partnerco-logo');
+    if (partnerLogo) partnerLogo.src = c.images.partnerLogo;
+  });
 
   function toggleNav() {
     document.getElementById('mobileNav').classList.toggle('open');

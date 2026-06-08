@@ -11,6 +11,7 @@
 <meta property="og:url" content="https://www.tammymelchisedeck.com">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="images/favicon.png">
+<script src="config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
@@ -498,102 +499,118 @@
   /* ── TESTIMONIALS ── */
   .testimonials-section {
     background: var(--ink);
-    padding: 6rem 2rem;
+    padding: 5rem 0 0;
   }
-  .testimonials-inner {
+  .t-header {
+    padding: 0 2rem 3rem;
     max-width: 1080px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 6rem;
-    align-items: center;
   }
-  .testimonials-header .section-title { color: var(--cream); }
-  .testimonials-header .section-label { color: var(--gold-light); }
-  .testimonials-header .divider { background: var(--gold-light); }
-  .testimonials-header .section-body { color: rgba(255,255,255,0.55); font-size: 0.9rem; }
-  .testimonials-stage {
-    border-left: 1px solid rgba(255,255,255,0.08);
-    padding-left: 6rem;
-  }
-
-  .t-quote-mark {
-    font-family: var(--serif);
-    font-size: 5rem;
-    color: var(--gold);
-    opacity: 0.2;
-    line-height: 1;
-    display: block;
-    margin-bottom: 0.5rem;
-    user-select: none;
-  }
-  .t-quotes {
-    min-height: 160px;
+  /* Marquee strip */
+  .t-marquee-wrap {
     position: relative;
-    margin-bottom: 2rem;
-  }
-  .t-slide {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    opacity: 0;
-    transition: opacity 0.45s ease;
-    pointer-events: none;
-  }
-  .t-slide.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .t-text {
-    font-family: var(--serif);
-    font-size: clamp(1.15rem, 1.6vw, 1.45rem);
-    font-style: italic;
-    font-weight: 300;
-    color: var(--cream);
-    line-height: 1.7;
-    margin-bottom: 1.1rem;
-  }
-  .t-name {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .t-controls {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255,255,255,0.08);
   }
-  .t-arrow {
+  .t-marquee {
+    overflow: hidden;
+    width: 100%;
+    cursor: grab;
+  }
+  .t-marquee:active { cursor: grabbing; }
+  .t-track {
+    display: flex;
+    gap: 12px;
+    padding: 0 12px 3rem;
+    animation: marqueeScroll 40s linear infinite;
+    width: max-content;
+  }
+  .t-marquee-wrap:hover .t-track,
+  .t-marquee-wrap:focus-within .t-track { animation-play-state: paused; }
+  @keyframes marqueeScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .t-photo {
+    width: 260px;
+    height: 260px;
+    flex-shrink: 0;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+  .t-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .t-photo:hover img { transform: scale(1.04); }
+  .t-photo-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(44,37,32,0.85) 0%, transparent 100%);
+    padding: 1.5rem 0.85rem 0.85rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .t-photo:hover .t-photo-caption { opacity: 1; }
+  .t-photo-caption-name {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+  }
+  .t-photo-caption-result {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--cream);
+    display: block;
+    margin-top: 0.1rem;
+  }
+  .t-placeholder {
+    background: rgba(255,255,255,0.04);
+    border: 1px dashed rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .t-placeholder span {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.06em;
+  }
+  /* Arrow buttons */
+  .t-marquee-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-60%);
+    z-index: 10;
     width: 40px;
     height: 40px;
     border-radius: 50%;
     border: 1px solid rgba(255,255,255,0.2);
-    background: none;
+    background: rgba(44,37,32,0.8);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--gold-light);
-    flex-shrink: 0;
     transition: all 0.2s;
+    flex-shrink: 0;
   }
-  .t-arrow:hover { border-color: var(--gold); color: var(--gold); }
-  .t-dots {
-    display: flex;
-    gap: 0.45rem;
-    align-items: center;
+  .t-marquee-arrow:hover { border-color: var(--gold); color: var(--gold); }
+  .t-marquee-prev { left: 0.5rem; }
+  .t-marquee-next { right: 0.5rem; }
+  @media (max-width: 900px) {
+    .t-photo { width: 200px; height: 200px; }
+    .t-track { gap: 8px; padding: 0 8px 2.5rem; }
+    .t-marquee-arrow { display: none; }
   }
-  .t-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 3px;
-    background: rgba(255,255,255,0.2);
-    transition: all 0.3s;
-  }
-  .t-dot.active { background: var(--gold); width: 18px; }
 
   /* ── PURCHASE / CTA STRIP ── */
   .purchase-section {
@@ -1038,8 +1055,6 @@
     .about-quote-block { display: none; }
     .products-grid { grid-template-columns: 1fr; }
     .results-grid { grid-template-columns: 1fr; }
-    .testimonials-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .testimonials-stage { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 3rem; }
     .purchase-box { padding: 2.5rem 1.75rem; }
     nav { padding: 0 1.25rem; }
     .nav-links { display: none; }
@@ -1164,59 +1179,41 @@
 
 <!-- ── TESTIMONIALS ── -->
 <section class="testimonials-section" id="testimonials" aria-labelledby="t-title">
-  <div class="testimonials-inner">
+  <div class="t-header">
+    <span class="section-label" style="color:var(--gold-light)">Real Transformations</span>
+    <h2 class="section-title" id="t-title" style="color:var(--cream)">Their stories.</h2>
+    <div class="divider" style="background:var(--gold-light)" aria-hidden="true"></div>
+    <p class="section-body" style="color:rgba(255,255,255,0.55);font-size:0.9rem">Real results from real people — not paid endorsements, not stock photos. Just women who said yes to something different.</p>
+  </div>
 
-    <div class="testimonials-header">
-      <span class="section-label">From Real Women</span>
-      <h2 class="section-title" id="t-title">Their stories.</h2>
-      <div class="divider" aria-hidden="true"></div>
-      <p class="section-body">Real results from real people — not paid endorsements, not stock photos. Just women who said yes to something different.</p>
-    </div>
-
-    <div class="testimonials-stage">
-      <span class="t-quote-mark" aria-hidden="true">"</span>
-      <div class="t-quotes" aria-live="polite">
-        <div class="t-slide active">
-          <p class="t-text">I have lost 25 pounds and have gained enormous amounts of energy. I didn't think anything would work for me — I was wrong.</p>
-          <p class="t-name">— Ciera</p>
-        </div>
-        <div class="t-slide">
-          <p class="t-text">My night sweats are completely gone. I honestly didn't expect that benefit — this program has genuinely changed my life.</p>
-          <p class="t-name">— Ashley</p>
-        </div>
-        <div class="t-slide">
-          <p class="t-text">This is so much more than weight loss. I am now off 6 medications! I feel like I have gotten my life back.</p>
-          <p class="t-name">— Noha</p>
-        </div>
-        <div class="t-slide">
-          <p class="t-text">22 pounds down and my inflammation is completely gone. I feel better at 50 than I did at 35.</p>
-          <p class="t-name">— Tonya</p>
-        </div>
-        <div class="t-slide">
-          <p class="t-text">These drops give me unbelievable amounts of energy. An absolute game changer — I tell everyone I know about them.</p>
-          <p class="t-name">— Ellie</p>
-        </div>
-      </div>
-      <div class="t-controls">
-        <button class="t-arrow" id="tPrev" aria-label="Previous">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <div class="t-dots" aria-hidden="true">
-          <span class="t-dot active"></span>
-          <span class="t-dot"></span>
-          <span class="t-dot"></span>
-          <span class="t-dot"></span>
-          <span class="t-dot"></span>
-        </div>
-        <button class="t-arrow" id="tNext" aria-label="Next">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
+  <!-- Photo marquee strip -->
+  <div class="t-marquee-wrap" role="region" aria-label="Transformation photos">
+    <button class="t-marquee-arrow t-marquee-prev" aria-label="Previous" onclick="marqueeStep(-1)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="t-marquee" id="tMarquee">
+      <div class="t-track" id="tTrack">
+        <!-- Photos injected by JS from Supabase — placeholders shown until then -->
+        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
+        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
+        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
+        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
+        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
+        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
+        <!-- Duplicates for seamless loop -->
+        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
+        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
+        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
+        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
+        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
+        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
       </div>
     </div>
-
+    <button class="t-marquee-arrow t-marquee-next" aria-label="Next" onclick="marqueeStep(1)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
   </div>
 </section>
-
 <!-- ── WHAT ARE THE DROPS ── -->
 <section class="drops-section" id="drops" aria-labelledby="drops-title">
   <div class="container">
@@ -1413,41 +1410,52 @@
 </footer>
 
 <script>
-  // Testimonials
+  // Marquee — drag to scroll + arrow buttons + touch support
   (function() {
-    var slides = document.querySelectorAll('.t-slide');
-    var dots   = document.querySelectorAll('.t-dot');
-    var cur    = 0;
-    var timer  = null;
+    var track = document.getElementById('tTrack');
+    var marquee = document.getElementById('tMarquee');
+    if (!track || !marquee) return;
 
-    // Set min-height of container to tallest slide
-    var wrap = document.querySelector('.t-quotes');
-    if (wrap) {
-      var maxH = 0;
-      slides.forEach(function(s) {
-        s.style.opacity = '1';
-        s.style.position = 'relative';
-        maxH = Math.max(maxH, s.offsetHeight);
-        s.style.opacity = '';
-        s.style.position = '';
-      });
-      wrap.style.minHeight = maxH + 'px';
-    }
+    // Drag to scroll
+    var isDragging = false, startX = 0, scrollLeft = 0;
+    marquee.addEventListener('mousedown', function(e) {
+      isDragging = true;
+      startX = e.pageX - marquee.offsetLeft;
+      scrollLeft = marquee.scrollLeft;
+      track.style.animationPlayState = 'paused';
+    });
+    document.addEventListener('mouseup', function() {
+      isDragging = false;
+      track.style.animationPlayState = 'running';
+    });
+    marquee.addEventListener('mousemove', function(e) {
+      if (!isDragging) return;
+      e.preventDefault();
+      var x = e.pageX - marquee.offsetLeft;
+      marquee.scrollLeft = scrollLeft - (x - startX);
+    });
 
-    function go(idx) {
-      slides[cur].classList.remove('active');
-      dots[cur].classList.remove('active');
-      cur = (idx + slides.length) % slides.length;
-      slides[cur].classList.add('active');
-      dots[cur].classList.add('active');
-      clearInterval(timer);
-      timer = setInterval(function(){ go(cur + 1); }, 5000);
-    }
-
-    document.getElementById('tNext').addEventListener('click', function(){ go(cur + 1); });
-    document.getElementById('tPrev').addEventListener('click', function(){ go(cur - 1); });
-    timer = setInterval(function(){ go(cur + 1); }, 5000);
+    // Touch support
+    var touchStartX = 0;
+    marquee.addEventListener('touchstart', function(e) {
+      touchStartX = e.touches[0].pageX;
+      track.style.animationPlayState = 'paused';
+    }, { passive: true });
+    marquee.addEventListener('touchend', function() {
+      track.style.animationPlayState = 'running';
+    }, { passive: true });
+    marquee.addEventListener('touchmove', function(e) {
+      var diff = touchStartX - e.touches[0].pageX;
+      marquee.scrollLeft += diff * 0.5;
+      touchStartX = e.touches[0].pageX;
+    }, { passive: true });
   })();
+
+  // Arrow step for marquee
+  function marqueeStep(dir) {
+    var marquee = document.getElementById('tMarquee');
+    if (marquee) marquee.scrollBy({ left: dir * 280, behavior: 'smooth' });
+  }
 
   // Dynamic copyright year
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -1650,34 +1658,35 @@
     return fetch(SB_URL + endpoint, { headers: SB_HEADERS }).then(function(r) { return r.json(); });
   }
 
-  // Load testimonials from Supabase
+  // Load transformation photos from Supabase testimonials table
   function loadTestimonialsFromDB() {
     sbFetch('/testimonials?active=eq.true&order=sort_order.asc')
       .then(function(data) {
         if (!data || !data.length) return;
-        var slides = document.querySelectorAll('.t-slide');
-        var dots   = document.querySelectorAll('.t-dot');
+        var track = document.getElementById('tTrack');
+        if (!track) return;
 
-        // Update existing slides with DB content
-        data.forEach(function(t, i) {
-          if (slides[i]) {
-            slides[i].querySelector('.t-text').textContent = t.quote;
-            slides[i].querySelector('.t-name').textContent = '— ' + t.name;
-          }
-        });
+        // Only use testimonials that have a photo_url
+        var withPhotos = data.filter(function(t) { return t.photo_url; });
+        if (!withPhotos.length) return; // keep placeholders if no photos yet
 
-        // Hide extra slides/dots if DB has fewer than 5
-        for (var i = data.length; i < slides.length; i++) {
-          slides[i].style.display = 'none';
-          if (dots[i]) dots[i].style.display = 'none';
-        }
+        // Build cards — duplicate set for seamless loop
+        var cards = withPhotos.concat(withPhotos).map(function(t) {
+          var caption = (t.name || t.result)
+            ? '<div class="t-photo-caption">' +
+                (t.name ? '<span class="t-photo-caption-name">' + t.name + '</span>' : '') +
+                (t.result ? '<span class="t-photo-caption-result">' + t.result + '</span>' : '') +
+              '</div>'
+            : '';
+          return '<div class="t-photo">' +
+            '<img src="' + t.photo_url + '" alt="' + (t.name || 'Transformation') + '" loading="lazy">' +
+            caption +
+          '</div>';
+        }).join('');
 
-        // Update sizer with longest quote
-        var longest = data.reduce(function(a, b) { return b.quote.length > a.quote.length ? b : a; }, data[0]);
-        var sizer = document.querySelector('.testimonial-sizer .t-text');
-        if (sizer) sizer.textContent = longest.quote;
+        track.innerHTML = cards;
       })
-      .catch(function() { /* silently fall back to hardcoded content */ });
+      .catch(function() { /* keep placeholders */ });
   }
 
   // Load content blocks from Supabase
@@ -1769,8 +1778,89 @@
       .catch(function() { /* fall back to hardcoded */ });
   }
 
+  // ── APPLY CONFIG ──
+  function applyConfig() {
+    if (typeof SITE_CONFIG === 'undefined') return;
+    var c = SITE_CONFIG;
+    var root = document.documentElement.style;
+
+    // Colors
+    root.setProperty('--cream',      c.colors.cream);
+    root.setProperty('--linen',      c.colors.linen);
+    root.setProperty('--sand',       c.colors.sand);
+    root.setProperty('--gold',       c.colors.gold);
+    root.setProperty('--gold-light', c.colors.goldLight);
+    root.setProperty('--ink',        c.colors.ink);
+    root.setProperty('--ink-mid',    c.colors.inkMid);
+    root.setProperty('--ink-light',  c.colors.inkLight);
+    root.setProperty('--sage',       c.colors.sage);
+    root.setProperty('--serif',      "'" + c.fonts.serif + "', Georgia, serif");
+    root.setProperty('--sans',       "'" + c.fonts.sans + "', system-ui, sans-serif");
+
+    // Nav
+    document.querySelectorAll('.nav-name').forEach(function(el) { el.textContent = c.brand.name; });
+
+    // Hero image + position
+    var heroImg = document.querySelector('.hero-img');
+    if (heroImg) {
+      heroImg.style.backgroundImage = "url('" + c.images.hero + "')";
+      heroImg.style.backgroundPosition = 'center ' + (c.hero.imgPosition || '45%');
+    }
+
+    // Hero text
+    var eyebrow = document.querySelector('.hero-eyebrow');
+    if (eyebrow) eyebrow.textContent = c.hero.eyebrow;
+    var headline = document.querySelector('.hero-headline');
+    if (headline) {
+      headline.innerHTML = c.hero.headline.split('\n').map(function(l) {
+        return l.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+      }).join('<br>');
+    }
+    var heroBody = document.querySelector('.hero-body');
+    if (heroBody) heroBody.textContent = c.hero.body;
+
+    // Trust bar
+    var trustBar = document.querySelector('.trust-bar');
+    if (trustBar && c.trustBar) {
+      trustBar.innerHTML = c.trustBar.map(function(item) {
+        return '<span class="trust-item"><span class="trust-dot" aria-hidden="true"></span>' + item + '</span>';
+      }).join('');
+    }
+
+    // Results
+    var resultCards = document.querySelectorAll('.result-card');
+    if (c.results) c.results.forEach(function(r, i) {
+      if (resultCards[i]) {
+        resultCards[i].querySelector('.result-stat').textContent  = r.stat;
+        resultCards[i].querySelector('.result-label').textContent = r.label;
+        resultCards[i].querySelector('.result-desc').textContent  = r.desc;
+      }
+    });
+
+    // CTA strip
+    var ctaTitle = document.querySelector('.cta-strip-title');
+    if (ctaTitle) ctaTitle.textContent = c.cta.headline;
+    var ctaBody = document.querySelector('.cta-strip-body');
+    if (ctaBody) ctaBody.textContent = c.cta.body;
+
+    // Footer
+    document.querySelectorAll('.footer-name').forEach(function(el) { el.innerHTML = c.brand.name.replace(' ', '<br>'); });
+    document.querySelectorAll('.footer-tagline').forEach(function(el) { el.textContent = c.brand.tagline; });
+    document.querySelectorAll('.footer-disclaimer').forEach(function(el) { el.textContent = c.footer.disclaimer; });
+    var partnerLogo = document.querySelector('.footer-partnerco-logo');
+    if (partnerLogo) partnerLogo.src = c.images.partnerLogo;
+
+    // Supabase override
+    if (c.supabase) {
+      SB_URL     = c.supabase.url;
+      SB_KEY     = c.supabase.anonKey;
+      SB_HEADERS = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY };
+    }
+  }
+
   // Run all on DOMContentLoaded
   document.addEventListener('DOMContentLoaded', function() {
+    applyConfig();
     loadTestimonialsFromDB();
     loadContentFromDB();
     loadProductsFromDB();

@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Natural Weight Loss Drops | Tammy Maltby Melchisedeck</title>
-<meta name="description" content="Tammy Melchisedeck helps women and men lose weight, balance hormones, and reclaim their energy through Partner.Co's natural Skinny Drops. Real results, real people.">
-<meta property="og:title" content="Tammy Melchisedeck – Skinny Drops by Partner.Co">
-<meta property="og:description" content="Real results. Real people. Real transformation. Natural Skinny Drops for weight loss and hormone balance — for women and men.">
+<title>Body Balancing Drops | Tammy Maltby Melchisedeck</title>
+<meta name="description" content="Tammy Melchisedeck helps women and men lose weight, balance hormones, and reclaim their energy through Partner.Co's natural Body Balancing Drops. Real results, real people.">
+<meta property="og:title" content="Tammy Melchisedeck – Body Balancing Drops by Partner.Co">
+<meta property="og:description" content="Real results. Real people. Real transformation. Natural Body Balancing Drops for hormone balance and whole-body wellness — for women and men.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.tammymelchisedeck.com">
 <meta name="twitter:card" content="summary_large_image">
@@ -1290,10 +1290,10 @@
       <!-- Left: intro copy + order button -->
       <div class="drops-left">
         <span class="section-label">Slenderiiz™ by Partner.Co</span>
-        <h2 class="section-title" id="drops-title">What are the<br>Skinny Drops?</h2>
+        <h2 class="section-title" id="drops-title">What are the<br>Body Balancing Drops?</h2>
         <div class="divider" aria-hidden="true"></div>
         <p class="section-body">
-          Slenderiiz™ is a unique homeopathic combination of Slenderiix and Xceler8 — designed to balance hormones, increase metabolism, control appetite, and support healthy weight loss. Three drops before each meal. Purchase includes free access to a supportive community to keep you on track.
+          Slenderiiz™ is a unique homeopathic combination of Slenderiix and Xceler8 — designed to balance hormones, increase metabolism, control appetite, and support healthy weight loss. Two drops before each meal. Purchase includes free access to a supportive community to keep you on track.
         </p>
         <img src="images/tmpv33k6gwn.webp" alt="Slenderiix and Xceler8 drops" class="drops-product-img" id="dropsFeatureImg" loading="lazy">
       </div>
@@ -1307,7 +1307,7 @@
             <span class="faq-toggle" aria-hidden="true">−</span>
           </summary>
           <div class="faq-body">
-            Three drops under your tongue before each meal — three times a day. They suppress appetite, balance hormones, and support thyroid, digestion, and blood sugar levels. Women typically lose ½ lb per day; men around ¾ lb. All natural, plant-based, and hormone-free.
+            Two drops under your tongue before each meal — three times a day. They suppress appetite, balance hormones, and support thyroid, digestion, and blood sugar levels. Women typically lose ½ lb per day; men around ¾ lb. All natural, plant-based, and hormone-free.
             <br><br><a href="https://vimeo.com/855740553" target="_blank" rel="noopener">Watch the full video →</a>
           </div>
         </details>
@@ -1393,7 +1393,7 @@
           
         </div>
         <div class="product-body">
-          <span class="product-tag">Thermogenic Fat Burning</span>
+          <span class="product-tag">Scientific Fat Burning</span>
           <h3 class="product-name">AbVantage</h3>
           <p class="product-desc">A recent science breakthrough in thermogenic hip and waist reduction. These capsules activate brown fat — burning calories by converting glucose, fatty acids, and amino acids into heat. Features 10× calorie burn with Grains of Paradise. Gluten free.</p>
           <a href="order.html" class="product-btn">Order Now</a>
@@ -1761,7 +1761,7 @@
           return '<div class="t-photo">' +
             '<div class="t-photo-mat">' +
               '<div class="t-photo-img">' +
-                '<img src="' + photoUrl + '" alt="' + (t.name || 'Transformation') + '" loading="lazy">' +
+                '<img src="' + photoUrl + '" alt="' + (t.name || 'Transformation') + '">' +
               '</div>' +
             '</div>' +
             ((t.name || t.result) ? '<div class="t-photo-caption">' +
@@ -1772,6 +1772,11 @@
         }).join('');
 
         track.innerHTML = cards;
+
+        // Restart animation cleanly after rebuild
+        track.style.animation = 'none';
+        track.offsetHeight; // force reflow
+        track.style.animation = '';
       })
       .catch(function() { /* keep placeholders */ });
   }

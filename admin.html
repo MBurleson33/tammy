@@ -276,6 +276,11 @@
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
         Drag the lines on the left to reorder · Use the toggle to show or hide on site
       </div>
+      <div style="background:var(--linen);border:1px solid var(--sand);border-left:3px solid var(--gold);border-radius:2px;padding:0.85rem 1.1rem;margin-bottom:1.5rem;font-size:0.82rem;color:var(--ink-mid);line-height:1.7">
+        <strong style="color:var(--ink)">📸 Photo size guide:</strong>
+        Transformation photos should be <strong>square</strong> — ideal size is <strong>520 × 520px</strong> (JPG or WebP, under 100KB).
+        Square photos display best in the scrolling strip on the homepage.
+      </div>
       <div id="testimonialsList">
         <div class="loading-state"><div class="spinner"></div> Loading…</div>
       </div>
@@ -292,6 +297,11 @@
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Add Product
         </button>
+      </div>
+      <div style="background:var(--linen);border:1px solid var(--sand);border-left:3px solid var(--gold);border-radius:2px;padding:0.85rem 1.1rem;margin-bottom:1.5rem;font-size:0.82rem;color:var(--ink-mid);line-height:1.7">
+        <strong style="color:var(--ink)">📸 Image size guide:</strong><br>
+        <strong>Product Card Image</strong> — 800 × 450px (landscape, 16:9 ratio) · JPG or WebP · under 150KB<br>
+        <strong>Feature Image</strong> (Drops section only) — 320 × 400px (portrait) · JPG or WebP · under 100KB
       </div>
       <div id="productsList">
         <div class="loading-state"><div class="spinner"></div> Loading…</div>
@@ -400,7 +410,7 @@
     <div class="field-group">
       <label class="edit-label">Their Quote</label>
       <textarea class="edit-field" id="newQuote" placeholder="What did she say about the drops?..." style="min-height:110px"></textarea>
-      <p class="field-hint">Write it in her own words. Quote is optional — name alone is fine if you just want to show her photo.</p>
+      <p class="field-hint">Quote is optional — name alone is fine if you just want to show their photo.</p>
     </div>
     <div class="field-group">
       <label class="edit-label">First Name *</label>
@@ -409,6 +419,19 @@
     <div class="field-group">
       <label class="edit-label">Result <span style="font-size:0.7rem;color:var(--ink-light);font-weight:400;text-transform:none;letter-spacing:0">(optional — shows on photo hover)</span></label>
       <input type="text" class="edit-field" id="newResult" placeholder="e.g. Lost 25 lbs">
+    </div>
+    <div class="field-group">
+      <label class="edit-label">Transformation Photo <span style="font-size:0.7rem;color:var(--ink-light);font-weight:400;text-transform:none;letter-spacing:0">(square, 520×520px ideal)</span></label>
+      <div style="display:flex;gap:0.5rem;align-items:center;margin-bottom:0.5rem">
+        <input type="text" class="edit-field" id="newPhoto" placeholder="Upload or paste URL" style="margin-bottom:0">
+        <label class="btn btn-outline btn-sm" style="cursor:pointer;white-space:nowrap;flex-shrink:0">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+          Upload
+          <input type="file" accept="image/*" style="display:none" onchange="uploadNewTestimonialPhoto(this)">
+        </label>
+      </div>
+      <div id="newPhotoProgress" style="display:none;font-size:0.75rem;color:var(--gold);align-items:center;gap:0.4rem"><div class="spinner" style="width:14px;height:14px;border-width:1.5px"></div> Uploading…</div>
+      <img id="newPhotoPreview" class="img-preview" onerror="this.style.display='none'" style="width:80px;height:80px;object-fit:cover">
     </div>
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeModal('addTestimonialModal')">Cancel</button>
@@ -783,8 +806,34 @@
     document.getElementById('newQuote').value = '';
     document.getElementById('newName').value = '';
     document.getElementById('newResult').value = '';
+    document.getElementById('newPhoto').value = '';
+    document.getElementById('newPhotoPreview').style.display = 'none';
     openModal('addTestimonialModal');
     setTimeout(function() { document.getElementById('newQuote').focus(); }, 100);
+  }
+
+  function uploadNewTestimonialPhoto(input) {
+    var file = input.files[0];
+    if (!file) return;
+    var prog = document.getElementById('newPhotoProgress');
+    prog.style.display = 'flex';
+    var ext = file.name.split('.').pop();
+    var filename = 'testimonial-new-' + Date.now() + '.' + ext;
+    fetch(SUPABASE_URL + '/storage/v1/object/product-images/' + filename, {
+      method: 'POST',
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': file.type, 'x-upsert': 'true' },
+      body: file
+    })
+    .then(function(r) { if (!r.ok) throw new Error(); return r.json(); })
+    .then(function() {
+      var url = SUPABASE_URL + '/storage/v1/object/public/product-images/' + filename;
+      document.getElementById('newPhoto').value = url;
+      var prev = document.getElementById('newPhotoPreview');
+      prev.src = url; prev.style.display = 'block';
+      prog.style.display = 'none';
+      toast('✓ Photo uploaded', 'success');
+    })
+    .catch(function() { prog.style.display = 'none'; toast('Upload failed', 'error'); });
   }
 
   function saveNewTestimonial() {
@@ -792,7 +841,7 @@
     var name  = document.getElementById('newName').value.trim();
     if (!quote || !name) { toast('Please fill in the quote and name', 'error'); return; }
     var maxOrder = testimonials.reduce(function(m, t) { return Math.max(m, t.sort_order); }, 0);
-    fetch(db('testimonials'), { method: 'POST', headers: headers(), body: JSON.stringify({ quote: quote, name: name, result: document.getElementById('newResult').value.trim(), sort_order: maxOrder + 1, active: true }) })
+    fetch(db('testimonials'), { method: 'POST', headers: headers(), body: JSON.stringify({ quote: quote, name: name, result: document.getElementById('newResult').value.trim(), photo_url: document.getElementById('newPhoto').value.trim(), sort_order: maxOrder + 1, active: true }) })
       .then(function(r) { return r.json(); })
       .then(function(d) {
         testimonials.push(Array.isArray(d) ? d[0] : d);
@@ -877,7 +926,7 @@
                 '<input type="file" accept="image/*" style="display:none" onchange="uploadProductImage(\'' + p.id + '\',\'feature\',this)">' +
               '</label>' +
             '</div>' +
-            '<p class="field-hint">Shown in the Skinny Drops section — portrait works best, 320×400px ideal</p>' +
+            '<p class="field-hint">Shown in the Body Balancing Drops section — portrait works best, 320×400px ideal</p>' +
             '<img id="pfeatureimgpreview-' + p.id + '" class="img-preview" ' + (p.feature_image_path ? 'src="' + p.feature_image_path + '" style="display:block"' : '') + ' onerror="this.style.display=\'none\'">' +
             '<div id="uprog-' + p.id + '-feature" style="display:none;font-size:0.75rem;color:var(--gold);margin-top:0.35rem;align-items:center;gap:0.4rem"><div class="spinner" style="width:14px;height:14px;border-width:1.5px"></div> Uploading…</div>' +
           '</div>' +

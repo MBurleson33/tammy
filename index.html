@@ -1857,7 +1857,7 @@
 
     // Supabase override
     if (c.supabase) {
-      SB_URL     = c.supabase.url;
+      SB_URL     = c.supabase.url + '/rest/v1';
       SB_KEY     = c.supabase.anonKey;
       SB_HEADERS = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY };
     }

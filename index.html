@@ -520,60 +520,61 @@
   .t-marquee:active { cursor: grabbing; }
   .t-track {
     display: flex;
-    gap: 4px;
-    padding: 0 4px 3rem;
-    animation: marqueeScroll 60s linear infinite;
+    gap: 2rem;
+    padding: 0 2rem 3rem;
+    animation: marqueeScroll 70s linear infinite;
     width: max-content;
+    align-items: center;
   }
-  /* Pause on hover — target the track directly via JS flag */
   .t-track.paused { animation-play-state: paused; }
   @keyframes marqueeScroll {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }
   }
   .t-photo {
-    width: 220px;
-    height: 280px;
     flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .t-photo-img {
+    width: 320px;
+    height: 320px;
     border-radius: 2px;
     overflow: hidden;
     position: relative;
+    border: 1px solid rgba(255,255,255,0.08);
   }
-  .t-photo img {
+  .t-photo-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top center;
+    object-position: center;
     display: block;
     transition: transform 0.5s ease;
-    filter: brightness(0.92) contrast(0.96);
+    filter: brightness(0.95);
   }
-  .t-photo:hover img {
-    transform: scale(1.04);
-    filter: brightness(1) contrast(1);
+  .t-photo:hover .t-photo-img img {
+    transform: scale(1.03);
+    filter: brightness(1);
   }
   .t-photo-caption {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    background: linear-gradient(to top, rgba(44,37,32,0.88) 0%, transparent 100%);
-    padding: 2rem 0.85rem 0.85rem;
-    opacity: 0;
-    transition: opacity 0.3s;
+    text-align: center;
   }
-  .t-photo:hover .t-photo-caption { opacity: 1; }
   .t-photo-caption-name {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 500;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--gold);
     display: block;
   }
   .t-photo-caption-result {
     font-family: var(--serif);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-style: italic;
-    color: var(--cream);
+    color: rgba(255,255,255,0.5);
     display: block;
     margin-top: 0.1rem;
   }
@@ -583,6 +584,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 320px;
+    height: 320px;
+    border-radius: 2px;
   }
   .t-placeholder span {
     font-size: 0.72rem;
@@ -593,13 +597,13 @@
   .t-marquee-arrow {
     position: absolute;
     top: 50%;
-    transform: translateY(-60%);
+    transform: translateY(-70%);
     z-index: 10;
     width: 40px;
     height: 40px;
     border-radius: 50%;
     border: 1px solid rgba(255,255,255,0.2);
-    background: rgba(44,37,32,0.8);
+    background: rgba(44,37,32,0.85);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -609,11 +613,12 @@
     flex-shrink: 0;
   }
   .t-marquee-arrow:hover { border-color: var(--gold); color: var(--gold); }
-  .t-marquee-prev { left: 0.5rem; }
-  .t-marquee-next { right: 0.5rem; }
+  .t-marquee-prev { left: 0.75rem; }
+  .t-marquee-next { right: 0.75rem; }
   @media (max-width: 900px) {
-    .t-photo { width: 180px; height: 230px; }
-    .t-track { gap: 3px; padding: 0 3px 2.5rem; }
+    .t-photo-img { width: 240px; height: 240px; }
+    .t-placeholder { width: 240px; height: 240px; }
+    .t-track { gap: 1.25rem; padding: 0 1.25rem 2.5rem; }
     .t-marquee-arrow { display: none; }
   }
 
@@ -1199,19 +1204,19 @@
     <div class="t-marquee" id="tMarquee">
       <div class="t-track" id="tTrack">
         <!-- Photos injected by JS from Supabase — placeholders shown until then -->
-        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
-        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
-        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
-        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
-        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
-        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
+        <div class="t-photo"><div class="t-placeholder"><span>Photo coming soon</span></div></div>
+        <div class="t-photo"><div class="t-placeholder"><span>Photo coming soon</span></div></div>
+        <div class="t-photo"><div class="t-placeholder"><span>Photo coming soon</span></div></div>
+        <div class="t-photo"><div class="t-placeholder"><span>Photo coming soon</span></div></div>
+        <div class="t-photo"><div class="t-placeholder"><span>Photo coming soon</span></div></div>
+        <div class="t-photo"><div class="t-placeholder"><span>Photo coming soon</span></div></div>
         <!-- Duplicates for seamless loop -->
-        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
-        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
-        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
-        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
-        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
-        <div class="t-photo t-placeholder"><span>Photo coming soon</span></div>
+        <div class="t-photo"><div class="t-placeholder"><span>Photo coming soon</span></div></div>
+        <div class="t-photo"><div class="t-placeholder"><span>Photo coming soon</span></div></div>
+        <div class="t-photo"><div class="t-placeholder"><span>Photo coming soon</span></div></div>
+        <div class="t-photo"><div class="t-placeholder"><span>Photo coming soon</span></div></div>
+        <div class="t-photo"><div class="t-placeholder"><span>Photo coming soon</span></div></div>
+        <div class="t-photo"><div class="t-placeholder"><span>Photo coming soon</span></div></div>
       </div>
     </div>
     <button class="t-marquee-arrow t-marquee-next" aria-label="Next" onclick="marqueeStep(1)">
@@ -1696,8 +1701,13 @@
               '</div>'
             : '';
           return '<div class="t-photo">' +
-            '<img src="' + photoUrl + '" alt="' + (t.name || 'Transformation') + '" loading="lazy">' +
-            caption +
+            '<div class="t-photo-img">' +
+              '<img src="' + photoUrl + '" alt="' + (t.name || 'Transformation') + '" loading="lazy">' +
+            '</div>' +
+            ((t.name || t.result) ? '<div class="t-photo-caption">' +
+              (t.name ? '<span class="t-photo-caption-name">' + t.name + '</span>' : '') +
+              (t.result ? '<span class="t-photo-caption-result">' + t.result + '</span>' : '') +
+            '</div>' : '') +
           '</div>';
         }).join('');
 

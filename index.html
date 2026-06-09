@@ -528,7 +528,8 @@
   .t-marquee-wrap::after {
     content: '';
     position: absolute;
-    top: 0; bottom: 0;
+    top: 0;
+    bottom: 4rem;
     width: 120px;
     z-index: 5;
     pointer-events: none;
@@ -545,12 +546,13 @@
     overflow: hidden;
     width: 100%;
     cursor: grab;
+    padding-bottom: 4rem;
   }
   .t-marquee:active { cursor: grabbing; }
   .t-track {
     display: flex;
     gap: 3rem;
-    padding: 0 6rem 4rem;
+    padding: 0;
     animation: marqueeScroll 120s linear infinite;
     width: max-content;
     align-items: center;
@@ -671,10 +673,11 @@
   @media (max-width: 900px) {
     .t-photo-img { width: 260px; height: 260px; }
     .t-placeholder { width: 260px; height: 260px; }
-    .t-track { gap: 2rem; padding: 0 3rem 3rem; }
+    .t-track { gap: 2rem; }
+    .t-marquee { padding-bottom: 3rem; }
     .t-marquee-arrow { display: none; }
     .t-marquee-wrap::before,
-    .t-marquee-wrap::after { width: 60px; }
+    .t-marquee-wrap::after { width: 60px; bottom: 3rem; }
     .t-photo-caption { opacity: 1; transform: none; }
   }
 

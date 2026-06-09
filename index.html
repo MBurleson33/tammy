@@ -1671,7 +1671,12 @@
         if (!withPhotos.length) return; // keep placeholders if no photos yet
 
         // Build cards — duplicate set for seamless loop
+        // Resolve relative paths to absolute URLs
+        var base = window.location.origin + '/';
         var cards = withPhotos.concat(withPhotos).map(function(t) {
+          var photoUrl = (t.photo_url && !t.photo_url.startsWith('http'))
+            ? base + t.photo_url
+            : t.photo_url;
           var caption = (t.name || t.result)
             ? '<div class="t-photo-caption">' +
                 (t.name ? '<span class="t-photo-caption-name">' + t.name + '</span>' : '') +
@@ -1679,7 +1684,7 @@
               '</div>'
             : '';
           return '<div class="t-photo">' +
-            '<img src="' + t.photo_url + '" alt="' + (t.name || 'Transformation') + '" loading="lazy">' +
+            '<img src="' + photoUrl + '" alt="' + (t.name || 'Transformation') + '" loading="lazy">' +
             caption +
           '</div>';
         }).join('');

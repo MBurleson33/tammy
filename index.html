@@ -520,20 +520,20 @@
   .t-marquee:active { cursor: grabbing; }
   .t-track {
     display: flex;
-    gap: 12px;
-    padding: 0 12px 3rem;
-    animation: marqueeScroll 40s linear infinite;
+    gap: 4px;
+    padding: 0 4px 3rem;
+    animation: marqueeScroll 60s linear infinite;
     width: max-content;
   }
-  .t-marquee-wrap:hover .t-track,
-  .t-marquee-wrap:focus-within .t-track { animation-play-state: paused; }
+  /* Pause on hover — target the track directly via JS flag */
+  .t-track.paused { animation-play-state: paused; }
   @keyframes marqueeScroll {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }
   }
   .t-photo {
-    width: 260px;
-    height: 260px;
+    width: 220px;
+    height: 280px;
     flex-shrink: 0;
     border-radius: 2px;
     overflow: hidden;
@@ -543,15 +543,20 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top center;
     display: block;
-    transition: transform 0.4s ease;
+    transition: transform 0.5s ease;
+    filter: brightness(0.92) contrast(0.96);
   }
-  .t-photo:hover img { transform: scale(1.04); }
+  .t-photo:hover img {
+    transform: scale(1.04);
+    filter: brightness(1) contrast(1);
+  }
   .t-photo-caption {
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    background: linear-gradient(to top, rgba(44,37,32,0.85) 0%, transparent 100%);
-    padding: 1.5rem 0.85rem 0.85rem;
+    background: linear-gradient(to top, rgba(44,37,32,0.88) 0%, transparent 100%);
+    padding: 2rem 0.85rem 0.85rem;
     opacity: 0;
     transition: opacity 0.3s;
   }
@@ -607,8 +612,8 @@
   .t-marquee-prev { left: 0.5rem; }
   .t-marquee-next { right: 0.5rem; }
   @media (max-width: 900px) {
-    .t-photo { width: 200px; height: 200px; }
-    .t-track { gap: 8px; padding: 0 8px 2.5rem; }
+    .t-photo { width: 180px; height: 230px; }
+    .t-track { gap: 3px; padding: 0 3px 2.5rem; }
     .t-marquee-arrow { display: none; }
   }
 
@@ -1410,11 +1415,18 @@
 </footer>
 
 <script>
-  // Marquee — drag to scroll + arrow buttons + touch support
+  // Marquee — drag to scroll + arrow buttons + touch support + hover pause
   (function() {
     var track = document.getElementById('tTrack');
     var marquee = document.getElementById('tMarquee');
+    var wrap = document.querySelector('.t-marquee-wrap');
     if (!track || !marquee) return;
+
+    // Pause on hover
+    if (wrap) {
+      wrap.addEventListener('mouseenter', function() { track.classList.add('paused'); });
+      wrap.addEventListener('mouseleave', function() { track.classList.remove('paused'); });
+    }
 
     // Drag to scroll
     var isDragging = false, startX = 0, scrollLeft = 0;
@@ -1422,11 +1434,11 @@
       isDragging = true;
       startX = e.pageX - marquee.offsetLeft;
       scrollLeft = marquee.scrollLeft;
-      track.style.animationPlayState = 'paused';
+      track.classList.add('paused');
     });
     document.addEventListener('mouseup', function() {
       isDragging = false;
-      track.style.animationPlayState = 'running';
+      track.classList.remove('paused');
     });
     marquee.addEventListener('mousemove', function(e) {
       if (!isDragging) return;
@@ -1439,10 +1451,10 @@
     var touchStartX = 0;
     marquee.addEventListener('touchstart', function(e) {
       touchStartX = e.touches[0].pageX;
-      track.style.animationPlayState = 'paused';
+      track.classList.add('paused');
     }, { passive: true });
     marquee.addEventListener('touchend', function() {
-      track.style.animationPlayState = 'running';
+      track.classList.remove('paused');
     }, { passive: true });
     marquee.addEventListener('touchmove', function(e) {
       var diff = touchStartX - e.touches[0].pageX;

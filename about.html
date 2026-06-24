@@ -46,7 +46,7 @@
   nav {
     background: var(--white);
     border-bottom: 1px solid var(--sand);
-    padding: 0 2rem;
+    padding: 0 clamp(2rem, 6vw, 6rem);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -111,7 +111,7 @@
     left: 0; right: 0;
     background: var(--white);
     border-bottom: 1px solid var(--sand);
-    padding: 1.5rem 2rem;
+    padding: 1.5rem clamp(2rem, 6vw, 6rem);
     z-index: 99;
     flex-direction: column;
     gap: 1.25rem;
@@ -186,7 +186,7 @@
   /* ── MAIN CONTENT ── */
   .about-content {
     background: var(--white);
-    padding: 5rem 2rem;
+    padding: 5rem clamp(2rem, 6vw, 6rem);
   }
   .container { max-width: 1080px; margin: 0 auto; }
   .about-grid {
@@ -291,7 +291,7 @@
   /* ── CTA STRIP ── */
   .cta-strip {
     background: var(--ink);
-    padding: 4.5rem 2rem;
+    padding: 4.5rem clamp(2rem, 6vw, 6rem);
     text-align: center;
   }
   .cta-strip-label {
@@ -336,7 +336,7 @@
 
   /* ── FOOTER ── */
   .site-footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06); }
-  .footer-inner { max-width: 1080px; margin: 0 auto; padding: 5rem 2rem 2.5rem; }
+  .footer-inner { max-width: 1080px; margin: 0 auto; padding: 5rem clamp(2rem, 6vw, 6rem) 2.5rem; }
   .footer-grid {
     display: grid;
     grid-template-columns: 1.5fr 1fr 2fr;

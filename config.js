@@ -57,8 +57,8 @@ var SITE_CONFIG = {
   // ── HERO SECTION ───────────────────────────────────
   hero: {
     eyebrow:    'Partner.Co Wellness',
-    headline:   'Real results.\n*Real people.*\nReal transformation.',  // *text* = gold
-    body:       'You were designed to grow. Through homeopathy, clean eating, and natural nutrients, these drops have helped hundreds of women and men lose weight, balance hormones, and reclaim their energy — without gimmicks or extreme diets.',
+    headline:   'Feel like\n*yourself*\nagain.',
+    body:       'More energy. Better sleep. Balanced hormones. Real results — for women and men ready to reclaim their vitality in the second half of life.',
     imgPosition: '45%',   // Vertical position of hero image (0% = top, 100% = bottom)
   },
 

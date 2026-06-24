@@ -308,12 +308,12 @@
   }
   .tammy-quote-mark {
     font-family: var(--serif);
-    font-size: 5rem;
-    line-height: 0.8;
+    font-size: 4rem;
+    line-height: 1;
     color: var(--gold);
-    opacity: 0.3;
+    opacity: 0.4;
     display: block;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
   .tammy-quote-text {
     font-family: var(--serif);
@@ -1276,7 +1276,6 @@
   <div class="tammy-intro-inner">
     <div class="tammy-intro-left">
       <span class="section-label">Meet Tammy</span>
-      <h2 class="tammy-intro-title" id="tammy-intro-title">The reason people buy isn't the drops.<br><em>It's Tammy.</em></h2>
       <div class="divider" aria-hidden="true"></div>
       <p class="tammy-intro-body">Before she became a wellness leader, Tammy was a storyteller — an Emmy Award-winning television host, author, and speaker who built a career helping people find hope, purpose, and transformation. Today she brings that same mission to health.</p>
       <ul class="tammy-credentials">
@@ -1721,10 +1720,12 @@
     sections.forEach(function(s) { observer.observe(s); });
   })();
   function toggleNav() {
-    document.getElementById('mobileNav').classList.toggle('open');
+    var nav = document.getElementById('mobileNav');
+    if (nav) nav.classList.toggle('open');
   }
   function closeMobileNav() {
-    document.getElementById('mobileNav').classList.remove('open');
+    var nav = document.getElementById('mobileNav');
+    if (nav) nav.classList.remove('open');
   }
 
   // Close mobile nav on outside click
@@ -1790,6 +1791,7 @@
     e.preventDefault();
     var btn = document.getElementById('chatSubmitBtn');
     var form = document.getElementById('chatForm');
+    if (!btn || !form) return;
     btn.textContent = 'Sending...';
     btn.disabled = true;
 
@@ -1800,8 +1802,10 @@
       headers: { 'Accept': 'application/json' }
     }).then(function(r) {
       if (r.ok) {
-        document.getElementById('chatFormWrap').style.display = 'none';
-        document.getElementById('chatSuccess').style.display = 'block';
+        var wrap = document.getElementById('chatFormWrap');
+        var success = document.getElementById('chatSuccess');
+        if (wrap) wrap.style.display = 'none';
+        if (success) success.style.display = 'block';
       } else {
         btn.textContent = 'Try again';
         btn.disabled = false;
@@ -1833,7 +1837,7 @@
   document.addEventListener('click', function(e) {
     var panel = document.getElementById('chatPanel');
     var bubble = document.getElementById('chatBubble');
-    if (panel.classList.contains('open') && !panel.contains(e.target) && !bubble.contains(e.target)) {
+    if (panel && bubble && panel.classList.contains('open') && !panel.contains(e.target) && !bubble.contains(e.target)) {
       panel.classList.remove('open');
     }
   });
@@ -2043,9 +2047,12 @@
     var resultCards = document.querySelectorAll('.result-card');
     if (c.results) c.results.forEach(function(r, i) {
       if (resultCards[i]) {
-        resultCards[i].querySelector('.result-stat').textContent  = r.stat;
-        resultCards[i].querySelector('.result-label').textContent = r.label;
-        resultCards[i].querySelector('.result-desc').textContent  = r.desc;
+        var stat  = resultCards[i].querySelector('.result-stat');
+        var label = resultCards[i].querySelector('.result-label');
+        var desc  = resultCards[i].querySelector('.result-desc');
+        if (stat)  stat.textContent  = r.stat;
+        if (label) label.textContent = r.label;
+        if (desc)  desc.textContent  = r.desc;
       }
     });
 

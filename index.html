@@ -1579,7 +1579,19 @@
     });
   }
 
-  // Active nav state on scroll
+  // Back to top button
+  var backToTopBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) {
+      backToTopBtn.style.opacity = '1';
+      backToTopBtn.style.transform = 'translateY(0)';
+    } else {
+      backToTopBtn.style.opacity = '0';
+      backToTopBtn.style.transform = 'translateY(10px)';
+    }
+  }, { passive: true });
+
+
   (function() {
     var sections = document.querySelectorAll('section[id], div[id="order"]');
     var navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
@@ -2142,6 +2154,11 @@
     </div>
   </div>
 </div>
+
+<!-- BACK TO TOP -->
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" style="position:fixed;bottom:2rem;right:1.5rem;width:44px;height:44px;border-radius:50%;background:var(--gold);color:var(--white);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(10px);transition:opacity 0.3s,transform 0.3s;z-index:90;box-shadow:0 4px 16px rgba(44,37,32,0.25)">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 
 </body>
 </html>

@@ -48,7 +48,7 @@
   nav {
     background: var(--white);
     border-bottom: 1px solid var(--sand);
-    padding: 0 2rem;
+    padding: 0 clamp(2rem, 6vw, 6rem);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -254,7 +254,7 @@
   /* ── WHO IS TAMMY ── */
   .tammy-intro {
     background: var(--linen);
-    padding: 5.5rem 2rem;
+    padding: 5.5rem clamp(2rem, 6vw, 6rem);
     border-bottom: 1px solid var(--sand);
   }
   .tammy-intro-inner {
@@ -357,7 +357,7 @@
   /* ── TRUST BAR ── */
   .trust-bar {
     background: var(--ink);
-    padding: 1.1rem 2rem;
+    padding: 1.1rem clamp(2rem, 6vw, 6rem);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -394,7 +394,7 @@
   }
 
   /* ── LAYOUT SHELLS ── */
-  section { padding: 5.5rem 2rem; }
+  section { padding: 5.5rem clamp(2rem, 6vw, 6rem); }
   .container { max-width: 1080px; margin: 0 auto; }
   .section-label {
     font-size: 0.7rem;
@@ -616,7 +616,7 @@
     padding: 5rem 0 0;
   }
   .t-header {
-    padding: 0 2rem 4rem;
+    padding: 0 clamp(2rem, 6vw, 6rem) 4rem;
     max-width: 1080px;
     margin: 0 auto;
   }
@@ -783,7 +783,7 @@
   /* ── PURCHASE / CTA STRIP ── */
   .purchase-section {
     background: var(--ink);
-    padding: 5rem 2rem;
+    padding: 5rem clamp(2rem, 6vw, 6rem);
   }
   .cta-strip-inner {
     display: grid;
@@ -1059,7 +1059,7 @@
   .footer-inner {
     max-width: 1080px;
     margin: 0 auto;
-    padding: 5rem 2rem 2.5rem;
+    padding: 5rem clamp(2rem, 6vw, 6rem) 2.5rem;
   }
   .footer-grid {
     display: grid;

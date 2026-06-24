@@ -57,7 +57,7 @@ var SITE_CONFIG = {
   // ── HERO SECTION ───────────────────────────────────
   hero: {
     eyebrow:    'Partner.Co Wellness',
-    headline:   'Feel like\n*yourself*\nagain.',
+    headline:   'Feel like\n*yourself* again.',
     body:       'More energy. Better sleep. Balanced hormones. Real results — for women and men ready to reclaim their vitality in the second half of life.',
     imgPosition: '45%',   // Vertical position of hero image (0% = top, 100% = bottom)
   },

@@ -1023,9 +1023,11 @@
   }
 
   function toggleProductCard(id) {
+    var cardBody = document.getElementById('pb-' + id);
     var chev = document.getElementById('chev-' + id);
-    body.classList.toggle('open');
-    if (chev) chev.classList.toggle('open', body.classList.contains('open'));
+    if (!cardBody) return;
+    cardBody.classList.toggle('open');
+    if (chev) chev.classList.toggle('open', cardBody.classList.contains('open'));
   }
 
   function toggleProduct(id, active) {

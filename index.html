@@ -1276,6 +1276,7 @@
   <div class="tammy-intro-inner">
     <div class="tammy-intro-left">
       <span class="section-label">Meet Tammy</span>
+      <h2 class="tammy-intro-title" id="tammy-intro-title">Wellness. Faith.<br>Purpose.</h2>
       <div class="divider" aria-hidden="true"></div>
       <p class="tammy-intro-body">Before she became a wellness leader, Tammy was a storyteller — an Emmy Award-winning television host, author, and speaker who built a career helping people find hope, purpose, and transformation. Today she brings that same mission to health.</p>
       <ul class="tammy-credentials">
@@ -1653,12 +1654,14 @@
 
   function closeLetter() {
     var overlay = document.getElementById('letterOverlay');
+    if (!overlay) return;
     overlay.classList.add('hidden');
-    setTimeout(function() { overlay.style.display = 'none'; }, 400);
+    setTimeout(function() { if (overlay) overlay.style.display = 'none'; }, 400);
   }
 
   // Close on backdrop click
-  document.getElementById('letterOverlay').addEventListener('click', function(e) {
+  var _overlay = document.getElementById('letterOverlay');
+  if (_overlay) _overlay.addEventListener('click', function(e) {
     if (e.target === this) closeLetter();
   });
 
@@ -1691,15 +1694,17 @@
 
   // Back to top button
   var backToTopBtn = document.getElementById('backToTop');
-  window.addEventListener('scroll', function() {
-    if (window.scrollY > 400) {
-      backToTopBtn.style.opacity = '1';
-      backToTopBtn.style.transform = 'translateY(0)';
-    } else {
-      backToTopBtn.style.opacity = '0';
-      backToTopBtn.style.transform = 'translateY(10px)';
-    }
-  }, { passive: true });
+  if (backToTopBtn) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 400) {
+        backToTopBtn.style.opacity = '1';
+        backToTopBtn.style.transform = 'translateY(0)';
+      } else {
+        backToTopBtn.style.opacity = '0';
+        backToTopBtn.style.transform = 'translateY(10px)';
+      }
+    }, { passive: true });
+  }
 
 
   (function() {
@@ -1760,6 +1765,7 @@
   // Email form with basic feedback
   function handleEmailSubmit(e) {
     var btn = e.target.querySelector('button');
+    if (!btn) return;
     var original = btn.textContent;
     var action = e.target.action;
     if (action.includes('YOUR_FORM_ID')) {
@@ -1898,9 +1904,11 @@
         track.innerHTML = cards;
 
         // Restart animation cleanly after rebuild
-        track.style.animation = 'none';
-        track.offsetHeight; // force reflow
-        track.style.animation = '';
+        if (track) {
+          track.style.animation = 'none';
+          track.offsetHeight; // force reflow
+          track.style.animation = '';
+        }
       })
       .catch(function() { /* keep placeholders */ });
   }

@@ -935,13 +935,15 @@
   /* ── PURCHASE / CTA STRIP ── */
   .purchase-section {
     background: var(--ink);
-    padding: 5rem clamp(2rem, 4vw, 4rem);
   }
   .cta-strip-inner {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 4rem;
     align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 5.5rem clamp(2rem, 4vw, 4rem);
   }
   .cta-strip-title {
     font-family: var(--serif);
@@ -1207,6 +1209,8 @@
     border-top: 1px solid rgba(255,255,255,0.06);
   }
   .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
     padding: 5rem clamp(2rem, 4vw, 4rem) 2.5rem;
   }
   .footer-grid {

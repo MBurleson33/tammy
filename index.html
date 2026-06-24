@@ -1207,13 +1207,15 @@
     .products-grid { grid-template-columns: 1fr; }
     .results-grid { grid-template-columns: 1fr; }
     .purchase-box { padding: 2.5rem 1.75rem; }
+    section { padding: 4rem 1.5rem; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  }
+  @media (max-width: 1200px) {
     nav { padding: 0 1.25rem; }
     .nav-links { display: none; }
     .nav-toggle { display: flex; }
     .nav-mobile-right { display: flex; }
-    section { padding: 4rem 1.5rem; }
-    .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
   }
 </style>
 </head>
@@ -1223,10 +1225,10 @@
 <nav aria-label="Main navigation">
   <a href="#" class="nav-name">Tammy Maltby Melchisedeck</a>
   <ul class="nav-links" role="list">
+    <li><a href="#tammy">Meet Tammy</a></li>
     <li><a href="#drops">The Drops</a></li>
     <li><a href="#results">Results</a></li>
     <li><a href="#testimonials">Testimonials</a></li>
-    <li><a href="about.html">About</a></li>
     <li><a href="order.html" class="nav-cta">Order Now</a></li>
   </ul>
   <div class="nav-mobile-right">
@@ -1237,10 +1239,10 @@
   </div>
 </nav>
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+  <a href="#tammy" onclick="closeMobileNav()">Meet Tammy</a>
   <a href="#drops" onclick="closeMobileNav()">The Drops</a>
   <a href="#results" onclick="closeMobileNav()">Results</a>
   <a href="#testimonials" onclick="closeMobileNav()">Testimonials</a>
-  <a href="about.html" onclick="closeMobileNav()">About</a>
 </nav>
 
 <!-- ── HERO ── -->

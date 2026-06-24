@@ -251,6 +251,109 @@
   }
   .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
 
+  /* ── WHO IS TAMMY ── */
+  .tammy-intro {
+    background: var(--linen);
+    padding: 5.5rem 2rem;
+    border-bottom: 1px solid var(--sand);
+  }
+  .tammy-intro-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .tammy-intro-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+  }
+  .tammy-intro-title em { font-style: italic; color: var(--gold); }
+  .tammy-intro-body {
+    font-size: 0.95rem;
+    color: var(--ink-mid);
+    line-height: 1.85;
+    margin-bottom: 1.75rem;
+  }
+  .tammy-credentials {
+    list-style: none;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .tammy-credentials li {
+    font-size: 0.88rem;
+    color: var(--ink-mid);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    line-height: 1.5;
+  }
+  .cred-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .btn-secondary {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 0.1rem;
+    transition: color 0.2s, border-color 0.2s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { color: var(--ink); border-color: var(--ink); }
+  /* Quote block */
+  .tammy-intro-quote {
+    background: var(--ink);
+    padding: 3rem 2.5rem;
+    border-radius: 2px;
+    position: relative;
+  }
+  .tammy-quote-mark {
+    font-family: var(--serif);
+    font-size: 5rem;
+    line-height: 0.8;
+    color: var(--gold);
+    opacity: 0.3;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .tammy-quote-text {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 2vw, 1.8rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+  .tammy-quote-attr {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+  }
+  @media (max-width: 900px) {
+    .tammy-intro-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .tammy-intro-quote { padding: 2rem 1.5rem; }
+  }
+
   /* ── TRUST BAR ── */
   .trust-bar {
     background: var(--ink);
@@ -1165,16 +1268,16 @@
   <div class="hero-copy">
     <p class="hero-eyebrow">Partner.Co Wellness</p>
     <h1 class="hero-headline" id="hero-headline">
-      Real results.<br>
-      <em>Real people.</em><br>
-      Real transformation.
+      Feel like<br>
+      <em>yourself</em><br>
+      again.
     </h1>
     <p class="hero-body">
-      You were designed to grow. Through homeopathy, clean eating, and natural nutrients, these drops have helped hundreds of women and men lose weight, balance hormones, and reclaim their energy — without gimmicks or extreme diets.
+      More energy. Better sleep. Balanced hormones. Real results — for women and men ready to reclaim their vitality in the second half of life.
     </p>
     <div class="hero-actions">
-      <a href="order.html" class="btn-primary">Order Now</a>
-      <a href="#drops" class="btn-ghost">Learn More</a>
+      <a href="#drops" class="btn-primary">Start Your Journey</a>
+      <a href="#tammy" class="btn-ghost">Meet Tammy</a>
     </div>
   </div>
 </section>
@@ -1186,6 +1289,33 @@
   <span class="trust-item" role="listitem"><span class="trust-dot" aria-hidden="true"></span>Free US Shipping</span>
   <span class="trust-item" role="listitem"><span class="trust-dot" aria-hidden="true"></span>Up to ¾ lb Lost Per Day</span>
 </div>
+
+<!-- ── WHO IS TAMMY ── -->
+<section class="tammy-intro" id="tammy" aria-labelledby="tammy-intro-title">
+  <div class="tammy-intro-inner">
+    <div class="tammy-intro-left">
+      <span class="section-label">Meet Tammy</span>
+      <h2 class="tammy-intro-title" id="tammy-intro-title">The reason people buy isn't the drops.<br><em>It's Tammy.</em></h2>
+      <div class="divider" aria-hidden="true"></div>
+      <p class="tammy-intro-body">Before she became a wellness leader, Tammy was a storyteller — an Emmy Award-winning television host, author, and speaker who built a career helping people find hope, purpose, and transformation. Today she brings that same mission to health.</p>
+      <ul class="tammy-credentials">
+        <li><span class="cred-dot"></span>Emmy Award-winning television host</li>
+        <li><span class="cred-dot"></span>Published author &amp; international speaker</li>
+        <li><span class="cred-dot"></span>Helped build one of the largest wellness organizations in the industry</li>
+        <li><span class="cred-dot"></span>Mentor to thousands of women across the globe</li>
+        <li><span class="cred-dot"></span>Living proof that midlife is just the beginning</li>
+      </ul>
+      <a href="about.html" class="btn-secondary">Read Tammy's Full Story →</a>
+    </div>
+    <div class="tammy-intro-right">
+      <div class="tammy-intro-quote">
+        <span class="tammy-quote-mark">"</span>
+        <p class="tammy-quote-text">Midlife is not a season to retreat. It is a season to grow.</p>
+        <span class="tammy-quote-attr">— Tammy Maltby Melchisedeck</span>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ── WELCOME LETTER POPUP ── -->
 <div class="letter-overlay" id="letterOverlay" role="dialog" aria-modal="true" aria-labelledby="letter-greeting">

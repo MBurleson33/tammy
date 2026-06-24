@@ -408,8 +408,8 @@
   <div class="modal">
     <h3 class="modal-title">Add a Testimonial</h3>
     <div class="field-group">
-      <label class="edit-label">Their Quote</label>
-      <textarea class="edit-field" id="newQuote" placeholder="What did she say about the drops?..." style="min-height:110px"></textarea>
+      <label class="edit-label">Their Quote <span style="font-size:0.7rem;color:var(--ink-light);font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+      <textarea class="edit-field" id="newQuote" placeholder="What did she say about the drops? Leave blank if photo only..." style="min-height:110px"></textarea>
       <p class="field-hint">Quote is optional — name alone is fine if you just want to show their photo.</p>
     </div>
     <div class="field-group">
@@ -926,7 +926,7 @@
                 '<input type="file" accept="image/*" style="display:none" onchange="uploadProductImage(\'' + p.id + '\',\'feature\',this)">' +
               '</label>' +
             '</div>' +
-            '<p class="field-hint">Shown in the Body Balancing Drops section — portrait works best, 320×400px ideal</p>' +
+            '<p class="field-hint">Shown in the Body Balancing Drops section — landscape, 1200×675px ideal (16:9 ratio)</p>' +
             '<img id="pfeatureimgpreview-' + p.id + '" class="img-preview" ' + (p.feature_image_path ? 'src="' + p.feature_image_path + '" style="display:block"' : '') + ' onerror="this.style.display=\'none\'">' +
             '<div id="uprog-' + p.id + '-feature" style="display:none;font-size:0.75rem;color:var(--gold);margin-top:0.35rem;align-items:center;gap:0.4rem"><div class="spinner" style="width:14px;height:14px;border-width:1.5px"></div> Uploading…</div>' +
           '</div>' +

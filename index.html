@@ -764,6 +764,10 @@
     background: #1a1714;
     padding: 5rem 0 0;
   }
+  .testimonials-section > .container {
+    padding-left: clamp(2rem, 6vw, 6rem);
+    padding-right: clamp(2rem, 6vw, 6rem);
+  }
   .t-header {
     padding: 0 clamp(2rem, 6vw, 6rem) 4rem;
     max-width: 1080px;
@@ -1520,7 +1524,7 @@
 
 <!-- ── TESTIMONIALS ── -->
 <section class="testimonials-section" id="testimonials" aria-labelledby="t-title">
-  <div class="t-header">
+  <div class="container" style="padding-bottom:4rem">
     <span class="section-label" style="color:var(--gold-light)">Real Transformations</span>
     <h2 class="section-title" id="t-title" style="color:var(--cream)">Their stories.</h2>
     <div class="divider" style="background:var(--gold-light)" aria-hidden="true"></div>

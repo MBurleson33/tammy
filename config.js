@@ -79,9 +79,9 @@ var SITE_CONFIG = {
   nav: {
     links: [
       { label: 'Meet Tammy',   href: '#tammy' },
-      { label: 'The Drops',    href: '#drops' },
       { label: 'Results',      href: '#results' },
       { label: 'Testimonials', href: '#testimonials' },
+      { label: 'The Drops',    href: '#drops' },
     ],
   },
 

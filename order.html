@@ -1013,6 +1013,27 @@
       // Redefine getSelectedProducts to use live DOM
       window.rows = document.querySelectorAll('.product-row');
       updateSummary();
+
+      // Pre-select product from URL parameter e.g. order.html?product=AbVantage
+      var urlParams = new URLSearchParams(window.location.search);
+      var preselect = urlParams.get('product');
+      if (preselect) {
+        document.querySelectorAll('.product-row').forEach(function(row) {
+          var nameEl = row.querySelector('.product-name-text');
+          var check  = row.querySelector('.product-check');
+          var qty    = row.querySelector('.product-qty');
+          var price  = row.querySelector('.product-price');
+          if (nameEl && nameEl.textContent.trim().toLowerCase() === preselect.toLowerCase()) {
+            check.checked = true;
+            if (qty)   qty.classList.add('active');
+            if (price) price.classList.add('active');
+            updateSummary();
+            setTimeout(function() {
+              row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 400);
+          }
+        });
+      }
     })
     .catch(function() { /* fall back to hardcoded product list */ });
   });

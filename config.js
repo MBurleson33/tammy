@@ -78,10 +78,10 @@ var SITE_CONFIG = {
   // ── NAVIGATION ─────────────────────────────────────
   nav: {
     links: [
+      { label: 'Meet Tammy',   href: '#tammy' },
       { label: 'The Drops',    href: '#drops' },
       { label: 'Results',      href: '#results' },
       { label: 'Testimonials', href: '#testimonials' },
-      { label: 'About',        href: 'about.html' },
     ],
   },
 

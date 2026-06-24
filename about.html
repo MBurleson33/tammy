@@ -46,7 +46,7 @@
   nav {
     background: var(--white);
     border-bottom: 1px solid var(--sand);
-    padding: 0 clamp(2rem, 6vw, 6rem);
+    padding: 0 clamp(2rem, 4vw, 4rem);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -111,7 +111,7 @@
     left: 0; right: 0;
     background: var(--white);
     border-bottom: 1px solid var(--sand);
-    padding: 1.5rem clamp(2rem, 6vw, 6rem);
+    padding: 1.5rem clamp(2rem, 4vw, 4rem);
     z-index: 99;
     flex-direction: column;
     gap: 1.25rem;
@@ -186,9 +186,9 @@
   /* ── MAIN CONTENT ── */
   .about-content {
     background: var(--white);
-    padding: 5rem clamp(2rem, 6vw, 6rem);
+    padding: 5rem clamp(2rem, 4vw, 4rem);
   }
-  .container { max-width: 1080px; margin: 0 auto; }
+  .container { max-width: 1400px; margin: 0 auto; }
   .about-grid {
     display: grid;
     grid-template-columns: 3fr 7fr;
@@ -291,7 +291,7 @@
   /* ── CTA STRIP ── */
   .cta-strip {
     background: var(--ink);
-    padding: 4.5rem clamp(2rem, 6vw, 6rem);
+    padding: 4.5rem clamp(2rem, 4vw, 4rem);
     text-align: center;
   }
   .cta-strip-label {
@@ -336,7 +336,7 @@
 
   /* ── FOOTER ── */
   .site-footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06); }
-  .footer-inner { max-width: 1080px; margin: 0 auto; padding: 5rem clamp(2rem, 6vw, 6rem) 2.5rem; }
+  .footer-inner { max-width: 1400px; margin: 0 auto; padding: 5rem clamp(2rem, 4vw, 4rem) 2.5rem; }
   .footer-grid {
     display: grid;
     grid-template-columns: 1.5fr 1fr 2fr;
@@ -496,10 +496,12 @@
 
 <!-- ── CTA STRIP ── -->
 <div class="cta-strip">
-  <span class="cta-strip-label">Ready to Begin?</span>
-  <h2 class="cta-strip-title">You were woven for this moment.</h2>
-  <p class="cta-strip-body">Join the people who have already taken the first step toward health, energy, and a life lived on purpose. The Body Balancing Drops are a simple start.</p>
-  <a href="order.html" class="btn-primary">Order Now</a>
+  <div style="max-width:1400px;margin:0 auto">
+    <span class="cta-strip-label">Ready to Begin?</span>
+    <h2 class="cta-strip-title">You were woven for this moment.</h2>
+    <p class="cta-strip-body">Join the people who have already taken the first step toward health, energy, and a life lived on purpose. The Body Balancing Drops are a simple start.</p>
+    <a href="order.html" class="btn-primary">Order Now</a>
+  </div>
 </div>
 
 <!-- ── FOOTER ── -->

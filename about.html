@@ -43,13 +43,13 @@
   }
 
   /* ── NAV ── */
-  nav {
+  nav:not(.social-row):not(.footer-social-row) {
     background: var(--white);
     border-bottom: 1px solid var(--sand);
     padding: 0 clamp(2rem, 4vw, 4rem);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -96,6 +96,9 @@
     padding: 0.25rem;
     flex-direction: column;
     gap: 5px;
+    position: relative;
+    width: 28px;
+    height: 20px;
   }
   .nav-mobile-right {
     display: none;
@@ -109,31 +112,67 @@
     width: 22px;
     height: 1.5px;
     background: var(--ink);
-    transition: all 0.25s;
+    transition: all 0.3s ease;
+    position: absolute;
+    left: 3px;
   }
-  .mobile-nav {
+  .nav-toggle span:nth-child(1) { top: 2px; }
+  .nav-toggle span:nth-child(2) { top: 9px; }
+  .nav-toggle span:nth-child(3) { top: 16px; }
+  .nav-toggle.open span:nth-child(1) { transform: rotate(45deg); top: 9px; }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg); top: 9px; }
+  .nav-page-overlay {
     display: none;
     position: fixed;
     top: 68px;
-    left: 0; right: 0;
-    background: var(--white);
-    border-bottom: 1px solid var(--sand);
-    padding: 1.5rem clamp(2rem, 4vw, 4rem);
-    z-index: 101;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(44,37,32,0.35);
+    z-index: 9998;
+    backdrop-filter: blur(1px);
+  }
+  .nav-page-overlay.open { display: block; }
+  /* ── MOBILE NAV ── */
+  #mobileNav {
+    display: none;
+    position: fixed;
+    top: 68px;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-bottom: 3px solid #B89A6A;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    z-index: 10000;
     flex-direction: column;
-    gap: 1.25rem;
-    box-shadow: 0 8px 24px rgba(44,37,32,0.08);
   }
-  .mobile-nav.open { display: flex; }
-  .mobile-nav a {
-    font-size: 0.9rem;
-    font-weight: 400;
-    letter-spacing: 0.08em;
+  #mobileNav.open { display: flex; }
+  #mobileNav a {
+    display: block;
+    padding: 18px 28px;
+    font-family: sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--ink-mid);
+    color: #5C4F44;
     text-decoration: none;
+    border-bottom: 1px solid #E8DFD0;
   }
-  .mobile-nav a:hover { color: var(--gold); }
+  #mobileNav a:last-child { border-bottom: none; }
+  #mobileNav a:active { color: #B89A6A; }
+  .mobile-nav-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--ink-light);
+    line-height: 1;
+  }
 
   /* ── PAGE HERO ── */
   .page-hero {
@@ -347,6 +386,7 @@
   }
   .footer-brand { display: flex; flex-direction: column; }
   .footer-brand nav { border: none; background: none; padding: 0; margin: 0; }
+  .social-row, .footer-social-row { position: static; height: auto; border: none; background: none; display: flex; }
   .footer-name { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: var(--cream); line-height: 1.2; letter-spacing: 0.03em; margin-bottom: 0.5rem; }
   .footer-tagline { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
   .footer-social-row { display: flex; gap: 0.75rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(184,154,106,0.35); background: none; justify-content: flex-start; }
@@ -407,12 +447,13 @@
     </button>
   </div>
 </nav>
-<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+<div class="nav-page-overlay" id="navPageOverlay" onclick="closeMobileNav()"></div>
+<div id="mobileNav" role="navigation" aria-label="Mobile navigation">
   <a href="index.html#tammy" onclick="closeMobileNav()">Meet Tammy</a>
   <a href="index.html#results" onclick="closeMobileNav()">Results</a>
   <a href="index.html#testimonials" onclick="closeMobileNav()">Testimonials</a>
   <a href="index.html#drops" onclick="closeMobileNav()">The Drops</a>
-</nav>
+</div>
 
 <!-- ── PAGE HERO ── -->
 <div class="page-hero">
@@ -579,16 +620,28 @@
   });
 
   function toggleNav() {
-    document.getElementById('mobileNav').classList.toggle('open');
+    var nav     = document.getElementById('mobileNav');
+    var overlay = document.getElementById('navPageOverlay');
+    var toggle  = document.querySelector('.nav-toggle');
+    if (!nav) return;
+    var isOpen = nav.classList.contains('open');
+    nav.classList.toggle('open');
+    if (overlay) overlay.classList.toggle('open', !isOpen);
+    if (toggle)  toggle.classList.toggle('open',  !isOpen);
   }
   function closeMobileNav() {
-    document.getElementById('mobileNav').classList.remove('open');
+    var nav     = document.getElementById('mobileNav');
+    var overlay = document.getElementById('navPageOverlay');
+    var toggle  = document.querySelector('.nav-toggle');
+    if (nav)     nav.classList.remove('open');
+    if (overlay) overlay.classList.remove('open');
+    if (toggle)  toggle.classList.remove('open');
   }
   document.addEventListener('click', function(e) {
-    const nav = document.getElementById('mobileNav');
-    const toggle = document.querySelector('.nav-toggle');
-    if (nav.classList.contains('open') && !nav.contains(e.target) && !toggle.contains(e.target)) {
-      nav.classList.remove('open');
+    var nav    = document.getElementById('mobileNav');
+    var toggle = document.querySelector('.nav-toggle');
+    if (nav && nav.classList.contains('open') && !nav.contains(e.target) && toggle && !toggle.contains(e.target)) {
+      closeMobileNav();
     }
   });
 

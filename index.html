@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>About Tammy – Tammy Melchisedeck</title>
-<meta name="description" content="An Emmy-winning media personality turned wellness entrepreneur, Tammy Maltby Melchisedeck inspires people to take their health, faith, and purpose seriously.">
-<meta property="og:title" content="About Tammy – Tammy Melchisedeck">
-<meta property="og:description" content="An Emmy-winning media personality turned wellness entrepreneur, Tammy Maltby Melchisedeck inspires people to take their health, faith, and purpose seriously.">
+<title>Body Balancing Drops | Tammy Maltby Melchisedeck</title>
+<meta name="description" content="Tammy Melchisedeck helps women and men lose weight, balance hormones, and reclaim their energy through Partner.Co's natural Body Balancing Drops. Real results, real people.">
+<meta property="og:title" content="Tammy Melchisedeck – Body Balancing Drops by Partner.Co">
+<meta property="og:description" content="Real results. Real people. Real transformation. Natural Body Balancing Drops for hormone balance and whole-body wellness — for women and men.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://www.tammymelchisedeck.com">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="images/favicon.png">
 <script src="config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,7 +81,7 @@
     transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--gold); }
-  .nav-links a.active { color: var(--gold); }
+  .nav-links a.nav-active { color: var(--gold); }
   .nav-cta {
     background: var(--gold) !important;
     color: var(--white) !important;
@@ -88,6 +90,17 @@
     transition: background 0.2s !important;
   }
   .nav-cta:hover { background: var(--ink) !important; color: var(--white) !important; }
+
+  .nav-mobile-right {
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .nav-mobile-order {
+    display: none;
+  }
+
+  /* Mobile nav toggle */
   .nav-toggle {
     display: none;
     background: none;
@@ -99,13 +112,6 @@
     position: relative;
     width: 28px;
     height: 20px;
-  }
-  .nav-mobile-right {
-    display: none;
-    align-items: center;
-  }
-  @media (max-width: 1200px) {
-    .nav-mobile-right { display: flex; }
   }
   .nav-toggle span {
     display: block;
@@ -119,9 +125,11 @@
   .nav-toggle span:nth-child(1) { top: 2px; }
   .nav-toggle span:nth-child(2) { top: 9px; }
   .nav-toggle span:nth-child(3) { top: 16px; }
+  /* Animate to X */
   .nav-toggle.open span:nth-child(1) { transform: rotate(45deg); top: 9px; }
   .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
   .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg); top: 9px; }
+  /* Page overlay */
   .nav-page-overlay {
     display: none;
     position: fixed;
@@ -174,192 +182,67 @@
     line-height: 1;
   }
 
-  /* ── PAGE HERO ── */
-  .page-hero {
+  /* ── HERO ── */
+  .hero {
     display: grid;
-    grid-template-columns: 3fr 7fr;
-    max-height: 520px;
+    grid-template-columns: 1fr 1fr;
+    min-height: 88vh;
+    align-items: stretch;
     overflow: hidden;
   }
-  .page-hero-img-wrap {
+  .hero-img {
+    background: url('images/TammyJulieWEB-6432.webp') center 45% / cover no-repeat;
     position: relative;
-    overflow: hidden;
+    min-height: 500px;
   }
-  .page-hero-img {
-    width: 100%;
-    height: 520px;
-    object-fit: cover;
-    object-position: center 45%;
-    display: block;
+  .hero-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent 50%, var(--linen) 100%);
+    pointer-events: none;
   }
-  .page-hero-copy {
+  .hero-copy {
     background: var(--linen);
+    padding: 5rem 4rem 5rem 3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 5rem 4rem;
   }
-  .page-hero-eyebrow {
+  .hero-eyebrow {
     font-size: 0.72rem;
     font-weight: 500;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 1rem;
-    display: block;
+    margin-bottom: 1.25rem;
   }
-  .page-hero-title {
+  .hero-headline {
     font-family: var(--serif);
-    font-size: clamp(2.8rem, 4vw, 4rem);
+    font-size: clamp(2.4rem, 3.5vw, 3.4rem);
     font-weight: 300;
-    line-height: 1.1;
+    line-height: 1.15;
     color: var(--ink);
     margin-bottom: 1.5rem;
   }
-  .page-hero-sub {
+  .hero-headline em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-body {
     font-size: 1rem;
     color: var(--ink-mid);
     line-height: 1.8;
-    max-width: 420px;
+    margin-bottom: 2.25rem;
+    max-width: 460px;
   }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
 
-  /* ── MAIN CONTENT ── */
-  .about-content {
-    background: var(--white);
-    padding: 5rem clamp(2rem, 4vw, 4rem);
-  }
-  .container { max-width: 1400px; margin: 0 auto; }
-  .about-grid {
-    display: grid;
-    grid-template-columns: 3fr 7fr;
-    gap: 7rem;
-    align-items: start;
-  }
-
-  /* Credentials sidebar */
-  .credentials {
-  }
-  .credentials-label {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.5rem;
-    display: block;
-  }
-  .credential-item {
-    padding: 1.1rem 0;
-    border-top: 1px solid var(--sand);
-  }
-  .credential-item:last-child { border-bottom: 1px solid var(--sand); }
-  .credential-title {
-    font-family: var(--serif);
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--ink);
-    margin-bottom: 0.2rem;
-  }
-  .credential-sub {
-    font-size: 0.82rem;
-    color: var(--ink-light);
-    line-height: 1.5;
-  }
-  .social-row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 0.5rem;
-    margin-top: 2rem;
-  }
-  .social-icon-btn {
+  /* ── BUTTONS ── */
+  .btn-primary {
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-mid);
-    text-decoration: none;
-    border: 1px solid var(--sand);
-    padding: 0.55rem 0.9rem;
-    border-radius: 2px;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-  .social-icon-btn:hover { border-color: var(--gold); color: var(--gold); }
-
-  /* Bio */
-  .divider {
-    width: 40px;
-    height: 1px;
-    background: var(--gold);
-    margin: 1.5rem 0;
-  }
-  .bio-title {
-    font-family: var(--serif);
-    font-size: clamp(1.8rem, 3vw, 2.6rem);
-    font-weight: 300;
-    line-height: 1.2;
-    color: var(--ink);
-    margin-bottom: 0.5rem;
-  }
-  .bio-body p {
-    font-size: 1.05rem;
-    color: var(--ink-mid);
-    line-height: 1.9;
-    margin-bottom: 1.4rem;
-  }
-  .bio-body p:last-child { margin-bottom: 0; }
-  .bio-body em { font-style: italic; color: var(--ink); }
-  .bio-pullquote {
-    border-left: 3px solid var(--gold);
-    margin: 2.5rem 0;
-    padding: 0.5rem 0 0.5rem 1.75rem;
-  }
-  .bio-pullquote p {
-    font-family: var(--serif);
-    font-size: 1.4rem !important;
-    font-style: italic;
-    font-weight: 300;
-    color: var(--ink) !important;
-    line-height: 1.55 !important;
-    margin-bottom: 0 !important;
-  }
-
-  /* ── CTA STRIP ── */
-  .cta-strip {
-    background: var(--ink);
-    padding: 4.5rem clamp(2rem, 4vw, 4rem);
-    text-align: center;
-  }
-  .cta-strip-label {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold-light);
-    margin-bottom: 1rem;
-    display: block;
-  }
-  .cta-strip-title {
-    font-family: var(--serif);
-    font-size: clamp(1.8rem, 3vw, 2.8rem);
-    font-weight: 300;
-    color: var(--cream);
-    margin-bottom: 0.75rem;
-    line-height: 1.2;
-  }
-  .cta-strip-body {
-    font-size: 1rem;
-    color: var(--sand);
-    line-height: 1.75;
-    max-width: 520px;
-    margin: 0 auto 2.25rem;
-  }
-  .btn-primary {
-    display: inline-block;
+    justify-content: center;
     background: var(--gold);
     color: var(--white);
     font-family: var(--sans);
@@ -367,16 +250,1010 @@
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    padding: 1rem 2.5rem;
+    padding: 1rem 2.25rem;
     text-decoration: none;
     border-radius: 2px;
     transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
   }
-  .btn-primary:hover { background: var(--cream); color: var(--ink); transform: translateY(-1px); }
+  .btn-primary:hover { background: var(--ink); transform: translateY(-1px); }
+  .btn-ghost {
+    display: inline-block;
+    background: transparent;
+    color: var(--ink-mid);
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 1rem 2.25rem;
+    text-decoration: none;
+    border: 1px solid var(--sand);
+    border-radius: 2px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── WHO IS TAMMY ── */
+  .tammy-intro {
+    background: var(--linen);
+    padding: 5.5rem clamp(2rem, 4vw, 4rem);
+    border-bottom: 1px solid var(--sand);
+  }
+  .tammy-intro-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .tammy-intro-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+  }
+  .tammy-intro-title em { font-style: italic; color: var(--gold); }
+  .tammy-intro-body {
+    font-size: 0.95rem;
+    color: var(--ink-mid);
+    line-height: 1.85;
+    margin-bottom: 1.75rem;
+  }
+  .tammy-credentials {
+    list-style: none;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .tammy-credentials li {
+    font-size: 0.88rem;
+    color: var(--ink-mid);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    line-height: 1.5;
+  }
+  .cred-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .btn-secondary {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 0.1rem;
+    transition: color 0.2s, border-color 0.2s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { color: var(--ink); border-color: var(--ink); }
+  /* Quote block */
+  .tammy-intro-quote {
+    background: var(--ink);
+    padding: 3rem 2.5rem;
+    border-radius: 2px;
+    position: relative;
+  }
+  .tammy-quote-mark {
+    font-family: var(--serif);
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--gold);
+    opacity: 0.4;
+    position: absolute;
+    top: 1.5rem;
+    left: 2.5rem;
+  }
+  .tammy-quote-text {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 2vw, 1.8rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .tammy-quote-attr {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+  }
+  @media (max-width: 900px) {
+    .tammy-intro-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .tammy-intro-quote { padding: 2rem 1.5rem; }
+  }
+
+  /* ── TRUST BAR ── */
+  .trust-bar {
+    background: var(--ink);
+    padding: 1.1rem clamp(2rem, 4vw, 4rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem 2.5rem;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--gold-light);
+    font-size: 0.77rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .trust-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  @media (max-width: 640px) {
+    .trust-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem 1rem;
+      padding: 1.25rem 1.5rem;
+      justify-items: start;
+    }
+    .trust-item { font-size: 0.68rem; white-space: normal; }
+  }
+
+  /* ── LAYOUT SHELLS ── */
+  section { padding: 5.5rem clamp(2rem, 4vw, 4rem); }
+  .container { max-width: 1400px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.9rem, 3vw, 3rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .section-body {
+    font-size: 1rem;
+    color: var(--ink-mid);
+    line-height: 1.85;
+    max-width: 600px;
+  }
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 1.5rem 0;
+  }
+
+  /* ── DROPS SECTION ── */
+  .drops-section { background: var(--white); }
+  .drops-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    margin-top: 3.5rem;
+  }
+  .drops-left {
+    display: flex;
+    flex-direction: column;
+  }
+  .drops-left .btn-primary {
+    margin-top: 2.25rem;
+    align-self: flex-start;
+  }
+  .drops-product-img {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    object-position: center;
+    margin-top: 1.75rem;
+    display: block;
+    border-radius: 2px;
+  }
+
+  /* FAQ */
+  .faq-list { margin-top: 1.75rem; }
+  .faq-item { border-top: 1px solid var(--sand); }
+  .faq-item:last-of-type { border-bottom: 1px solid var(--sand); }
+  .faq-q {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--ink);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    user-select: none;
+    list-style: none;
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-toggle {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border: 1px solid var(--sand);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    line-height: 1;
+    color: var(--gold);
+    transition: all 0.2s;
+    font-weight: 400;
+    padding-bottom: 1px;
+  }
+  details[open] .faq-toggle {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--white);
+  }
+  .faq-body {
+    font-size: 0.92rem;
+    color: var(--ink-mid);
+    line-height: 1.8;
+    padding-bottom: 1.25rem;
+  }
+  .faq-body a { color: var(--gold); text-decoration: none; }
+  .faq-body a:hover { text-decoration: underline; }
+
+  /* ── WHY IT WORKS ── */
+  .why-section { background: var(--ink); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .why-item {
+    display: flex;
+    gap: 1rem;
+    align-items: start;
+  }
+  .why-num {
+    font-family: var(--serif);
+    font-size: 0.75rem;
+    color: var(--gold);
+    opacity: 0.6;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    letter-spacing: 0.06em;
+  }
+  .why-title-text {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 0.4rem;
+  }
+  .why-body {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
+  }
+  @media (max-width: 900px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .why-grid { grid-template-columns: 1fr; } }
+
+  /* ── WHAT'S INSIDE ── */
+  .inside-section { background: var(--cream); }
+  .inside-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .inside-bottle {
+    background: var(--white);
+    border: 1px solid var(--sand);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .inside-bottle-header {
+    background: var(--ink);
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .inside-bottle-num {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+  .inside-bottle-name {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+  }
+  .inside-bottle-tag {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.4);
+    margin-top: 0.25rem;
+  }
+  .inside-ingredients {
+    list-style: none;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .inside-ingredients li {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 1rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--linen);
+    align-items: start;
+  }
+  .inside-ingredients li:last-child { border-bottom: none; }
+  .ing-name {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .ing-benefit {
+    font-size: 0.78rem;
+    color: var(--ink-light);
+    font-style: italic;
+    line-height: 1.4;
+  }
+  .inside-inactive {
+    font-size: 0.72rem;
+    color: var(--ink-light);
+    padding: 1rem 2rem 1.5rem;
+    border-top: 1px solid var(--sand);
+    line-height: 1.6;
+  }
+  .inside-disclaimer {
+    font-size: 0.72rem;
+    color: var(--ink-light);
+    text-align: center;
+    margin-top: 2rem;
+    font-style: italic;
+  }
+  @media (max-width: 900px) {
+    .inside-grid { grid-template-columns: 1fr; }
+    .inside-ingredients li { grid-template-columns: 1fr; gap: 0.15rem; }
+  }
+
+  /* ── YOUR HORMONES ── */
+  .hormones-section { background: var(--linen); }
+  .hormones-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .hormone-card {
+    background: var(--white);
+    border: 1px solid var(--sand);
+    border-top: 3px solid var(--gold);
+    border-radius: 2px;
+    padding: 1.5rem;
+  }
+  .hormone-name {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.15rem;
+  }
+  .hormone-role {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+  .hormone-symptoms {
+    font-size: 0.82rem;
+    color: var(--ink-mid);
+    line-height: 1.7;
+  }
+  @media (max-width: 900px) { .hormones-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .hormones-grid { grid-template-columns: 1fr; } }
+
+  /* ── MORE PRODUCTS ── */
+  .products-section { background: var(--linen); }
+  .products-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3.5rem;
+  }
+  .product-card {
+    background: var(--white);
+    border-radius: 2px;
+    overflow: hidden;
+    border: 1px solid var(--sand);
+    display: flex;
+    flex-direction: column;
+  }
+  .product-img-wrap { position: relative; aspect-ratio: 16/9; overflow: hidden; background: var(--sand); }
+  .product-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .product-img-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--ink-light);
+  }
+  .product-body { padding: 2rem; display: flex; flex-direction: column; flex: 1; }
+  .product-tag {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.65rem;
+    display: block;
+  }
+  .product-name {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .product-desc {
+    font-size: 0.9rem;
+    color: var(--ink-mid);
+    line-height: 1.75;
+    margin-bottom: 1.75rem;
+    flex: 1;
+  }
+  .product-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.85rem 1.75rem;
+    text-decoration: none;
+    border: 1px solid var(--sand);
+    border-radius: 2px;
+    transition: all 0.2s;
+    align-self: flex-start;
+  }
+  .product-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── RESULTS ── */
+  .results-section { background: var(--linen); }
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+  .result-card {
+    background: var(--white);
+    padding: 2.25rem 2rem;
+    border-radius: 2px;
+    border-top: 3px solid var(--gold);
+  }
+  .result-stat {
+    font-family: var(--serif);
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .result-label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    margin-bottom: 0.85rem;
+  }
+  .result-desc {
+    font-size: 0.9rem;
+    color: var(--ink-light);
+    line-height: 1.7;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-section {
+    background: #1a1714;
+    padding-top: 5rem;
+    padding-bottom: 0;
+  }
+  .testimonials-section > .container {
+    padding-bottom: 4rem;
+  }
+  .t-header {
+    padding: 0 clamp(2rem, 4vw, 4rem) 4rem;
+    max-width: 1400px;
+  }
+  /* Marquee strip */
+  .t-marquee-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  /* Fade edges */
+  .t-marquee-wrap::before,
+  .t-marquee-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 4rem;
+    width: 120px;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .t-marquee-wrap::before {
+    left: 0;
+    background: linear-gradient(to right, #1a1714, transparent);
+  }
+  .t-marquee-wrap::after {
+    right: 0;
+    background: linear-gradient(to left, #1a1714, transparent);
+  }
+  .t-marquee {
+    overflow: hidden;
+    width: 100%;
+    cursor: grab;
+    padding-bottom: 4rem;
+  }
+  .t-marquee:active { cursor: grabbing; }
+  .t-track {
+    display: flex;
+    gap: 3rem;
+    padding: 0;
+    animation: marqueeScroll 120s linear infinite;
+    width: max-content;
+    align-items: center;
+  }
+  .t-track.paused { animation-play-state: paused; }
+  @keyframes marqueeScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  /* Photo frame — gallery mat treatment */
+  .t-photo {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+  }
+  .t-photo-mat {
+    background: #242019;
+    padding: 10px;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow:
+      0 4px 24px rgba(0,0,0,0.5),
+      0 1px 3px rgba(0,0,0,0.4),
+      inset 0 1px 0 rgba(255,255,255,0.04);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+  }
+  .t-photo:hover .t-photo-mat {
+    transform: translateY(-6px);
+    box-shadow:
+      0 16px 48px rgba(0,0,0,0.6),
+      0 2px 6px rgba(0,0,0,0.4),
+      inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  .t-photo-img {
+    width: 340px;
+    height: 340px;
+    overflow: hidden;
+    display: block;
+  }
+  .t-photo-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.6s ease, filter 0.4s ease;
+    filter: brightness(0.9) saturate(0.95);
+  }
+  .t-photo:hover .t-photo-img img {
+    transform: scale(1.04);
+    filter: brightness(1) saturate(1);
+  }
+  /* Caption below frame */
+  .t-photo-caption {
+    text-align: center;
+    opacity: 1;
+    transform: translateY(0);
+    transition: none;
+  }
+  .t-photo-caption-name {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+  }
+  .t-photo-caption-result {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.45);
+    display: block;
+    margin-top: 0.2rem;
+  }
+  /* Placeholder */
+  .t-placeholder {
+    width: 340px;
+    height: 340px;
+    background: rgba(255,255,255,0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .t-placeholder span {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.15);
+    letter-spacing: 0.08em;
+  }
+  /* Arrow buttons */
+  .t-marquee-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-70%);
+    z-index: 10;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(26,23,20,0.9);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold-light);
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .t-marquee-arrow:hover { border-color: var(--gold); color: var(--gold); background: rgba(26,23,20,1); }
+  .t-marquee-prev { left: 1rem; }
+  .t-marquee-next { right: 1rem; }
+  @media (max-width: 900px) {
+    .t-photo-img { width: 260px; height: 260px; }
+    .t-placeholder { width: 260px; height: 260px; }
+    .t-track { gap: 2rem; }
+    .t-marquee { padding-bottom: 3rem; }
+    .t-marquee-arrow { display: none; }
+    .t-marquee-wrap::before,
+    .t-marquee-wrap::after { width: 60px; bottom: 3rem; }
+    .t-photo-caption { opacity: 1; transform: none; }
+  }
+
+  /* ── PURCHASE / CTA STRIP ── */
+  .purchase-section {
+    background: var(--ink);
+  }
+  .cta-strip-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 5.5rem clamp(2rem, 4vw, 4rem);
+  }
+  .cta-strip-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .cta-strip-body {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.75;
+    max-width: 520px;
+  }
+  .cta-strip-right {
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .cta-price {
+    font-family: var(--serif);
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+  .cta-price-note {
+    font-size: 0.75rem;
+    color: var(--gold-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .cta-contact {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.35);
+    margin-top: 1rem;
+  }
+  .cta-contact a { color: var(--gold-light); text-decoration: none; }
+  .cta-contact a:hover { color: var(--gold); }
+  @media (max-width: 900px) {
+    .cta-strip-inner { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+    .cta-strip-body { margin: 0 auto; }
+  }
+
+  /* ── ABOUT ── */
+  .about-section { background: var(--linen); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 5rem;
+    align-items: start;
+    margin-top: 3.5rem;
+  }
+  .about-img-wrap { position: relative; }
+  .about-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: url('images/TammyJulieWEB-6432.webp') top center / cover no-repeat;
+    border-radius: 2px;
+    display: block;
+  }
+  .about-quote-block {
+    position: absolute;
+    bottom: -1.75rem;
+    right: -1.75rem;
+    background: var(--gold);
+    color: var(--white);
+    padding: 1.35rem 1.5rem;
+    max-width: 210px;
+    border-radius: 2px;
+  }
+  .about-quote-block p {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.55;
+  }
+  .about-body { padding-top: 0.5rem; }
+  .about-body p {
+    font-size: 1rem;
+    color: var(--ink-mid);
+    line-height: 1.9;
+    margin-bottom: 1.25rem;
+  }
+  .about-body em { font-style: italic; color: var(--ink); }
+  .social-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+  .social-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.73rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    text-decoration: none;
+    border: 1px solid var(--sand);
+    padding: 0.55rem 1.1rem;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .social-icon-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .footer-social-btn {
+    color: var(--sand);
+    border-color: rgba(255,255,255,0.1);
+  }
+  .footer-social-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  .social-btn {
+    font-size: 0.73rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    text-decoration: none;
+    border: 1px solid var(--sand);
+    padding: 0.55rem 1.25rem;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── WELCOME LETTER POPUP ── */
+  .letter-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(44, 37, 32, 0.72);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    animation: overlayFadeIn 0.6s ease forwards;
+  }
+  .letter-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  @keyframes overlayFadeIn {
+    to { opacity: 1; }
+  }
+  .letter-modal {
+    background: var(--white);
+    border-top: 3px solid var(--gold);
+    border-radius: 2px;
+    padding: 3.5rem 4rem;
+    max-width: 640px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    transform: translateY(16px);
+    animation: modalSlideIn 0.5s 0.4s cubic-bezier(0.22,1,0.36,1) forwards;
+    scrollbar-width: thin;
+    scrollbar-color: var(--sand) transparent;
+  }
+  @keyframes modalSlideIn {
+    to { transform: translateY(0); }
+  }
+  .letter-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    background: none;
+    border: 1px solid var(--sand);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--ink-light);
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .letter-close:hover { border-color: var(--gold); color: var(--gold); }
+  .letter-greeting {
+    font-family: var(--serif);
+    font-size: 1.65rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 1.75rem;
+    display: block;
+  }
+  .letter-body {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.9;
+  }
+  .letter-body p { margin-bottom: 1.25rem; }
+  .letter-body p:last-of-type { margin-bottom: 0; }
+  .letter-body strong {
+    font-weight: 400;
+    color: var(--ink);
+    font-style: italic;
+  }
+  .letter-closing {
+    margin-top: 2rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--sand);
+  }
+  .letter-closing-line {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--ink-mid);
+    margin-bottom: 0.25rem;
+  }
+  .letter-sig {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold);
+  }
+  .letter-ornament {
+    text-align: center;
+    color: var(--gold-light);
+    font-size: 1rem;
+    letter-spacing: 0.5em;
+    margin-bottom: 1.75rem;
+    opacity: 0.6;
+  }
+  .letter-enter {
+    display: block;
+    width: 100%;
+    margin-top: 2rem;
+    background: var(--gold);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 1rem;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .letter-enter:hover { background: var(--ink); }
+  @media (max-width: 900px) {
+    .letter-modal { padding: 2.5rem 1.75rem; }
+  }
 
   /* ── FOOTER ── */
-  .site-footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06); }
-  .footer-inner { max-width: 1400px; margin: 0 auto; padding: 5rem clamp(2rem, 4vw, 4rem) 2.5rem; }
+  .site-footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 5rem clamp(2rem, 4vw, 4rem) 2.5rem;
+  }
   .footer-grid {
     display: grid;
     grid-template-columns: 1.5fr 1fr 2fr;
@@ -386,45 +1263,169 @@
   }
   .footer-brand { display: flex; flex-direction: column; }
   .footer-brand nav { border: none; background: none; padding: 0; margin: 0; }
-  .footer-name { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: var(--cream); line-height: 1.2; letter-spacing: 0.03em; margin-bottom: 0.5rem; }
-  .footer-tagline { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
-  .footer-social-row { display: flex; gap: 0.75rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(184,154,106,0.35); background: none; justify-content: flex-start; }
-  .footer-social-row a { background: none; border: none; padding: 0; outline: none; }
-  .footer-icon-link { display: flex; align-items: center; justify-content: center; color: var(--white); text-decoration: none; transition: color 0.2s; }
+  .footer-name {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.2;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.5rem;
+  }
+  .footer-tagline {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+  .footer-social-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(184,154,106,0.35);
+    background: none;
+    justify-content: flex-start;
+  }
+  .footer-social-row a {
+    background: none;
+    border: none;
+    padding: 0;
+    outline: none;
+  }
+  .footer-icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
   .footer-icon-link:hover { color: var(--gold); }
-  .footer-col-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; display: block; }
-  .footer-links { display: flex; flex-direction: column; gap: 0.65rem; }
-  .footer-link { font-size: 0.88rem; color: var(--ink-light); text-decoration: none; transition: color 0.2s; }
+  .footer-col-label {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+    display: block;
+  }
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .footer-link {
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
   .footer-link:hover { color: var(--cream); }
-  .footer-signup-desc { font-size: 0.88rem; color: var(--ink-light); line-height: 1.65; margin-bottom: 1.1rem; }
-  .footer-email-form { display: flex; }
-  .footer-email-form input { flex: 1; padding: 0.75rem 1rem; font-family: var(--sans); font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.1); outline: none; background: rgba(255,255,255,0.05); color: var(--cream); border-radius: 2px 0 0 2px; min-width: 0; transition: border-color 0.2s; }
+  .footer-signup-desc {
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    line-height: 1.65;
+    margin-bottom: 1.1rem;
+  }
+  .footer-email-form {
+    display: flex;
+  }
+  .footer-email-form input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    outline: none;
+    background: rgba(255,255,255,0.05);
+    color: var(--cream);
+    border-radius: 2px 0 0 2px;
+    min-width: 0;
+    transition: border-color 0.2s;
+  }
   .footer-email-form input:focus { border-color: var(--gold); }
   .footer-email-form input::placeholder { color: var(--ink-light); }
-  .footer-email-form button { background: var(--gold); color: var(--white); border: none; padding: 0.75rem 1.25rem; font-family: var(--sans); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border-radius: 0 2px 2px 0; transition: background 0.2s; white-space: nowrap; }
+  .footer-email-form button {
+    background: var(--gold);
+    color: var(--white);
+    border: none;
+    padding: 0.75rem 1.25rem;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 0 2px 2px 0;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
   .footer-email-form button:hover { background: var(--cream); color: var(--ink); }
-  .footer-bottom { padding-top: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
-  .footer-disclaimer { font-size: 0.68rem; color: rgba(255,255,255,0.2); line-height: 1.6; max-width: 600px; }
-  .footer-copy { font-size: 0.68rem; color: rgba(255,255,255,0.2); white-space: nowrap; }
-  .footer-partnerco-logo { height: 24px; width: auto; opacity: 0.4; flex-shrink: 0; }
+  .footer-bottom {
+    padding-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .footer-disclaimer {
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.2);
+    line-height: 1.6;
+    max-width: 600px;
+  }
+  .footer-copy {
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.2);
+    white-space: nowrap;
+  }
+  .footer-partnerco-logo {
+    height: 24px;
+    width: auto;
+    opacity: 0.4;
+    flex-shrink: 0;
+  }
+
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
-    .page-hero { grid-template-columns: 1fr; max-height: none; }
-    .page-hero-img { height: 60vw; }
-    .page-hero-copy { padding: 3rem 1.5rem; }
-    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .credentials { position: static; order: 2; }
-    .bio-body { order: 1; }
-    .social-row { flex-direction: row; flex-wrap: wrap; }
+    .hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    .hero-img {
+      height: 55vw;
+      min-height: 280px;
+    }
+    .hero-img::after {
+      background: linear-gradient(to bottom, transparent 60%, var(--linen));
+    }
+    .hero-copy {
+      padding: 2.5rem 1.75rem 3rem;
+    }
+    .drops-grid,
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .about-quote-block { display: none; }
+    .products-grid { grid-template-columns: 1fr; }
+    .results-grid { grid-template-columns: 1fr; }
+    .purchase-box { padding: 2.5rem 1.75rem; }
+    section { padding: 4rem 1.5rem; }
     .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
-    .about-content { padding: 3.5rem 1.5rem; }
   }
   @media (max-width: 1200px) {
     nav { padding: 0 1.25rem; }
     .nav-links { display: none; }
     .nav-toggle { display: flex; }
+    .nav-mobile-right { display: flex; }
   }
 </style>
 </head>
@@ -432,15 +1433,16 @@
 
 <!-- ── NAVIGATION ── -->
 <nav aria-label="Main navigation">
-  <a href="index.html" class="nav-name">Tammy Maltby Melchisedeck</a>
+  <a href="#" class="nav-name">Tammy Maltby Melchisedeck</a>
   <ul class="nav-links" role="list">
-    <li><a href="index.html#tammy">Meet Tammy</a></li>
-    <li><a href="index.html#results">Results</a></li>
-    <li><a href="index.html#testimonials">Testimonials</a></li>
-    <li><a href="index.html#drops">The Drops</a></li>
+    <li><a href="#tammy">Meet Tammy</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#drops">The Drops</a></li>
     <li><a href="order.html" class="nav-cta">Order Now</a></li>
   </ul>
   <div class="nav-mobile-right">
+    <a href="order.html" class="nav-mobile-order">Order Now</a>
     <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
       <span></span><span></span><span></span>
     </button>
@@ -448,110 +1450,391 @@
 </nav>
 <div class="nav-page-overlay" id="navPageOverlay" onclick="closeMobileNav()"></div>
 <div id="mobileNav" role="navigation" aria-label="Mobile navigation">
-  <a href="index.html#tammy" onclick="closeMobileNav()">Meet Tammy</a>
-  <a href="index.html#results" onclick="closeMobileNav()">Results</a>
-  <a href="index.html#testimonials" onclick="closeMobileNav()">Testimonials</a>
-  <a href="index.html#drops" onclick="closeMobileNav()">The Drops</a>
+  <a href="#tammy" onclick="closeMobileNav()">Meet Tammy</a>
+  <a href="#results" onclick="closeMobileNav()">Results</a>
+  <a href="#testimonials" onclick="closeMobileNav()">Testimonials</a>
+  <a href="#drops" onclick="closeMobileNav()">The Drops</a>
 </div>
 
-<!-- ── PAGE HERO ── -->
-<div class="page-hero">
-  <div class="page-hero-img-wrap">
-    <img
-      src="images/RedDressArmsneedretouch.webp"
-      alt="Tammy Maltby Melchisedeck"
-      class="page-hero-img"
-      loading="eager"
-    >
+<!-- ── HERO ── -->
+<section class="hero" style="padding: 0;" aria-labelledby="hero-headline">
+  <div class="hero-img" role="img" aria-label="Tammy Maltby Melchisedeck smiling and laughing, full of energy and joy"></div>
+  <div class="hero-copy">
+    <p class="hero-eyebrow">Partner.Co Wellness</p>
+    <h1 class="hero-headline" id="hero-headline">
+      Feel like<br>
+      <em>yourself</em> again.
+    </h1>
+    <p class="hero-body">
+      More energy. Better sleep. Balanced hormones. Real results — for women and men ready to reclaim their vitality in the second half of life.
+    </p>
+    <div class="hero-actions">
+      <a href="#tammy" class="btn-primary">Meet Tammy</a>
+      <a href="#drops" class="btn-ghost">Start Your Journey</a>
+    </div>
   </div>
-  <div class="page-hero-copy">
-    <span class="page-hero-eyebrow">Meet Tammy</span>
-    <h1 class="page-hero-title">Glad to<br>meet you!</h1>
-    <p class="page-hero-sub">An Emmy-winning media personality turned wellness entrepreneur — speaker, author, mentor, and mother. Her story is one of courage, faith, and continual becoming.</p>
+</section>
+
+<!-- ── TRUST BAR ── -->
+<div class="trust-bar" role="list" aria-label="Key product features">
+  <span class="trust-item" role="listitem"><span class="trust-dot" aria-hidden="true"></span>100% Natural &amp; Plant-Based</span>
+  <span class="trust-item" role="listitem"><span class="trust-dot" aria-hidden="true"></span>Hormone-Free Formula</span>
+  <span class="trust-item" role="listitem"><span class="trust-dot" aria-hidden="true"></span>Free US Shipping</span>
+  <span class="trust-item" role="listitem"><span class="trust-dot" aria-hidden="true"></span>Up to ¾ lb Lost Per Day</span>
+</div>
+
+<!-- ── WHO IS TAMMY ── -->
+<section class="tammy-intro" id="tammy" aria-labelledby="tammy-intro-title">
+  <div class="tammy-intro-inner">
+    <div class="tammy-intro-left">
+      <span class="section-label">Meet Tammy</span>
+      <h2 class="tammy-intro-title" id="tammy-intro-title">Wellness. Faith. Purpose.</h2>
+      <div class="divider" aria-hidden="true"></div>
+      <p class="tammy-intro-body">Before she became a wellness leader, Tammy was a storyteller — an Emmy Award-winning television host, author, and speaker who built a career helping people find hope, purpose, and transformation. Today she brings that same mission to health.</p>
+      <ul class="tammy-credentials">
+        <li><span class="cred-dot"></span>Emmy Award-winning television host</li>
+        <li><span class="cred-dot"></span>Published author &amp; international speaker</li>
+        <li><span class="cred-dot"></span>Helped build one of the largest wellness organizations in the industry</li>
+        <li><span class="cred-dot"></span>Mentor to thousands of women across the globe</li>
+        <li><span class="cred-dot"></span>Living proof that midlife is just the beginning</li>
+      </ul>
+      <a href="about.html" class="btn-secondary">Read Tammy's Full Story →</a>
+    </div>
+    <div class="tammy-intro-right">
+      <div class="tammy-intro-quote">
+        <span class="tammy-quote-mark">"</span>
+        <p class="tammy-quote-text">Midlife is not a season to retreat. It is a season to grow.</p>
+        <span class="tammy-quote-attr">— Tammy Maltby Melchisedeck</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WELCOME LETTER POPUP ── -->
+<div class="letter-overlay" id="letterOverlay" role="dialog" aria-modal="true" aria-labelledby="letter-greeting">
+  <div class="letter-modal">
+    <button class="letter-close" onclick="closeLetter()" aria-label="Close letter">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="letter-ornament" aria-hidden="true">✦ &nbsp; ✦ &nbsp; ✦</div>
+    <span class="letter-greeting" id="letter-greeting">Hello Beautiful One,</span>
+    <div class="letter-body">
+      <p>Every woman reaches a moment where she feels the quiet pull toward more: more health, more clarity, more faith, more purpose. Not out of striving, but out of a holy knowing:</p>
+      <p><strong>You were designed to grow. You were crafted to rise.</strong></p>
+      <p>My work, through media, writing, leadership, and global wellness coaching, has always pointed toward one truth: when a woman becomes well, her world becomes stronger. Her family shifts. Her confidence rises. Her calling expands. And generational legacy begins to change.</p>
+      <p>Midlife has become my favorite season to speak into because it is where reinvention is not only possible—it is powerful. God loves to use what we think disqualifies us as the very thing that equips us.</p>
+      <p>My heart is to help you cultivate health from the inside out, walk boldly into your God-given identity, and build a life that reflects the joy and abundance He designed for you.</p>
+      <p>Here, you'll find pathways to wellness, mentorship, community, and personal growth—tools that help you live a life of purpose and vitality.</p>
+      <p><strong>You were woven for this moment. Let's step into it together.</strong></p>
+    </div>
+    <div class="letter-closing">
+      <p class="letter-closing-line">Cheering you on,</p>
+      <p class="letter-sig">Tammy</p>
+    </div>
+    <button class="letter-enter" onclick="closeLetter()">Enter the Site</button>
   </div>
 </div>
 
-<!-- ── ABOUT CONTENT ── -->
-<section class="about-content" aria-labelledby="bio-title">
+<!-- ── RESULTS ── -->
+<section class="results-section" id="results" aria-labelledby="results-title">
   <div class="container">
-    <div class="about-grid">
+    <span class="section-label">What to Expect</span>
+    <h2 class="section-title" id="results-title">Proven results, naturally.</h2>
+    <div class="divider" aria-hidden="true"></div>
+    <p class="section-body">
+      These aren't crash-diet numbers. Women on this program see steady, sustainable transformation — in their weight, their energy, and their overall health. Real drops. Real results.
+    </p>
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-stat">½ lb</div>
+        <div class="result-label">Lost Per Day — Women</div>
+        <div class="result-desc">Consistent, daily fat loss that adds up fast — without starvation or extreme restriction.</div>
+      </div>
+      <div class="result-card">
+        <div class="result-stat">¾ lb</div>
+        <div class="result-label">Lost Per Day — Men</div>
+        <div class="result-desc">Men on the program see even faster results, with drops designed to support male metabolism.</div>
+      </div>
+      <div class="result-card">
+        <div class="result-stat">3×</div>
+        <div class="result-label">Daily Doses</div>
+        <div class="result-desc">Simple routine: drops under the tongue before each meal. No injections. No prescriptions. No fuss.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <!-- Credentials sidebar -->
-      <aside class="credentials" aria-label="Tammy's credentials">
-        <span class="credentials-label">Background</span>
-        <div class="credential-item">
-          <p class="credential-title">Emmy-Winning Media Personality</p>
-          <p class="credential-sub">Television host, speaker, and author with decades of media experience</p>
-        </div>
-        <div class="credential-item">
-          <p class="credential-title">Wellness Entrepreneur</p>
-          <p class="credential-sub">Helped build one of the largest wellness organizations in the industry</p>
-        </div>
-        <div class="credential-item">
-          <p class="credential-title">Speaker &amp; Mentor</p>
-          <p class="credential-sub">Has led rooms of thousands and one-on-one conversations with equal warmth</p>
-        </div>
-        <div class="credential-item">
-          <p class="credential-title">Author &amp; Mother</p>
-          <p class="credential-sub">Writing and motherhood woven through every chapter of her story</p>
-        </div>
-        <div class="credential-item">
-          <p class="credential-title">Faith-Driven Leader</p>
-          <p class="credential-sub">Deep conviction that God meets us in every season — especially the unexpected ones</p>
-        </div>
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonials-section" id="testimonials" aria-labelledby="t-title">
+  <div class="container" style="padding-bottom:4rem">
+    <span class="section-label" style="color:var(--gold-light)">Real Transformations</span>
+    <h2 class="section-title" id="t-title" style="color:var(--cream)">Their stories.</h2>
+    <div class="divider" style="background:var(--gold-light)" aria-hidden="true"></div>
+    <p class="section-body" style="color:rgba(255,255,255,0.55);font-size:0.9rem">Real results from real people — not paid endorsements, not stock photos. Just people who said yes to something different.</p>
+  </div>
 
-        <nav class="social-row" aria-label="Follow Tammy">
-          <a href="https://www.facebook.com/share/1Js62grMD4/?mibextid=wwXIfr" class="social-icon-btn" target="_blank" rel="noopener" aria-label="Facebook">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-            Facebook
-          </a>
-          <a href="https://www.instagram.com/tammymmelchisedeck?igsh=dGQxcjQyMmEzbDcx" class="social-icon-btn" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-            Instagram
-          </a>
-          <a href="https://www.tiktok.com/@tammymmelchisedec?_r=1&_t=ZT-9297iK4kplv" class="social-icon-btn" target="_blank" rel="noopener" aria-label="TikTok">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
-            TikTok
-          </a>
-        </nav>
-      </aside>
+  <!-- Photo marquee strip -->
+  <div class="t-marquee-wrap" role="region" aria-label="Transformation photos">
+    <button class="t-marquee-arrow t-marquee-prev" aria-label="Previous" onclick="marqueeStep(-1)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="t-marquee" id="tMarquee">
+      <div class="t-track" id="tTrack">
+        <!-- Photos injected by JS from Supabase — placeholders shown until then -->
+        <div class="t-photo"><div class="t-photo-mat"><div class="t-placeholder"><span>Coming soon</span></div></div></div>
+        <div class="t-photo"><div class="t-photo-mat"><div class="t-placeholder"><span>Coming soon</span></div></div></div>
+        <div class="t-photo"><div class="t-photo-mat"><div class="t-placeholder"><span>Coming soon</span></div></div></div>
+        <div class="t-photo"><div class="t-photo-mat"><div class="t-placeholder"><span>Coming soon</span></div></div></div>
+        <div class="t-photo"><div class="t-photo-mat"><div class="t-placeholder"><span>Coming soon</span></div></div></div>
+        <div class="t-photo"><div class="t-photo-mat"><div class="t-placeholder"><span>Coming soon</span></div></div></div>
+        <!-- Duplicates for seamless loop -->
+        <div class="t-photo"><div class="t-photo-mat"><div class="t-placeholder"><span>Coming soon</span></div></div></div>
+        <div class="t-photo"><div class="t-photo-mat"><div class="t-placeholder"><span>Coming soon</span></div></div></div>
+        <div class="t-photo"><div class="t-photo-mat"><div class="t-placeholder"><span>Coming soon</span></div></div></div>
+        <div class="t-photo"><div class="t-photo-mat"><div class="t-placeholder"><span>Coming soon</span></div></div></div>
+        <div class="t-photo"><div class="t-photo-mat"><div class="t-placeholder"><span>Coming soon</span></div></div></div>
+        <div class="t-photo"><div class="t-photo-mat"><div class="t-placeholder"><span>Coming soon</span></div></div></div>
+      </div>
+    </div>
+    <button class="t-marquee-arrow t-marquee-next" aria-label="Next" onclick="marqueeStep(1)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</section>
+<!-- ── WHAT ARE THE DROPS ── -->
+<section class="drops-section" id="drops" aria-labelledby="drops-title">
+  <div class="container">
+    <div class="drops-grid">
 
-      <!-- Bio -->
-      <div class="bio-body">
-        <h2 class="bio-title" id="bio-title">Tammy Maltby<br>Melchisedeck</h2>
+      <!-- Left: intro copy + order button -->
+      <div class="drops-left">
+        <span class="section-label">Slenderiiz™ by Partner.Co</span>
+        <h2 class="section-title" id="drops-title">What are the<br>Body Balancing Drops?</h2>
         <div class="divider" aria-hidden="true"></div>
+        <p class="section-body">
+          Slenderiiz™ is a unique homeopathic combination of Slenderiix and Xceler8 — designed to balance hormones, increase metabolism, control appetite, and support healthy weight loss. Two drops before each meal. Purchase includes free access to a supportive community to keep you on track.
+        </p>
+        <img src="images/drops-feature.webp" alt="Slenderiix and Xceler8 drops" class="drops-product-img" id="dropsFeatureImg">
+      </div>
 
-        <p>Tammy Maltby Melchisedeck believes in the power of starting again. An Emmy-winning media personality turned wellness entrepreneur, Tammy has lived many lives — speaker, author, television host, mentor, and mother — and each chapter has shaped the woman she is today.</p>
+      <!-- Right: FAQs -->
+      <div class="faq-list" role="list" aria-label="Frequently asked questions">
 
-        <p>Her story is one of courage and continual becoming. At 52, Tammy stepped into a brand-new career in global wellness, building one of the largest wellness organizations in the industry and inspiring people around the world to take their health and purpose seriously. Her leadership blends compassion, strength, and a deep conviction that <em>God meets us in every season — especially the unexpected ones.</em></p>
+        <details open>
+          <summary class="faq-q">
+            How do the drops work?
+            <span class="faq-toggle" aria-hidden="true">−</span>
+          </summary>
+          <div class="faq-body">
+            Two drops under your tongue before each meal — three times a day. They suppress appetite, balance hormones, and support thyroid, digestion, and blood sugar levels. Women typically lose ½ lb per day; men around ¾ lb. All natural, plant-based, and hormone-free.
+            <br><br><a href="https://vimeo.com/855740553" target="_blank" rel="noopener">Watch the full video →</a>
+          </div>
+        </details>
 
-        <div class="bio-pullquote">
-          <p>"Tammy's gift has always been connection — creating a sense of belonging that reminds people they are seen, valued, and capable of so much more than they imagine."</p>
+        <details>
+          <summary class="faq-q">
+            Do you have diet &amp; recipe support?
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-body">
+            Yes! Use this guide to choose the right ingredients and accelerate your weight management goals.
+            <br><br><a href="https://file.brd.so/TgxOWudb05ifxQCcvBqNx75Glk1K.pdf" target="_blank" rel="noopener">Download the food guide →</a>
+          </div>
+        </details>
+
+        <details>
+          <summary class="faq-q">
+            What results can I expect?
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-body">
+            Safe, effective, and long-lasting results. Slenderiiz is the only natural weight management system of its kind shown to improve results beyond diet and exercise alone. Check out the before &amp; after photos.
+            <br><br><a href="https://brd.so/1e8fYWlq7cdtSaffv7W9VyUWNpR8/ingredients-list.pdf" target="_blank" rel="noopener">View before &amp; after results →</a>
+          </div>
+        </details>
+
+        <details>
+          <summary class="faq-q">
+            What are the ingredients?
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-body">
+            Here is the complete ingredient list for each bottle, with an explanation of what each ingredient does in the body.
+            <br><br><a href="https://file.brd.so/KE9ROqr6hRGIKR2Xo1b1el8D8fgK.pdf" target="_blank" rel="noopener">Read the full ingredient list →</a>
+          </div>
+        </details>
+
+        <details>
+          <summary class="faq-q">
+            Where can I read the full program guide?
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-body">
+            This booklet is your guide to staying the course. It includes the approved food list, supporting supplements, and pro tips for success.
+            <br><br><a href="https://0c341c57-3f9c-4425-9b20-0062a219b9d2.filesusr.com/ugd/a68862_a465aa0c489d4bdfbc754537729e0724.pdf" target="_blank" rel="noopener">Download the program booklet →</a>
+          </div>
+        </details>
+
+        <div style="margin-top: 2rem;">
+          <a href="order.html" class="btn-primary">Order Now</a>
         </div>
 
-        <p>Whether she's leading a room of thousands or welcoming someone into her home, she creates a sense of belonging that reminds people they are seen, valued, and capable of so much more than they imagine.</p>
-
-        <p>Today, she continues her mission of helping people live rich, authentic, purpose-driven lives — built on wellness, faith, community, and courageous reinvention.</p>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ── CTA STRIP ── -->
-<div class="cta-strip">
-  <div style="max-width:1400px;margin:0 auto">
-    <span class="cta-strip-label">Ready to Begin?</span>
-    <h2 class="cta-strip-title">You were woven for this moment.</h2>
-    <p class="cta-strip-body">Join the people who have already taken the first step toward health, energy, and a life lived on purpose. The Body Balancing Drops are a simple start.</p>
-    <a href="order.html" class="btn-primary">Order Now</a>
+<!-- ── WHY IT WORKS ── -->
+<section class="why-section" aria-labelledby="why-title">
+  <div class="container">
+    <span class="section-label" style="color:var(--gold-light)">Why It Works</span>
+    <h2 class="section-title" id="why-title" style="color:var(--cream)">Eight reasons women and men love the drops.</h2>
+    <div class="divider" style="background:var(--gold-light)" aria-hidden="true"></div>
+    <div class="why-grid">
+      <div class="why-item"><span class="why-num">01</span><div><h3 class="why-title-text" id="why-title-01">Balances Hormones</h3><p class="why-body" id="why-body-01">Addresses the root cause of stubborn weight — hormone imbalance — rather than just counting calories.</p></div></div>
+      <div class="why-item"><span class="why-num">02</span><div><h3 class="why-title-text" id="why-title-02">Curbs Cravings</h3><p class="why-body" id="why-body-02">Homeopathic ingredients target appetite control and food addiction patterns at the source.</p></div></div>
+      <div class="why-item"><span class="why-num">03</span><div><h3 class="why-title-text" id="why-title-03">Increases Energy</h3><p class="why-body" id="why-body-03">Supports thyroid and adrenal function so you feel genuinely energized — not artificially stimulated.</p></div></div>
+      <div class="why-item"><span class="why-num">04</span><div><h3 class="why-title-text" id="why-title-04">Boosts Metabolism</h3><p class="why-body" id="why-body-04">Raises metabolic rate naturally so your body burns more efficiently throughout the day.</p></div></div>
+      <div class="why-item"><span class="why-num">05</span><div><h3 class="why-title-text" id="why-title-05">Boosts Mood</h3><p class="why-body" id="why-body-05">Ingredients like B-12 and Ashwagandha support mental clarity, reduce anxiety, and lift your overall outlook.</p></div></div>
+      <div class="why-item"><span class="why-num">06</span><div><h3 class="why-title-text" id="why-title-06">Supports Thyroid</h3><p class="why-body" id="why-body-06">Thyroidinum and Fucus Vesiculosus directly support thyroid function — a key driver of weight and energy.</p></div></div>
+      <div class="why-item"><span class="why-num">07</span><div><h3 class="why-title-text" id="why-title-07">Targets Belly Fat</h3><p class="why-body" id="why-body-07">Rhodiola Rosea and specific homeopathic ingredients target excess fat and lower cortisol — the belly fat hormone.</p></div></div>
+      <div class="why-item"><span class="why-num">08</span><div><h3 class="why-title-text" id="why-title-08">Lowers Cortisol</h3><p class="why-body" id="why-body-08">Chronic stress raises cortisol which stores fat. The drops help regulate this cycle naturally.</p></div></div>
+    </div>
   </div>
-</div>
+</section>
+
+<!-- ── WHAT'S INSIDE ── -->
+<section class="inside-section" aria-labelledby="inside-title">
+  <div class="container">
+    <span class="section-label">What's Inside</span>
+    <h2 class="section-title" id="inside-title">19 natural ingredients.<br>Two powerful bottles.</h2>
+    <div class="divider" aria-hidden="true"></div>
+    <p class="section-body" style="max-width:560px">The Body Balancing Drops consist of two separate formulas — Slenderiix and Xceler8 — each designed to work synergistically with the other.</p>
+
+    <div class="inside-grid">
+      <!-- Bottle 1 -->
+      <div class="inside-bottle">
+        <div class="inside-bottle-header">
+          <span class="inside-bottle-num">Bottle 1</span>
+          <h3 class="inside-bottle-name">Slenderiix</h3>
+          <span class="inside-bottle-tag">11 Homeopathic Ingredients</span>
+        </div>
+        <ul class="inside-ingredients">
+          <li><span class="ing-name">Ammonium Bromatum 12x</span><span class="ing-benefit">Balances hormones, weight</span></li>
+          <li><span class="ing-name">Avena Sativa 6x</span><span class="ing-benefit">Addictions including food, anxiety, cravings</span></li>
+          <li><span class="ing-name">Calcarea Carbonica 9x</span><span class="ing-benefit">Immune system support</span></li>
+          <li><span class="ing-name">Fucus Vesiculosus 6x</span><span class="ing-benefit">Thyroid, weight issues</span></li>
+          <li><span class="ing-name">Graphites 12x</span><span class="ing-benefit">Skin, constipation, fights fat</span></li>
+          <li><span class="ing-name">Ignatia Amara 9x</span><span class="ing-benefit">Overwhelm, worry, emotional stress eating</span></li>
+          <li><span class="ing-name">Kali Phosphoricum 12x</span><span class="ing-benefit">Hunger control, mental exhaustion</span></li>
+          <li><span class="ing-name">Lycopodium Clavatum 6x</span><span class="ing-benefit">Brain fog, digestion, edema, carb cravings</span></li>
+          <li><span class="ing-name">Natrum Mur 12x</span><span class="ing-benefit">Blood pressure, bloating, salty cravings</span></li>
+          <li><span class="ing-name">Sulfuricum Acidum 12x</span><span class="ing-benefit">Sugar cravings, hot flashes</span></li>
+          <li><span class="ing-name">Thyroidinum 9x</span><span class="ing-benefit">Assists in metabolizing food, thyroid function</span></li>
+        </ul>
+        <p class="inside-inactive">Inactive ingredients: Grain Alcohol 20%, Natural Flavors, Stevia Leaf, USP Purified Water</p>
+      </div>
+
+      <!-- Bottle 2 -->
+      <div class="inside-bottle">
+        <div class="inside-bottle-header">
+          <span class="inside-bottle-num">Bottle 2</span>
+          <h3 class="inside-bottle-name">Xceler8</h3>
+          <span class="inside-bottle-tag">8 Natural Ingredients</span>
+        </div>
+        <ul class="inside-ingredients">
+          <li><span class="ing-name">B-12 (as Methylcobalamin)</span><span class="ing-benefit">Mood, depression</span></li>
+          <li><span class="ing-name">Biotin</span><span class="ing-benefit">Metabolism, skin, stabilizing blood sugar</span></li>
+          <li><span class="ing-name">Rosehips</span><span class="ing-benefit">Antioxidant, anti-inflammatory, immune system, cholesterol</span></li>
+          <li><span class="ing-name">Acerola Fruit</span><span class="ing-benefit">Immune system, digestion, inflammation, cognitive function</span></li>
+          <li><span class="ing-name">Green Tea Leaf Extract</span><span class="ing-benefit">Weight loss, energy</span></li>
+          <li><span class="ing-name">Fresh Ashwagandha Root Extract</span><span class="ing-benefit">Stress, cognitive ability, memory, sleep</span></li>
+          <li><span class="ing-name">Rhodiola Rosea</span><span class="ing-benefit">Energy, lowers cortisol, adrenaline, targets excess fat</span></li>
+          <li><span class="ing-name">Other ingredients</span><span class="ing-benefit">Vegetable Glycerin, Water, Stevia Leaf Extract, Peppermint Essential Oil</span></li>
+        </ul>
+        <p class="inside-inactive">Created by Amy Rickman, Homeopathy Educator and Julie Park</p>
+      </div>
+    </div>
+    <p class="inside-disclaimer">Information only — not designed to treat, cure, diagnose disease or any medical condition.</p>
+  </div>
+</section>
+
+<!-- ── YOUR HORMONES ── -->
+<section class="hormones-section" aria-labelledby="hormones-title">
+  <div class="container">
+    <span class="section-label">Understanding Your Body</span>
+    <h2 class="section-title" id="hormones-title">When hormones are off,<br>everything feels off.</h2>
+    <div class="divider" aria-hidden="true"></div>
+    <p class="section-body" style="max-width:580px">98% of weight loss attempts fail because of hormone imbalance. Here's what each hormone controls — and what happens when it's disrupted.</p>
+
+    <div class="hormones-grid">
+      <div class="hormone-card"><h3 class="hormone-name">Cortisol</h3><p class="hormone-role">The stress hormone</p><p class="hormone-symptoms" id="hormone-cortisol">High blood pressure, poor sleep, belly fat, inability to control stress, anxiety</p></div>
+      <div class="hormone-card"><h3 class="hormone-name">Estrogen</h3><p class="hormone-role">Reproductive health</p><p class="hormone-symptoms" id="hormone-estrogen">Fatigue, hot flashes, dryness, weight gain, irregular periods, PCOS</p></div>
+      <div class="hormone-card"><h3 class="hormone-name">Testosterone</h3><p class="hormone-role">Strength &amp; vitality</p><p class="hormone-symptoms" id="hormone-testosterone">Bone health, sexual dysfunction, muscle mass loss, fatigue, libido, belly fat</p></div>
+      <div class="hormone-card"><h3 class="hormone-name">Thyroid</h3><p class="hormone-role">Metabolism regulator</p><p class="hormone-symptoms" id="hormone-thyroid">Hot/cold regulation, constipation, dry skin, excess weight gain or loss, hair loss, fatigue</p></div>
+      <div class="hormone-card"><h3 class="hormone-name">Insulin</h3><p class="hormone-role">Blood sugar control</p><p class="hormone-symptoms" id="hormone-insulin">Blood sugar spikes, increased thirst, poor circulation, slow wound healing, energy crashes</p></div>
+      <div class="hormone-card"><h3 class="hormone-name">Melatonin</h3><p class="hormone-role">Sleep cycle</p><p class="hormone-symptoms" id="hormone-melatonin">Sleep imbalance, insomnia, active brain at night, fatigue during the day</p></div>
+    </div>
+    <p class="inside-disclaimer">Information only — not designed to treat, cure, diagnose or treat any medical condition.</p>
+  </div>
+</section>
+
+<!-- ── MORE PRODUCTS ── -->
+<section class="products-section" aria-labelledby="products-title">
+  <div class="container">
+    <span class="section-label">Also from Partner.Co</span>
+    <h2 class="section-title" id="products-title">Complete your wellness routine.</h2>
+    <div class="divider" aria-hidden="true"></div>
+    <div class="products-grid">
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/CLB_CoreCleanse_Insider_Guide_ENG-V05_10.jpg" alt="Core Cleanse and Core Cleanse Plus packets" class="product-img" onerror="this.style.display='none'">
+          
+        </div>
+        <div class="product-body">
+          <span class="product-tag">Gut Health</span>
+          <h3 class="product-name">Core Cleanse &amp;<br>Core Cleanse Plus</h3>
+          <p class="product-desc">Your weekly 5:2 ritual for digestive health and rhythm. Feel lighter, no bloat, and keep cravings in check. A five-day gut reset followed by a two-day GI release that restores your core.</p>
+          <a href="order.html?product=Core%20Cleanse" class="product-btn">Order Now</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/pdp-product-image-global-clb-abvantage-2-desktop.jpg" alt="AbVantage hip and waist reducer supplement" class="product-img" onerror="this.style.display='none'">
+          
+        </div>
+        <div class="product-body">
+          <span class="product-tag">Scientific Fat Burning</span>
+          <h3 class="product-name">AbVantage</h3>
+          <p class="product-desc">A recent science breakthrough in thermogenic hip and waist reduction. These capsules activate brown fat — burning calories by converting glucose, fatty acids, and amino acids into heat. Features 10× calorie burn with Grains of Paradise. Gluten free.</p>
+          <a href="order.html?product=AbVantage" class="product-btn">Order Now</a>
+<section class="purchase-section" id="order">
+  <div class="container">
+    <div class="cta-strip-inner">
+      <div class="cta-strip-left">
+        <span class="section-label" style="color: var(--gold-light);">Ready to Begin?</span>
+        <h2 class="cta-strip-title">Start your transformation today.</h2>
+        <p class="cta-strip-body">Slenderiix™ + Xceler8™ drops. Natural, plant-based, hormone-free. Includes diet guide, program booklet, and personal support from Tammy. Free US shipping.</p>
+      </div>
+      <div class="cta-strip-right">
+        <a href="order.html" class="btn-primary" style="background: var(--gold); font-size: 0.82rem; padding: 1.1rem 2.5rem;">Order Now</a>
+        <p class="cta-contact">Questions? <a href="mailto:tammymelchisedeck@gmail.com">Email Tammy</a></p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ── FOOTER ── -->
 <footer class="site-footer">
   <div class="footer-inner">
+
+    <!-- Top: 3-column grid -->
     <div class="footer-grid">
+
+      <!-- Col 1: Brand -->
       <div class="footer-brand">
         <p class="footer-name">Tammy Maltby<br>Melchisedeck</p>
         <p class="footer-tagline">Wellness. Faith. Purpose.</p>
@@ -567,14 +1850,18 @@
           </a>
         </nav>
       </div>
+
+      <!-- Col 2: Quick links -->
       <div class="footer-links">
         <p class="footer-col-label">Navigate</p>
-        <a href="index.html#drops" class="footer-link">The Drops</a>
-        <a href="index.html#results" class="footer-link">Results</a>
-        <a href="index.html#testimonials" class="footer-link">Testimonials</a>
+        <a href="#drops" class="footer-link">The Drops</a>
+        <a href="#results" class="footer-link">Results</a>
+        <a href="#testimonials" class="footer-link">Testimonials</a>
         <a href="about.html" class="footer-link">About Tammy</a>
         <a href="mailto:tammymelchisedeck@gmail.com" class="footer-link">Contact</a>
       </div>
+
+      <!-- Col 3: Stay connected -->
       <div class="footer-signup">
         <p class="footer-col-label">Stay Connected</p>
         <p class="footer-signup-desc">Tips, recipes, and encouragement — straight to your inbox.</p>
@@ -583,43 +1870,161 @@
           <button type="submit">Subscribe</button>
         </form>
       </div>
+
     </div>
+
+    <!-- Bottom bar -->
     <div class="footer-bottom">
       <img src="images/unnamed.webp" alt="Partner.Co" class="footer-partnerco-logo">
       <p class="footer-disclaimer">These statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease. Applicable to U.S. only.</p>
-      <p class="footer-copy">&copy; <span id="year"></span> Tammy Maltby Melchisedeck. All rights reserved.</p>
+      <p class="footer-copy">&copy; <span id="year"></span> Tammy Maltby Melchisedeck. All rights reserved. <a href="admin.html" style="color:rgba(255,255,255,0.15);text-decoration:none;margin-left:0.5rem" title="Admin">&#9679;</a></p>
       <p style="font-size:0.68rem;color:rgba(255,255,255,0.18);letter-spacing:0.06em">Site by <a href="https://treetopbusiness.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.25);text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='rgba(255,255,255,0.5)'" onmouseout="this.style.color='rgba(255,255,255,0.25)'">Treetop Business Solutions</a></p>
     </div>
+
   </div>
 </footer>
 
 <script>
+  // Marquee — drag to scroll + arrow buttons + touch support + hover pause
+  (function() {
+    var track = document.getElementById('tTrack');
+    var marquee = document.getElementById('tMarquee');
+    var wrap = document.querySelector('.t-marquee-wrap');
+    if (!track || !marquee) return;
+
+    // Pause on hover
+    if (wrap) {
+      wrap.addEventListener('mouseenter', function() { track.classList.add('paused'); });
+      wrap.addEventListener('mouseleave', function() { track.classList.remove('paused'); });
+    }
+
+    // Drag to scroll
+    var isDragging = false, startX = 0, scrollLeft = 0;
+    marquee.addEventListener('mousedown', function(e) {
+      isDragging = true;
+      startX = e.pageX - marquee.offsetLeft;
+      scrollLeft = marquee.scrollLeft;
+      track.classList.add('paused');
+    });
+    document.addEventListener('mouseup', function() {
+      isDragging = false;
+      track.classList.remove('paused');
+    });
+    marquee.addEventListener('mousemove', function(e) {
+      if (!isDragging) return;
+      e.preventDefault();
+      var x = e.pageX - marquee.offsetLeft;
+      marquee.scrollLeft = scrollLeft - (x - startX);
+    });
+
+    // Touch support
+    var touchStartX = 0;
+    marquee.addEventListener('touchstart', function(e) {
+      touchStartX = e.touches[0].pageX;
+      track.classList.add('paused');
+    }, { passive: true });
+    marquee.addEventListener('touchend', function() {
+      track.classList.remove('paused');
+    }, { passive: true });
+    marquee.addEventListener('touchmove', function(e) {
+      var diff = touchStartX - e.touches[0].pageX;
+      marquee.scrollLeft += diff * 0.5;
+      touchStartX = e.touches[0].pageX;
+    }, { passive: true });
+  })();
+
+  // Arrow step for marquee
+  function marqueeStep(dir) {
+    var marquee = document.getElementById('tMarquee');
+    if (marquee) marquee.scrollBy({ left: dir * 280, behavior: 'smooth' });
+  }
+
+  // Dynamic copyright year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Apply config
-  document.addEventListener('DOMContentLoaded', function() {
-    if (typeof SITE_CONFIG === 'undefined') return;
-    var c = SITE_CONFIG;
-    var root = document.documentElement.style;
-    root.setProperty('--cream', c.colors.cream); root.setProperty('--linen', c.colors.linen);
-    root.setProperty('--sand', c.colors.sand); root.setProperty('--gold', c.colors.gold);
-    root.setProperty('--gold-light', c.colors.goldLight); root.setProperty('--ink', c.colors.ink);
-    root.setProperty('--ink-mid', c.colors.inkMid); root.setProperty('--ink-light', c.colors.inkLight);
-    root.setProperty('--sage', c.colors.sage);
-    root.setProperty('--serif', "'" + c.fonts.serif + "', Georgia, serif");
-    root.setProperty('--sans', "'" + c.fonts.sans + "', system-ui, sans-serif");
-    document.querySelectorAll('.nav-name').forEach(function(el) { el.textContent = c.brand.name; });
-    document.querySelectorAll('.footer-name').forEach(function(el) { el.innerHTML = c.brand.name.replace(' ', '<br>'); });
-    document.querySelectorAll('.footer-tagline').forEach(function(el) { el.textContent = c.brand.tagline; });
-    document.querySelectorAll('.footer-disclaimer').forEach(function(el) { el.textContent = c.footer.disclaimer; });
-    var aboutImg = document.querySelector('.about-img');
-    if (aboutImg) aboutImg.style.backgroundImage = "url('" + c.images.about + "')";
-    var partnerLogo = document.querySelector('.footer-partnerco-logo');
-    if (partnerLogo) partnerLogo.src = c.images.partnerLogo;
+  // Welcome letter popup — 3s delay on first visit + exit intent
+  function showLetter() {
+    if (sessionStorage.getItem('letterSeen')) return;
+    var overlay = document.getElementById('letterOverlay');
+    if (!overlay || overlay.style.display === 'none') return;
+    overlay.style.display = 'flex';
+    sessionStorage.setItem('letterSeen', '1');
+  }
+
+  function closeLetter() {
+    var overlay = document.getElementById('letterOverlay');
+    if (!overlay) return;
+    overlay.classList.add('hidden');
+    setTimeout(function() { if (overlay) overlay.style.display = 'none'; }, 400);
+  }
+
+  // Close on backdrop click
+  var _overlay = document.getElementById('letterOverlay');
+  if (_overlay) _overlay.addEventListener('click', function(e) {
+    if (e.target === this) closeLetter();
   });
 
+  // Close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLetter();
+  });
+
+  if (sessionStorage.getItem('letterSeen')) {
+    // Already seen — hide immediately, no flash
+    var ol = document.getElementById('letterOverlay');
+    if (ol) { ol.style.display = 'none'; }
+  } else {
+    // Hide initially so it doesn't flash on load
+    var ol = document.getElementById('letterOverlay');
+    if (ol) ol.style.display = 'none';
+
+    // Show after 3 seconds
+    var letterTimer = setTimeout(showLetter, 3000);
+
+    // Exit intent — mouse moving toward top of browser (tab switching)
+    document.addEventListener('mouseleave', function onExit(e) {
+      if (e.clientY <= 10) {
+        clearTimeout(letterTimer);
+        showLetter();
+        document.removeEventListener('mouseleave', onExit);
+      }
+    });
+  }
+
+  // Back to top button
+  var backToTopBtn = document.getElementById('backToTop');
+  if (backToTopBtn) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 400) {
+        backToTopBtn.style.opacity = '1';
+        backToTopBtn.style.transform = 'translateY(0)';
+      } else {
+        backToTopBtn.style.opacity = '0';
+        backToTopBtn.style.transform = 'translateY(10px)';
+      }
+    }, { passive: true });
+  }
+
+
+  (function() {
+    var sections = document.querySelectorAll('section[id], div[id="order"]');
+    var navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          navLinks.forEach(function(link) {
+            link.classList.remove('nav-active');
+            if (link.getAttribute('href') === '#' + entry.target.id) {
+              link.classList.add('nav-active');
+            }
+          });
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    sections.forEach(function(s) { observer.observe(s); });
+  })();
   function toggleNav() {
-    var nav     = document.getElementById('mobileNav');
+    var nav    = document.getElementById('mobileNav');
     var overlay = document.getElementById('navPageOverlay');
     var toggle  = document.querySelector('.nav-toggle');
     if (!nav) return;
@@ -629,13 +2034,15 @@
     if (toggle)  toggle.classList.toggle('open',  !isOpen);
   }
   function closeMobileNav() {
-    var nav     = document.getElementById('mobileNav');
+    var nav    = document.getElementById('mobileNav');
     var overlay = document.getElementById('navPageOverlay');
     var toggle  = document.querySelector('.nav-toggle');
     if (nav)     nav.classList.remove('open');
     if (overlay) overlay.classList.remove('open');
     if (toggle)  toggle.classList.remove('open');
   }
+
+  // Close mobile nav on outside click
   document.addEventListener('click', function(e) {
     var nav    = document.getElementById('mobileNav');
     var toggle = document.querySelector('.nav-toggle');
@@ -644,22 +2051,565 @@
     }
   });
 
+  // FAQ accordion — clicking one closes all others
+  document.querySelectorAll('details').forEach(function(detail) {
+    detail.querySelector('summary').addEventListener('click', function(e) {
+      e.preventDefault();
+      var isOpen = detail.open;
+      // Close all
+      document.querySelectorAll('details').forEach(function(d) {
+        d.open = false;
+        var icon = d.querySelector('.faq-toggle');
+        if (icon) icon.textContent = '+';
+      });
+      // If it was closed, open this one
+      if (!isOpen) {
+        detail.open = true;
+        var icon = detail.querySelector('.faq-toggle');
+        if (icon) icon.textContent = '−';
+      }
+    });
+  });
+
+  // Email form with basic feedback
   function handleEmailSubmit(e) {
-    const action = e.target.action;
+    var btn = e.target.querySelector('button');
+    if (!btn) return;
+    var original = btn.textContent;
+    var action = e.target.action;
     if (action.includes('YOUR_FORM_ID')) {
       e.preventDefault();
-      const btn = e.target.querySelector('button');
-      const original = btn.textContent;
-      btn.textContent = 'Almost there! (Form not yet connected)';
-      btn.style.background = '#7A8C72';
+      btn.textContent = 'Almost there!';
+      btn.style.opacity = '0.7';
+      btn.disabled = true;
       setTimeout(function() {
         btn.textContent = original;
-        btn.style.background = '';
+        btn.style.opacity = '';
+        btn.disabled = false;
         e.target.reset();
-      }, 3500);
+      }, 3000);
+    } else {
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
     }
   }
+
+  // ── CHAT BUBBLE ──
+  function toggleChat() {
+    var panel = document.getElementById('chatPanel');
+    var isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+    if (!isOpen) document.getElementById('chatName').focus();
+  }
+
+  function submitChat(e) {
+    e.preventDefault();
+    var btn = document.getElementById('chatSubmitBtn');
+    var form = document.getElementById('chatForm');
+    if (!btn || !form) return;
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    var data = new FormData(form);
+    fetch('https://formspree.io/f/YOUR_CHAT_FORM_ID', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(function(r) {
+      if (r.ok) {
+        var wrap = document.getElementById('chatFormWrap');
+        var success = document.getElementById('chatSuccess');
+        if (wrap) wrap.style.display = 'none';
+        if (success) success.style.display = 'block';
+      } else {
+        btn.textContent = 'Try again';
+        btn.disabled = false;
+      }
+    }).catch(function() {
+      btn.textContent = 'Try again';
+      btn.disabled = false;
+    });
+  }
+
+  // Show chat bubble after scrolling past hero
+  document.addEventListener('DOMContentLoaded', function() {
+    var bubble = document.getElementById('chatBubble');
+    var hero = document.querySelector('.hero');
+    if (!bubble) return;
+    function checkScroll() {
+      var threshold = hero ? hero.offsetHeight * 0.6 : 300;
+      if (window.scrollY > threshold) {
+        bubble.classList.add('visible');
+      } else {
+        bubble.classList.remove('visible');
+      }
+    }
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    checkScroll();
+  });
+
+  // Close chat on outside click
+  document.addEventListener('click', function(e) {
+    var panel = document.getElementById('chatPanel');
+    var bubble = document.getElementById('chatBubble');
+    if (panel && bubble && panel.classList.contains('open') && !panel.contains(e.target) && !bubble.contains(e.target)) {
+      panel.classList.remove('open');
+    }
+  });
+
+  // ── SUPABASE LIVE CONTENT ──
+  var SB_URL = 'https://nzqdmsbxwghkqowajmvs.supabase.co/rest/v1';
+  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cWRtc2J4d2doa3Fvd2FqbXZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3Njk0MjQsImV4cCI6MjA5NjM0NTQyNH0.aqdvA_ytnkeSvg4hmLqC1zces0aIFZcxkHrrN7k7atk';
+  var SB_HEADERS = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY };
+
+  // Convert *text* markers to gold italic spans
+  // e.g. "Real results. *Real women.* Real transformation."
+  function parseGold(text) {
+    return text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  }
+
+  function sbFetch(endpoint) {
+    return fetch(SB_URL + endpoint, { headers: SB_HEADERS }).then(function(r) { return r.json(); });
+  }
+
+  // Load transformation photos from Supabase testimonials table
+  function loadTestimonialsFromDB() {
+    sbFetch('/testimonials?active=eq.true&order=sort_order.asc')
+      .then(function(data) {
+        if (!data || !data.length) return;
+        var track = document.getElementById('tTrack');
+        if (!track) return;
+
+        // Only use testimonials that have a photo_url
+        var withPhotos = data.filter(function(t) { return t.photo_url; });
+        if (!withPhotos.length) return; // keep placeholders if no photos yet
+
+        // Build cards — duplicate set for seamless loop
+        // Resolve relative paths to absolute URLs
+        var base = window.location.origin + '/';
+        var cards = withPhotos.concat(withPhotos).map(function(t) {
+          var photoUrl = (t.photo_url && !t.photo_url.startsWith('http'))
+            ? base + t.photo_url
+            : t.photo_url;
+          var caption = (t.name || t.result)
+            ? '<div class="t-photo-caption">' +
+                (t.name ? '<span class="t-photo-caption-name">' + t.name + '</span>' : '') +
+                (t.result ? '<span class="t-photo-caption-result">' + t.result + '</span>' : '') +
+              '</div>'
+            : '';
+          return '<div class="t-photo">' +
+            '<div class="t-photo-mat">' +
+              '<div class="t-photo-img">' +
+                '<img src="' + photoUrl + '" alt="' + (t.name || 'Transformation') + '">' +
+              '</div>' +
+            '</div>' +
+            ((t.name || t.result) ? '<div class="t-photo-caption">' +
+              (t.name ? '<span class="t-photo-caption-name">' + t.name + '</span>' : '') +
+              (t.result ? '<span class="t-photo-caption-result">' + t.result + '</span>' : '') +
+            '</div>' : '') +
+          '</div>';
+        }).join('');
+
+        track.innerHTML = cards;
+
+        // Restart animation cleanly after rebuild
+        if (track) {
+          track.style.animation = 'none';
+          track.offsetHeight; // force reflow
+          track.style.animation = '';
+        }
+      })
+      .catch(function() { /* keep placeholders */ });
+  }
+
+  // Load content blocks from Supabase
+  function loadContentFromDB() {
+    sbFetch('/content_blocks?select=key,value')
+      .then(function(data) {
+        if (!data || !data.length) return;
+        var map = {};
+        data.forEach(function(b) { map[b.key] = b.value; });
+
+        // Hero
+        if (map.hero_eyebrow) {
+          var ey = document.querySelector('.hero-eyebrow');
+          if (ey) ey.textContent = map.hero_eyebrow;
+        }
+        if (map.hero_headline) {
+          var hh = document.querySelector('.hero-headline');
+          if (hh) {
+            // Convert *text* to gold em, \n to <br>
+            var lines = map.hero_headline.split('\n');
+            hh.innerHTML = lines.map(function(line) {
+              return parseGold(line);
+            }).join('<br>');
+          }
+        }
+        if (map.hero_body) {
+          var hb = document.querySelector('.hero-body');
+          if (hb) hb.textContent = map.hero_body;
+        }
+
+        // Welcome letter
+        if (map.letter_greeting) {
+          var lg = document.getElementById('letter-greeting');
+          if (lg) lg.textContent = map.letter_greeting;
+        }
+        if (map.letter_body) {
+          var lb = document.querySelector('.letter-body');
+          if (lb) {
+            var paragraphs = map.letter_body.split('\n\n');
+            lb.innerHTML = paragraphs.map(function(p) {
+              return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+            }).join('');
+          }
+        }
+
+        // CTA strip
+        if (map.cta_headline) {
+          var ch = document.querySelector('.cta-strip-title');
+          if (ch) ch.textContent = map.cta_headline;
+        }
+        if (map.cta_body) {
+          var cb = document.querySelector('.cta-strip-body');
+          if (cb) cb.textContent = map.cta_body;
+        }
+
+        // Why It Works benefits
+        for (var i = 1; i <= 8; i++) {
+          var num = i < 10 ? '0' + i : '' + i;
+          var titleEl = document.getElementById('why-title-' + num);
+          var bodyEl  = document.getElementById('why-body-'  + num);
+          if (titleEl && map['why_' + num + '_title']) titleEl.textContent = map['why_' + num + '_title'];
+          if (bodyEl  && map['why_' + num + '_body'])  bodyEl.textContent  = map['why_' + num + '_body'];
+        }
+
+        // Hormone symptoms
+        var hormoneKeys = ['cortisol','estrogen','testosterone','thyroid','insulin','melatonin'];
+        hormoneKeys.forEach(function(h) {
+          var el = document.getElementById('hormone-' + h);
+          if (el && map['hormone_' + h + '_symptoms']) el.textContent = map['hormone_' + h + '_symptoms'];
+        });
+      })
+      .catch(function() { /* fall back to hardcoded */ });
+  }
+
+  function loadProductsFromDB() {
+    sbFetch('/products?active=eq.true&order=sort_order.asc')
+      .then(function(data) {
+        if (!data || !data.length) return;
+
+        // Update the drops feature image if the first product has one
+        var dropsProduct = data.find(function(p) { return p.sort_order === 1; });
+        if (dropsProduct && dropsProduct.feature_image_path) {
+          var featImg = document.getElementById('dropsFeatureImg');
+          if (featImg) featImg.src = dropsProduct.feature_image_path;
+        }
+
+        // Rebuild the More Products grid
+        var grid = document.querySelector('.products-grid');
+        if (!grid) return;
+        grid.innerHTML = data.map(function(p) {
+          var img = p.image_path
+            ? '<img src="' + p.image_path + '" alt="' + p.name + '" class="product-img" onerror="this.style.display=\'none\'">'
+            : '';
+          return '<div class="product-card">' +
+            '<div class="product-img-wrap">' + img + '</div>' +
+            '<div class="product-body">' +
+              '<span class="product-tag">' + (p.tag || '') + '</span>' +
+              '<h3 class="product-name">' + p.name + '</h3>' +
+              '<p class="product-desc">' + (p.description || '') + '</p>' +
+              '<a href="order.html?product=' + encodeURIComponent(p.name) + '" class="product-btn">Order Now</a>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function() { /* fall back to hardcoded */ });
+  }
+
+  // ── APPLY CONFIG ──
+  function applyConfig() {
+    if (typeof SITE_CONFIG === 'undefined') return;
+    var c = SITE_CONFIG;
+    var root = document.documentElement.style;
+
+    // Colors
+    root.setProperty('--cream',      c.colors.cream);
+    root.setProperty('--linen',      c.colors.linen);
+    root.setProperty('--sand',       c.colors.sand);
+    root.setProperty('--gold',       c.colors.gold);
+    root.setProperty('--gold-light', c.colors.goldLight);
+    root.setProperty('--ink',        c.colors.ink);
+    root.setProperty('--ink-mid',    c.colors.inkMid);
+    root.setProperty('--ink-light',  c.colors.inkLight);
+    root.setProperty('--sage',       c.colors.sage);
+    root.setProperty('--serif',      "'" + c.fonts.serif + "', Georgia, serif");
+    root.setProperty('--sans',       "'" + c.fonts.sans + "', system-ui, sans-serif");
+
+    // Nav
+    document.querySelectorAll('.nav-name').forEach(function(el) { el.textContent = c.brand.name; });
+
+    // Hero image + position
+    var heroImg = document.querySelector('.hero-img');
+    if (heroImg) {
+      heroImg.style.backgroundImage = "url('" + c.images.hero + "')";
+      heroImg.style.backgroundPosition = 'center ' + (c.hero.imgPosition || '45%');
+    }
+
+    // Hero text
+    var eyebrow = document.querySelector('.hero-eyebrow');
+    if (eyebrow) eyebrow.textContent = c.hero.eyebrow;
+    var headline = document.querySelector('.hero-headline');
+    if (headline) {
+      headline.innerHTML = c.hero.headline.split('\n').map(function(l) {
+        return l.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+      }).join('<br>');
+    }
+    var heroBody = document.querySelector('.hero-body');
+    if (heroBody) heroBody.textContent = c.hero.body;
+
+    // Trust bar
+    var trustBar = document.querySelector('.trust-bar');
+    if (trustBar && c.trustBar) {
+      trustBar.innerHTML = c.trustBar.map(function(item) {
+        return '<span class="trust-item"><span class="trust-dot" aria-hidden="true"></span>' + item + '</span>';
+      }).join('');
+    }
+
+    // Results
+    var resultCards = document.querySelectorAll('.result-card');
+    if (c.results) c.results.forEach(function(r, i) {
+      if (resultCards[i]) {
+        var stat  = resultCards[i].querySelector('.result-stat');
+        var label = resultCards[i].querySelector('.result-label');
+        var desc  = resultCards[i].querySelector('.result-desc');
+        if (stat)  stat.textContent  = r.stat;
+        if (label) label.textContent = r.label;
+        if (desc)  desc.textContent  = r.desc;
+      }
+    });
+
+    // CTA strip
+    var ctaTitle = document.querySelector('.cta-strip-title');
+    if (ctaTitle) ctaTitle.textContent = c.cta.headline;
+    var ctaBody = document.querySelector('.cta-strip-body');
+    if (ctaBody) ctaBody.textContent = c.cta.body;
+
+    // Footer
+    document.querySelectorAll('.footer-name').forEach(function(el) { el.innerHTML = c.brand.name.replace(' ', '<br>'); });
+    document.querySelectorAll('.footer-tagline').forEach(function(el) { el.textContent = c.brand.tagline; });
+    document.querySelectorAll('.footer-disclaimer').forEach(function(el) { el.textContent = c.footer.disclaimer; });
+    var partnerLogo = document.querySelector('.footer-partnerco-logo');
+    if (partnerLogo) partnerLogo.src = c.images.partnerLogo;
+
+    // Supabase override
+    if (c.supabase) {
+      SB_URL     = c.supabase.url + '/rest/v1';
+      SB_KEY     = c.supabase.anonKey;
+      SB_HEADERS = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY };
+    }
+  }
+
+  // Run all on DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', function() {
+    applyConfig();
+    loadTestimonialsFromDB();
+    loadContentFromDB();
+    loadProductsFromDB();
+  });
 </script>
+
+<style>
+  .chat-bubble {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    box-shadow: 0 4px 20px rgba(44,37,32,0.25);
+    transition: background 0.2s, transform 0.2s, opacity 0.4s ease;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .chat-bubble.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .chat-bubble:hover { background: var(--ink); transform: scale(1.05); }
+  .chat-bubble svg { color: var(--white); }
+
+  .chat-panel {
+    position: fixed;
+    bottom: 5.5rem;
+    right: 2rem;
+    width: 340px;
+    background: var(--white);
+    border-radius: 2px;
+    border-top: 3px solid var(--gold);
+    box-shadow: 0 8px 40px rgba(44,37,32,0.2);
+    z-index: 899;
+    transform: translateY(12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .chat-panel.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .chat-header {
+    background: var(--ink);
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .chat-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top center;
+    flex-shrink: 0;
+    border: 2px solid var(--gold);
+  }
+  .chat-header-text { flex: 1; }
+  .chat-header-name {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.2;
+  }
+  .chat-header-sub {
+    font-size: 0.68rem;
+    color: var(--gold-light);
+    letter-spacing: 0.06em;
+  }
+  .chat-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255,255,255,0.4);
+    display: flex;
+    align-items: center;
+    padding: 0;
+    transition: color 0.2s;
+  }
+  .chat-close:hover { color: var(--white); }
+
+  .chat-body { padding: 1.25rem; }
+  .chat-intro {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--ink-mid);
+    line-height: 1.6;
+    margin-bottom: 1.1rem;
+  }
+  .chat-field {
+    width: 100%;
+    padding: 0.65rem 0.85rem;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--ink);
+    border: 1px solid var(--sand);
+    border-radius: 2px;
+    outline: none;
+    margin-bottom: 0.65rem;
+    background: var(--cream);
+    transition: border-color 0.2s;
+    display: block;
+  }
+  .chat-field:focus { border-color: var(--gold); }
+  textarea.chat-field { resize: none; height: 80px; }
+  .chat-submit {
+    width: 100%;
+    background: var(--gold);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.85rem;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 0.25rem;
+  }
+  .chat-submit:hover { background: var(--ink); }
+  .chat-submit:disabled { opacity: 0.6; cursor: default; }
+  .chat-success {
+    display: none;
+    text-align: center;
+    padding: 2rem 1.25rem;
+  }
+  .chat-success-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .chat-success p {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--ink-mid);
+    line-height: 1.6;
+  }
+  @media (max-width: 900px) {
+    .chat-panel { width: calc(100vw - 2rem); right: 1rem; }
+    .chat-bubble { right: 1rem; bottom: 1.5rem; }
+  }
+</style>
+
+<!-- ── CHAT BUBBLE ── -->
+<button class="chat-bubble" id="chatBubble" onclick="toggleChat()" aria-label="Have a question?">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+</button>
+
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Contact Tammy">
+  <div class="chat-header">
+    <img src="images/TammyJulieWEB-6432.webp" alt="Tammy" class="chat-avatar">
+    <div class="chat-header-text">
+      <p class="chat-header-name">Tammy Melchisedeck</p>
+      <p class="chat-header-sub">Typically replies within 24hrs</p>
+    </div>
+    <button class="chat-close" onclick="toggleChat()" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="chat-body">
+    <div id="chatFormWrap">
+      <p class="chat-intro">Have a question about the drops? I'd love to help — send me a message!</p>
+      <form id="chatForm" onsubmit="submitChat(event)">
+        <input type="text" name="name" id="chatName" class="chat-field" placeholder="Your name" required>
+        <input type="tel" name="phone" class="chat-field" placeholder="Phone (optional)">
+        <input type="email" name="email" class="chat-field" placeholder="Email address" required>
+        <textarea name="message" class="chat-field" placeholder="Your question..." required></textarea>
+        <button type="submit" class="chat-submit" id="chatSubmitBtn">Send Message</button>
+      </form>
+    </div>
+    <div class="chat-success" id="chatSuccess">
+      <div class="chat-success-icon">✦</div>
+      <p>Thank you! Tammy will be in touch with you soon.</p>
+    </div>
+  </div>
+</div>
+
+<!-- BACK TO TOP -->
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" style="position:fixed;bottom:2rem;right:1.5rem;width:44px;height:44px;border-radius:50%;background:var(--gold);color:var(--white);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(10px);transition:opacity 0.3s,transform 0.3s;z-index:90;box-shadow:0 4px 16px rgba(44,37,32,0.25)">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 
 </body>
 </html>

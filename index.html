@@ -45,7 +45,7 @@
   }
 
   /* ── NAV ── */
-  nav:not(.footer-social-row) {
+  nav:not(.footer-social-row):not(.social-row) {
     background: var(--white);
     border-bottom: 1px solid var(--sand);
     padding: 0 clamp(2rem, 4vw, 4rem);
@@ -1263,6 +1263,7 @@
   }
   .footer-brand { display: flex; flex-direction: column; }
   .footer-brand nav { border: none; background: none; padding: 0; margin: 0; }
+  .footer-social-row { position: static !important; height: auto !important; border: none !important; background: none !important; }
   .footer-name {
     font-family: var(--serif);
     font-size: 1.6rem;

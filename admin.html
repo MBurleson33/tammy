@@ -839,7 +839,7 @@
   function saveNewTestimonial() {
     var quote = document.getElementById('newQuote').value.trim();
     var name  = document.getElementById('newName').value.trim();
-    if (!quote || !name) { toast('Please fill in the quote and name', 'error'); return; }
+    if (!name) { toast('Please fill in the name', 'error'); return; }
     var maxOrder = testimonials.reduce(function(m, t) { return Math.max(m, t.sort_order); }, 0);
     fetch(db('testimonials'), { method: 'POST', headers: headers(), body: JSON.stringify({ quote: quote, name: name, result: document.getElementById('newResult').value.trim(), photo_url: document.getElementById('newPhoto').value.trim(), sort_order: maxOrder + 1, active: true }) })
       .then(function(r) { return r.json(); })

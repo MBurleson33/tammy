@@ -45,7 +45,7 @@
   }
 
   /* ── NAV ── */
-  nav:not(.footer-social-row):not(.social-row) {
+  .main-nav {
     background: var(--white);
     border-bottom: 1px solid var(--sand);
     padding: 0 clamp(2rem, 4vw, 4rem);
@@ -1423,7 +1423,7 @@
     .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
   }
   @media (max-width: 1200px) {
-    nav { padding: 0 1.25rem; }
+    .main-nav { padding: 0 1.25rem; }
     .nav-links { display: none; }
     .nav-toggle { display: flex; }
     .nav-mobile-right { display: flex; }
@@ -1433,7 +1433,7 @@
 <body>
 
 <!-- ── NAVIGATION ── -->
-<nav aria-label="Main navigation">
+<nav class="main-nav" aria-label="Main navigation">
   <a href="#" class="nav-name">Tammy Maltby Melchisedeck</a>
   <ul class="nav-links" role="list">
     <li><a href="#tammy">Meet Tammy</a></li>

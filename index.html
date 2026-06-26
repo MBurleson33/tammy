@@ -1430,7 +1430,7 @@
   }
 </style>
 </head>
-<body>
+<body id="top">
 
 <!-- ── NAVIGATION ── -->
 <nav class="main-nav" aria-label="Main navigation">
@@ -2001,18 +2001,7 @@
   }
 
   // Back to top button
-  var backToTopBtn = document.getElementById('backToTop');
-  if (backToTopBtn) {
-    window.addEventListener('scroll', function() {
-      if (window.scrollY > 400) {
-        backToTopBtn.style.opacity = '1';
-        backToTopBtn.style.transform = 'translateY(0)';
-      } else {
-        backToTopBtn.style.opacity = '0';
-        backToTopBtn.style.transform = 'translateY(10px)';
-      }
-    }, { passive: true });
-  }
+  // Back to top handled inline near element
 
 
   (function() {
@@ -2140,22 +2129,6 @@
     });
   }
 
-  // Show chat bubble after scrolling past hero
-  document.addEventListener('DOMContentLoaded', function() {
-    var bubble = document.getElementById('chatBubble');
-    var hero = document.querySelector('.hero');
-    if (!bubble) return;
-    function checkScroll() {
-      var threshold = hero ? hero.offsetHeight * 0.6 : 300;
-      if (window.scrollY > threshold) {
-        bubble.classList.add('visible');
-      } else {
-        bubble.classList.remove('visible');
-      }
-    }
-    window.addEventListener('scroll', checkScroll, { passive: true });
-    checkScroll();
-  });
 
   // Close chat on outside click
   document.addEventListener('click', function(e) {
@@ -2444,11 +2417,7 @@
     justify-content: center;
     z-index: 900;
     box-shadow: 0 4px 20px rgba(44,37,32,0.25);
-    transition: background 0.2s, transform 0.2s, opacity 0.4s ease;
-    opacity: 0;
-    pointer-events: none;
-  }
-  .chat-bubble.visible {
+    transition: background 0.2s, transform 0.2s;
     opacity: 1;
     pointer-events: auto;
   }
@@ -2616,9 +2585,16 @@
 </div>
 
 <!-- BACK TO TOP -->
-<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" style="position:fixed;bottom:2rem;right:1.5rem;width:44px;height:44px;border-radius:50%;background:var(--gold);color:var(--white);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(10px);transition:opacity 0.3s,transform 0.3s;z-index:90;box-shadow:0 4px 16px rgba(44,37,32,0.25)">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-</button>
+<a href="#top" id="backToTop" style="display:none;position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:#B89A6A;color:#ffffff;text-decoration:none;padding:0.5rem 1.25rem;border-radius:20px;font-family:sans-serif;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;z-index:99999;box-shadow:0 4px 16px rgba(44,37,32,0.25);">↑ TOP</a>
+<script>
+  (function() {
+    var btn = document.getElementById('backToTop');
+    if (!btn) return;
+    window.addEventListener('scroll', function() {
+      btn.style.display = window.scrollY > 300 ? 'block' : 'none';
+    }, { passive: true });
+  })();
+</script>
 
 </body>
 </html>

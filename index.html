@@ -2130,6 +2130,23 @@
   }
 
 
+  // Show chat bubble after scrolling past hero
+  document.addEventListener('DOMContentLoaded', function() {
+    var bubble = document.getElementById('chatBubble');
+    var hero = document.querySelector('.hero');
+    if (!bubble) return;
+    function checkScroll() {
+      var threshold = hero ? hero.offsetHeight * 0.6 : 300;
+      if (window.scrollY > threshold) {
+        bubble.classList.add('visible');
+      } else {
+        bubble.classList.remove('visible');
+      }
+    }
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    checkScroll();
+  });
+
   // Close chat on outside click
   document.addEventListener('click', function(e) {
     var panel = document.getElementById('chatPanel');
@@ -2417,7 +2434,11 @@
     justify-content: center;
     z-index: 900;
     box-shadow: 0 4px 20px rgba(44,37,32,0.25);
-    transition: background 0.2s, transform 0.2s;
+    transition: background 0.2s, transform 0.2s, opacity 0.4s ease;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .chat-bubble.visible {
     opacity: 1;
     pointer-events: auto;
   }

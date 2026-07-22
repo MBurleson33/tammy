@@ -80,7 +80,8 @@ project name, and the admin login password it generated.
 1. Duplicates this repo via GitHub's "generate from template" API
 2. Creates a new Supabase project and waits for it to become healthy
 3. Runs `schema.sql` (if present) to create tables
-4. Runs `seed_content_blocks.sql` to seed starter content
+4. Runs `seed_content_blocks.sql` (from the repo root — not a copy in this
+   folder) to seed starter content
 5. Writes a `config.js` into the new repo with the client's info + the new
    Supabase URL/anon key
 6. Creates a Vercel project linked to the new repo, sets all required env

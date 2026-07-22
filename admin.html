@@ -568,6 +568,7 @@
       .then(function(d) {
         if (d.ok) {
           sessionStorage.setItem('tmmAdminAuth', '1');
+          sessionStorage.setItem('tmmAdminPw', pw);
           showAdminShell();
         } else {
           document.getElementById('loginError').style.display = 'block';
@@ -592,6 +593,7 @@
 
   function doLogout() {
     sessionStorage.removeItem('tmmAdminAuth');
+    sessionStorage.removeItem('tmmAdminPw');
     clearInterval(sessionTimeout);
     document.getElementById('loginScreen').style.display = 'flex';
     document.getElementById('adminShell').style.display = 'none';
@@ -1249,10 +1251,14 @@
   // ──────────────────────────────────────
   // ORDERS
   // ──────────────────────────────────────
+  function adminOrdersHeaders(extra) {
+    return Object.assign({ 'x-admin-password': sessionStorage.getItem('tmmAdminPw') || '', 'Content-Type': 'application/json' }, extra || {});
+  }
+
   function loadOrders() {
     document.getElementById('ordersList').innerHTML = '<div class="loading-state" style="padding:2rem"><div class="spinner"></div> Loading…</div>';
-    fetch(db('orders') + '?order=created_at.desc', { headers: headers() })
-      .then(function(r) { return r.json(); })
+    fetch('/api/admin-orders', { headers: adminOrdersHeaders() })
+      .then(function(r) { if (!r.ok) throw new Error(); return r.json(); })
       .then(function(data) { renderOrders(data); renderOrderStats(data); })
       .catch(function() { toast('Could not load orders', 'error'); });
   }
@@ -1272,12 +1278,14 @@
   }
 
   function loadOrderBadge() {
-    fetch(db('orders') + '?status=eq.new&select=id', { headers: headers() })
-      .then(function(r) { return r.json(); })
+    fetch('/api/admin-orders', { headers: adminOrdersHeaders() })
+      .then(function(r) { if (!r.ok) throw new Error(); return r.json(); })
       .then(function(d) {
+        var newCount = d.filter(function(o) { return o.status === 'new'; }).length;
         var badge = document.getElementById('newOrdersBadge');
-        if (d.length > 0) { badge.textContent = d.length; badge.style.display = 'inline-block'; }
-      });
+        if (newCount > 0) { badge.textContent = newCount; badge.style.display = 'inline-block'; }
+      })
+      .catch(function() { /* badge just won't show if this fails silently on load */ });
   }
 
   var statusLabels = { new: 'New Order', contacted: 'Contacted', payment_sent: 'Payment Sent', shipped: 'Shipped', complete: 'Complete', cancelled: 'Cancelled' };
@@ -1322,7 +1330,7 @@
 
   function deleteOrder(id, name) {
     if (!confirm('Delete order from ' + name + '? This cannot be undone.')) return;
-    fetch(db('orders') + '?id=eq.' + id, { method: 'DELETE', headers: headers() })
+    fetch('/api/admin-orders', { method: 'DELETE', headers: adminOrdersHeaders(), body: JSON.stringify({ id: id }) })
       .then(function(r) {
         if (r.ok) {
           toast('Order deleted', 'success');
@@ -1334,7 +1342,7 @@
   }
 
   function updateOrderStatus(id, status) {
-    fetch(db('orders') + '?id=eq.' + id, { method: 'PATCH', headers: Object.assign(headers(), { 'Prefer': 'return=minimal' }), body: JSON.stringify({ status: status }) })
+    fetch('/api/admin-orders', { method: 'PATCH', headers: adminOrdersHeaders(), body: JSON.stringify({ id: id, status: status }) })
       .then(function(r) { if (r.ok) { toast('✓ Status updated to: ' + statusLabels[status], 'success'); loadOrderBadge(); } else { toast('Update failed', 'error'); } });
   }
 

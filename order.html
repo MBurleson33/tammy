@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Order | Tammy Maltby Melchisedeck</title>
-<meta name="description" content="Order Partner.Co wellness products from Tammy Maltby Melchisedeck. Body Balancing Drops, AbVantage, Core Cleanse and more.">
+<title>Order | [YOUR NAME] — replace before launch</title>
+<meta name="description" content="Order Partner.Co wellness products from [YOUR NAME]. Body Balancing Drops, AbVantage, Core Cleanse and more. — replace before launch">
 <link rel="icon" type="image/png" href="images/favicon.png">
 <script src="config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -540,7 +540,7 @@
 <div class="page-header">
   <span class="page-header-eyebrow">Partner.Co Wellness</span>
   <h1 class="page-header-title">Place Your Order</h1>
-  <p class="page-header-sub">Fill out the form below. Tammy will confirm your order and follow up with payment details within 24 hours.</p>
+  <p class="page-header-sub" id="pageHeaderSub">Fill out the form below. We'll confirm your order and follow up with payment details within 24 hours.</p>
 </div>
 
 <!-- MAIN CONTENT -->
@@ -672,13 +672,13 @@
         <div class="form-row">
           <div class="field-wrap">
             <label class="field-label" for="notes">Questions or special instructions</label>
-            <textarea class="field-input" id="notes" name="notes" placeholder="Any questions for Tammy, or special requests..."></textarea>
+            <textarea class="field-input" id="notes" name="notes" placeholder="Any questions, or special requests..."></textarea>
           </div>
         </div>
       </div>
 
       <!-- Hidden fields for Formspree -->
-      <input type="hidden" name="_subject" value="New Order — Tammy Melchisedeck">
+      <input type="hidden" name="_subject" id="formSubject" value="New Order">
       <input type="hidden" name="order_total" id="hiddenTotal" value="$0.00">
       <input type="hidden" name="order_items" id="hiddenItems" value="">
 
@@ -725,21 +725,22 @@
 <div class="success-screen" id="successScreen">
   <span class="success-icon">✦</span>
   <h2 class="success-title">Order Received!</h2>
-  <p class="success-body">Thank you, <strong id="successName"></strong>! Your order has been received. Please complete your payment below — include your name in the memo so Tammy can match it to your order.</p>
+  <p class="success-body">Thank you, <strong id="successName"></strong>! Your order has been received. Please complete your payment below — include your name in the memo so we can match it to your order.</p>
 
   <!-- Order summary -->
   <div class="payment-summary" id="paymentSummary"></div>
 
   <!-- Payment buttons -->
   <div class="payment-cta">
-    <a id="paypalBtn" href="https://www.paypal.me/tammymaltby" target="_blank" rel="noopener" class="pay-btn pay-btn-paypal">
+    <a id="paypalBtn" href="#" target="_blank" rel="noopener" class="pay-btn pay-btn-paypal" style="display:none">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/></svg>
       Pay with PayPal
     </a>
-    <a href="https://venmo.com/u/tammy-melchisedeck" target="_blank" rel="noopener" class="pay-btn pay-btn-venmo">
+    <a id="venmoBtn" href="#" target="_blank" rel="noopener" class="pay-btn pay-btn-venmo" style="display:none">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.488 1.157c.39.643.565 1.306.565 2.143 0 2.672-2.28 6.148-4.137 8.586H11.65L9.92 2.284l-4.57.44L7.504 22.5h6.494c3.109-3.588 6.994-9.255 6.994-13.84 0-2.727-.955-4.568-1.504-5.503z"/></svg>
       Pay with Venmo
     </a>
+    <p id="paymentMissingNote" style="display:none;font-size:0.8rem;color:var(--error,#C0392B)">Payment link not configured — contact us to complete your order.</p>
   </div>
 
   <div class="payment-memo-note">
@@ -895,19 +896,22 @@
       status:      'new'
     };
 
-    // Save to Supabase
-    fetch(SB_URL + '/orders', {
-      method: 'POST',
-      headers: {
-        'apikey': SB_KEY,
-        'Authorization': 'Bearer ' + SB_KEY,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify(orderRecord)
-    })
+    // Save to Supabase (skip if this site's config.js hasn't been filled in yet)
+    var saveOrder = (SB_URL && SB_KEY)
+      ? fetch(SB_URL + '/orders', {
+          method: 'POST',
+          headers: {
+            'apikey': SB_KEY,
+            'Authorization': 'Bearer ' + SB_KEY,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify(orderRecord)
+        })
+      : Promise.resolve();
+    saveOrder
     .then(function(r) {
-      if (!r.ok) console.warn('Supabase order save failed — continuing anyway');
+      if (r && !r.ok) console.warn('Supabase order save failed — continuing anyway');
     })
     .catch(function(err) { console.warn('Supabase error:', err); })
     .finally(function() {
@@ -956,9 +960,11 @@
     '</div>';
     document.getElementById('paymentSummary').innerHTML = summaryHtml;
 
-    // Set PayPal link with amount pre-filled
+    // Set PayPal link with amount pre-filled (uses this client's own PayPal URL from config, set in applyConfig above)
     var paypalBtn = document.getElementById('paypalBtn');
-    if (paypalBtn) paypalBtn.href = 'https://www.paypal.me/tammymaltby/' + total;
+    if (paypalBtn && paypalBtn.dataset.baseUrl) {
+      paypalBtn.href = paypalBtn.dataset.baseUrl.replace(/\/+$/, '') + '/' + total;
+    }
 
     document.getElementById('orderForm').style.display = 'none';
     document.querySelector('.page-header').style.display = 'none';
@@ -974,10 +980,50 @@
   });
 
   // ── SUPABASE — Load products live ──
-  var SB_URL = 'https://nzqdmsbxwghkqowajmvs.supabase.co/rest/v1';
-  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cWRtc2J4d2doa3Fvd2FqbXZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3Njk0MjQsImV4cCI6MjA5NjM0NTQyNH0.aqdvA_ytnkeSvg4hmLqC1zces0aIFZcxkHrrN7k7atk';
+  // Read from this client's own config.js — never hardcode a Supabase project/key here.
+  // If config isn't filled in yet, leave blank so product/order calls fail loudly instead of
+  // silently hitting another client's database.
+  var SB_URL = (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.supabase && SITE_CONFIG.supabase.url && SITE_CONFIG.supabase.url.indexOf('YOUR_') !== 0)
+    ? SITE_CONFIG.supabase.url + '/rest/v1' : '';
+  var SB_KEY = (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.supabase && SITE_CONFIG.supabase.anonKey && SITE_CONFIG.supabase.anonKey.indexOf('YOUR_') !== 0)
+    ? SITE_CONFIG.supabase.anonKey : '';
 
   document.addEventListener('DOMContentLoaded', function() {
+    // Apply this client's config — nav name, header copy, contact, footer, payment links
+    if (typeof SITE_CONFIG !== 'undefined') {
+      var c = SITE_CONFIG;
+      document.querySelectorAll('.nav-name').forEach(function(el) { el.textContent = c.brand.name; });
+      document.title = 'Order | ' + c.brand.name;
+      var pageHeaderSub = document.getElementById('pageHeaderSub');
+      if (pageHeaderSub) pageHeaderSub.textContent = "Fill out the form below. We'll confirm your order and follow up with payment details within 24 hours.";
+      var formSubject = document.getElementById('formSubject');
+      if (formSubject) formSubject.value = 'New Order — ' + c.brand.name;
+      var footerCopy = document.querySelector('.page-footer p');
+      if (footerCopy) {
+        footerCopy.innerHTML = footerCopy.innerHTML.replace('Tammy Maltby Melchisedeck', c.brand.name);
+        if (c.brand.email) footerCopy.innerHTML = footerCopy.innerHTML.replace('mailto:tammymelchisedeck@gmail.com', 'mailto:' + c.brand.email);
+      }
+      // Payment buttons — only show if this client's own PayPal/Venmo are configured
+      var paypalBtn = document.getElementById('paypalBtn');
+      var venmoBtn  = document.getElementById('venmoBtn');
+      var missingNote = document.getElementById('paymentMissingNote');
+      var hasPaypal = c.brand.paypal && c.brand.paypal.indexOf('YOUR_') !== 0;
+      var hasVenmo  = c.brand.venmo && c.brand.venmo.indexOf('YOUR_') !== 0 && c.brand.venmo !== '@';
+      if (paypalBtn && hasPaypal) {
+        var paypalUrl = c.brand.paypal.indexOf('http') === 0 ? c.brand.paypal : 'https://www.' + c.brand.paypal.replace(/^\/+/, '');
+        paypalBtn.dataset.baseUrl = paypalUrl;
+        paypalBtn.href = paypalUrl;
+        paypalBtn.style.display = '';
+      }
+      if (venmoBtn && hasVenmo) {
+        var handle = c.brand.venmo.replace(/^@/, '');
+        venmoBtn.href = 'https://venmo.com/u/' + handle;
+        venmoBtn.style.display = '';
+      }
+      if (!hasPaypal && !hasVenmo && missingNote) missingNote.style.display = 'block';
+    }
+
+    if (!SB_URL || !SB_KEY) return;
     fetch(SB_URL + '/products?active=eq.true&order=sort_order.asc', {
       headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
     })

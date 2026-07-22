@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Admin — Tammy Melchisedeck</title>
+<title id="pageTitle">Admin — [YOUR NAME] — replace before launch</title>
 <link rel="icon" type="image/png" href="images/favicon.png">
 <script src="config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -218,7 +218,7 @@
 <div class="login-screen" id="loginScreen">
   <div class="login-box">
     <h1 class="login-title">Admin</h1>
-    <p class="login-sub">Tammy Maltby Melchisedeck</p>
+    <p class="login-sub" id="loginSub">Admin</p>
     <input type="password" class="login-field" id="loginPassword" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
     <button class="login-btn" id="loginBtn" onclick="doLogin()">Sign In</button>
     <p class="login-error" id="loginError">Incorrect password. Please try again.</p>
@@ -229,7 +229,7 @@
 <div class="admin-shell" id="adminShell">
 
   <div class="topbar">
-    <span class="topbar-title">Tammy — Admin</span>
+    <span class="topbar-title" id="topbarTitle">Admin</span>
     <div class="topbar-right">
       <span class="session-timer" id="sessionTimer"></span>
       <a href="index.html" class="topbar-site">← View Site</a>
@@ -537,6 +537,15 @@
     // Login background image
     var loginBg = document.querySelector('.login-screen');
     if (loginBg && SITE_CONFIG.images.loginBg) loginBg.style.backgroundImage = "url('" + SITE_CONFIG.images.loginBg + "')";
+
+    // Brand name in title, login screen, and topbar
+    if (SITE_CONFIG.brand && SITE_CONFIG.brand.name) {
+      document.title = 'Admin — ' + SITE_CONFIG.brand.name;
+      var loginSub = document.getElementById('loginSub');
+      if (loginSub) loginSub.textContent = SITE_CONFIG.brand.name;
+      var topbarTitle = document.getElementById('topbarTitle');
+      if (topbarTitle) topbarTitle.textContent = (SITE_CONFIG.brand.shortName || SITE_CONFIG.brand.name.split(' ')[0]) + ' — Admin';
+    }
   }
 
   function headers(extra) {
@@ -1118,6 +1127,7 @@
   // ──────────────────────────────────────
   var contentGroups = {
     'Homepage Hero': ['hero_eyebrow','hero_headline','hero_body'],
+    'About / Meet Section': ['about_title','about_intro_body','about_credentials','about_quote_text'],
     'Welcome Letter': ['letter_greeting','letter_body'],
     'Call to Action': ['cta_headline','cta_body'],
     'Why It Works': ['why_01_title','why_01_body','why_02_title','why_02_body','why_03_title','why_03_body','why_04_title','why_04_body','why_05_title','why_05_body','why_06_title','why_06_body','why_07_title','why_07_body','why_08_title','why_08_body'],
@@ -1128,6 +1138,10 @@
     hero_eyebrow:    'Small text above the main headline (e.g. "Partner.Co Wellness")',
     hero_headline:   'The big headline in the hero image. Use *asterisks* around words you want in gold.',
     hero_body:       'The paragraph of text below the headline explaining what the drops are.',
+    about_title:        'The headline in the "Meet [Name]" section on your homepage (e.g. "Wellness. Faith. Purpose.")',
+    about_intro_body:   'The paragraph of text in the "Meet [Name]" section on your homepage.',
+    about_credentials:  'Your credentials or highlights list. Put each one on its own line — each line becomes a bullet point.',
+    about_quote_text:   'The short pull-quote shown next to your "Meet [Name]" section.',
     letter_greeting: 'The opening greeting of your welcome letter (e.g. "Hello Beautiful One,")',
     letter_body:     'The full body of your welcome letter. Start a new line in this box to create a new paragraph on the site. Use *asterisks* for gold text.',
     cta_headline:    'The headline in the dark "Start Your Transformation" section at the bottom of the page.',
@@ -1319,10 +1333,16 @@
   }
 
   function openEmailTemplate(id, firstName, email, total) {
-    var template = 'Hi ' + firstName + ',\n\nThank you so much for your order! I received it and I\'m so excited for you to start your wellness journey.\n\nYour order total is $' + total + '. To complete your purchase, please send payment via:\n\n• Venmo: @tammy-melchisedeck\n• PayPal: tammymelchisedeck@gmail.com\n\nPlease include your name in the memo so I can match it to your order.\n\nOnce I receive payment I\'ll get your order shipped out right away. Feel free to reach out with any questions!\n\nCheering you on,\nTammy';
+    var brand = (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.brand) ? SITE_CONFIG.brand : {};
+    var senderName  = brand.shortName || (brand.name ? brand.name.split(' ')[0] : 'Us');
+    var paymentLines = [];
+    if (brand.venmo)  paymentLines.push('• Venmo: ' + brand.venmo);
+    if (brand.paypal) paymentLines.push('• PayPal: ' + brand.paypal);
+    var paymentBlock = paymentLines.length ? paymentLines.join('\n') : '• Payment link not yet configured — contact the customer directly.';
+    var template = 'Hi ' + firstName + ',\n\nThank you so much for your order! I received it and I\'m so excited for you to start your wellness journey.\n\nYour order total is $' + total + '. To complete your purchase, please send payment via:\n\n' + paymentBlock + '\n\nPlease include your name in the memo so I can match it to your order.\n\nOnce I receive payment I\'ll get your order shipped out right away. Feel free to reach out with any questions!\n\nCheering you on,\n' + senderName;
     document.getElementById('emailPreview').textContent = template;
     document.getElementById('openEmailBtn').onclick = function() {
-      window.location.href = 'mailto:' + email + '?subject=Your Order from Tammy Melchisedeck&body=' + encodeURIComponent(template);
+      window.location.href = 'mailto:' + email + '?subject=Your Order from ' + (brand.name || senderName) + '&body=' + encodeURIComponent(template);
     };
     openModal('emailModal');
   }

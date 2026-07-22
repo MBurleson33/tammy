@@ -1,11 +1,4 @@
 // api/admin-auth.js
-// Verifies admin password against Supabase settings table
-// Falls back to ADMIN_PASSWORD env var if Supabase unavailable
-// Vercel env vars needed:
-//   SUPABASE_URL      — e.g. https://nzqdmsbxwghkqowajmvs.supabase.co
-//   SUPABASE_SERVICE_KEY — service role key (not anon key) for settings access
-//   ADMIN_PASSWORD    — fallback password if Supabase is down
-
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -21,7 +14,9 @@ module.exports = async function handler(req, res) {
   const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
   const FALLBACK_PASSWORD    = process.env.ADMIN_PASSWORD || 'tmm2026';
 
-  // Try Supabase first
+  console.log('DEBUG: SUPABASE_SERVICE_KEY present:', !!SUPABASE_SERVICE_KEY);
+  console.log('DEBUG: newPassword present:', !!newPassword);
+
   if (SUPABASE_SERVICE_KEY) {
     try {
       const resp = await fetch(`${SUPABASE_URL}/rest/v1/settings?key=eq.admin_password&select=value`, {
@@ -31,20 +26,17 @@ module.exports = async function handler(req, res) {
         }
       });
 
-      if (resp.ok) {
-        const data = await resp.json();
-        const storedPassword = data[0]?.value;
+      console.log('DEBUG: Supabase read status:', resp.status);
+      const data = await resp.json();
+      console.log('DEBUG: Supabase data:', JSON.stringify(data));
 
-        if (!storedPassword) {
-          return res.status(500).json({ ok: false, error: 'Password not set in database' });
-        }
+      if (resp.ok && data.length > 0) {
+        const storedPassword = data[0].value;
 
-        // Verify current password
         if (password !== storedPassword) {
-          return res.status(401).json({ ok: false, error: 'Incorrect password' });
+          return res.status(401).json({ ok: false, error: 'Incorrect password', debug: 'supabase_mismatch' });
         }
 
-        // If newPassword provided, update it in Supabase
         if (newPassword) {
           const updateResp = await fetch(`${SUPABASE_URL}/rest/v1/settings?key=eq.admin_password`, {
             method: 'PATCH',
@@ -57,23 +49,28 @@ module.exports = async function handler(req, res) {
             body: JSON.stringify({ value: newPassword })
           });
 
-          if (!updateResp.ok) {
-            return res.status(500).json({ ok: false, error: 'Failed to update password' });
-          }
+          console.log('DEBUG: Update status:', updateResp.status);
+          const updateText = await updateResp.text();
+          console.log('DEBUG: Update response:', updateText);
 
+          if (!updateResp.ok) {
+            return res.status(500).json({ ok: false, error: 'Failed to update', debug: updateText });
+          }
           return res.status(200).json({ ok: true, updated: true });
         }
 
         return res.status(200).json({ ok: true });
+      } else {
+        console.log('DEBUG: Falling back — Supabase returned empty or error');
       }
     } catch (err) {
-      console.warn('Supabase unavailable, falling back to env var:', err.message);
+      console.error('DEBUG: Supabase error:', err.message);
     }
   }
 
-  // Fallback to env var
+  // Fallback
   if (password === FALLBACK_PASSWORD) {
-    return res.status(200).json({ ok: true });
+    return res.status(200).json({ ok: true, source: 'fallback' });
   }
 
   return res.status(401).json({ ok: false, error: 'Incorrect password' });

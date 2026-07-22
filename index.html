@@ -2506,6 +2506,11 @@
     var chatSuccessMsg = document.getElementById('chatSuccessMsg');
     if (chatSuccessMsg) chatSuccessMsg.textContent = "Thank you! We'll be in touch with you soon.";
 
+    // Page title + meta description
+    document.title = 'Body Balancing Drops | ' + c.brand.name;
+    var metaDesc = document.getElementById('metaDescription');
+    if (metaDesc) metaDesc.setAttribute('content', c.brand.name + " helps women and men lose weight, balance hormones, and reclaim their energy through Partner.Co's natural Body Balancing Drops. Real results, real people.");
+
     // Supabase override
     if (c.supabase) {
       SB_URL     = c.supabase.url + '/rest/v1';

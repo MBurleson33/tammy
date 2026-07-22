@@ -2085,18 +2085,19 @@
     btn.textContent = '...';
     btn.disabled = true;
 
-    // Save to Supabase
-    fetch(SUPABASE_URL + '/rest/v1/subscribers', {
+    var SB_URL = 'https://nzqdmsbxwghkqowajmvs.supabase.co';
+    var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cWRtc2J4d2doa3Fvd2FqbXZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3Njk0MjQsImV4cCI6MjA5NjM0NTQyNH0.aqdvA_ytnkeSvg4hmLqC1zces0aIFZcxkHrrN7k7atk';
+
+    fetch(SB_URL + '/rest/v1/subscribers', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'apikey': SB_KEY,
+        'Authorization': 'Bearer ' + SB_KEY,
         'Prefer': 'return=minimal'
       },
       body: JSON.stringify({ email: email, source: 'footer' })
-    }).then(function(r) {
-      // Notify via Resend (fire and forget)
+    }).then(function() {
       fetch('/api/notify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -2129,37 +2130,35 @@
     btn.textContent = 'Sending...';
     btn.disabled = true;
 
+    var SB_URL = 'https://nzqdmsbxwghkqowajmvs.supabase.co';
+    var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cWRtc2J4d2doa3Fvd2FqbXZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3Njk0MjQsImV4cCI6MjA5NjM0NTQyNH0.aqdvA_ytnkeSvg4hmLqC1zces0aIFZcxkHrrN7k7atk';
+
     var payload = {
       name:    name.value.trim(),
       email:   email.value.trim(),
       message: msg.value.trim()
     };
 
-    // Save to Supabase with timeout
     var timeoutId = setTimeout(function() {
       btn.textContent = 'Try again';
       btn.disabled = false;
-      alert('Connection timeout — please try again');
     }, 8000);
 
-    fetch(SUPABASE_URL + '/rest/v1/messages', {
+    fetch(SB_URL + '/rest/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'apikey': SB_KEY,
+        'Authorization': 'Bearer ' + SB_KEY,
         'Prefer': 'return=minimal'
       },
       body: JSON.stringify(payload)
     }).then(function(r) {
       clearTimeout(timeoutId);
-      console.log('Supabase response status:', r.status);
-      // Show success regardless of status
       var wrap = document.getElementById('chatFormWrap');
       var success = document.getElementById('chatSuccess');
       if (wrap) wrap.style.display = 'none';
       if (success) success.style.display = 'block';
-      // Fire notify in background
       fetch('/api/notify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -2167,7 +2166,6 @@
       }).catch(function() {});
     }).catch(function(err) {
       clearTimeout(timeoutId);
-      console.error('Supabase error:', err);
       btn.textContent = 'Try again';
       btn.disabled = false;
     });

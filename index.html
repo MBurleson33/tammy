@@ -1120,7 +1120,7 @@
     position: fixed;
     inset: 0;
     background: rgba(44, 37, 32, 0.72);
-    z-index: 999;
+    z-index: 9990;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1129,9 +1129,11 @@
     animation: overlayFadeIn 0.6s ease forwards;
   }
   .letter-overlay.hidden {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
+    animation: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    display: none !important;
+    transition: none;
   }
   @keyframes overlayFadeIn {
     to { opacity: 1; }
@@ -1964,7 +1966,7 @@
     var overlay = document.getElementById('letterOverlay');
     if (!overlay) return;
     overlay.classList.add('hidden');
-    setTimeout(function() { if (overlay) overlay.style.display = 'none'; }, 400);
+    sessionStorage.setItem('letterSeen', '1');
   }
 
   // Close on backdrop click

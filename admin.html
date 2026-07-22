@@ -360,7 +360,7 @@
 
       <div class="settings-card">
         <p class="settings-card-title">Change Password</p>
-        <p class="settings-card-desc">Update your admin password. You'll need to update the ADMIN_PASSWORD environment variable in Vercel after changing it here.</p>
+        <p class="settings-card-desc">Update your admin password. Changes take effect immediately — no Vercel access needed.</p>
         <div class="field-group">
           <label class="edit-label">Current Password</label>
           <input type="password" class="edit-field" id="currentPw" placeholder="Enter current password">
@@ -373,9 +373,6 @@
           <label class="edit-label">Confirm New Password</label>
           <input type="password" class="edit-field" id="confirmPw" placeholder="Repeat new password">
         </div>
-        <p style="font-size:0.78rem;color:var(--ink-light);margin-bottom:1rem;line-height:1.6;">
-          After saving, go to <strong>Vercel → Settings → Environment Variables</strong> and update <code style="background:var(--linen);padding:0.1rem 0.35rem;border-radius:2px">ADMIN_PASSWORD</code> to match your new password.
-        </p>
         <button class="btn btn-gold" onclick="changePassword()">Save New Password</button>
       </div>
 
@@ -643,15 +640,23 @@
     if (!cur || !nw || !cf) { toast('Please fill in all password fields', 'error'); return; }
     if (nw !== cf) { toast('New passwords do not match', 'error'); return; }
     if (nw.length < 8) { toast('Password must be at least 8 characters', 'error'); return; }
-    fetch('/api/admin-auth', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: cur }) })
-      .then(function(r) { return r.json(); })
-      .then(function(d) {
-        if (!d.ok) { toast('Current password is incorrect', 'error'); return; }
-        toast('Password verified — remember to update ADMIN_PASSWORD in Vercel too!', 'success');
-        document.getElementById('currentPw').value = '';
-        document.getElementById('newPw').value = '';
-        document.getElementById('confirmPw').value = '';
-      });
+
+    fetch('/api/admin-auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: cur, newPassword: nw })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (!d.ok) { toast('Current password is incorrect', 'error'); return; }
+      toast('✓ Password updated successfully!', 'success');
+      document.getElementById('currentPw').value = '';
+      document.getElementById('newPw').value = '';
+      document.getElementById('confirmPw').value = '';
+    })
+    .catch(function() {
+      toast('Failed to update password — please try again', 'error');
+    });
   }
 
   // ── TABS ──

@@ -481,17 +481,16 @@
       <!-- Credentials sidebar -->
       <aside class="credentials" aria-label="Credentials" id="aboutPageCredentials">
         <span class="credentials-label">Background</span>
-        <div class="credential-item">
-          <p class="credential-title">Add a credential or highlight</p>
-          <p class="credential-sub">A short line of supporting detail</p>
-        </div>
-        <div class="credential-item">
-          <p class="credential-title">Add a credential or highlight</p>
-          <p class="credential-sub">A short line of supporting detail</p>
-        </div>
-        <div class="credential-item">
-          <p class="credential-title">Add a credential or highlight</p>
-          <p class="credential-sub">A short line of supporting detail</p>
+        <div id="aboutPageCredentialsList">
+          <div class="credential-item">
+            <p class="credential-title">Add a credential or highlight</p>
+          </div>
+          <div class="credential-item">
+            <p class="credential-title">Add a credential or highlight</p>
+          </div>
+          <div class="credential-item">
+            <p class="credential-title">Add a credential or highlight</p>
+          </div>
         </div>
 
         <nav class="social-row" aria-label="Follow us">
@@ -515,17 +514,17 @@
         <h2 class="bio-title" id="bio-title">[YOUR NAME]<br>— replace before launch</h2>
         <div class="divider" aria-hidden="true"></div>
 
-        <p><strong>⚠ Placeholder bio — this whole "Bio" block was Tammy's actual personal life story and needs to be rewritten from scratch for every new client.</strong> It's not something a generic template can auto-fill — replace these paragraphs with the client's real background, what led them to Partner.Co, and who they help.</p>
+        <p id="bioPlaceholderWarning"><strong>⚠ Placeholder bio — this content isn't wired up in Supabase yet.</strong> Add rows for about_bio_paragraph_1/2/3 and about_quote_text to content_blocks (see SQL below) — once they exist, this warning disappears and your real bio shows automatically.</p>
 
-        <p>[Paragraph 1 — client's background and what they do]</p>
+        <p id="bioParagraph1">[Paragraph 1 — client's background and what they do]</p>
 
         <div class="bio-pullquote">
-          <p>"[Add a short personal quote from the client here.]"</p>
+          <p id="bioQuoteText">"[Add a short personal quote from the client here.]"</p>
         </div>
 
-        <p>[Paragraph 2 — client's mission or approach]</p>
+        <p id="bioParagraph2">[Paragraph 2 — client's mission or approach]</p>
 
-        <p>[Paragraph 3 — client's closing statement / call to connect]</p>
+        <p id="bioParagraph3">[Paragraph 3 — client's closing statement / call to connect]</p>
       </div>
 
     </div>
@@ -638,6 +637,61 @@
     var footerCopyName = document.getElementById('footerCopyName');
     if (footerCopyName) footerCopyName.textContent = c.brand.name;
   });
+
+  // ── LOAD BIO CONTENT FROM SUPABASE ──
+  // about.html previously had no Supabase integration at all — the bio, credentials,
+  // and quote were pure static placeholder HTML with no way to pull real content.
+  (function() {
+    var SB_URL = (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.supabase && SITE_CONFIG.supabase.url) ? SITE_CONFIG.supabase.url + '/rest/v1' : '';
+    var SB_KEY = (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.supabase && SITE_CONFIG.supabase.anonKey) ? SITE_CONFIG.supabase.anonKey : '';
+    if (!SB_URL || !SB_KEY) return;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch(SB_URL + '/content_blocks?select=key,value', { headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY } })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (!data || !data.length) return;
+          var map = {};
+          data.forEach(function(b) { map[b.key] = b.value; });
+          var anyBioContent = false;
+
+          if (map.about_page_intro) {
+            var sub = document.getElementById('pageHeroSub');
+            if (sub) sub.textContent = map.about_page_intro;
+          }
+          if (map.about_bio_paragraph_1) {
+            var p1 = document.getElementById('bioParagraph1');
+            if (p1) { p1.textContent = map.about_bio_paragraph_1; anyBioContent = true; }
+          }
+          if (map.about_bio_paragraph_2) {
+            var p2 = document.getElementById('bioParagraph2');
+            if (p2) p2.textContent = map.about_bio_paragraph_2;
+          }
+          if (map.about_bio_paragraph_3) {
+            var p3 = document.getElementById('bioParagraph3');
+            if (p3) p3.textContent = map.about_bio_paragraph_3;
+          }
+          if (map.about_bio_quote) {
+            var q = document.getElementById('bioQuoteText');
+            if (q) q.textContent = '"' + map.about_bio_quote + '"';
+          }
+          if (map.about_credentials) {
+            var list = document.getElementById('aboutPageCredentialsList');
+            if (list) {
+              list.innerHTML = map.about_credentials.split('\n').filter(Boolean).map(function(line) {
+                return '<div class="credential-item"><p class="credential-title">' + line + '</p></div>';
+              }).join('');
+            }
+          }
+          // Hide the placeholder warning once real bio content exists
+          if (anyBioContent) {
+            var warn = document.getElementById('bioPlaceholderWarning');
+            if (warn) warn.style.display = 'none';
+          }
+        })
+        .catch(function() { /* keep placeholders */ });
+    });
+  })();
 
   function toggleNav() {
     var nav     = document.getElementById('mobileNav');

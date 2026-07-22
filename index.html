@@ -2146,16 +2146,17 @@
       },
       body: JSON.stringify(payload)
     }).then(function() {
-      // Notify via Resend
+      // Show success immediately
+      var wrap = document.getElementById('chatFormWrap');
+      var success = document.getElementById('chatSuccess');
+      if (wrap) wrap.style.display = 'none';
+      if (success) success.style.display = 'block';
+      // Fire notify in background — don't wait
       fetch('/api/notify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type: 'message', data: payload })
       }).catch(function() {});
-      var wrap = document.getElementById('chatFormWrap');
-      var success = document.getElementById('chatSuccess');
-      if (wrap) wrap.style.display = 'none';
-      if (success) success.style.display = 'block';
     }).catch(function() {
       btn.textContent = 'Try again';
       btn.disabled = false;

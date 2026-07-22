@@ -44,7 +44,10 @@ const VERCEL_TEAM_ID = ''; // leave blank if not using a Vercel team
 // Path to schema.sql (table definitions) — you'll need to create this;
 // see the note in SETUP.md. Script will skip table creation if missing.
 const SCHEMA_SQL_PATH = path.join(__dirname, 'schema.sql');
-const SEED_SQL_PATH = path.join(__dirname, 'seed_content_blocks.sql');
+// Points at the repo root, not this folder — seed_content_blocks.sql is the
+// canonical copy referenced by SETUP.md and edited (rarely) at the template
+// level. Keeping only one copy avoids it silently drifting out of sync.
+const SEED_SQL_PATH = path.join(__dirname, '..', 'seed_content_blocks.sql');
 // ──────────────────────────────────────────────────────────
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;

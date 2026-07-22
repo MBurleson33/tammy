@@ -13,6 +13,7 @@ var SITE_CONFIG = {
     tagline:    'Wellness. Faith. Purpose.',      // Shown in footer under name
     email:      'tammymelchisedeck@gmail.com',   // Contact email
     venmo:      '@tammy-melchisedeck',           // Venmo handle for payments
+    paypal:     'paypal.me/tammymaltby',         // PayPal.me link for payments
   },
 
   // ── COLORS ─────────────────────────────────────────
@@ -69,16 +70,19 @@ var SITE_CONFIG = {
   },
 
   // ── FORMSPREE ──────────────────────────────────────
+  // Not currently used by index/about/order.html — chat and newsletter go
+  // through Supabase `messages`/`subscribers` + /api/notify instead. Left
+  // as-is; harmless either way.
   formspree: {
-    newsletter: 'YOUR_NEWSLETTER_FORM_ID',   // Footer email signup
-    chat:       'YOUR_CHAT_FORM_ID',         // Chat bubble contact form
-    order:      'YOUR_ORDER_FORM_ID',        // Order form submission
+    newsletter: 'YOUR_NEWSLETTER_FORM_ID',
+    chat:       'YOUR_CHAT_FORM_ID',
+    order:      'YOUR_ORDER_FORM_ID',
   },
 
   // ── NAVIGATION ─────────────────────────────────────
   nav: {
     links: [
-      { label: 'Meet Tammy',   href: '#tammy' },
+      { label: 'Meet Tammy',   href: '#about' },
       { label: 'Results',      href: '#results' },
       { label: 'Testimonials', href: '#testimonials' },
       { label: 'The Drops',    href: '#drops' },

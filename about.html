@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>About [YOUR NAME] — replace before launch</title>
+<title>About [YOUR NAME]</title>
 <meta name="description" content="[Write a 1-2 sentence description of the client and what they do] — replace before launch">
 <meta property="og:title" content="About [YOUR NAME] — replace before launch">
 <meta property="og:description" content="[Write a 1-2 sentence description of the client and what they do] — replace before launch">
@@ -636,6 +636,11 @@
     // Footer copyright name
     var footerCopyName = document.getElementById('footerCopyName');
     if (footerCopyName) footerCopyName.textContent = c.brand.name;
+
+    // Page title + meta description
+    document.title = 'About ' + c.brand.name;
+    var metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', 'Learn more about ' + c.brand.name + ', a Partner.Co wellness distributor.');
   });
 
   // ── LOAD BIO CONTENT FROM SUPABASE ──

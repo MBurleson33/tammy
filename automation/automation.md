@@ -11,11 +11,23 @@ client's domain.
 On GitHub: this repo → **Settings** → General → check **Template repository**.
 Required for the "generate from template" API call to work.
 
+Also make sure `api/admin-orders.js` is committed to this repo before
+running the script on any new client — it's what lets `admin.html` manage
+orders securely (see the RLS note under step 6). Since the script just
+duplicates whatever's in the template repo, any new client automatically
+gets this file too, as long as it's here first.
+
 ### 2. Get a GitHub personal access token
-GitHub → Settings (your profile, not the repo) → Developer settings →
-Personal access tokens → Fine-grained tokens → Generate new token.
-Grant it **Contents: Read and write** and **Administration: Read and write**
-access, scoped to your account (or the org that owns the template repo).
+Use a **classic** token, not fine-grained — fine-grained tokens can't create
+new repositories under a personal (non-organization) account at all, since
+the "Administration" permission that grants repo creation only exists when
+the token's resource owner is an organization. (Ask me if you want the
+longer explanation — it's a real GitHub limitation, not a config mistake.)
+
+GitHub → your profile icon → Settings → Developer settings → Personal
+access tokens → **Tokens (classic)** → Generate new token (classic).
+Name it, set an expiration, and check the top-level **`repo`** scope
+(this auto-selects everything under it). That's the only scope needed.
 
 ### 3. Get a Supabase access token + find your org slug
 Supabase dashboard → Account (bottom left) → Access Tokens → Generate new token.
@@ -35,15 +47,16 @@ const SUPABASE_ORG_SLUG = '...'; // from step 3
 const VERCEL_TEAM_ID = '';       // from step 4, if applicable
 ```
 
-### 6. Create `schema.sql`
-This script can run SQL against the new Supabase project, but I don't have
-your actual table definitions (`testimonials`, `products`, `orders`,
-`subscribers`, `messages`, `settings`) — only `seed_content_blocks.sql`.
-Export your current schema (Supabase SQL Editor → a `select` against
-`information_schema`, or `pg_dump --schema-only` via the connection string
-in Project Settings → Database) and save it as `schema.sql` next to
-`setup-client.js`. Without it, the script skips table creation and you'll
-need to create them by hand for each new client, same as today.
+### 6. `schema.sql` — already done
+This is included in this folder now, reconstructed from Tammy's live tables
+(`testimonials`, `products`, `orders`, `subscribers`, `messages`, `settings`,
+`content_blocks`). It also has a fix baked in: the original `orders` table
+had RLS policies that let anyone with the public anon key read/edit/delete
+customer orders — `schema.sql` now creates `orders` as insert-only for the
+anon key, with reads/updates/deletes only possible through the service key
+(via `/api/admin-orders`, in the main repo). New clients set up with this
+script get the corrected version from the start — no separate fix needed
+the way Tammy's live project required.
 
 ## Running it
 

@@ -1288,10 +1288,24 @@
             '<span class="status-badge status-' + (o.status||'new') + '">' + (statusLabels[o.status] || 'New') + '</span>' +
             '<select class="status-select" onchange="updateOrderStatus(\'' + o.id + '\',this.value)">' + statusOpts + '</select>' +
             '<button class="btn btn-outline btn-sm email-template-btn" onclick="openEmailTemplate(\'' + o.id + '\',\'' + (o.full_name||'').split(' ')[0] + '\',\'' + (o.email||'') + '\',' + (o.order_total||0) + ')">✉ Email</button>' +
+            '<button class="btn btn-sm" style="background:none;border:1px solid rgba(192,57,43,0.3);color:#C0392B;font-size:0.72rem;padding:0.35rem 0.75rem;" onclick="deleteOrder(\'' + o.id + '\',\'' + (o.full_name||'Order') + '\')">✕ Delete</button>' +
           '</div>' +
         '</div>' +
       '</div>';
     }).join('');
+  }
+
+  function deleteOrder(id, name) {
+    if (!confirm('Delete order from ' + name + '? This cannot be undone.')) return;
+    fetch(db('orders') + '?id=eq.' + id, { method: 'DELETE', headers: headers() })
+      .then(function(r) {
+        if (r.ok) {
+          toast('Order deleted', 'success');
+          loadOrders();
+        } else {
+          toast('Delete failed', 'error');
+        }
+      });
   }
 
   function updateOrderStatus(id, status) {

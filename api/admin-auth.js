@@ -10,68 +10,65 @@ module.exports = async function handler(req, res) {
   const { password, newPassword } = req.body || {};
   if (!password) return res.status(400).json({ ok: false, error: 'Password required' });
 
-  const SUPABASE_URL         = process.env.SUPABASE_URL || 'https://nzqdmsbxwghkqowajmvs.supabase.co';
-  const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
+  const SUPABASE_URL         = 'https://nzqdmsbxwghkqowajmvs.supabase.co';
+  const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cWRtc2J4d2doa3Fvd2FqbXZzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDc2OTQyNCwiZXhwIjoyMDk2MzQ1NDI0fQ.Bc1DYkVSB9MsT_Qmh_U5c9dFcrKyV-hn2CN4unF4jFs';
   const FALLBACK_PASSWORD    = process.env.ADMIN_PASSWORD || 'tmm2026';
 
-  console.log('DEBUG: SUPABASE_SERVICE_KEY present:', !!SUPABASE_SERVICE_KEY);
-  console.log('DEBUG: newPassword present:', !!newPassword);
-
-  if (SUPABASE_SERVICE_KEY) {
-    try {
-      const resp = await fetch(`${SUPABASE_URL}/rest/v1/settings?key=eq.admin_password&select=value`, {
-        headers: {
-          'apikey': SUPABASE_SERVICE_KEY,
-          'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`
-        }
-      });
-
-      console.log('DEBUG: Supabase read status:', resp.status);
-      const data = await resp.json();
-      console.log('DEBUG: Supabase data:', JSON.stringify(data));
-
-      if (resp.ok && data.length > 0) {
-        const storedPassword = data[0].value;
-
-        if (password !== storedPassword) {
-          return res.status(401).json({ ok: false, error: 'Incorrect password', debug: 'supabase_mismatch' });
-        }
-
-        if (newPassword) {
-          const updateResp = await fetch(`${SUPABASE_URL}/rest/v1/settings?key=eq.admin_password`, {
-            method: 'PATCH',
-            headers: {
-              'apikey': SUPABASE_SERVICE_KEY,
-              'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
-              'Content-Type': 'application/json',
-              'Prefer': 'return=minimal'
-            },
-            body: JSON.stringify({ value: newPassword })
-          });
-
-          console.log('DEBUG: Update status:', updateResp.status);
-          const updateText = await updateResp.text();
-          console.log('DEBUG: Update response:', updateText);
-
-          if (!updateResp.ok) {
-            return res.status(500).json({ ok: false, error: 'Failed to update', debug: updateText });
-          }
-          return res.status(200).json({ ok: true, updated: true });
-        }
-
-        return res.status(200).json({ ok: true });
-      } else {
-        console.log('DEBUG: Falling back — Supabase returned empty or error');
+  try {
+    const resp = await fetch(`${SUPABASE_URL}/rest/v1/settings?key=eq.admin_password&select=value`, {
+      headers: {
+        'apikey': SUPABASE_SERVICE_KEY,
+        'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`
       }
-    } catch (err) {
-      console.error('DEBUG: Supabase error:', err.message);
+    });
+
+    const data = await resp.json();
+    console.log('Supabase read status:', resp.status, 'data:', JSON.stringify(data));
+
+    if (resp.ok && data.length > 0) {
+      const storedPassword = data[0].value;
+
+      if (password !== storedPassword) {
+        return res.status(401).json({ ok: false, error: 'Incorrect password' });
+      }
+
+      if (newPassword) {
+        const updateResp = await fetch(`${SUPABASE_URL}/rest/v1/settings?key=eq.admin_password`, {
+          method: 'PATCH',
+          headers: {
+            'apikey': SUPABASE_SERVICE_KEY,
+            'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({ value: newPassword })
+        });
+
+        console.log('Update status:', updateResp.status);
+        if (!updateResp.ok) {
+          const txt = await updateResp.text();
+          console.log('Update error:', txt);
+          return res.status(500).json({ ok: false, error: 'Failed to update password' });
+        }
+        return res.status(200).json({ ok: true, updated: true });
+      }
+
+      return res.status(200).json({ ok: true });
     }
-  }
 
-  // Fallback
-  if (password === FALLBACK_PASSWORD) {
-    return res.status(200).json({ ok: true, source: 'fallback' });
-  }
+    // Fallback if Supabase returns empty
+    console.log('Supabase returned empty — using fallback');
+    if (password === FALLBACK_PASSWORD) {
+      return res.status(200).json({ ok: true, source: 'fallback' });
+    }
+    return res.status(401).json({ ok: false, error: 'Incorrect password' });
 
-  return res.status(401).json({ ok: false, error: 'Incorrect password' });
+  } catch (err) {
+    console.error('Supabase error:', err.message);
+    // Fallback on error
+    if (password === FALLBACK_PASSWORD) {
+      return res.status(200).json({ ok: true, source: 'fallback' });
+    }
+    return res.status(401).json({ ok: false, error: 'Incorrect password' });
+  }
 };

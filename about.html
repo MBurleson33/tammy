@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Order | [YOUR NAME] — replace before launch</title>
-<meta name="description" content="Order Partner.Co wellness products from [YOUR NAME]. Body Balancing Drops, AbVantage, Core Cleanse and more. — replace before launch">
+<title>About [YOUR NAME] — replace before launch</title>
+<meta name="description" content="[Write a 1-2 sentence description of the client and what they do] — replace before launch">
+<meta property="og:title" content="About [YOUR NAME] — replace before launch">
+<meta property="og:description" content="[Write a 1-2 sentence description of the client and what they do] — replace before launch">
+<meta property="og:type" content="website">
 <link rel="icon" type="image/png" href="images/favicon.png">
 <script src="config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,30 +26,30 @@
     --ink-mid: #5C4F44;
     --ink-light: #8C7E72;
     --sage: #7A8C72;
+    --sage-light: #C4D0BD;
     --white: #FFFFFF;
     --serif: 'Cormorant Garamond', Georgia, serif;
     --sans: 'DM Sans', system-ui, sans-serif;
-    --error: #C0392B;
   }
 
   html { scroll-behavior: smooth; }
+
   body {
     font-family: var(--sans);
     background: var(--cream);
     color: var(--ink);
     line-height: 1.6;
     font-size: 16px;
-    min-height: 100vh;
   }
 
   /* ── NAV ── */
-  nav {
+  nav:not(.social-row):not(.footer-social-row) {
     background: var(--white);
     border-bottom: 1px solid var(--sand);
-    padding: 0 2rem;
+    padding: 0 clamp(2rem, 4vw, 4rem);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -60,1036 +63,623 @@
     color: var(--ink);
     text-decoration: none;
   }
-  .nav-back {
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--ink-mid);
     text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
     transition: color 0.2s;
   }
-  .nav-back:hover { color: var(--gold); }
-
-  /* ── PAGE HEADER ── */
-  .page-header {
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a.active { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold) !important;
+    color: var(--white) !important;
+    padding: 0.55rem 1.35rem;
+    border-radius: 2px;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--ink) !important; color: var(--white) !important; }
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    flex-direction: column;
+    gap: 5px;
+    position: relative;
+    width: 28px;
+    height: 20px;
+  }
+  .nav-mobile-right {
+    display: none;
+    align-items: center;
+  }
+  @media (max-width: 1200px) {
+    .nav-mobile-right { display: flex; }
+  }
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
     background: var(--ink);
-    padding: 4rem 2rem;
+    transition: all 0.3s ease;
+    position: absolute;
+    left: 3px;
+  }
+  .nav-toggle span:nth-child(1) { top: 2px; }
+  .nav-toggle span:nth-child(2) { top: 9px; }
+  .nav-toggle span:nth-child(3) { top: 16px; }
+  .nav-toggle.open span:nth-child(1) { transform: rotate(45deg); top: 9px; }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg); top: 9px; }
+  .nav-page-overlay {
+    display: none;
+    position: fixed;
+    top: 68px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(44,37,32,0.35);
+    z-index: 9998;
+    backdrop-filter: blur(1px);
+  }
+  .nav-page-overlay.open { display: block; }
+  /* ── MOBILE NAV ── */
+  #mobileNav {
+    display: none;
+    position: fixed;
+    top: 68px;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-bottom: 3px solid #B89A6A;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    z-index: 10000;
+    flex-direction: column;
+  }
+  #mobileNav.open { display: flex; }
+  #mobileNav a {
+    display: block;
+    padding: 18px 28px;
+    font-family: sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #5C4F44;
+    text-decoration: none;
+    border-bottom: 1px solid #E8DFD0;
+  }
+  #mobileNav a:last-child { border-bottom: none; }
+  #mobileNav a:active { color: #B89A6A; }
+  .mobile-nav-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--ink-light);
+    line-height: 1;
+  }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    max-height: 520px;
+    overflow: hidden;
+  }
+  .page-hero-img-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero-img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    object-position: center 45%;
+    display: block;
+  }
+  .page-hero-copy {
+    background: var(--linen);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 4rem;
+  }
+  .page-hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .page-hero-title {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 4vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  .page-hero-sub {
+    font-size: 1rem;
+    color: var(--ink-mid);
+    line-height: 1.8;
+    max-width: 420px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .about-content {
+    background: var(--white);
+    padding: 5rem clamp(2rem, 4vw, 4rem);
+  }
+  .container { max-width: 1400px; margin: 0 auto; }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    gap: 7rem;
+    align-items: start;
+  }
+
+  /* Credentials sidebar */
+  .credentials {
+  }
+  .credentials-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+  .credential-item {
+    padding: 1.1rem 0;
+    border-top: 1px solid var(--sand);
+  }
+  .credential-item:last-child { border-bottom: 1px solid var(--sand); }
+  .credential-title {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+  .credential-sub {
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    line-height: 1.5;
+  }
+  .social-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+  .social-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    text-decoration: none;
+    border: 1px solid var(--sand);
+    padding: 0.55rem 0.9rem;
+    border-radius: 2px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .social-icon-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Bio */
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 1.5rem 0;
+  }
+  .bio-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .bio-body p {
+    font-size: 1.05rem;
+    color: var(--ink-mid);
+    line-height: 1.9;
+    margin-bottom: 1.4rem;
+  }
+  .bio-body p:last-child { margin-bottom: 0; }
+  .bio-body em { font-style: italic; color: var(--ink); }
+  .bio-pullquote {
+    border-left: 3px solid var(--gold);
+    margin: 2.5rem 0;
+    padding: 0.5rem 0 0.5rem 1.75rem;
+  }
+  .bio-pullquote p {
+    font-family: var(--serif);
+    font-size: 1.4rem !important;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink) !important;
+    line-height: 1.55 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* ── CTA STRIP ── */
+  .cta-strip {
+    background: var(--ink);
+    padding: 4.5rem clamp(2rem, 4vw, 4rem);
     text-align: center;
   }
-  .page-header-eyebrow {
+  .cta-strip-label {
     font-size: 0.7rem;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--gold-light);
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
     display: block;
   }
-  .page-header-title {
+  .cta-strip-title {
     font-family: var(--serif);
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
     font-weight: 300;
     color: var(--cream);
     margin-bottom: 0.75rem;
+    line-height: 1.2;
   }
-  .page-header-sub {
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.45);
-    max-width: 480px;
-    margin: 0 auto;
-    line-height: 1.7;
+  .cta-strip-body {
+    font-size: 1rem;
+    color: var(--sand);
+    line-height: 1.75;
+    max-width: 520px;
+    margin: 0 auto 2.25rem;
   }
-
-  /* ── LAYOUT ── */
-  .order-layout {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 4rem 2rem;
-    display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 4rem;
-    align-items: start;
-  }
-
-  /* ── FORM SECTIONS ── */
-  .form-section {
-    margin-bottom: 2.5rem;
-  }
-  .form-section-label {
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.25rem;
-    display: block;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--sand);
-  }
-  .form-row {
-    display: grid;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-  }
-  .form-row.cols-2 { grid-template-columns: 1fr 1fr; }
-  .form-row.cols-3 { grid-template-columns: 2fr 1fr 1fr; }
-
-  .field-wrap { display: flex; flex-direction: column; gap: 0.35rem; }
-  .field-label {
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    color: var(--ink-mid);
-  }
-  .field-input {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    font-family: var(--sans);
-    font-size: 0.9rem;
-    color: var(--ink);
-    background: var(--white);
-    border: 1px solid var(--sand);
-    border-radius: 2px;
-    outline: none;
-    transition: border-color 0.2s;
-    appearance: none;
-  }
-  .field-input:focus { border-color: var(--gold); }
-  .field-input.error { border-color: var(--error); }
-  .field-input::placeholder { color: var(--ink-light); }
-  select.field-input { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238C7E72' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; cursor: pointer; }
-
-  /* ── PRODUCTS ── */
-  .product-list { display: flex; flex-direction: column; gap: 0; }
-  .product-row {
-    display: grid;
-    grid-template-columns: auto 1fr auto auto;
-    gap: 1rem;
-    align-items: center;
-    padding: 1.1rem 0;
-    border-bottom: 1px solid var(--sand);
-    transition: background 0.15s;
-  }
-  .product-row:first-child { border-top: 1px solid var(--sand); }
-
-  .product-check {
-    width: 18px;
-    height: 18px;
-    border: 1.5px solid var(--sand);
-    border-radius: 2px;
-    cursor: pointer;
-    appearance: none;
-    flex-shrink: 0;
-    transition: all 0.15s;
-    position: relative;
-  }
-  .product-check:checked {
-    background: var(--gold);
-    border-color: var(--gold);
-  }
-  .product-check:checked::after {
-    content: '';
-    position: absolute;
-    top: 2px; left: 5px;
-    width: 5px; height: 9px;
-    border: 1.5px solid var(--white);
-    border-top: none;
-    border-left: none;
-    transform: rotate(45deg);
-  }
-  .product-check:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
-
-  .product-info { cursor: pointer; }
-  .product-name-text {
-    font-family: var(--serif);
-    font-size: 1.05rem;
-    font-weight: 400;
-    color: var(--ink);
-    line-height: 1.3;
-  }
-  .product-sub {
-    font-size: 0.78rem;
-    color: var(--ink-light);
-    margin-top: 0.1rem;
-  }
-
-  .product-qty {
-    width: 64px;
-    padding: 0.4rem 0.5rem;
-    font-family: var(--sans);
-    font-size: 0.85rem;
-    color: var(--ink);
-    background: var(--cream);
-    border: 1px solid var(--sand);
-    border-radius: 2px;
-    outline: none;
-    text-align: center;
-    transition: all 0.2s;
-    opacity: 0.4;
-    pointer-events: none;
-  }
-  .product-qty.active { opacity: 1; pointer-events: auto; }
-  .product-qty:focus { border-color: var(--gold); }
-
-  .product-price {
-    font-family: var(--serif);
-    font-size: 1.05rem;
-    font-weight: 400;
-    color: var(--ink);
-    min-width: 60px;
-    text-align: right;
-    white-space: nowrap;
-  }
-  .product-price.active { color: var(--gold); }
-
-  /* ── ORDER SUMMARY (sidebar) ── */
-  .order-summary {
-    position: sticky;
-    top: 88px;
-    background: var(--white);
-    border: 1px solid var(--sand);
-    border-top: 3px solid var(--gold);
-    border-radius: 2px;
-    padding: 2rem;
-  }
-  .summary-title {
-    font-family: var(--serif);
-    font-size: 1.3rem;
-    font-weight: 300;
-    color: var(--ink);
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--sand);
-  }
-  .summary-items { margin-bottom: 1.5rem; min-height: 60px; }
-  .summary-empty {
-    font-size: 0.85rem;
-    color: var(--ink-light);
-    font-style: italic;
-    padding: 0.5rem 0;
-  }
-  .summary-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    gap: 0.75rem;
-    padding: 0.6rem 0;
-    border-bottom: 1px solid var(--linen);
-    font-size: 0.88rem;
-  }
-  .summary-item:last-child { border-bottom: none; }
-  .summary-item-name { color: var(--ink-mid); flex: 1; line-height: 1.4; }
-  .summary-item-qty { color: var(--ink-light); font-size: 0.8rem; }
-  .summary-item-price { color: var(--ink); font-weight: 500; white-space: nowrap; }
-  .summary-total-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 1.25rem;
-    margin-top: 0.25rem;
-    border-top: 1px solid var(--sand);
-  }
-  .summary-total-label {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-mid);
-  }
-  .summary-total-amount {
-    font-family: var(--serif);
-    font-size: 2rem;
-    font-weight: 300;
-    color: var(--ink);
-  }
-  .summary-shipping {
-    font-size: 0.75rem;
-    color: var(--sage);
-    font-weight: 500;
-    text-align: right;
-    margin-top: 0.25rem;
-  }
-
-  /* ── PAYMENT UI ── */
-  .payment-section {
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--sand);
-  }
-  .payment-section-label {
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
-    display: block;
-  }
-  .payment-intro {
-    font-size: 0.82rem;
-    color: var(--ink-mid);
-    line-height: 1.7;
-    margin-bottom: 1rem;
-  }
-  .payment-methods-preview {
-    display: flex;
-    gap: 0.5rem;
-  }
-  .payment-method-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-mid);
-    background: var(--linen);
-    border: 1px solid var(--sand);
-    padding: 0.35rem 0.85rem;
-    border-radius: 2px;
-  }
-
-  /* ── PAYMENT CONFIRMATION SCREEN ── */
-  .payment-summary {
-    background: var(--linen);
-    border: 1px solid var(--sand);
-    border-radius: 2px;
-    padding: 1.25rem 1.5rem;
-    margin: 1.5rem 0;
-    text-align: left;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .payment-summary-item {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.88rem;
-    color: var(--ink-mid);
-    padding: 0.35rem 0;
-    border-bottom: 1px solid var(--sand);
-  }
-  .payment-summary-item:last-child { border-bottom: none; }
-  .payment-summary-total {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 0.75rem;
-    margin-top: 0.25rem;
-    border-top: 2px solid var(--sand);
-  }
-  .payment-summary-total-label {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-mid);
-  }
-  .payment-summary-total-amount {
-    font-family: var(--serif);
-    font-size: 2rem;
-    font-weight: 300;
-    color: var(--ink);
-  }
-  .payment-cta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    max-width: 340px;
-    margin: 0 auto 1.5rem;
-  }
-  .pay-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-    padding: 1rem 2rem;
-    border-radius: 4px;
-    font-family: var(--sans);
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    transition: opacity 0.2s, transform 0.15s;
-  }
-  .pay-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-  .pay-btn-paypal { background: #0070ba; color: var(--white); }
-  .pay-btn-venmo  { background: #008CFF; color: var(--white); }
-  .payment-memo-note {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-    color: var(--ink-mid);
-    background: var(--linen);
-    border: 1px solid var(--sand);
-    padding: 0.6rem 1rem;
-    border-radius: 2px;
-    margin-bottom: 2rem;
-    max-width: 400px;
-  }
-  .back-link {
-    display: block;
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    text-decoration: none;
-  }
-  .back-link:hover { color: var(--gold); }
-
-  /* Submit button */
-  .submit-btn {
-    display: block;
-    width: 100%;
+  .btn-primary {
+    display: inline-block;
     background: var(--gold);
     color: var(--white);
     font-family: var(--sans);
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    padding: 1.1rem;
-    border: none;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
     border-radius: 2px;
-    cursor: pointer;
-    transition: background 0.2s;
-    margin-top: 1.5rem;
-    text-align: center;
+    transition: background 0.2s, transform 0.15s;
   }
-  .submit-btn:hover { background: var(--ink); }
-  .submit-btn:disabled { opacity: 0.6; cursor: default; }
-  .submit-note {
-    font-size: 0.73rem;
-    color: var(--ink-light);
-    text-align: center;
-    margin-top: 0.75rem;
-    line-height: 1.6;
-  }
-
-  /* Notes field */
-  textarea.field-input { resize: vertical; min-height: 90px; }
-
-  /* Success state */
-  .success-screen {
-    display: none;
-    text-align: center;
-    padding: 5rem 2rem;
-    max-width: 560px;
-    margin: 0 auto;
-  }
-  .success-icon {
-    font-family: var(--serif);
-    font-size: 3rem;
-    color: var(--gold);
-    margin-bottom: 1.5rem;
-    display: block;
-  }
-  .success-title {
-    font-family: var(--serif);
-    font-size: 2.2rem;
-    font-weight: 300;
-    color: var(--ink);
-    margin-bottom: 1rem;
-  }
-  .success-body {
-    font-size: 1rem;
-    color: var(--ink-mid);
-    line-height: 1.8;
-    margin-bottom: 2rem;
-  }
+  .btn-primary:hover { background: var(--cream); color: var(--ink); transform: translateY(-1px); }
 
   /* ── FOOTER ── */
-  .page-footer {
-    background: var(--ink);
-    padding: 2rem;
-    text-align: center;
+  .site-footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06); }
+  .footer-inner { max-width: 1400px; margin: 0 auto; padding: 5rem clamp(2rem, 4vw, 4rem) 2.5rem; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 2fr;
+    gap: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(184,154,106,0.2);
   }
-  .page-footer p {
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.25);
-    line-height: 1.7;
-  }
-  .page-footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  .footer-brand { display: flex; flex-direction: column; }
+  .footer-brand nav { border: none; background: none; padding: 0; margin: 0; }
+  .social-row, .footer-social-row { position: static; height: auto; border: none; background: none; display: flex; }
+  .footer-name { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: var(--cream); line-height: 1.2; letter-spacing: 0.03em; margin-bottom: 0.5rem; }
+  .footer-tagline { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+  .footer-social-row { display: flex; gap: 0.75rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(184,154,106,0.35); background: none; justify-content: flex-start; }
+  .footer-social-row a { background: none; border: none; padding: 0; outline: none; }
+  .footer-icon-link { display: flex; align-items: center; justify-content: center; color: var(--white); text-decoration: none; transition: color 0.2s; }
+  .footer-icon-link:hover { color: var(--gold); }
+  .footer-col-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; display: block; }
+  .footer-links { display: flex; flex-direction: column; gap: 0.65rem; }
+  .footer-link { font-size: 0.88rem; color: var(--ink-light); text-decoration: none; transition: color 0.2s; }
+  .footer-link:hover { color: var(--cream); }
+  .footer-signup-desc { font-size: 0.88rem; color: var(--ink-light); line-height: 1.65; margin-bottom: 1.1rem; }
+  .footer-email-form { display: flex; }
+  .footer-email-form input { flex: 1; padding: 0.75rem 1rem; font-family: var(--sans); font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.1); outline: none; background: rgba(255,255,255,0.05); color: var(--cream); border-radius: 2px 0 0 2px; min-width: 0; transition: border-color 0.2s; }
+  .footer-email-form input:focus { border-color: var(--gold); }
+  .footer-email-form input::placeholder { color: var(--ink-light); }
+  .footer-email-form button { background: var(--gold); color: var(--white); border: none; padding: 0.75rem 1.25rem; font-family: var(--sans); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border-radius: 0 2px 2px 0; transition: background 0.2s; white-space: nowrap; }
+  .footer-email-form button:hover { background: var(--cream); color: var(--ink); }
+  .footer-bottom { padding-top: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .footer-disclaimer { font-size: 0.68rem; color: rgba(255,255,255,0.2); line-height: 1.6; max-width: 600px; }
+  .footer-copy { font-size: 0.68rem; color: rgba(255,255,255,0.2); white-space: nowrap; }
+  .footer-partnerco-logo { height: 24px; width: auto; opacity: 0.4; flex-shrink: 0; }
 
+  /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
-    .order-layout { grid-template-columns: 1fr; gap: 2.5rem; padding: 2.5rem 1.5rem; }
-    .order-summary { position: static; }
-    .form-row.cols-2, .form-row.cols-3 { grid-template-columns: 1fr; }
+    .page-hero { grid-template-columns: 1fr; max-height: none; }
+    .page-hero-img { height: 60vw; }
+    .page-hero-copy { padding: 3rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .credentials { position: static; order: 2; }
+    .bio-body { order: 1; }
+    .social-row { flex-direction: row; flex-wrap: wrap; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    .about-content { padding: 3.5rem 1.5rem; }
+  }
+  @media (max-width: 1200px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { display: none; }
+    .nav-toggle { display: flex; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
+<!-- ── NAVIGATION ── -->
+<nav aria-label="Main navigation">
   <a href="index.html" class="nav-name">Tammy Maltby Melchisedeck</a>
-  <a href="index.html" class="nav-back">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-    Back to Site
-  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="index.html#about" class="nav-meet-link">Meet Us</a></li>
+    <li><a href="index.html#results">Results</a></li>
+    <li><a href="index.html#testimonials">Testimonials</a></li>
+    <li><a href="index.html#drops">The Drops</a></li>
+    <li><a href="order.html" class="nav-cta">Order Now</a></li>
+  </ul>
+  <div class="nav-mobile-right">
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
-
-<!-- PAGE HEADER -->
-<div class="page-header">
-  <span class="page-header-eyebrow">Partner.Co Wellness</span>
-  <h1 class="page-header-title">Place Your Order</h1>
-  <p class="page-header-sub" id="pageHeaderSub">Fill out the form below. We'll confirm your order and follow up with payment details within 24 hours.</p>
+<div class="nav-page-overlay" id="navPageOverlay" onclick="closeMobileNav()"></div>
+<div id="mobileNav" role="navigation" aria-label="Mobile navigation">
+  <a href="index.html#about" class="nav-meet-link" onclick="closeMobileNav()">Meet Us</a>
+  <a href="index.html#results" onclick="closeMobileNav()">Results</a>
+  <a href="index.html#testimonials" onclick="closeMobileNav()">Testimonials</a>
+  <a href="index.html#drops" onclick="closeMobileNav()">The Drops</a>
 </div>
 
-<!-- MAIN CONTENT -->
-<div id="orderForm">
-  <div class="order-layout">
-
-    <!-- LEFT: Form -->
-    <form id="checkoutForm" novalidate>
-
-      <!-- Contact -->
-      <div class="form-section">
-        <span class="form-section-label">Contact Information</span>
-        <div class="form-row">
-          <div class="field-wrap">
-            <label class="field-label" for="fullName">Full Name *</label>
-            <input class="field-input" id="fullName" name="fullName" type="text" placeholder="Jane Smith" required autocomplete="name">
-          </div>
-        </div>
-        <div class="form-row cols-2">
-          <div class="field-wrap">
-            <label class="field-label" for="email">Email Address *</label>
-            <input class="field-input" id="email" name="email" type="email" placeholder="jane@email.com" required autocomplete="email">
-          </div>
-          <div class="field-wrap">
-            <label class="field-label" for="phone">Phone Number</label>
-            <input class="field-input" id="phone" name="phone" type="tel" placeholder="(555) 000-0000" autocomplete="tel">
-          </div>
-        </div>
-      </div>
-
-      <!-- Shipping -->
-      <div class="form-section">
-        <span class="form-section-label">Shipping Address</span>
-        <div class="form-row">
-          <div class="field-wrap">
-            <label class="field-label" for="address">Street Address *</label>
-            <input class="field-input" id="address" name="address" type="text" placeholder="123 Main Street" required autocomplete="street-address">
-          </div>
-        </div>
-        <div class="form-row cols-2">
-          <div class="field-wrap">
-            <label class="field-label" for="city">City *</label>
-            <input class="field-input" id="city" name="city" type="text" placeholder="Oklahoma City" required autocomplete="address-level2">
-          </div>
-          <div class="field-wrap">
-            <label class="field-label" for="state">State *</label>
-            <input class="field-input" id="state" name="state" type="text" placeholder="OK" required autocomplete="address-level1" maxlength="2">
-          </div>
-        </div>
-        <div class="form-row cols-2">
-          <div class="field-wrap">
-            <label class="field-label" for="zip">Zip Code *</label>
-            <input class="field-input" id="zip" name="zip" type="text" placeholder="73101" required autocomplete="postal-code" maxlength="10">
-          </div>
-          <div class="field-wrap">
-            <label class="field-label" for="country">Country</label>
-            <select class="field-input" id="country" name="country" autocomplete="country">
-              <option value="US" selected>United States</option>
-              <option value="CA">Canada</option>
-              <option value="GB">United Kingdom</option>
-              <option value="AU">Australia</option>
-              <option value="OTHER">Other</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- Products -->
-      <div class="form-section">
-        <span class="form-section-label">Select Your Products</span>
-        <div class="product-list" id="productList">
-
-          <div class="product-row" data-price="167">
-            <input type="checkbox" class="product-check" id="p1" name="product_drops" value="Body Balancing Drops (Slenderiix + Xceler8)">
-            <label class="product-info" for="p1">
-              <p class="product-name-text">Body Balancing Drops</p>
-              <p class="product-sub">Slenderiix™ + Xceler8™ — Body Balancing Drops</p>
-            </label>
-            <input type="number" class="product-qty" min="1" max="10" value="1" aria-label="Quantity">
-            <span class="product-price">$167</span>
-          </div>
-
-          <div class="product-row" data-price="58">
-            <input type="checkbox" class="product-check" id="p2" name="product_abvantage" value="AbVantage">
-            <label class="product-info" for="p2">
-              <p class="product-name-text">AbVantage</p>
-              <p class="product-sub">Thermogenic Hip &amp; Waist Reducer — Activates Brown Fat</p>
-            </label>
-            <input type="number" class="product-qty" min="1" max="10" value="1" aria-label="Quantity">
-            <span class="product-price">$58</span>
-          </div>
-
-          <div class="product-row" data-price="225">
-            <input type="checkbox" class="product-check" id="p3" name="product_drops_abvantage_combo" value="Drops &amp; AbVantage Combo">
-            <label class="product-info" for="p3">
-              <p class="product-name-text">Drops &amp; AbVantage Combo</p>
-              <p class="product-sub">Best Value — Save vs. buying separately</p>
-            </label>
-            <input type="number" class="product-qty" min="1" max="10" value="1" aria-label="Quantity">
-            <span class="product-price">$225</span>
-          </div>
-
-          <div class="product-row" data-price="87">
-            <input type="checkbox" class="product-check" id="p4" name="product_core_cleanse" value="Core Cleanse — Month Supply">
-            <label class="product-info" for="p4">
-              <p class="product-name-text">Core Cleanse</p>
-              <p class="product-sub">One Month Supply — 5:2 Gut Reset Ritual</p>
-            </label>
-            <input type="number" class="product-qty" min="1" max="10" value="1" aria-label="Quantity">
-            <span class="product-price">$87</span>
-          </div>
-
-          <div class="product-row" data-price="237">
-            <input type="checkbox" class="product-check" id="p5" name="product_combo_pack" value="Combo Pack — Slenderiiz &amp; Core Cleanse">
-            <label class="product-info" for="p5">
-              <p class="product-name-text">Combo Pack</p>
-              <p class="product-sub">Slenderiiz™ &amp; Core Cleanse — Complete System</p>
-            </label>
-            <input type="number" class="product-qty" min="1" max="10" value="1" aria-label="Quantity">
-            <span class="product-price">$237</span>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Notes -->
-      <div class="form-section">
-        <span class="form-section-label">Notes (Optional)</span>
-        <div class="form-row">
-          <div class="field-wrap">
-            <label class="field-label" for="notes">Questions or special instructions</label>
-            <textarea class="field-input" id="notes" name="notes" placeholder="Any questions, or special requests..."></textarea>
-          </div>
-        </div>
-      </div>
-
-      <!-- Hidden fields for Formspree -->
-      <input type="hidden" name="_subject" id="formSubject" value="New Order">
-      <input type="hidden" name="order_total" id="hiddenTotal" value="$0.00">
-      <input type="hidden" name="order_items" id="hiddenItems" value="">
-
-    </form>
-
-    <!-- RIGHT: Summary -->
-    <aside class="order-summary" aria-label="Order summary">
-      <h2 class="summary-title">Order Summary</h2>
-      <div class="summary-items" id="summaryItems">
-        <p class="summary-empty">No products selected yet.</p>
-      </div>
-      <div class="summary-total-row">
-        <span class="summary-total-label">Order Total</span>
-        <span class="summary-total-amount" id="summaryTotal">$0</span>
-      </div>
-      <p class="summary-shipping">✓ Free US Shipping Included</p>
-
-      <div class="payment-section">
-        <span class="payment-section-label">How You'll Pay</span>
-        <p class="payment-intro">After submitting your order, you'll be shown your total and links to pay via PayPal or Venmo. No payment is collected on this form.</p>
-
-        <div class="payment-methods-preview">
-          <div class="payment-method-badge">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.7"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/></svg>
-            PayPal
-          </div>
-          <div class="payment-method-badge">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.7"><path d="M19.488 1.157c.39.643.565 1.306.565 2.143 0 2.672-2.28 6.148-4.137 8.586H11.65L9.92 2.284l-4.57.44L7.504 22.5h6.494c3.109-3.588 6.994-9.255 6.994-13.84 0-2.727-.955-4.568-1.504-5.503z"/></svg>
-            Venmo
-          </div>
-        </div>
-      </div>
-
-      <button type="submit" class="submit-btn" id="submitBtn" onclick="submitOrder(event)">
-        Place Order Request
-      </button>
-      <p class="submit-note">No payment is collected now. You'll be shown payment instructions after submitting.</p>
-    </aside>
-
+<!-- ── PAGE HERO ── -->
+<div class="page-hero">
+  <div class="page-hero-img-wrap">
+    <img
+      src="images/about.webp"
+      alt=""
+      class="page-hero-img"
+      id="pageHeroImg"
+      loading="eager"
+    >
+  </div>
+  <div class="page-hero-copy">
+    <span class="page-hero-eyebrow nav-meet-link">Meet Us</span>
+    <h1 class="page-hero-title">Glad to<br>meet you!</h1>
+    <p class="page-hero-sub" id="pageHeroSub">Add a 1–2 sentence introduction here — who you are and what you do. This shows at the top of your About page.</p>
   </div>
 </div>
 
-<!-- SUCCESS / PAYMENT SCREEN -->
-<div class="success-screen" id="successScreen">
-  <span class="success-icon">✦</span>
-  <h2 class="success-title">Order Received!</h2>
-  <p class="success-body">Thank you, <strong id="successName"></strong>! Your order has been received. Please complete your payment below — include your name in the memo so we can match it to your order.</p>
+<!-- ── ABOUT CONTENT ── -->
+<section class="about-content" aria-labelledby="bio-title">
+  <div class="container">
+    <div class="about-grid">
 
-  <!-- Order summary -->
-  <div class="payment-summary" id="paymentSummary"></div>
+      <!-- Credentials sidebar -->
+      <aside class="credentials" aria-label="Credentials" id="aboutPageCredentials">
+        <span class="credentials-label">Background</span>
+        <div class="credential-item">
+          <p class="credential-title">Add a credential or highlight</p>
+          <p class="credential-sub">A short line of supporting detail</p>
+        </div>
+        <div class="credential-item">
+          <p class="credential-title">Add a credential or highlight</p>
+          <p class="credential-sub">A short line of supporting detail</p>
+        </div>
+        <div class="credential-item">
+          <p class="credential-title">Add a credential or highlight</p>
+          <p class="credential-sub">A short line of supporting detail</p>
+        </div>
 
-  <!-- Payment buttons -->
-  <div class="payment-cta">
-    <a id="paypalBtn" href="#" target="_blank" rel="noopener" class="pay-btn pay-btn-paypal" style="display:none">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/></svg>
-      Pay with PayPal
-    </a>
-    <a id="venmoBtn" href="#" target="_blank" rel="noopener" class="pay-btn pay-btn-venmo" style="display:none">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.488 1.157c.39.643.565 1.306.565 2.143 0 2.672-2.28 6.148-4.137 8.586H11.65L9.92 2.284l-4.57.44L7.504 22.5h6.494c3.109-3.588 6.994-9.255 6.994-13.84 0-2.727-.955-4.568-1.504-5.503z"/></svg>
-      Pay with Venmo
-    </a>
-    <p id="paymentMissingNote" style="display:none;font-size:0.8rem;color:var(--error,#C0392B)">Payment link not configured — contact us to complete your order.</p>
+        <nav class="social-row" aria-label="Follow us">
+          <a href="https://www.facebook.com/share/1Js62grMD4/?mibextid=wwXIfr" class="social-icon-btn" target="_blank" rel="noopener" aria-label="Facebook" id="aboutFacebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            Facebook
+          </a>
+          <a href="https://www.instagram.com/tammymmelchisedeck?igsh=dGQxcjQyMmEzbDcx" class="social-icon-btn" target="_blank" rel="noopener" aria-label="Instagram" id="aboutInstagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            Instagram
+          </a>
+          <a href="https://www.tiktok.com/@tammymmelchisedec?_r=1&_t=ZT-9297iK4kplv" class="social-icon-btn" target="_blank" rel="noopener" aria-label="TikTok" id="aboutTiktok">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+            TikTok
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Bio -->
+      <div class="bio-body">
+        <h2 class="bio-title" id="bio-title">[YOUR NAME]<br>— replace before launch</h2>
+        <div class="divider" aria-hidden="true"></div>
+
+        <p><strong>⚠ Placeholder bio — this whole "Bio" block was Tammy's actual personal life story and needs to be rewritten from scratch for every new client.</strong> It's not something a generic template can auto-fill — replace these paragraphs with the client's real background, what led them to Partner.Co, and who they help.</p>
+
+        <p>[Paragraph 1 — client's background and what they do]</p>
+
+        <div class="bio-pullquote">
+          <p>"[Add a short personal quote from the client here.]"</p>
+        </div>
+
+        <p>[Paragraph 2 — client's mission or approach]</p>
+
+        <p>[Paragraph 3 — client's closing statement / call to connect]</p>
+      </div>
+
+    </div>
   </div>
+</section>
 
-  <div class="payment-memo-note">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    Please include your <strong>full name</strong> in the memo field when paying
+<!-- ── CTA STRIP ── -->
+<div class="cta-strip">
+  <div style="max-width:1400px;margin:0 auto">
+    <span class="cta-strip-label">Ready to Begin?</span>
+    <h2 class="cta-strip-title">You were woven for this moment.</h2>
+    <p class="cta-strip-body">Join the people who have already taken the first step toward health, energy, and a life lived on purpose. The Body Balancing Drops are a simple start.</p>
+    <a href="order.html" class="btn-primary">Order Now</a>
   </div>
-
-  <a href="index.html" class="back-link">← Back to Site</a>
 </div>
 
-<!-- FOOTER -->
-<footer class="page-footer">
-  <p>&copy; <span id="year"></span> Tammy Maltby Melchisedeck &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; <a href="about.html">About</a> &nbsp;·&nbsp; <a href="mailto:tammymelchisedeck@gmail.com">Contact</a></p>
-  <p style="margin-top:0.5rem;font-size:0.68rem;color:rgba(255,255,255,0.18);letter-spacing:0.06em">Site by <a href="https://treetopbusiness.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.25);text-decoration:none" onmouseover="this.style.color='rgba(255,255,255,0.5)'" onmouseout="this.style.color='rgba(255,255,255,0.25)'">Treetop Business Solutions</a></p>
-  <p style="margin-top:0.5rem;">These statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease.</p>
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p class="footer-name">Tammy Maltby<br>Melchisedeck</p>
+        <p class="footer-tagline">Wellness. Faith. Purpose.</p>
+        <nav class="footer-social-row" aria-label="Social media">
+          <a href="https://www.facebook.com/share/1Js62grMD4/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook" class="footer-icon-link" id="footerFacebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/tammymmelchisedeck?igsh=dGQxcjQyMmEzbDcx" target="_blank" rel="noopener" aria-label="Instagram" class="footer-icon-link" id="footerInstagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@tammymmelchisedec?_r=1&_t=ZT-9297iK4kplv" target="_blank" rel="noopener" aria-label="TikTok" class="footer-icon-link" id="footerTiktok">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+          </a>
+        </nav>
+      </div>
+      <div class="footer-links">
+        <p class="footer-col-label">Navigate</p>
+        <a href="index.html#drops" class="footer-link">The Drops</a>
+        <a href="index.html#results" class="footer-link">Results</a>
+        <a href="index.html#testimonials" class="footer-link">Testimonials</a>
+        <a href="about.html" class="footer-link" id="footerAboutLink">About Us</a>
+        <a href="mailto:tammymelchisedeck@gmail.com" class="footer-link" id="footerContactLink">Contact</a>
+      </div>
+      <div class="footer-signup">
+        <p class="footer-col-label">Stay Connected</p>
+        <p class="footer-signup-desc">Tips, recipes, and encouragement — straight to your inbox.</p>
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" onsubmit="handleEmailSubmit(event)" class="footer-email-form" aria-label="Newsletter signup">
+          <input type="email" name="email" placeholder="Your email address" required autocomplete="email">
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <img src="images/unnamed.webp" alt="Partner.Co" class="footer-partnerco-logo">
+      <p class="footer-disclaimer">These statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease. Applicable to U.S. only.</p>
+      <p class="footer-copy">&copy; <span id="year"></span> <span id="footerCopyName">Your Business Name</span>. All rights reserved.</p>
+      <p style="font-size:0.68rem;color:rgba(255,255,255,0.18);letter-spacing:0.06em">Site by <a href="https://treetopbusiness.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.25);text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='rgba(255,255,255,0.5)'" onmouseout="this.style.color='rgba(255,255,255,0.25)'">Treetop Business Solutions</a></p>
+    </div>
+  </div>
 </footer>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Payment tab switcher
-
-  // Product rows — check/uncheck interaction
-  var rows = document.querySelectorAll('.product-row');
-  rows.forEach(function(row) {
-    var check = row.querySelector('.product-check');
-    var qty   = row.querySelector('.product-qty');
-    var price = row.querySelector('.product-price');
-
-    check.addEventListener('change', function() {
-      qty.classList.toggle('active', check.checked);
-      price.classList.toggle('active', check.checked);
-      updateSummary();
-    });
-
-    qty.addEventListener('input', function() {
-      if (qty.value < 1) qty.value = 1;
-      if (qty.value > 10) qty.value = 10;
-      updateSummary();
-    });
-  });
-
-  function getSelectedProducts() {
-    var products = [];
-    rows.forEach(function(row) {
-      var check = row.querySelector('.product-check');
-      if (check.checked) {
-        var name  = row.querySelector('.product-name-text').textContent.trim();
-        var sub   = row.querySelector('.product-sub').textContent.trim();
-        var qty   = parseInt(row.querySelector('.product-qty').value) || 1;
-        var price = parseInt(row.dataset.price);
-        products.push({ name: name, sub: sub, qty: qty, price: price, total: qty * price });
-      }
-    });
-    return products;
-  }
-
-  function updateSummary() {
-    var products = getSelectedProducts();
-    var container = document.getElementById('summaryItems');
-    var totalEl   = document.getElementById('summaryTotal');
-    var submitBtn = document.getElementById('submitBtn');
-    var grandTotal = 0;
-
-    if (products.length === 0) {
-      container.innerHTML = '<p class="summary-empty">No products selected yet.</p>';
-      totalEl.textContent = '$0';
-      submitBtn.disabled = true;
-      return;
-    }
-
-    submitBtn.disabled = false;
-    var html = '';
-    products.forEach(function(p) {
-      grandTotal += p.total;
-      html += '<div class="summary-item">';
-      html += '<span class="summary-item-name">' + p.name + (p.qty > 1 ? ' <span class="summary-item-qty">×' + p.qty + '</span>' : '') + '</span>';
-      html += '<span class="summary-item-price">$' + p.total + '</span>';
-      html += '</div>';
-    });
-
-    container.innerHTML = html;
-    totalEl.textContent = '$' + grandTotal;
-
-    // Update hidden fields for Formspree
-    var itemsSummary = products.map(function(p) {
-      return p.name + (p.qty > 1 ? ' x' + p.qty : '') + ' — $' + p.total;
-    }).join(', ');
-    document.getElementById('hiddenTotal').value = '$' + grandTotal;
-    document.getElementById('hiddenItems').value = itemsSummary;
-  }
-
-  // Initialise
-  updateSummary();
-  document.getElementById('submitBtn').disabled = true;
-
-  // Form validation & submission
-  function submitOrder(e) {
-    e.preventDefault();
-    var form = document.getElementById('checkoutForm');
-    var products = getSelectedProducts();
-    var valid = true;
-
-    // Required fields
-    ['fullName','email','address','city','state','zip'].forEach(function(id) {
-      var field = document.getElementById(id);
-      if (!field.value.trim()) {
-        field.classList.add('error');
-        valid = false;
-      } else {
-        field.classList.remove('error');
-      }
-    });
-
-    // Email format
-    var emailField = document.getElementById('email');
-    if (emailField.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
-      emailField.classList.add('error');
-      valid = false;
-    }
-
-    // At least one product
-    if (products.length === 0) {
-      valid = false;
-      alert('Please select at least one product.');
-    }
-
-    if (!valid) {
-      // Scroll to first error
-      var firstError = form.querySelector('.error');
-      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      return;
-    }
-
-    // Submit — save to Supabase first, then Formspree for email notification
-    var btn = document.getElementById('submitBtn');
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
-
-    // Build Supabase order record
-    var orderRecord = {
-      full_name:   document.getElementById('fullName').value.trim(),
-      email:       document.getElementById('email').value.trim(),
-      phone:       document.getElementById('phone').value.trim(),
-      address:     document.getElementById('address').value.trim(),
-      city:        document.getElementById('city').value.trim(),
-      state:       document.getElementById('state').value.trim(),
-      zip:         document.getElementById('zip').value.trim(),
-      country:     document.getElementById('country').value,
-      notes:       document.getElementById('notes').value.trim(),
-      items:       products.map(function(p) { return { name: p.name, qty: p.qty, price: p.price, total: p.total }; }),
-      order_total: products.reduce(function(s, p) { return s + p.total; }, 0),
-      status:      'new'
-    };
-
-    // Save to Supabase (skip if this site's config.js hasn't been filled in yet)
-    var saveOrder = (SB_URL && SB_KEY)
-      ? fetch(SB_URL + '/orders', {
-          method: 'POST',
-          headers: {
-            'apikey': SB_KEY,
-            'Authorization': 'Bearer ' + SB_KEY,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=minimal'
-          },
-          body: JSON.stringify(orderRecord)
-        })
-      : Promise.resolve();
-    saveOrder
-    .then(function(r) {
-      if (r && !r.ok) console.warn('Supabase order save failed — continuing anyway');
-    })
-    .catch(function(err) { console.warn('Supabase error:', err); })
-    .finally(function() {
-      var products = getSelectedProducts();
-      var orderData = {
-        full_name:      (document.getElementById('fullName') || {}).value || '',
-        email:          (document.getElementById('email') || {}).value || '',
-        phone:          (document.getElementById('phone') || {}).value || '',
-        address:        (document.getElementById('address') || {}).value || '',
-        city:           (document.getElementById('city') || {}).value || '',
-        state:          (document.getElementById('state') || {}).value || '',
-        zip:            (document.getElementById('zip') || {}).value || '',
-        items:          products,
-        order_total:    products.reduce(function(s,p){ return s + p.total; }, 0),
-        notes:          (document.getElementById('notes') || {}).value || '',
-        payment_method: 'PayPal / Venmo'
-      };
-      // Show success first
-      showSuccess();
-      // Then fire notify in background
-      fetch('/api/notify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'order', data: orderData })
-      }).catch(function() {});
-    });
-  }
-
-  function showSuccess() {
-    var name = document.getElementById('fullName').value.split(' ')[0];
-    var products = getSelectedProducts();
-    var total = products.reduce(function(s, p) { return s + p.total; }, 0);
-
-    document.getElementById('successName').textContent = name;
-
-    // Build order summary
-    var summaryHtml = products.map(function(p) {
-      return '<div class="payment-summary-item">' +
-        '<span>' + p.name + (p.qty > 1 ? ' ×' + p.qty : '') + '</span>' +
-        '<span>$' + p.total + '</span>' +
-      '</div>';
-    }).join('');
-    summaryHtml += '<div class="payment-summary-total">' +
-      '<span class="payment-summary-total-label">Total Due</span>' +
-      '<span class="payment-summary-total-amount">$' + total + '</span>' +
-    '</div>';
-    document.getElementById('paymentSummary').innerHTML = summaryHtml;
-
-    // Set PayPal link with amount pre-filled (uses this client's own PayPal URL from config, set in applyConfig above)
-    var paypalBtn = document.getElementById('paypalBtn');
-    if (paypalBtn && paypalBtn.dataset.baseUrl) {
-      paypalBtn.href = paypalBtn.dataset.baseUrl.replace(/\/+$/, '') + '/' + total;
-    }
-
-    document.getElementById('orderForm').style.display = 'none';
-    document.querySelector('.page-header').style.display = 'none';
-    document.getElementById('successScreen').style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  // Clear error state on input
-  document.querySelectorAll('.field-input').forEach(function(field) {
-    field.addEventListener('input', function() {
-      field.classList.remove('error');
-    });
-  });
-
-  // ── SUPABASE — Load products live ──
-  // Read from this client's own config.js — never hardcode a Supabase project/key here.
-  // If config isn't filled in yet, leave blank so product/order calls fail loudly instead of
-  // silently hitting another client's database.
-  var SB_URL = (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.supabase && SITE_CONFIG.supabase.url && SITE_CONFIG.supabase.url.indexOf('YOUR_') !== 0)
-    ? SITE_CONFIG.supabase.url + '/rest/v1' : '';
-  var SB_KEY = (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.supabase && SITE_CONFIG.supabase.anonKey && SITE_CONFIG.supabase.anonKey.indexOf('YOUR_') !== 0)
-    ? SITE_CONFIG.supabase.anonKey : '';
-
+  // Apply config
   document.addEventListener('DOMContentLoaded', function() {
-    // Apply this client's config — nav name, header copy, contact, footer, payment links
-    if (typeof SITE_CONFIG !== 'undefined') {
-      var c = SITE_CONFIG;
-      document.querySelectorAll('.nav-name').forEach(function(el) { el.textContent = c.brand.name; });
-      var pageHeaderSub = document.getElementById('pageHeaderSub');
-      if (pageHeaderSub) pageHeaderSub.textContent = "Fill out the form below. We'll confirm your order and follow up with payment details within 24 hours.";
-      var formSubject = document.getElementById('formSubject');
-      if (formSubject) formSubject.value = 'New Order — ' + c.brand.name;
-      var footerCopy = document.querySelector('.page-footer p');
-      if (footerCopy) {
-        footerCopy.innerHTML = footerCopy.innerHTML.replace('Tammy Maltby Melchisedeck', c.brand.name);
-        if (c.brand.email) footerCopy.innerHTML = footerCopy.innerHTML.replace('mailto:tammymelchisedeck@gmail.com', 'mailto:' + c.brand.email);
-      }
-      // Payment buttons — only show if this client's own PayPal/Venmo are configured
-      var paypalBtn = document.getElementById('paypalBtn');
-      var venmoBtn  = document.getElementById('venmoBtn');
-      var missingNote = document.getElementById('paymentMissingNote');
-      var hasPaypal = c.brand.paypal && c.brand.paypal.indexOf('YOUR_') !== 0;
-      var hasVenmo  = c.brand.venmo && c.brand.venmo.indexOf('YOUR_') !== 0 && c.brand.venmo !== '@';
-      if (paypalBtn && hasPaypal) {
-        var paypalUrl = c.brand.paypal.indexOf('http') === 0 ? c.brand.paypal : 'https://www.' + c.brand.paypal.replace(/^\/+/, '');
-        paypalBtn.dataset.baseUrl = paypalUrl;
-        paypalBtn.href = paypalUrl;
-        paypalBtn.style.display = '';
-      }
-      if (venmoBtn && hasVenmo) {
-        var handle = c.brand.venmo.replace(/^@/, '');
-        venmoBtn.href = 'https://venmo.com/u/' + handle;
-        venmoBtn.style.display = '';
-      }
-      if (!hasPaypal && !hasVenmo && missingNote) missingNote.style.display = 'block';
+    if (typeof SITE_CONFIG === 'undefined') return;
+    var c = SITE_CONFIG;
+    var root = document.documentElement.style;
+    root.setProperty('--cream', c.colors.cream); root.setProperty('--linen', c.colors.linen);
+    root.setProperty('--sand', c.colors.sand); root.setProperty('--gold', c.colors.gold);
+    root.setProperty('--gold-light', c.colors.goldLight); root.setProperty('--ink', c.colors.ink);
+    root.setProperty('--ink-mid', c.colors.inkMid); root.setProperty('--ink-light', c.colors.inkLight);
+    root.setProperty('--sage', c.colors.sage);
+    root.setProperty('--serif', "'" + c.fonts.serif + "', Georgia, serif");
+    root.setProperty('--sans', "'" + c.fonts.sans + "', system-ui, sans-serif");
+    document.querySelectorAll('.nav-name').forEach(function(el) { el.textContent = c.brand.name; });
+    var meetLabel = 'Meet ' + (c.brand.shortName || c.brand.name.split(' ')[0]);
+    document.querySelectorAll('.nav-meet-link').forEach(function(el) { el.textContent = meetLabel; });
+    document.querySelectorAll('.footer-name').forEach(function(el) { el.innerHTML = c.brand.name.replace(' ', '<br>'); });
+    document.querySelectorAll('.footer-tagline').forEach(function(el) { el.textContent = c.brand.tagline; });
+    document.querySelectorAll('.footer-disclaimer').forEach(function(el) { el.textContent = c.footer.disclaimer; });
+    var aboutImg = document.querySelector('.about-img');
+    if (aboutImg) aboutImg.style.backgroundImage = "url('" + c.images.about + "')";
+    var partnerLogo = document.querySelector('.footer-partnerco-logo');
+    if (partnerLogo) partnerLogo.src = c.images.partnerLogo;
+
+    // Page hero photo + alt
+    var pageHeroImg = document.getElementById('pageHeroImg');
+    if (pageHeroImg && c.images.about) { pageHeroImg.src = c.images.about; pageHeroImg.alt = c.brand.name; }
+
+    // Bio title
+    var bioTitle = document.getElementById('bio-title');
+    if (bioTitle) bioTitle.innerHTML = c.brand.name.replace(' ', '<br>');
+
+    // Contact email + footer social (hide any icon with no URL configured)
+    if (c.brand.email) {
+      var footerContact = document.getElementById('footerContactLink');
+      if (footerContact) footerContact.href = 'mailto:' + c.brand.email;
     }
+    var socialMap = { footerFacebook: c.social && c.social.facebook, footerInstagram: c.social && c.social.instagram, footerTiktok: c.social && c.social.tiktok, aboutFacebook: c.social && c.social.facebook, aboutInstagram: c.social && c.social.instagram, aboutTiktok: c.social && c.social.tiktok };
+    Object.keys(socialMap).forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      if (socialMap[id]) el.href = socialMap[id];
+      else el.style.display = 'none';
+    });
 
-    if (!SB_URL || !SB_KEY) return;
-    fetch(SB_URL + '/products?active=eq.true&order=sort_order.asc', {
-      headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
-    })
-    .then(function(r) { return r.json(); })
-    .then(function(products) {
-      if (!products || !products.length) return;
-      var list = document.getElementById('productList');
-      if (!list) return;
-      list.innerHTML = products.map(function(p, i) {
-        var pid = 'p' + (i + 1);
-        var safeName = p.name.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
-        var safeSub  = (p.subtitle || '').replace(/&/g,'&amp;');
-        return '<div class="product-row" data-price="' + p.price + '">' +
-          '<input type="checkbox" class="product-check" id="' + pid + '" name="product_' + pid + '" value="' + safeName + '">' +
-          '<label class="product-info" for="' + pid + '">' +
-            '<p class="product-name-text">' + p.name + '</p>' +
-            '<p class="product-sub">' + safeSub + '</p>' +
-          '</label>' +
-          '<input type="number" class="product-qty" min="1" max="10" value="1" aria-label="Quantity">' +
-          '<span class="product-price">$' + p.price + '</span>' +
-        '</div>';
-      }).join('');
-
-      // Re-attach event listeners after DOM update
-      document.querySelectorAll('.product-row').forEach(function(row) {
-        var check = row.querySelector('.product-check');
-        var qty   = row.querySelector('.product-qty');
-        var price = row.querySelector('.product-price');
-        check.addEventListener('change', function() {
-          qty.classList.toggle('active', check.checked);
-          price.classList.toggle('active', check.checked);
-          updateSummary();
-        });
-        qty.addEventListener('input', function() {
-          if (qty.value < 1) qty.value = 1;
-          if (qty.value > 10) qty.value = 10;
-          updateSummary();
-        });
-      });
-
-      // Redefine getSelectedProducts to use live DOM
-      window.rows = document.querySelectorAll('.product-row');
-      updateSummary();
-
-      // Pre-select product from URL parameter e.g. order.html?product=AbVantage
-      var urlParams = new URLSearchParams(window.location.search);
-      var preselect = urlParams.get('product');
-      if (preselect) {
-        document.querySelectorAll('.product-row').forEach(function(row) {
-          var nameEl = row.querySelector('.product-name-text');
-          var check  = row.querySelector('.product-check');
-          var qty    = row.querySelector('.product-qty');
-          var price  = row.querySelector('.product-price');
-          if (nameEl && nameEl.textContent.trim().toLowerCase() === preselect.toLowerCase()) {
-            check.checked = true;
-            if (qty)   qty.classList.add('active');
-            if (price) price.classList.add('active');
-            updateSummary();
-            setTimeout(function() {
-              row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 400);
-          }
-        });
-      }
-    })
-    .catch(function() { /* fall back to hardcoded product list */ });
+    // Footer copyright name
+    var footerCopyName = document.getElementById('footerCopyName');
+    if (footerCopyName) footerCopyName.textContent = c.brand.name;
   });
+
+  function toggleNav() {
+    var nav     = document.getElementById('mobileNav');
+    var overlay = document.getElementById('navPageOverlay');
+    var toggle  = document.querySelector('.nav-toggle');
+    if (!nav) return;
+    var isOpen = nav.classList.contains('open');
+    nav.classList.toggle('open');
+    if (overlay) overlay.classList.toggle('open', !isOpen);
+    if (toggle)  toggle.classList.toggle('open',  !isOpen);
+  }
+  function closeMobileNav() {
+    var nav     = document.getElementById('mobileNav');
+    var overlay = document.getElementById('navPageOverlay');
+    var toggle  = document.querySelector('.nav-toggle');
+    if (nav)     nav.classList.remove('open');
+    if (overlay) overlay.classList.remove('open');
+    if (toggle)  toggle.classList.remove('open');
+  }
+  document.addEventListener('click', function(e) {
+    var nav    = document.getElementById('mobileNav');
+    var toggle = document.querySelector('.nav-toggle');
+    if (nav && nav.classList.contains('open') && !nav.contains(e.target) && toggle && !toggle.contains(e.target)) {
+      closeMobileNav();
+    }
+  });
+
+  function handleEmailSubmit(e) {
+    const action = e.target.action;
+    if (action.includes('YOUR_FORM_ID')) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      const original = btn.textContent;
+      btn.textContent = 'Almost there! (Form not yet connected)';
+      btn.style.background = '#7A8C72';
+      setTimeout(function() {
+        btn.textContent = original;
+        btn.style.background = '';
+        e.target.reset();
+      }, 3500);
+    }
+  }
 </script>
 
 </body>

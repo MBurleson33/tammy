@@ -23,7 +23,6 @@ module.exports = async function handler(req, res) {
     });
 
     const data = await resp.json();
-    console.log('Supabase read status:', resp.status, 'data:', JSON.stringify(data));
 
     if (resp.ok && data.length > 0) {
       const storedPassword = data[0].value;
@@ -44,10 +43,7 @@ module.exports = async function handler(req, res) {
           body: JSON.stringify({ value: newPassword })
         });
 
-        console.log('Update status:', updateResp.status);
         if (!updateResp.ok) {
-          const txt = await updateResp.text();
-          console.log('Update error:', txt);
           return res.status(500).json({ ok: false, error: 'Failed to update password' });
         }
         return res.status(200).json({ ok: true, updated: true });
@@ -57,17 +53,15 @@ module.exports = async function handler(req, res) {
     }
 
     // Fallback if Supabase returns empty
-    console.log('Supabase returned empty — using fallback');
     if (password === FALLBACK_PASSWORD) {
-      return res.status(200).json({ ok: true, source: 'fallback' });
+      return res.status(200).json({ ok: true });
     }
     return res.status(401).json({ ok: false, error: 'Incorrect password' });
 
   } catch (err) {
-    console.error('Supabase error:', err.message);
     // Fallback on error
     if (password === FALLBACK_PASSWORD) {
-      return res.status(200).json({ ok: true, source: 'fallback' });
+      return res.status(200).json({ ok: true });
     }
     return res.status(401).json({ ok: false, error: 'Incorrect password' });
   }

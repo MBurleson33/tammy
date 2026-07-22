@@ -911,20 +911,28 @@
     })
     .catch(function(err) { console.warn('Supabase error:', err); })
     .finally(function() {
-      // Always attempt Formspree regardless of Supabase result
-      var data = new FormData(document.getElementById('checkoutForm'));
-      fetch('https://formspree.io/f/YOUR_ORDER_FORM_ID', {
+      var products = getSelectedProducts();
+      var orderData = {
+        full_name:      (document.getElementById('fullName') || {}).value || '',
+        email:          (document.getElementById('email') || {}).value || '',
+        phone:          (document.getElementById('phone') || {}).value || '',
+        address:        (document.getElementById('address') || {}).value || '',
+        city:           (document.getElementById('city') || {}).value || '',
+        state:          (document.getElementById('state') || {}).value || '',
+        zip:            (document.getElementById('zip') || {}).value || '',
+        items:          products,
+        order_total:    products.reduce(function(s,p){ return s + p.total; }, 0),
+        notes:          (document.getElementById('notes') || {}).value || '',
+        payment_method: 'PayPal / Venmo'
+      };
+      // Show success first
+      showSuccess();
+      // Then fire notify in background
+      fetch('/api/notify', {
         method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(function(r) {
-        // Show success regardless — order is saved in Supabase
-        showSuccess();
-      })
-      .catch(function() {
-        showSuccess();
-      });
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'order', data: orderData })
+      }).catch(function() {});
     });
   }
 

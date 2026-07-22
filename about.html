@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>About Tammy – Tammy Melchisedeck</title>
-<meta name="description" content="An Emmy-winning media personality turned wellness entrepreneur, Tammy Maltby Melchisedeck inspires people to take their health, faith, and purpose seriously.">
-<meta property="og:title" content="About Tammy – Tammy Melchisedeck">
-<meta property="og:description" content="An Emmy-winning media personality turned wellness entrepreneur, Tammy Maltby Melchisedeck inspires people to take their health, faith, and purpose seriously.">
+<title>About [YOUR NAME] — replace before launch</title>
+<meta name="description" content="[Write a 1-2 sentence description of the client and what they do] — replace before launch">
+<meta property="og:title" content="About [YOUR NAME] — replace before launch">
+<meta property="og:description" content="[Write a 1-2 sentence description of the client and what they do] — replace before launch">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/png" href="images/favicon.png">
 <script src="config.js"></script>
@@ -435,7 +435,7 @@
 <nav aria-label="Main navigation">
   <a href="index.html" class="nav-name">Tammy Maltby Melchisedeck</a>
   <ul class="nav-links" role="list">
-    <li><a href="index.html#tammy">Meet Tammy</a></li>
+    <li><a href="index.html#about" class="nav-meet-link">Meet Us</a></li>
     <li><a href="index.html#results">Results</a></li>
     <li><a href="index.html#testimonials">Testimonials</a></li>
     <li><a href="index.html#drops">The Drops</a></li>
@@ -449,7 +449,7 @@
 </nav>
 <div class="nav-page-overlay" id="navPageOverlay" onclick="closeMobileNav()"></div>
 <div id="mobileNav" role="navigation" aria-label="Mobile navigation">
-  <a href="index.html#tammy" onclick="closeMobileNav()">Meet Tammy</a>
+  <a href="index.html#about" class="nav-meet-link" onclick="closeMobileNav()">Meet Us</a>
   <a href="index.html#results" onclick="closeMobileNav()">Results</a>
   <a href="index.html#testimonials" onclick="closeMobileNav()">Testimonials</a>
   <a href="index.html#drops" onclick="closeMobileNav()">The Drops</a>
@@ -459,16 +459,17 @@
 <div class="page-hero">
   <div class="page-hero-img-wrap">
     <img
-      src="images/RedDressArmsneedretouch.webp"
-      alt="Tammy Maltby Melchisedeck"
+      src="images/about.webp"
+      alt=""
       class="page-hero-img"
+      id="pageHeroImg"
       loading="eager"
     >
   </div>
   <div class="page-hero-copy">
-    <span class="page-hero-eyebrow">Meet Tammy</span>
+    <span class="page-hero-eyebrow nav-meet-link">Meet Us</span>
     <h1 class="page-hero-title">Glad to<br>meet you!</h1>
-    <p class="page-hero-sub">An Emmy-winning media personality turned wellness entrepreneur — speaker, author, mentor, and mother. Her story is one of courage, faith, and continual becoming.</p>
+    <p class="page-hero-sub" id="pageHeroSub">Add a 1–2 sentence introduction here — who you are and what you do. This shows at the top of your About page.</p>
   </div>
 </div>
 
@@ -478,39 +479,31 @@
     <div class="about-grid">
 
       <!-- Credentials sidebar -->
-      <aside class="credentials" aria-label="Tammy's credentials">
+      <aside class="credentials" aria-label="Credentials" id="aboutPageCredentials">
         <span class="credentials-label">Background</span>
         <div class="credential-item">
-          <p class="credential-title">Emmy-Winning Media Personality</p>
-          <p class="credential-sub">Television host, speaker, and author with decades of media experience</p>
+          <p class="credential-title">Add a credential or highlight</p>
+          <p class="credential-sub">A short line of supporting detail</p>
         </div>
         <div class="credential-item">
-          <p class="credential-title">Wellness Entrepreneur</p>
-          <p class="credential-sub">Helped build one of the largest wellness organizations in the industry</p>
+          <p class="credential-title">Add a credential or highlight</p>
+          <p class="credential-sub">A short line of supporting detail</p>
         </div>
         <div class="credential-item">
-          <p class="credential-title">Speaker &amp; Mentor</p>
-          <p class="credential-sub">Has led rooms of thousands and one-on-one conversations with equal warmth</p>
-        </div>
-        <div class="credential-item">
-          <p class="credential-title">Author &amp; Mother</p>
-          <p class="credential-sub">Writing and motherhood woven through every chapter of her story</p>
-        </div>
-        <div class="credential-item">
-          <p class="credential-title">Faith-Driven Leader</p>
-          <p class="credential-sub">Deep conviction that God meets us in every season — especially the unexpected ones</p>
+          <p class="credential-title">Add a credential or highlight</p>
+          <p class="credential-sub">A short line of supporting detail</p>
         </div>
 
-        <nav class="social-row" aria-label="Follow Tammy">
-          <a href="https://www.facebook.com/share/1Js62grMD4/?mibextid=wwXIfr" class="social-icon-btn" target="_blank" rel="noopener" aria-label="Facebook">
+        <nav class="social-row" aria-label="Follow us">
+          <a href="https://www.facebook.com/share/1Js62grMD4/?mibextid=wwXIfr" class="social-icon-btn" target="_blank" rel="noopener" aria-label="Facebook" id="aboutFacebook">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
             Facebook
           </a>
-          <a href="https://www.instagram.com/tammymmelchisedeck?igsh=dGQxcjQyMmEzbDcx" class="social-icon-btn" target="_blank" rel="noopener" aria-label="Instagram">
+          <a href="https://www.instagram.com/tammymmelchisedeck?igsh=dGQxcjQyMmEzbDcx" class="social-icon-btn" target="_blank" rel="noopener" aria-label="Instagram" id="aboutInstagram">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
             Instagram
           </a>
-          <a href="https://www.tiktok.com/@tammymmelchisedec?_r=1&_t=ZT-9297iK4kplv" class="social-icon-btn" target="_blank" rel="noopener" aria-label="TikTok">
+          <a href="https://www.tiktok.com/@tammymmelchisedec?_r=1&_t=ZT-9297iK4kplv" class="social-icon-btn" target="_blank" rel="noopener" aria-label="TikTok" id="aboutTiktok">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
             TikTok
           </a>
@@ -519,20 +512,20 @@
 
       <!-- Bio -->
       <div class="bio-body">
-        <h2 class="bio-title" id="bio-title">Tammy Maltby<br>Melchisedeck</h2>
+        <h2 class="bio-title" id="bio-title">[YOUR NAME]<br>— replace before launch</h2>
         <div class="divider" aria-hidden="true"></div>
 
-        <p>Tammy Maltby Melchisedeck believes in the power of starting again. An Emmy-winning media personality turned wellness entrepreneur, Tammy has lived many lives — speaker, author, television host, mentor, and mother — and each chapter has shaped the woman she is today.</p>
+        <p><strong>⚠ Placeholder bio — this whole "Bio" block was Tammy's actual personal life story and needs to be rewritten from scratch for every new client.</strong> It's not something a generic template can auto-fill — replace these paragraphs with the client's real background, what led them to Partner.Co, and who they help.</p>
 
-        <p>Her story is one of courage and continual becoming. At 52, Tammy stepped into a brand-new career in global wellness, building one of the largest wellness organizations in the industry and inspiring people around the world to take their health and purpose seriously. Her leadership blends compassion, strength, and a deep conviction that <em>God meets us in every season — especially the unexpected ones.</em></p>
+        <p>[Paragraph 1 — client's background and what they do]</p>
 
         <div class="bio-pullquote">
-          <p>"Tammy's gift has always been connection — creating a sense of belonging that reminds people they are seen, valued, and capable of so much more than they imagine."</p>
+          <p>"[Add a short personal quote from the client here.]"</p>
         </div>
 
-        <p>Whether she's leading a room of thousands or welcoming someone into her home, she creates a sense of belonging that reminds people they are seen, valued, and capable of so much more than they imagine.</p>
+        <p>[Paragraph 2 — client's mission or approach]</p>
 
-        <p>Today, she continues her mission of helping people live rich, authentic, purpose-driven lives — built on wellness, faith, community, and courageous reinvention.</p>
+        <p>[Paragraph 3 — client's closing statement / call to connect]</p>
       </div>
 
     </div>
@@ -557,13 +550,13 @@
         <p class="footer-name">Tammy Maltby<br>Melchisedeck</p>
         <p class="footer-tagline">Wellness. Faith. Purpose.</p>
         <nav class="footer-social-row" aria-label="Social media">
-          <a href="https://www.facebook.com/share/1Js62grMD4/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook" class="footer-icon-link">
+          <a href="https://www.facebook.com/share/1Js62grMD4/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook" class="footer-icon-link" id="footerFacebook">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
           </a>
-          <a href="https://www.instagram.com/tammymmelchisedeck?igsh=dGQxcjQyMmEzbDcx" target="_blank" rel="noopener" aria-label="Instagram" class="footer-icon-link">
+          <a href="https://www.instagram.com/tammymmelchisedeck?igsh=dGQxcjQyMmEzbDcx" target="_blank" rel="noopener" aria-label="Instagram" class="footer-icon-link" id="footerInstagram">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
           </a>
-          <a href="https://www.tiktok.com/@tammymmelchisedec?_r=1&_t=ZT-9297iK4kplv" target="_blank" rel="noopener" aria-label="TikTok" class="footer-icon-link">
+          <a href="https://www.tiktok.com/@tammymmelchisedec?_r=1&_t=ZT-9297iK4kplv" target="_blank" rel="noopener" aria-label="TikTok" class="footer-icon-link" id="footerTiktok">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
           </a>
         </nav>
@@ -573,8 +566,8 @@
         <a href="index.html#drops" class="footer-link">The Drops</a>
         <a href="index.html#results" class="footer-link">Results</a>
         <a href="index.html#testimonials" class="footer-link">Testimonials</a>
-        <a href="about.html" class="footer-link">About Tammy</a>
-        <a href="mailto:tammymelchisedeck@gmail.com" class="footer-link">Contact</a>
+        <a href="about.html" class="footer-link" id="footerAboutLink">About Us</a>
+        <a href="mailto:tammymelchisedeck@gmail.com" class="footer-link" id="footerContactLink">Contact</a>
       </div>
       <div class="footer-signup">
         <p class="footer-col-label">Stay Connected</p>
@@ -588,7 +581,7 @@
     <div class="footer-bottom">
       <img src="images/unnamed.webp" alt="Partner.Co" class="footer-partnerco-logo">
       <p class="footer-disclaimer">These statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease. Applicable to U.S. only.</p>
-      <p class="footer-copy">&copy; <span id="year"></span> Tammy Maltby Melchisedeck. All rights reserved.</p>
+      <p class="footer-copy">&copy; <span id="year"></span> <span id="footerCopyName">Your Business Name</span>. All rights reserved.</p>
       <p style="font-size:0.68rem;color:rgba(255,255,255,0.18);letter-spacing:0.06em">Site by <a href="https://treetopbusiness.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.25);text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='rgba(255,255,255,0.5)'" onmouseout="this.style.color='rgba(255,255,255,0.25)'">Treetop Business Solutions</a></p>
     </div>
   </div>
@@ -610,6 +603,8 @@
     root.setProperty('--serif', "'" + c.fonts.serif + "', Georgia, serif");
     root.setProperty('--sans', "'" + c.fonts.sans + "', system-ui, sans-serif");
     document.querySelectorAll('.nav-name').forEach(function(el) { el.textContent = c.brand.name; });
+    var meetLabel = 'Meet ' + (c.brand.shortName || c.brand.name.split(' ')[0]);
+    document.querySelectorAll('.nav-meet-link').forEach(function(el) { el.textContent = meetLabel; });
     document.querySelectorAll('.footer-name').forEach(function(el) { el.innerHTML = c.brand.name.replace(' ', '<br>'); });
     document.querySelectorAll('.footer-tagline').forEach(function(el) { el.textContent = c.brand.tagline; });
     document.querySelectorAll('.footer-disclaimer').forEach(function(el) { el.textContent = c.footer.disclaimer; });
@@ -617,6 +612,31 @@
     if (aboutImg) aboutImg.style.backgroundImage = "url('" + c.images.about + "')";
     var partnerLogo = document.querySelector('.footer-partnerco-logo');
     if (partnerLogo) partnerLogo.src = c.images.partnerLogo;
+
+    // Page hero photo + alt
+    var pageHeroImg = document.getElementById('pageHeroImg');
+    if (pageHeroImg && c.images.about) { pageHeroImg.src = c.images.about; pageHeroImg.alt = c.brand.name; }
+
+    // Bio title
+    var bioTitle = document.getElementById('bio-title');
+    if (bioTitle) bioTitle.innerHTML = c.brand.name.replace(' ', '<br>');
+
+    // Contact email + footer social (hide any icon with no URL configured)
+    if (c.brand.email) {
+      var footerContact = document.getElementById('footerContactLink');
+      if (footerContact) footerContact.href = 'mailto:' + c.brand.email;
+    }
+    var socialMap = { footerFacebook: c.social && c.social.facebook, footerInstagram: c.social && c.social.instagram, footerTiktok: c.social && c.social.tiktok, aboutFacebook: c.social && c.social.facebook, aboutInstagram: c.social && c.social.instagram, aboutTiktok: c.social && c.social.tiktok };
+    Object.keys(socialMap).forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      if (socialMap[id]) el.href = socialMap[id];
+      else el.style.display = 'none';
+    });
+
+    // Footer copyright name
+    var footerCopyName = document.getElementById('footerCopyName');
+    if (footerCopyName) footerCopyName.textContent = c.brand.name;
   });
 
   function toggleNav() {

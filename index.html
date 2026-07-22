@@ -1874,7 +1874,7 @@
       <div class="footer-signup">
         <p class="footer-col-label">Stay Connected</p>
         <p class="footer-signup-desc">Tips, recipes, and encouragement — straight to your inbox.</p>
-        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" onsubmit="handleEmailSubmit(event)" class="footer-email-form" aria-label="Newsletter signup">
+        <form onsubmit="handleNewsletterSubmit(event)" class="footer-email-form" aria-label="Newsletter signup">
           <input type="email" name="email" placeholder="Your email address" required autocomplete="email">
           <button type="submit">Subscribe</button>
         </form>
@@ -2070,22 +2070,42 @@
   });
 
   // Email form with basic feedback
-  function handleEmailSubmit(e) {
-    var btn = e.target.querySelector('button');
-    if (!btn) return;
-    var original = btn.textContent;
-    var action = e.target.action;
-    if (action.includes('YOUR_FORM_ID')) {
-      e.preventDefault();
-      btn.textContent = 'Almost there!';
-      btn.style.opacity = '0.7';
-      btn.disabled = true;
-      setTimeout(function() {
-        btn.textContent = original;
-        btn.style.opacity = '';
-        btn.disabled = false;
-        e.target.reset();
-      }, 3000);
+  function handleNewsletterSubmit(e) {
+    e.preventDefault();
+    var form = e.target;
+    var btn  = form.querySelector('button');
+    var emailInput = form.querySelector('input[type="email"]');
+    var email = emailInput ? emailInput.value.trim() : '';
+    if (!email) return;
+    var orig = btn.textContent;
+    btn.textContent = '...';
+    btn.disabled = true;
+
+    // Save to Supabase
+    fetch(SUPABASE_URL + '/rest/v1/subscribers', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ email: email, source: 'footer' })
+    }).then(function(r) {
+      // Notify via Resend (fire and forget)
+      fetch('/api/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'subscriber', data: { email: email, source: 'footer' } })
+      }).catch(function() {});
+      btn.textContent = '✓ Subscribed!';
+      form.reset();
+      setTimeout(function() { btn.textContent = orig; btn.disabled = false; }, 3000);
+    }).catch(function() {
+      btn.textContent = 'Try again';
+      btn.disabled = false;
+    });
+  }
     } else {
       btn.textContent = 'Sending…';
       btn.disabled = true;
@@ -2102,27 +2122,41 @@
 
   function submitChat(e) {
     e.preventDefault();
-    var btn = document.getElementById('chatSubmitBtn');
-    var form = document.getElementById('chatForm');
-    if (!btn || !form) return;
+    var btn  = document.getElementById('chatSubmitBtn');
+    var name = document.getElementById('chatName');
+    var email = document.getElementById('chatEmail');
+    var msg  = document.getElementById('chatMessage');
+    if (!btn || !name || !email || !msg) return;
     btn.textContent = 'Sending...';
     btn.disabled = true;
 
-    var data = new FormData(form);
-    fetch('https://formspree.io/f/YOUR_CHAT_FORM_ID', {
+    var payload = {
+      name:    name.value.trim(),
+      email:   email.value.trim(),
+      message: msg.value.trim()
+    };
+
+    // Save to Supabase
+    fetch(SUPABASE_URL + '/rest/v1/messages', {
       method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    }).then(function(r) {
-      if (r.ok) {
-        var wrap = document.getElementById('chatFormWrap');
-        var success = document.getElementById('chatSuccess');
-        if (wrap) wrap.style.display = 'none';
-        if (success) success.style.display = 'block';
-      } else {
-        btn.textContent = 'Try again';
-        btn.disabled = false;
-      }
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(payload)
+    }).then(function() {
+      // Notify via Resend
+      fetch('/api/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'message', data: payload })
+      }).catch(function() {});
+      var wrap = document.getElementById('chatFormWrap');
+      var success = document.getElementById('chatSuccess');
+      if (wrap) wrap.style.display = 'none';
+      if (success) success.style.display = 'block';
     }).catch(function() {
       btn.textContent = 'Try again';
       btn.disabled = false;
@@ -2593,8 +2627,8 @@
       <form id="chatForm" onsubmit="submitChat(event)">
         <input type="text" name="name" id="chatName" class="chat-field" placeholder="Your name" required>
         <input type="tel" name="phone" class="chat-field" placeholder="Phone (optional)">
-        <input type="email" name="email" class="chat-field" placeholder="Email address" required>
-        <textarea name="message" class="chat-field" placeholder="Your question..." required></textarea>
+        <input type="email" name="email" id="chatEmail" class="chat-field" placeholder="Email address" required>
+        <textarea name="message" id="chatMessage" class="chat-field" placeholder="Your question..." required></textarea>
         <button type="submit" class="chat-submit" id="chatSubmitBtn">Send Message</button>
       </form>
     </div>
